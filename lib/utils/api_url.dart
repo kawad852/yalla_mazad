@@ -3,4 +3,6 @@ class ApiUrl {
 
   //registration
   static const String signIn = "/api/v1/login";
+
+  //home
 }

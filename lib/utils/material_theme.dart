@@ -10,13 +10,13 @@ class AppThemeData {
         primary: MyColors.primary,
         secondary: MyColors.secondary,
       ),
-      // textTheme: const TextTheme(
-      //   bodyText2: TextStyle(
+      // textTheme:  const TextTheme(
+      //   bodyMedium: TextStyle(
       //     color: MyColors.textColor,
       //   ),
-      //   headline6: TextStyle(color: MyColors.textColor),
-      //   headline5: TextStyle(color: MyColors.textColor),
-      //   headline4: TextStyle(color: MyColors.textColor),
+      //   titleLarge: TextStyle(color: MyColors.textColor),
+      //   headlineSmall: TextStyle(color: MyColors.textColor),
+      //   headlineMedium: TextStyle(color: MyColors.textColor),
       // ),
     );
   }

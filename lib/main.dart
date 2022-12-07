@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/translation/translation.dart';
-import 'package:yalla_mazad/ui/screens/registration/sign_in_screen.dart';
+import 'package:yalla_mazad/ui/screens/registration/sign_in/sign_in_screen.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // initialBinding: _initialBinding(),

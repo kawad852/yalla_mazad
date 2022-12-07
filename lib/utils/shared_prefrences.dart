@@ -24,7 +24,6 @@ class MySharedPreferences {
     email = "";
     name = "";
     userId = 0;
-    addressId = 0;
     deviceToken = "";
     phone = "";
     image = "";
@@ -59,7 +58,4 @@ class MySharedPreferences {
 
   static String get phone => _sharedPreferences.getString(keyPhone) ?? "";
   static set phone(String value) => _sharedPreferences.setString(keyPhone, value);
-
-  static int get addressId => _sharedPreferences.getInt('address_id') ?? 0;
-  static set addressId(int value) => _sharedPreferences.setInt('address_id', value);
 }
