@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/authentication/authentication_controller.dart';
+import 'package:yalla_mazad/controller/authentication/sign_in_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
-import '../../../../controller/registration/sign_in_ctrl.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
 
-  final controller = SignInCtrl.find;
+  final controller = SignInController.find;
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -9,7 +9,10 @@ final Map<String, String> ar = {
   'create account': 'انشاء حساب',
   'login': 'تسجيل الدخول',
   'or':'أو',
-  'phone number':'',
-  'password':'',
+  'phone number':'رقم الهاتف',
+  'password':'كلمة السر',
   'sign in using':'سجل دخولك من خلال',
+  'name':'الاسم',
+  'email':'البريد الإلكتروني',
+  'next':'التالي',
 };

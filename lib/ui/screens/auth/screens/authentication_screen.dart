@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/ui/screens/registration/sign_in/sign_in_screen.dart';
+import 'package:yalla_mazad/controller/authentication/authentication_controller.dart';
+import 'package:yalla_mazad/ui/screens/auth/sign_up/screens/sign_up_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
-class AuthenticationScreen extends StatelessWidget {
+import '../sign_in/screens/sign_in_screen.dart';
+
+class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen({Key? key}) : super(key: key);
 
+  @override
+  State<AuthenticationScreen> createState() => _AuthenticationScreenState();
+}
+
+class _AuthenticationScreenState extends State<AuthenticationScreen> {
+  final controller = AuthenticationController.find;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,47 +58,76 @@ class AuthenticationScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              // color: const Color(
-                              //   0xffD3CFDC,
-                              // ),
-                              color: MyColors.primary,
-                              borderRadius: BorderRadius.circular(
-                                25,
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.pageController.animateToPage(0,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.linear);
+                              setState(() {
+                                controller.currentIndex = 0;
+                              });
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 1, horizontal: 5),
+                              height: 56,
+                              decoration: BoxDecoration(
+                                color: controller.currentIndex == 0
+                                    ? MyColors.primary
+                                    : const Color(
+                                        0xffD3CFDC,
+                                      ),
+                                borderRadius: BorderRadius.circular(
+                                  25,
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'login'.tr,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 16,
+                              child: Center(
+                                child: Text(
+                                  'login'.tr,
+                                  style: TextStyle(
+                                    color: controller.currentIndex == 0
+                                        ? Colors.white
+                                        : MyColors.primary,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ),
                           ),
                         ),
                         Expanded(
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: MyColors.primary,
-                              borderRadius: BorderRadius.circular(
-                                25,
+                          child: GestureDetector(
+                            onTap: () {
+                              controller.pageController.animateToPage(1,
+                                  duration: const Duration(milliseconds: 500),
+                                  curve: Curves.linear);
+                              setState(() {
+                                controller.currentIndex = 1;
+                              });
+                            },
+                            child: Container(
+                              margin: const EdgeInsets.symmetric(
+                                  vertical: 1, horizontal: 5),
+                              height: 56,
+                              decoration: BoxDecoration(
+                                color: controller.currentIndex == 1
+                                    ? MyColors.primary
+                                    : const Color(
+                                        0xffD3CFDC,
+                                      ),
+                                borderRadius: BorderRadius.circular(
+                                  25,
+                                ),
                               ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'create account'.tr,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
+                              child: Center(
+                                child: Text(
+                                  'create account'.tr,
+                                  style: TextStyle(
+                                    color: controller.currentIndex == 1
+                                        ? Colors.white
+                                        : MyColors.primary,
+                                    fontSize: 16,
+                                  ),
                                 ),
                               ),
                             ),
@@ -105,8 +143,11 @@ class AuthenticationScreen extends StatelessWidget {
           Expanded(
             flex: 4,
             child: PageView(
+              physics: const NeverScrollableScrollPhysics(),
+              controller: controller.pageController,
               children: [
                 SignInScreen(),
+                SignUpScreen(),
               ],
             ),
           ),

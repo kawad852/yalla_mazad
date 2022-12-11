@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/registration/sign_in_binding.dart';
+import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/widgets/intro_card_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_slide_button.dart';
@@ -113,9 +113,11 @@ class IntroScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 1),
                   () {
-                    Get.to(()=>AuthenticationScreen(),
-                        binding: RegistrationBinding());
-                    //_key.currentState?.reset();
+                    Get.to(
+                      () => const AuthenticationScreen(),
+                      binding: AuthenticationBinding(),
+                    );
+                    _key.currentState?.reset();
                   },
                 );
               },
