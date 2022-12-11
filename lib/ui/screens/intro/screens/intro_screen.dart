@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/registration/sign_in_binding.dart';
+import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/widgets/intro_card_item.dart';
+import 'package:yalla_mazad/ui/widgets/custom_slide_button.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
@@ -17,9 +20,7 @@ class IntroScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          //const SizedBox(),
-          Container(
-            //color: Colors.red,
+          SizedBox(
             height: MediaQuery.of(context).size.aspectRatio < 0.5
                 ? MediaQuery.of(context).size.height * 0.46
                 : MediaQuery.of(context).size.height * 0.51,
@@ -99,41 +100,25 @@ class IntroScreen extends StatelessWidget {
                 height: false,
               ),
             ),
-            child: SlideAction(
+            child: CustomSlideButton(
               borderRadius: 25,
               height: ScreenSize.phoneSize(
                 60,
                 height: true,
               ),
-              reversed: true,
-              outerColor: MyColors.primary,
+              color: MyColors.primary,
+              stateKey: _key,
               text: 'yalla mazad'.tr,
-              textStyle: const TextStyle(
-                color: Colors.white,
-                fontSize: 17,
-              ),
-              sliderButtonIcon: RotatedBox(
-                quarterTurns: 2,
-                child: Image.asset(
-                  MyImages.doubleArrow,
-                  width: ScreenSize.phoneSize(
-                    18,
-                    height: true,
-                  ),
-                  height: ScreenSize.phoneSize(
-                    18,
-                    height: false,
-                  ),
-                ),
-              ),
-              key: _key,
-              onSubmit: () {
+              onSubmitted: () {
                 Future.delayed(
                   const Duration(seconds: 1),
-                  () => _key.currentState?.reset(),
+                  () {
+                    Get.to(()=>AuthenticationScreen(),
+                        binding: RegistrationBinding());
+                    //_key.currentState?.reset();
+                  },
                 );
               },
-              // sliderButtonYOffset: -20,
             ),
           ),
         ],
