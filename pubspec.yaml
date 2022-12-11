@@ -20,7 +20,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.0-146.2.beta <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -30,6 +30,8 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   flutter:
+    sdk: flutter
+  flutter_localizations:
     sdk: flutter
 
 
@@ -41,6 +43,10 @@ dependencies:
   persistent_bottom_nav_bar: ^5.0.2
   shimmer: ^2.0.0
   cached_network_image: ^3.2.3
+  flutter_native_splash: ^2.2.16
+  carousel_slider: ^4.2.0
+  slide_to_act: ^2.0.1
+
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +74,8 @@ flutter:
   assets:
     - assets/
     - assets/images/
-    - assets/icons/
+    - assets/fonts/
+    - assets/fonts/Tajawal/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -81,11 +88,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
+  fonts:
+     - family: Tajawal
+       fonts:
+         - asset: assets/fonts/Tajawal/Tajawal-Regular.ttf
+  #      - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
   #     fonts:
@@ -95,3 +102,13 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_native_splash:
+  android: true
+  ios: true
+  color: "#26124F"
+  image: assets/images/logo.png
+  android_12:
+    color: "#26124F"
+    image: assets/images/logo.png
+
