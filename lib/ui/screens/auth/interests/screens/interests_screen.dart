@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/subscription/subscription_binding.dart';
 import 'package:yalla_mazad/controller/authentication/interests_controller.dart';
 import 'package:yalla_mazad/ui/screens/auth/interests/widgets/interest_item.dart';
+import 'package:yalla_mazad/ui/screens/subscriptions/screens/subscrption_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -52,7 +54,7 @@ class InterestsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Expanded(flex: 1, child: SizedBox()),
+                const Expanded(flex: 1, child: SizedBox()),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -61,7 +63,7 @@ class InterestsScreen extends StatelessWidget {
                         children: [
                           TextSpan(
                             text: 'congratulations'.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyColors.red,
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -69,7 +71,7 @@ class InterestsScreen extends StatelessWidget {
                           ),
                           TextSpan(
                             text: 'you have been registered successfully'.tr,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: MyColors.primary,
                               fontSize: 32,
                               fontWeight: FontWeight.bold,
@@ -78,25 +80,24 @@ class InterestsScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
                       'help us know your interests to give you the best'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: MyColors.primary,
                         fontSize: 16,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 30,
                     ),
                     Wrap(
                       spacing: 10,
                       crossAxisAlignment: WrapCrossAlignment.center,
                       runSpacing: 10,
-                      children: [
+                      children: const [
                         InterestItem(
                           content: 'cars',
                           isChosen: true,
@@ -117,9 +118,13 @@ class InterestsScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Expanded(flex: 2, child: SizedBox()),
+                const Expanded(flex: 2, child: SizedBox()),
                 GestureDetector(
                   onTap: () {
+                    Get.to(
+                      () => const SubscriptionScreen(),
+                      binding: SubscriptionBinding(),
+                    );
                   },
                   child: Container(
                     height: 60,

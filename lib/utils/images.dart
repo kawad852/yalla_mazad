@@ -5,6 +5,8 @@ class MyImages {
 
   static const String authentication = "${_path}authentication/";
 
+  static const String subscription = "${_path}subscriptions/";
+
   static const String logo = "${_path}logo.png";
 
   static const String introCar = "${intro}car.png";
@@ -38,4 +40,6 @@ class MyImages {
   static const String googleSignIn = "${authentication}google.png";
 
   static const String circleBackground = "${authentication}circle.svg";
+
+  static const String justice = "${subscription}justice.png";
 }

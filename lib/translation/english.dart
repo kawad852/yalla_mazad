@@ -32,4 +32,10 @@ final Map<String, String> en = {
       ' ,You have been registered successfully',
   'help us know your interests to give you the best':
       'Help us know your interests to give you the best',
+  'subscriptions': 'Subscriptions',
+  'you\'ve got a free subscription, valid for one auction':
+      'You\'ve got a free subscription, valid for one auction',
+  'you can change your subscription to any other subscription at any time':
+      'You can change your subscription to any other subscription at any time',
+  'home screen': 'Home screen',
 };

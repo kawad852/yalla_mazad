@@ -29,4 +29,10 @@ final Map<String, String> ar = {
   'you have been registered successfully': '، تم تسجيلك بنجاح ',
   'help us know your interests to give you the best':
       'ساعدنا على معرفة اهتماماتك لنقدم لك الأفضل',
+  'subscriptions': 'الإشتراكات',
+  'you\'ve got a free subscription, valid for one auction':
+      ' ، لقد حصلت على إشتراك مجاني صالح لمزاد واحد',
+  'you can change your subscription to any other subscription at any time':
+      'يمكنك تغيير إشتراكك إلى أي اشتراك اخر في اي وقت',
+  'home screen': 'الصفحة الرئيسية',
 };
