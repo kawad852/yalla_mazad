@@ -8,11 +8,20 @@ final Map<String, String> ar = {
   'yalla mazad': 'يلا مزاد',
   'create account': 'انشاء حساب',
   'login': 'تسجيل الدخول',
-  'or':'أو',
-  'phone number':'رقم الهاتف',
-  'password':'كلمة السر',
-  'sign in using':'سجل دخولك من خلال',
-  'name':'الاسم',
-  'email':'البريد الإلكتروني',
-  'next':'التالي',
+  'or': 'أو',
+  'phone number': 'رقم الهاتف',
+  'password': 'كلمة السر',
+  'sign in using': 'سجل دخولك من خلال',
+  'name': 'الاسم',
+  'email': 'البريد الإلكتروني',
+  'next': 'التالي',
+  'I agree to the terms and conditions, privacy policy':
+      'اوافق على الشروط والأحكام ، سياسة الخصوصية',
+  'please enter your phone number': 'يرجى ادخال رقم هاتفك',
+  'a verification code will be sent to the number':
+      'سيتم ارسال رمز تحقق إلى الرقم',
+  'send': 'ارسال',
+  'please enter the verification code': 'يرجى ادخال رمز التحقق',
+  'enter the verification code sent to your phone number':
+      'ادخل رمز التحقق المرسل إلى رقم هاتفك',
 };

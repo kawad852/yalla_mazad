@@ -16,4 +16,13 @@ final Map<String, String> en = {
   'name': 'Name',
   'email': 'Email',
   'next': 'Next',
+  'I agree to the terms and conditions, privacy policy':
+      'I agree to the terms and conditions, privacy policy',
+  'please enter your phone number': 'Please enter your phone number',
+  'a verification code will be sent to the number':
+      'A verification code will be sent to the number',
+  'send': 'Send',
+  'please enter the verification code': 'Please enter the verification code',
+  'enter the verification code sent to your phone number':
+      'Enter the verification code sent to your phone number',
 };

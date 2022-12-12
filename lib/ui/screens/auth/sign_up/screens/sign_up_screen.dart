@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/authentication/phone_number_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_up_controller.dart';
+import 'package:yalla_mazad/ui/screens/auth/phone_number/screens/phone_number_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
-import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -40,10 +41,41 @@ class SignUpScreen extends StatelessWidget {
             ),
             _getConfirmPasswordTextField(),
             const SizedBox(
-              height: 10,
+              height: 12,
+            ),
+            Row(
+              children: [
+                GetBuilder<SignUpController>(builder: (v) {
+                  return Checkbox(
+                    activeColor: MyColors.primary,
+                    value: v.isChecked,
+                    onChanged: (value) {
+                      v.isChecked = !v.isChecked;
+                      v.update();
+                    },
+                  );
+                }),
+                Expanded(
+                  child: Text(
+                    'I agree to the terms and conditions, privacy policy'.tr,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: MyColors.primary,
+                    ),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 40,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Get.to(
+                  () => const PhoneNumberScreen(),
+                  binding: PhoneNumberBinding(),
+                );
+              },
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
@@ -139,6 +171,7 @@ class SignUpScreen extends StatelessWidget {
     return CustomTextField(
       controller: controller.passwordController,
       color: MyColors.textFieldColor,
+      obscureText: true,
       prefixIcon: SizedBox(
         width: 60,
         child: Row(
@@ -169,6 +202,7 @@ class SignUpScreen extends StatelessWidget {
     return CustomTextField(
       controller: controller.confirmPasswordController,
       color: MyColors.textFieldColor,
+      obscureText: true,
       prefixIcon: SizedBox(
         width: 60,
         child: Row(
@@ -192,68 +226,6 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
       hint: 'password'.tr,
-    );
-  }
-
-  _getORow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        const Expanded(
-          child: Divider(
-            indent: 10,
-            endIndent: 10,
-            thickness: 0.7,
-            color: MyColors.primary,
-          ),
-        ),
-        Text(
-          'or'.tr,
-          style: const TextStyle(
-            color: MyColors.primary,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const Expanded(
-          child: Divider(
-            indent: 10,
-            endIndent: 10,
-            color: MyColors.primary,
-            thickness: 0.7,
-            height: 10,
-          ),
-        ),
-      ],
-    );
-  }
-
-  _getSignInMethods() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.appleSignIn,
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.googleSignIn,
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.facebookSignIn,
-          ),
-        ),
-      ],
     );
   }
 }
