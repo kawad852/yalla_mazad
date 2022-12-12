@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/authentication/verification_code_controller.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -85,7 +86,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         horizontal: 4.0,
                       ),
                       child: Text(
-                        'enter the verification code sent to your phone number'.tr,
+                        'enter the verification code sent to your phone number'
+                            .tr,
                         style: const TextStyle(
                           fontSize: 16,
                           color: MyColors.primary,
@@ -97,14 +99,63 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     ),
                     _getPhoneTextField(),
                     const SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
-                    // _getPhoneTextField(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Flexible(
+                            child: _getCodeTextField(
+                                controller.codeControllers[0]),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: _getCodeTextField(
+                                controller.codeControllers[1]),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: _getCodeTextField(
+                                controller.codeControllers[2]),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Flexible(
+                            child: _getCodeTextField(
+                                controller.codeControllers[3]),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                      child: Text(
+                        'didn\'t receive a code? resend after'.tr,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 4,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        ///TODO: make sure of the direction of the code in both locales
+                        controller.code =
+                            '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
+                      },
                       child: Container(
                         height: 60,
                         decoration: BoxDecoration(
@@ -115,7 +166,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         ),
                         child: Center(
                           child: Text(
-                            'send'.tr,
+                            'next'.tr,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 20,
@@ -165,6 +216,19 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
         ),
       ),
       hint: 'phone number'.tr,
+    );
+  }
+
+  _getCodeTextField(controller) {
+    return CustomTextField(
+      controller: controller,
+      color: MyColors.textFieldColor,
+      textAlign: TextAlign.center,
+      inputFormatters: [
+        LengthLimitingTextInputFormatter(
+          1,
+        ),
+      ],
     );
   }
 }
