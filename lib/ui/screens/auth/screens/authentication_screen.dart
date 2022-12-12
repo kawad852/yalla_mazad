@@ -24,7 +24,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -141,7 +141,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
             ),
           ),
           Expanded(
-            flex: 4,
+            flex: 5,
             child: PageView(
               physics: const NeverScrollableScrollPhysics(),
               controller: controller.pageController,

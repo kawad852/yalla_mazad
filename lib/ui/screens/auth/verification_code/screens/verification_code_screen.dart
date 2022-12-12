@@ -33,7 +33,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -61,7 +61,7 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
               ),
             ),
             Expanded(
-              flex: 6,
+              flex: 5,
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,

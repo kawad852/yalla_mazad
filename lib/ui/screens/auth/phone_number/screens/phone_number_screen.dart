@@ -32,7 +32,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-              flex: 3,
+              flex: 2,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -60,7 +60,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
               ),
             ),
             Expanded(
-              flex: 6,
+              flex: 5,
               child: SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -103,7 +103,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     ),
                     _getPhoneTextField(),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height / 3.5,
+                      height: MediaQuery.of(context).size.height / 4,
                     ),
                     GestureDetector(
                       onTap: () {

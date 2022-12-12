@@ -70,12 +70,14 @@ class SubscriptionScreen extends StatelessWidget {
               horizontal: 30,
             ),
             child: Container(
-             // color: Colors.green,
+              // color: Colors.green,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 50,),
+                  const SizedBox(
+                    height: 50,
+                  ),
                   Expanded(
                     child: Container(
                       //color:Colors.red,
@@ -180,7 +182,9 @@ class SubscriptionScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                 ],
               ),
             ),
