@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/authentication/interests_binding.dart';
 import 'package:yalla_mazad/controller/authentication/verification_code_controller.dart';
+import 'package:yalla_mazad/ui/screens/auth/interests/screens/interests_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
@@ -155,6 +157,8 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         ///TODO: make sure of the direction of the code in both locales
                         controller.code =
                             '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
+                        Get.to(() => const InterestsScreen(),
+                            binding: InterestsBinding());
                       },
                       child: Container(
                         height: 60,

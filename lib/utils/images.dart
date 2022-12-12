@@ -36,4 +36,6 @@ class MyImages {
   static const String facebookSignIn = "${authentication}facebook.png";
 
   static const String googleSignIn = "${authentication}google.png";
+
+  static const String circleBackground = "${authentication}circle.svg";
 }

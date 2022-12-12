@@ -27,4 +27,9 @@ final Map<String, String> en = {
       'Enter the verification code sent to your phone number',
   'didn\'t receive a code? resend after':
       'Didn\'t receive a code? Resend after',
+  'congratulations': 'Congratulations',
+  'you have been registered successfully':
+      ' ,You have been registered successfully',
+  'help us know your interests to give you the best':
+      'Help us know your interests to give you the best',
 };
