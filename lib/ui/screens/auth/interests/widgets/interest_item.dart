@@ -4,8 +4,7 @@ import 'package:yalla_mazad/utils/colors.dart';
 class InterestItem extends StatelessWidget {
   final String content;
   final bool isChosen;
-  const InterestItem({required this.content, required this.isChosen, Key? key})
-      : super(key: key);
+  const InterestItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,8 @@ class InterestItem extends StatelessWidget {
           17,
         ),
         border: Border.all(
-          strokeAlign: StrokeAlign.inside,
+          //TODO: joudi
+          // strokeAlign: StrokeAlign.inside,
           width: 1,
           color: Color(
             0xff2D0050,

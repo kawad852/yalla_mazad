@@ -4,12 +4,7 @@ class IntroCardItem extends StatelessWidget {
   final double? width;
   final double? height;
   final String? image;
-  const IntroCardItem(
-      {required this.height,
-      required this.width,
-      required this.image,
-      Key? key})
-      : super(key: key);
+  const IntroCardItem({required this.height, required this.width, required this.image, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +23,8 @@ class IntroCardItem extends StatelessWidget {
             1,
           ),
           width: 7,
-          strokeAlign: StrokeAlign.outside,
+          //TODO: joudi
+          // strokeAlign: StrokeAlign.outside,
         ),
         image: DecorationImage(
           image: AssetImage(

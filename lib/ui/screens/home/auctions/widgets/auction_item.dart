@@ -4,8 +4,7 @@ import 'package:yalla_mazad/utils/colors.dart';
 class AuctionItem extends StatelessWidget {
   final String content;
   final bool isChosen;
-  const AuctionItem({required this.content, required this.isChosen, Key? key})
-      : super(key: key);
+  const AuctionItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,8 @@ class AuctionItem extends StatelessWidget {
           17,
         ),
         border: Border.all(
-          strokeAlign: StrokeAlign.inside,
+          //TODO: joudi
+          // strokeAlign: StrokeAlign.inside,
           width: 1,
           color: const Color(
             0xff2D0050,

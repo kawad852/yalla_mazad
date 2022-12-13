@@ -47,6 +47,9 @@ dependencies:
   carousel_slider: ^4.2.0
   slide_to_act: ^2.0.1
   flutter_svg: ^1.1.6
+  http: ^0.13.5
+  flutter_overlay_loader: ^2.0.0
+  fluttertoast: ^8.1.2
 
 
 dev_dependencies:
