@@ -10,7 +10,7 @@ class SubscriptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height / 2.5,
+      height: 392,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           25,
@@ -29,7 +29,7 @@ class SubscriptionItem extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
+                  const Text(
                     'الاشتراك الاول',
                     style: TextStyle(color: MyColors.red, fontSize: 20),
                   ),

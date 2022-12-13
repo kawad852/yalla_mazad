@@ -69,124 +69,128 @@ class SubscriptionScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(
               horizontal: 30,
             ),
-            child: Container(
-              // color: Colors.green,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  Expanded(
-                    child: Container(
-                      //color:Colors.red,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 40,
-                          ),
-                          RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'congratulations'.tr,
-                                  style: const TextStyle(
-                                    color: MyColors.red,
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                TextSpan(
-                                  text:
-                                      'you\'ve got a free subscription, valid for one auction'
-                                          .tr,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 50,
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: 'congratulations'.tr,
+                              style: const TextStyle(
+                                color: MyColors.red,
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            'you can change your subscription to any other subscription at any time'
-                                .tr,
-                            style: const TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 16,
+                            TextSpan(
+                              text:
+                                  'you\'ve got a free subscription, valid for one auction'
+                                      .tr,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Column(
                             children: [
-                              Image.asset(
-                                MyImages.justice,
-                                width: 20,
-                                height: 20,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
                               Text(
-                                'subscriptions'.tr,
+                                'you can change your subscription to any other subscription at any time'
+                                    .tr,
                                 style: const TextStyle(
                                   color: MyColors.primary,
-                                  fontSize: 20,
-                                ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          const SubscriptionItem(),
-                          const SizedBox(
-                            height: 60,
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: MyColors.primary,
-                                borderRadius: BorderRadius.circular(
-                                  25,
+                                  fontSize: 16,
                                 ),
                               ),
-                              child: Center(
-                                child: Text(
-                                  'home screen'.tr,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Image.asset(
+                                    MyImages.justice,
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 4,
+                                  ),
+                                  Text(
+                                    'subscriptions'.tr,
+                                    style: const TextStyle(
+                                      color: MyColors.primary,
+                                      fontSize: 20,
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              const SubscriptionItem(),
+                              const SizedBox(
+                                height: 60,
+                              ),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  height: 60,
+                                  decoration: BoxDecoration(
+                                    color: MyColors.primary,
+                                    borderRadius: BorderRadius.circular(
+                                      25,
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'home screen'.tr,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
+                            ],
                           ),
-                          // const SizedBox(
-                          //   height: 5,
-                          // ),
-                        ],
+                        ),
                       ),
-                    ),
+
+                      // const SizedBox(
+                      //   height: 5,
+                      // ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
             ),
           ),
         ],
