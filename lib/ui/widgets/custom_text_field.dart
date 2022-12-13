@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final List<TextInputFormatter>? inputFormatters;
   final TextAlign textAlign;
+  final int maxLines;
   const CustomTextField({
     required this.controller,
     required this.color,
@@ -21,12 +22,14 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.inputFormatters,
     this.textAlign = TextAlign.start,
+    this.maxLines = 1,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      maxLines: maxLines,
       textAlign: textAlign,
       inputFormatters: inputFormatters,
       controller: controller,

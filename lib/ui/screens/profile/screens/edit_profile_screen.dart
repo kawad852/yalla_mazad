@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/add_auction/add_auction_binding.dart';
 import 'package:yalla_mazad/controller/profile/profile_controller.dart';
+import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_password_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_subscription_screen.dart';
@@ -64,7 +66,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     child: Center(
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          ///TODO edit
+                          Get.to(
+                            () => AddAuctionScreen(),
+                            binding: AddAuctionBinding(),
+                          );
+                        },
                         icon: const Icon(
                           Icons.arrow_back_ios,
                           color: MyColors.primary,
@@ -130,8 +138,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
-  _getChoiceContainer(){
-    return  Container(
+  _getChoiceContainer() {
+    return Container(
       height: 67,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -155,15 +163,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 });
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 1, horizontal: 5),
+                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                 height: 56,
                 decoration: BoxDecoration(
                   color: controller.currentIndex == 0
                       ? MyColors.primary
                       : const Color(
-                    0xffD3CFDC,
-                  ),
+                          0xffD3CFDC,
+                        ),
                   borderRadius: BorderRadius.circular(
                     25,
                   ),
@@ -193,15 +200,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 });
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 1, horizontal: 5),
+                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                 height: 56,
                 decoration: BoxDecoration(
                   color: controller.currentIndex == 1
                       ? MyColors.primary
                       : const Color(
-                    0xffD3CFDC,
-                  ),
+                          0xffD3CFDC,
+                        ),
                   borderRadius: BorderRadius.circular(
                     25,
                   ),
@@ -231,15 +237,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 });
               },
               child: Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 1, horizontal: 5),
+                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                 height: 56,
                 decoration: BoxDecoration(
                   color: controller.currentIndex == 2
                       ? MyColors.primary
                       : const Color(
-                    0xffD3CFDC,
-                  ),
+                          0xffD3CFDC,
+                        ),
                   borderRadius: BorderRadius.circular(
                     25,
                   ),
@@ -262,6 +267,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       ),
     );
   }
+
   _getProfileRow() {
     return Directionality(
       textDirection: TextDirection.rtl,
