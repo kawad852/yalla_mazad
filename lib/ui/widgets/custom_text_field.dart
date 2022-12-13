@@ -1,0 +1,75 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final Color color;
+  final Widget? prefixIcon;
+  final String? hint;
+  final double borderRadius;
+  final bool obscureText;
+  final bool readOnly;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextAlign textAlign;
+  final int maxLines;
+  const CustomTextField({
+    required this.controller,
+    required this.color,
+    this.prefixIcon,
+    this.hint,
+    this.borderRadius = 25,
+    this.obscureText = false,
+    this.readOnly = false,
+    this.inputFormatters,
+    this.textAlign = TextAlign.start,
+    this.maxLines = 1,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      maxLines: maxLines,
+      textAlign: textAlign,
+      inputFormatters: inputFormatters,
+      controller: controller,
+      obscureText: obscureText,
+      obscuringCharacter: '•',
+      readOnly: readOnly,
+      style: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w500,
+      ),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: color,
+        prefixIcon: prefixIcon,
+        hintText: hint,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: BorderSide(
+            color: color,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: BorderSide(
+            color: color,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius),
+          borderSide: const BorderSide(
+            color: Colors.red,
+          ),
+        ),
+      ),
+    );
+  }
+}
