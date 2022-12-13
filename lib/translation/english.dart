@@ -38,4 +38,8 @@ final Map<String, String> en = {
   'you can change your subscription to any other subscription at any time':
       'You can change your subscription to any other subscription at any time',
   'home screen': 'Home screen',
+  'edit account': 'Edit account',
+  'subscription': 'subscription',
+  'account':'account',
+
 };

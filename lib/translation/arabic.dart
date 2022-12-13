@@ -10,7 +10,7 @@ final Map<String, String> ar = {
   'login': 'تسجيل الدخول',
   'or': 'أو',
   'phone number': 'رقم الهاتف',
-  'password': 'كلمة السر',
+  'password': 'كلمة المرور',
   'sign in using': 'سجل دخولك من خلال',
   'name': 'الاسم',
   'email': 'البريد الإلكتروني',
@@ -35,4 +35,7 @@ final Map<String, String> ar = {
   'you can change your subscription to any other subscription at any time':
       'يمكنك تغيير إشتراكك إلى أي اشتراك اخر في اي وقت',
   'home screen': 'الصفحة الرئيسية',
+  'edit account': 'تعديل الحساب',
+  'subscription': 'الإشتراك',
+  'account': 'الحساب',
 };

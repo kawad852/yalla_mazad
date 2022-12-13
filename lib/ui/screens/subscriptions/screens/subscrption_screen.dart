@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/profile/profile_binding.dart';
 import 'package:yalla_mazad/controller/subscription/subscription_controller.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/subscriptions/widgets/subscription_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
@@ -110,7 +112,6 @@ class SubscriptionScreen extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-
                       Expanded(
                         child: SingleChildScrollView(
                           child: Column(
@@ -155,7 +156,13 @@ class SubscriptionScreen extends StatelessWidget {
                                 height: 60,
                               ),
                               GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  ///TODO: navigate to home
+                                  Get.to(
+                                    () => const EditProfileScreen(),
+                                    binding: ProfileBinding(),
+                                  );
+                                },
                                 child: Container(
                                   height: 60,
                                   decoration: BoxDecoration(
@@ -180,10 +187,6 @@ class SubscriptionScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-
-                      // const SizedBox(
-                      //   height: 5,
-                      // ),
                     ],
                   ),
                 ),
