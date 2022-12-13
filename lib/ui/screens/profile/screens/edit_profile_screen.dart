@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/profile_controller.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/edit_password_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/my_subscription_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -95,156 +98,28 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(
                   height: 50,
                 ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      _getProfileRow(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 67,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(
-                            25,
-                          ),
-                          color: const Color(
-                            0xffD3CFDC,
-                          ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  controller.pageController.animateToPage(0,
-                                      duration: const Duration(milliseconds: 500),
-                                      curve: Curves.linear);
-                                  setState(() {
-                                    controller.currentIndex = 0;
-                                  });
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 1, horizontal: 5),
-                                  height: 56,
-                                  decoration: BoxDecoration(
-                                    color: controller.currentIndex == 0
-                                        ? MyColors.primary
-                                        : const Color(
-                                            0xffD3CFDC,
-                                          ),
-                                    borderRadius: BorderRadius.circular(
-                                      25,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'subscription'.tr,
-                                      style: TextStyle(
-                                        color: controller.currentIndex == 0
-                                            ? Colors.white
-                                            : MyColors.primary,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  controller.pageController.animateToPage(1,
-                                      duration: const Duration(milliseconds: 500),
-                                      curve: Curves.linear);
-                                  setState(() {
-                                    controller.currentIndex = 1;
-                                  });
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 1, horizontal: 5),
-                                  height: 56,
-                                  decoration: BoxDecoration(
-                                    color: controller.currentIndex == 1
-                                        ? MyColors.primary
-                                        : const Color(
-                                            0xffD3CFDC,
-                                          ),
-                                    borderRadius: BorderRadius.circular(
-                                      25,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'account'.tr,
-                                      style: TextStyle(
-                                        color: controller.currentIndex == 1
-                                            ? Colors.white
-                                            : MyColors.primary,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  controller.pageController.animateToPage(2,
-                                      duration: const Duration(milliseconds: 500),
-                                      curve: Curves.linear);
-                                  setState(() {
-                                    controller.currentIndex = 2;
-                                  });
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 1, horizontal: 5),
-                                  height: 56,
-                                  decoration: BoxDecoration(
-                                    color: controller.currentIndex == 2
-                                        ? MyColors.primary
-                                        : const Color(
-                                            0xffD3CFDC,
-                                          ),
-                                    borderRadius: BorderRadius.circular(
-                                      25,
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'password'.tr,
-                                      style: TextStyle(
-                                        color: controller.currentIndex == 2
-                                            ? Colors.white
-                                            : MyColors.primary,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    _getProfileRow(),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                  ],
                 ),
+                _getChoiceContainer(),
                 Expanded(
-                  flex: 2,
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: controller.pageController,
-                    children: [],
+                    children: [
+                      MySubscriptionScreen(),
+                      AccountScreen(),
+                      EditPasswordScreen(),
+                    ],
                   ),
                 ),
               ],
@@ -255,6 +130,138 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     );
   }
 
+  _getChoiceContainer(){
+    return  Container(
+      height: 67,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          25,
+        ),
+        color: const Color(
+          0xffD3CFDC,
+        ),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                controller.pageController.animateToPage(0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear);
+                setState(() {
+                  controller.currentIndex = 0;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 1, horizontal: 5),
+                height: 56,
+                decoration: BoxDecoration(
+                  color: controller.currentIndex == 0
+                      ? MyColors.primary
+                      : const Color(
+                    0xffD3CFDC,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    25,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'subscription'.tr,
+                    style: TextStyle(
+                      color: controller.currentIndex == 0
+                          ? Colors.white
+                          : MyColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                controller.pageController.animateToPage(1,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear);
+                setState(() {
+                  controller.currentIndex = 1;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 1, horizontal: 5),
+                height: 56,
+                decoration: BoxDecoration(
+                  color: controller.currentIndex == 1
+                      ? MyColors.primary
+                      : const Color(
+                    0xffD3CFDC,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    25,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'account'.tr,
+                    style: TextStyle(
+                      color: controller.currentIndex == 1
+                          ? Colors.white
+                          : MyColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: GestureDetector(
+              onTap: () {
+                controller.pageController.animateToPage(2,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.linear);
+                setState(() {
+                  controller.currentIndex = 2;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.symmetric(
+                    vertical: 1, horizontal: 5),
+                height: 56,
+                decoration: BoxDecoration(
+                  color: controller.currentIndex == 2
+                      ? MyColors.primary
+                      : const Color(
+                    0xffD3CFDC,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    25,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    'password'.tr,
+                    style: TextStyle(
+                      color: controller.currentIndex == 2
+                          ? Colors.white
+                          : MyColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
   _getProfileRow() {
     return Directionality(
       textDirection: TextDirection.rtl,

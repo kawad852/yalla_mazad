@@ -1,19 +1,21 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/profile/profile_binding.dart';
-import 'package:yalla_mazad/controller/subscription/subscription_controller.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/subscriptions/widgets/subscription_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-class SubscriptionScreen extends StatelessWidget {
-  const SubscriptionScreen({Key? key}) : super(key: key);
+import '../../../../controller/subscriptions/subscriptions_controller.dart';
+
+class SubscriptionsScreen extends StatelessWidget {
+  const SubscriptionsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = SubscriptionController.find;
+    final controller = SubscriptionsController.find;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -151,7 +153,24 @@ class SubscriptionScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 30,
                               ),
-                              const SubscriptionItem(),
+                              CarouselSlider(
+                                items: const [
+                                  SubscriptionItem(),
+                                  SubscriptionItem(),
+                                  SubscriptionItem(),
+                                ],
+                                options: CarouselOptions(
+                                  aspectRatio: 1,
+                                  viewportFraction: 0.9,
+                                  enlargeCenterPage: true,
+                                  initialPage: 0,
+                                  autoPlay: true,
+                                  enlargeFactor: 0.5,
+                                  autoPlayInterval: const Duration(
+                                    milliseconds: 1000,
+                                  ),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 60,
                               ),

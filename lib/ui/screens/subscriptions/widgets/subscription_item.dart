@@ -10,7 +10,8 @@ class SubscriptionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 392,
+      height: 354,
+      width: MediaQuery.of(context).size.width-75,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           25,

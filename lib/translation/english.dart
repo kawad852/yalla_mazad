@@ -40,6 +40,7 @@ final Map<String, String> en = {
   'home screen': 'Home screen',
   'edit account': 'Edit account',
   'subscription': 'subscription',
-  'account':'account',
-
+  'account': 'account',
+  'old password': 'old password',
+  'confirm password': 'confirm password',
 };

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/subscription/subscription_binding.dart';
+import 'package:yalla_mazad/binding/subscriptions/subscriptions_binding.dart';
 import 'package:yalla_mazad/controller/authentication/interests_controller.dart';
 import 'package:yalla_mazad/ui/screens/auth/interests/widgets/interest_item.dart';
-import 'package:yalla_mazad/ui/screens/subscriptions/screens/subscrption_screen.dart';
+import 'package:yalla_mazad/ui/screens/subscriptions/screens/subscriptions_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -122,8 +122,8 @@ class InterestsScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                      () => const SubscriptionScreen(),
-                      binding: SubscriptionBinding(),
+                      () => const SubscriptionsScreen(),
+                      binding: SubscriptionsBinding(),
                     );
                   },
                   child: Container(

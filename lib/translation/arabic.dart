@@ -38,4 +38,6 @@ final Map<String, String> ar = {
   'edit account': 'تعديل الحساب',
   'subscription': 'الإشتراك',
   'account': 'الحساب',
+  'old password':'',
+  'confirm password':'',
 };
