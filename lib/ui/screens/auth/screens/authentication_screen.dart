@@ -146,7 +146,7 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               physics: const NeverScrollableScrollPhysics(),
               controller: controller.pageController,
               children: [
-                SignInScreen(),
+                const SignInScreen(),
                 SignUpScreen(),
               ],
             ),

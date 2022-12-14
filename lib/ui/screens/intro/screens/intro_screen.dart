@@ -9,6 +9,7 @@ import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 class IntroScreen extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
@@ -113,11 +114,13 @@ class IntroScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 1),
                   () {
+                   ///Todo: remove intro screen
                     Get.to(
                       () => const AuthenticationScreen(),
                       binding: AuthenticationBinding(),
                     );
                     _key.currentState?.reset();
+                    MySharedPreferences.isPassedIntro = true;
                   },
                 );
               },

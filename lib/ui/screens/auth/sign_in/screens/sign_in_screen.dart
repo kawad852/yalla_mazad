@@ -7,7 +7,7 @@ import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 class SignInScreen extends StatefulWidget {
-  SignInScreen({Key? key}) : super(key: key);
+  const SignInScreen({Key? key}) : super(key: key);
 
   @override
   State<SignInScreen> createState() => _SignInScreenState();
@@ -78,7 +78,12 @@ class _SignInScreenState extends State<SignInScreen> {
               height: 90,
             ),
             GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                await controller.fetchSignInData(
+                    phone: controller.phoneController.text,
+                    password: controller.passwordController.text,
+                    context: context);
+              },
               child: Container(
                 height: 60,
                 decoration: BoxDecoration(
@@ -109,32 +114,56 @@ class _SignInScreenState extends State<SignInScreen> {
   }
 
   _getPhoneTextField() {
-    return CustomTextField(
-      controller: controller.phoneController,
-      color: MyColors.textFieldColor,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
+    ///TODO: make sure
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: CustomTextField(
+        controller: controller.phoneController,
+        textAlign: TextAlign.start,
+        color: MyColors.textFieldColor,
+        onChanged: (value) {
+          print(value);
+          if (value == '+962') {
+            controller.phoneController.text = "";
+            return;
+          }
+         if( value.startsWith('+962')){
+           controller.phoneController.text = value;
+         }
+         else{
+           controller.phoneController.text = '+962$value';
+         }
+          print(controller.phoneController.text);
+          controller.phoneController.selection = TextSelection.fromPosition(
+             TextPosition(
+              offset: controller.phoneController.text.length,
             ),
-            const Icon(
-              Icons.local_phone_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
+          );
+        },
+        prefixIcon: SizedBox(
+          width: 60,
+          child: Row(
+            children: [
+              const SizedBox(
+                width: 18,
+              ),
+              const Icon(
+                Icons.local_phone_outlined,
+                color: Color(0xffBDB5D0),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Container(
+                width: 1,
+                height: 38,
+                color: MyColors.primary,
+              ),
+            ],
+          ),
         ),
+        hint: 'phone number'.tr,
       ),
-      hint: 'phone number'.tr,
     );
   }
 
