@@ -1,12 +1,12 @@
-class SignInModel {
-  SignInModel({
+class RegisterModel {
+  RegisterModel({
     this.status,
     this.code,
     this.msg,
     this.data,
   });
 
-  SignInModel.fromJson(dynamic json) {
+  RegisterModel.fromJson(dynamic json) {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];
