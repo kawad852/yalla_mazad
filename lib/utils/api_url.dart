@@ -10,5 +10,6 @@ class ApiUrl {
   //otp check
   static const String otpCheck = "/api/v1/otp-check";
 
-  //home
+  //update user phone
+  static const String updateUserPhone = "/api/v1/phone-update/";
 }
