@@ -5,7 +5,5 @@ class AddAuctionBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => AddAuctionController());
-
-
   }
 }

@@ -7,6 +7,8 @@ class AddAuctionController extends GetxController {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController mainPictureController = TextEditingController();
   final TextEditingController morePicturesController = TextEditingController();
-  final TextEditingController auctionStartingPriceController = TextEditingController();
-  final TextEditingController directSellPriceController = TextEditingController();
+  final TextEditingController auctionStartingPriceController =
+      TextEditingController();
+  final TextEditingController directSellPriceController =
+      TextEditingController();
 }

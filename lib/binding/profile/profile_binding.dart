@@ -11,6 +11,5 @@ class ProfileBinding extends Bindings {
     Get.lazyPut(() => EditPasswordController());
     Get.lazyPut(() => AccountController());
     Get.lazyPut(() => MySubscriptionController());
-
   }
 }

@@ -1,8 +1,14 @@
 class ApiUrl {
-  static const String mainUrl = "http://takkeh.wecan.jo/public";
+  static const String mainUrl = "https://admin.yallamzad.com";
 
-  //registration
+  //sign in
   static const String signIn = "/api/v1/login";
+
+  //register
+  static const String register = "/api/v1/user-reg";
+
+  //otp check
+  static const String otpCheck = "/api/v1/otp-check";
 
   //home
 }

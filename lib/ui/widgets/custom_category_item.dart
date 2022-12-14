@@ -6,7 +6,7 @@ class CustomCategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       //color: Colors.red,
       height: 90,
       child: Column(

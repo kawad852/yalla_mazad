@@ -7,5 +7,6 @@ class AppConstants {
   static String get requiredField => "Field is required";
   static const String facebookUrl = "https://www.facebook.com/Google/";
   static const String instagram = "https://www.instagram.com/google/";
-  static const String twitterUrl = "https://twitter.com/Google?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
+  static const String twitterUrl =
+      "https://twitter.com/Google?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
 }

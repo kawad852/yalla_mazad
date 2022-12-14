@@ -62,7 +62,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home:  IntroScreen(),
+      home: IntroScreen(),
       //home: const IntroScreen(),
     );
   }
