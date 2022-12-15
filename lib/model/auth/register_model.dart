@@ -1,3 +1,5 @@
+import 'package:yalla_mazad/model/auth/sign_in_model.dart';
+
 class RegisterModel {
   RegisterModel({
     this.status,
@@ -53,6 +55,12 @@ class Data {
 }
 
 class User {
+  int? id;
+  String? name;
+  String? email;
+  String? image;
+  String? phone;
+  List<Badge?>? badges;
   User({
     this.id,
     this.name,
@@ -67,14 +75,18 @@ class User {
     phone = json['phone'];
     email = json['email'];
     image = json['image'];
-    badges = json['badges'];
+    if (json['badges'] != null) {
+      badges = <Badge?>[];
+      json['badges'].forEach((v) {
+        badges!.add(Badge.fromJson(v));
+      });
+    }
   }
-  int? id;
-  String? name;
-  String? email;
-  String? image;
-  String? phone;
-  List<Badge?>? badges;
+  // if (json['badges'] != null) {
+  //   badges = <Badge?>[];
+  //   json['badges'].forEach((v) {
+  //     badges!.add( Badge.fromJson(v));
+  //   });
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -83,7 +95,9 @@ class User {
     map['phone'] = phone;
     map['email'] = email;
     map['image'] = image;
-    map['badges'] = badges;
+    if (badges != null) {
+      map['badges'] = badges!.map((v) => v?.toJson()).toList();
+    }
     return map;
   }
 }

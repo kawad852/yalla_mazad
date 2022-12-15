@@ -19,8 +19,7 @@ class InterestItem extends StatelessWidget {
           17,
         ),
         border: Border.all(
-          //TODO: joudi
-          // strokeAlign: StrokeAlign.inside,
+          strokeAlign: StrokeAlign.inside,
           width: 1,
           color: Color(
             0xff2D0050,

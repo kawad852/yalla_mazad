@@ -27,10 +27,146 @@ class IntroScreen extends StatelessWidget {
                 : MediaQuery.of(context).size.height * 0.51,
             child: CarouselSlider(
               items: [
-                _getCarColumn(),
-                _getChairColumn(),
-                _getIphoneColumn(),
-                _getShirtColumn(),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      image: MyImages.introCar,
+                    ),
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        114,
+                        height: true,
+                      ),
+                      image: MyImages.introWatch,
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IntroCardItem(
+                          width: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          height: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          image: MyImages.introChair,
+                        ),
+                        IntroCardItem(
+                          width: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          height: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          image: MyImages.introLaptop,
+                        ),
+                      ],
+                    ),
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        253,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        253,
+                        height: false,
+                      ),
+                      image: MyImages.introJoystick,
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      image: MyImages.introIphone,
+                    ),
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        250,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        114,
+                        height: true,
+                      ),
+                      image: MyImages.introCamera,
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IntroCardItem(
+                          width: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          height: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          image: MyImages.introShirt,
+                        ),
+                        IntroCardItem(
+                          width: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          height: ScreenSize.phoneSize(
+                            110,
+                            height: false,
+                          ),
+                          image: MyImages.introTeapot,
+                        ),
+                      ],
+                    ),
+                    IntroCardItem(
+                      width: ScreenSize.phoneSize(
+                        253,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        253,
+                        height: false,
+                      ),
+                      image: MyImages.introBoots,
+                    ),
+                  ],
+                ),
               ],
               options: CarouselOptions(
                 clipBehavior: Clip.none,
@@ -114,7 +250,7 @@ class IntroScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 1),
                   () {
-                   ///Todo: remove intro screen
+                    ///Todo: remove intro screen
                     Get.to(
                       () => const AuthenticationScreen(),
                       binding: AuthenticationBinding(),
@@ -128,158 +264,6 @@ class IntroScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  _getCarColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          image: MyImages.introCar,
-        ),
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            114,
-            height: true,
-          ),
-          image: MyImages.introWatch,
-        ),
-      ],
-    );
-  }
-
-  _getChairColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IntroCardItem(
-              width: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              height: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              image: MyImages.introChair,
-            ),
-            IntroCardItem(
-              width: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              height: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              image: MyImages.introLaptop,
-            ),
-          ],
-        ),
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            253,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            253,
-            height: false,
-          ),
-          image: MyImages.introJoystick,
-        ),
-      ],
-    );
-  }
-
-  _getIphoneColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          image: MyImages.introIphone,
-        ),
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            250,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            114,
-            height: true,
-          ),
-          image: MyImages.introCamera,
-        ),
-      ],
-    );
-  }
-
-  _getShirtColumn() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            IntroCardItem(
-              width: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              height: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              image: MyImages.introShirt,
-            ),
-            IntroCardItem(
-              width: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              height: ScreenSize.phoneSize(
-                110,
-                height: false,
-              ),
-              image: MyImages.introTeapot,
-            ),
-          ],
-        ),
-        IntroCardItem(
-          width: ScreenSize.phoneSize(
-            253,
-            height: false,
-          ),
-          height: ScreenSize.phoneSize(
-            253,
-            height: false,
-          ),
-          image: MyImages.introBoots,
-        ),
-      ],
     );
   }
 }

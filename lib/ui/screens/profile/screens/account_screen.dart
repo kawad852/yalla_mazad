@@ -17,15 +17,96 @@ class AccountScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          _getNameTextField(),
+          CustomTextField(
+            controller: controller.nameController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.account_box_outlined,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'name'.tr,
+          ),
           const SizedBox(
             height: 10,
           ),
-          _getEmailTextField(),
+          CustomTextField(
+            controller: controller.emailController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.alternate_email,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'email'.tr,
+          ),
           const SizedBox(
             height: 20,
           ),
-          _getPhoneTextField(),
+          CustomTextField(
+            controller: controller.phoneController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.phone_enabled_outlined,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'phone'.tr,
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -56,99 +137,6 @@ class AccountScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  _getNameTextField() {
-    return CustomTextField(
-      controller: controller.nameController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.account_box_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'name'.tr,
-    );
-  }
-
-  _getEmailTextField() {
-    return CustomTextField(
-      controller: controller.emailController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.alternate_email,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'email'.tr,
-    );
-  }
-
-  _getPhoneTextField() {
-    return CustomTextField(
-      controller: controller.phoneController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.phone_enabled_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'phone'.tr,
     );
   }
 }

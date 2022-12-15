@@ -97,11 +97,68 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    _getPhoneTextField(),
+                    CustomTextField(
+                      controller: controller.countryCodeController,
+                      readOnly: true,
+                      color: MyColors.textFieldColor,
+                      suffixIcon: const Icon(
+                        Icons.keyboard_arrow_down_rounded,
+                        color: MyColors.primary,
+                      ),
+                      prefixIcon: SizedBox(
+                        width: 60,
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            Image.asset(
+                              MyImages.jordanFlag,
+                              width: 20,
+                              height: 20,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 1,
+                              height: 38,
+                              color: MyColors.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     const SizedBox(
                       height: 10,
                     ),
-                    _getPhoneTextField(),
+                    CustomTextField(
+                      controller: controller.phoneController,
+                      color: MyColors.textFieldColor,
+                      prefixIcon: SizedBox(
+                        width: 60,
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            const Icon(
+                              Icons.local_phone_outlined,
+                              color: Color(0xffBDB5D0),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 1,
+                              height: 38,
+                              color: MyColors.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                      hint: 'phone number'.tr,
+                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height / 4,
                     ),
@@ -142,36 +199,6 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  _getPhoneTextField() {
-    return CustomTextField(
-      controller: controller.phoneController,
-      color: MyColors.textFieldColor,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.local_phone_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'phone number'.tr,
     );
   }
 }

@@ -112,222 +112,217 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    _getProfileRow(),
+                    Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            width: 114,
+                            height: 114,
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffD3CFDC,
+                              ),
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: const Color(
+                                  0xffD3CFDC,
+                                ),
+                                width: 8,
+                              ),
+
+                              ///TODO: change image (from api)
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                  MyImages.introTeapot,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 170,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: const [
+                                Text(
+                                  'ahmad',
+                                  style: TextStyle(
+                                    color: MyColors.primary,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                                Text(
+                                  'ahmad',
+                                  style: TextStyle(
+                                    color: MyColors.greyPrimary,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                                Text(
+                                  'ahmad',
+                                  style: TextStyle(
+                                    color: MyColors.red,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     const SizedBox(
                       height: 30,
                     ),
                   ],
                 ),
-                _getChoiceContainer(),
+                Container(
+                  height: 67,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      25,
+                    ),
+                    color: const Color(
+                      0xffD3CFDC,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.pageController.animateToPage(0,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.linear);
+                            setState(() {
+                              controller.currentIndex = 0;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 1, horizontal: 5),
+                            height: 56,
+                            decoration: BoxDecoration(
+                              color: controller.currentIndex == 0
+                                  ? MyColors.primary
+                                  : const Color(
+                                      0xffD3CFDC,
+                                    ),
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'subscription'.tr,
+                                style: TextStyle(
+                                  color: controller.currentIndex == 0
+                                      ? Colors.white
+                                      : MyColors.primary,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.pageController.animateToPage(1,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.linear);
+                            setState(() {
+                              controller.currentIndex = 1;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 1, horizontal: 5),
+                            height: 56,
+                            decoration: BoxDecoration(
+                              color: controller.currentIndex == 1
+                                  ? MyColors.primary
+                                  : const Color(
+                                      0xffD3CFDC,
+                                    ),
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'account'.tr,
+                                style: TextStyle(
+                                  color: controller.currentIndex == 1
+                                      ? Colors.white
+                                      : MyColors.primary,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: GestureDetector(
+                          onTap: () {
+                            controller.pageController.animateToPage(2,
+                                duration: const Duration(milliseconds: 500),
+                                curve: Curves.linear);
+                            setState(() {
+                              controller.currentIndex = 2;
+                            });
+                          },
+                          child: Container(
+                            margin: const EdgeInsets.symmetric(
+                                vertical: 1, horizontal: 5),
+                            height: 56,
+                            decoration: BoxDecoration(
+                              color: controller.currentIndex == 2
+                                  ? MyColors.primary
+                                  : const Color(
+                                      0xffD3CFDC,
+                                    ),
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                'password'.tr,
+                                style: TextStyle(
+                                  color: controller.currentIndex == 2
+                                      ? Colors.white
+                                      : MyColors.primary,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 Expanded(
                   child: PageView(
                     physics: const NeverScrollableScrollPhysics(),
                     controller: controller.pageController,
                     children: [
-                      MySubscriptionScreen(),
+                      const MySubscriptionScreen(),
                       AccountScreen(),
                       EditPasswordScreen(),
                     ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _getChoiceContainer() {
-    return Container(
-      height: 67,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(
-          25,
-        ),
-        color: const Color(
-          0xffD3CFDC,
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                controller.pageController.animateToPage(0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.linear);
-                setState(() {
-                  controller.currentIndex = 0;
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                height: 56,
-                decoration: BoxDecoration(
-                  color: controller.currentIndex == 0
-                      ? MyColors.primary
-                      : const Color(
-                          0xffD3CFDC,
-                        ),
-                  borderRadius: BorderRadius.circular(
-                    25,
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    'subscription'.tr,
-                    style: TextStyle(
-                      color: controller.currentIndex == 0
-                          ? Colors.white
-                          : MyColors.primary,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                controller.pageController.animateToPage(1,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.linear);
-                setState(() {
-                  controller.currentIndex = 1;
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                height: 56,
-                decoration: BoxDecoration(
-                  color: controller.currentIndex == 1
-                      ? MyColors.primary
-                      : const Color(
-                          0xffD3CFDC,
-                        ),
-                  borderRadius: BorderRadius.circular(
-                    25,
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    'account'.tr,
-                    style: TextStyle(
-                      color: controller.currentIndex == 1
-                          ? Colors.white
-                          : MyColors.primary,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Expanded(
-            child: GestureDetector(
-              onTap: () {
-                controller.pageController.animateToPage(2,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.linear);
-                setState(() {
-                  controller.currentIndex = 2;
-                });
-              },
-              child: Container(
-                margin: const EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                height: 56,
-                decoration: BoxDecoration(
-                  color: controller.currentIndex == 2
-                      ? MyColors.primary
-                      : const Color(
-                          0xffD3CFDC,
-                        ),
-                  borderRadius: BorderRadius.circular(
-                    25,
-                  ),
-                ),
-                child: Center(
-                  child: Text(
-                    'password'.tr,
-                    style: TextStyle(
-                      color: controller.currentIndex == 2
-                          ? Colors.white
-                          : MyColors.primary,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  _getProfileRow() {
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(
-            width: 10,
-          ),
-          Container(
-            width: 114,
-            height: 114,
-            decoration: BoxDecoration(
-              color: const Color(
-                0xffD3CFDC,
-              ),
-              shape: BoxShape.circle,
-              border: Border.all(
-                color: const Color(
-                  0xffD3CFDC,
-                ),
-                width: 8,
-              ),
-
-              ///TODO: change image (from api)
-              image: DecorationImage(
-                image: AssetImage(
-                  MyImages.introTeapot,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          SizedBox(
-            width: 170,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(
-                  'ahmad',
-                  style: TextStyle(
-                    color: MyColors.primary,
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  'ahmad',
-                  style: TextStyle(
-                    color: MyColors.greyPrimary,
-                    fontSize: 14,
-                  ),
-                ),
-                Text(
-                  'ahmad',
-                  style: TextStyle(
-                    color: MyColors.red,
-                    fontSize: 18,
                   ),
                 ),
               ],

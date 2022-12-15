@@ -16,22 +16,23 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final controller = SignInController.find;
 
-  var khaled = '';
-  final myList = [];
-
-  void myFunction() {}
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
+  // for reference
+  // var khaled = '';
+  // final myList = [];
+  //
+  // void myFunction() {}
+  //
+  // @override
+  // void initState() {
+  //
+  //   super.initState();
+  // }
+  //
+  // @override
+  // void dispose() {
+  //
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -49,15 +50,117 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(
               height: 20,
             ),
-            _getPhoneTextField(),
+            CustomTextField(
+              controller: controller.phoneController,
+              textAlign: TextAlign.start,
+              color: MyColors.textFieldColor,
+
+              ///TODO: Mr.Khalid, please take a look
+              onChanged: (value) {
+                if (value == '+962') {
+                  controller.phoneController.text = "";
+                  return;
+                }
+                if (value.startsWith('+962')) {
+                  controller.phoneController.text = value;
+                } else {
+                  controller.phoneController.text = '+962$value';
+                }
+                controller.phoneController.selection =
+                    TextSelection.fromPosition(
+                  TextPosition(
+                    offset: controller.phoneController.text.length,
+                  ),
+                );
+              },
+              prefixIcon: SizedBox(
+                width: 60,
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 18,
+                    ),
+                    const Icon(
+                      Icons.local_phone_outlined,
+                      color: Color(0xffBDB5D0),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      width: 1,
+                      height: 38,
+                      color: MyColors.primary,
+                    ),
+                  ],
+                ),
+              ),
+              hint: 'phone number'.tr,
+            ),
             const SizedBox(
               height: 10,
             ),
-            _getPasswordTextField(),
+            CustomTextField(
+              controller: controller.passwordController,
+              color: MyColors.textFieldColor,
+              obscureText: true,
+              prefixIcon: SizedBox(
+                width: 60,
+                child: Row(
+                  children: [
+                    const SizedBox(
+                      width: 18,
+                    ),
+                    const Icon(
+                      Icons.lock_open_outlined,
+                      color: Color(0xffBDB5D0),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Container(
+                      width: 1,
+                      height: 38,
+                      color: MyColors.primary,
+                    ),
+                  ],
+                ),
+              ),
+              hint: 'password'.tr,
+            ),
             const SizedBox(
               height: 20,
             ),
-            _getORow(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Expanded(
+                  child: Divider(
+                    indent: 10,
+                    endIndent: 10,
+                    thickness: 0.7,
+                    color: MyColors.primary,
+                  ),
+                ),
+                Text(
+                  'or'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const Expanded(
+                  child: Divider(
+                    indent: 10,
+                    endIndent: 10,
+                    color: MyColors.primary,
+                    thickness: 0.7,
+                    height: 10,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -73,7 +176,32 @@ class _SignInScreenState extends State<SignInScreen> {
             const SizedBox(
               height: 20,
             ),
-            _getSignInMethods(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Image.asset(
+                    MyImages.appleSignIn,
+                  ),
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Image.asset(
+                    MyImages.googleSignIn,
+                  ),
+                ),
+                SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Image.asset(
+                    MyImages.facebookSignIn,
+                  ),
+                ),
+              ],
+            ),
             const SizedBox(
               height: 90,
             ),
@@ -110,153 +238,6 @@ class _SignInScreenState extends State<SignInScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  _getPhoneTextField() {
-    ///TODO: make sure
-    return Directionality(
-      textDirection: TextDirection.ltr,
-      child: CustomTextField(
-        controller: controller.phoneController,
-        textAlign: TextAlign.start,
-        color: MyColors.textFieldColor,
-        onChanged: (value) {
-          print(value);
-          if (value == '+962') {
-            controller.phoneController.text = "";
-            return;
-          }
-         if( value.startsWith('+962')){
-           controller.phoneController.text = value;
-         }
-         else{
-           controller.phoneController.text = '+962$value';
-         }
-          print(controller.phoneController.text);
-          controller.phoneController.selection = TextSelection.fromPosition(
-             TextPosition(
-              offset: controller.phoneController.text.length,
-            ),
-          );
-        },
-        prefixIcon: SizedBox(
-          width: 60,
-          child: Row(
-            children: [
-              const SizedBox(
-                width: 18,
-              ),
-              const Icon(
-                Icons.local_phone_outlined,
-                color: Color(0xffBDB5D0),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                width: 1,
-                height: 38,
-                color: MyColors.primary,
-              ),
-            ],
-          ),
-        ),
-        hint: 'phone number'.tr,
-      ),
-    );
-  }
-
-  _getPasswordTextField() {
-    return CustomTextField(
-      controller: controller.passwordController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.lock_open_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'password'.tr,
-    );
-  }
-
-  _getORow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        const Expanded(
-          child: Divider(
-            indent: 10,
-            endIndent: 10,
-            thickness: 0.7,
-            color: MyColors.primary,
-          ),
-        ),
-        Text(
-          'or'.tr,
-          style: const TextStyle(
-            color: MyColors.primary,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const Expanded(
-          child: Divider(
-            indent: 10,
-            endIndent: 10,
-            color: MyColors.primary,
-            thickness: 0.7,
-            height: 10,
-          ),
-        ),
-      ],
-    );
-  }
-
-  _getSignInMethods() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.appleSignIn,
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.googleSignIn,
-          ),
-        ),
-        SizedBox(
-          width: 50,
-          height: 50,
-          child: Image.asset(
-            MyImages.facebookSignIn,
-          ),
-        ),
-      ],
     );
   }
 }

@@ -137,31 +137,57 @@ class AddAuctionScreen extends StatelessWidget {
                         child: SingleChildScrollView(
                           child: Column(
                             children: [
-                              _getAddressTextField(),
+                              CustomTextField(
+                                controller: controller.addressController,
+                                color: MyColors.textFieldColor,
+                                hint: 'address'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              _getDescriptionTextField(),
+                              CustomTextField(
+                                controller: controller.descriptionController,
+                                color: MyColors.textFieldColor,
+                                maxLines: 10,
+                                hint: 'description'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              _getMainPictureTextField(),
+                              CustomTextField(
+                                controller: controller.mainPictureController,
+                                color: MyColors.textFieldColor,
+                                hint: 'main picture'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              _getMorePicturesTextField(),
+                              CustomTextField(
+                                controller: controller.morePicturesController,
+                                color: MyColors.textFieldColor,
+                                hint: 'more pictures'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              _getAuctionStartingPriceTextField(),
+                              CustomTextField(
+                                controller:
+                                    controller.auctionStartingPriceController,
+                                color: MyColors.textFieldColor,
+                                hint: 'auction starting price'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-                              _getDirectSellPriceTextField(),
+                              CustomTextField(
+                                controller:
+                                    controller.directSellPriceController,
+                                color: MyColors.textFieldColor,
+                                hint: 'direct sell price'.tr,
+                              ),
                               const SizedBox(
                                 height: 10,
                               ),
-
                             ],
                           ),
                         ),
@@ -183,7 +209,7 @@ class AddAuctionScreen extends StatelessWidget {
                       const Duration(seconds: 1),
                       () {
                         _key.currentState?.reset();
-                       Get.dialog(AddedAuctionDialog());
+                        Get.dialog(AddedAuctionDialog());
                       },
                     );
                   },
@@ -196,55 +222,6 @@ class AddAuctionScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  _getAddressTextField() {
-    return CustomTextField(
-      controller: controller.addressController,
-      color: MyColors.textFieldColor,
-      hint: 'address'.tr,
-    );
-  }
-
-  _getDescriptionTextField() {
-    return CustomTextField(
-      controller: controller.descriptionController,
-      color: MyColors.textFieldColor,
-      maxLines: 10,
-      hint: 'description'.tr,
-    );
-  }
-
-  _getMainPictureTextField() {
-    return CustomTextField(
-      controller: controller.mainPictureController,
-      color: MyColors.textFieldColor,
-      hint: 'main picture'.tr,
-    );
-  }
-
-  _getMorePicturesTextField() {
-    return CustomTextField(
-      controller: controller.morePicturesController,
-      color: MyColors.textFieldColor,
-      hint: 'more pictures'.tr,
-    );
-  }
-
-  _getAuctionStartingPriceTextField() {
-    return CustomTextField(
-      controller: controller.auctionStartingPriceController,
-      color: MyColors.textFieldColor,
-      hint: 'auction starting price'.tr,
-    );
-  }
-
-  _getDirectSellPriceTextField() {
-    return CustomTextField(
-      controller: controller.directSellPriceController,
-      color: MyColors.textFieldColor,
-      hint: 'direct sell price'.tr,
     );
   }
 }

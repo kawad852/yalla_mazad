@@ -60,4 +60,5 @@ final Map<String, String> en = {
   'auction': 'Auction',
   'your auction amount': 'Your auction amount',
   'current price': 'Current price',
+  'jordan': 'Jordan',
 };

@@ -9,4 +9,5 @@ class AppConstants {
   static const String instagram = "https://www.instagram.com/google/";
   static const String twitterUrl =
       "https://twitter.com/Google?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor";
+  static final String jordan = 'jordan'.tr;
 }

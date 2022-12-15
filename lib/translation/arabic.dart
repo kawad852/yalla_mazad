@@ -57,4 +57,5 @@ final Map<String, String> ar = {
   'auction': 'مزايدة',
   'your auction amount': 'مقدار مزايدتك',
   'current price': 'السعر الحالي',
+  'jordan':'الأردن',
 };

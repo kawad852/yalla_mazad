@@ -99,7 +99,33 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                     const SizedBox(
                       height: 40,
                     ),
-                    _getPhoneTextField(),
+                    CustomTextField(
+                      controller: controller.phoneController,
+                      color: MyColors.textFieldColor,
+                      prefixIcon: SizedBox(
+                        width: 60,
+                        child: Row(
+                          children: [
+                            const SizedBox(
+                              width: 18,
+                            ),
+                            const Icon(
+                              Icons.local_phone_outlined,
+                              color: Color(0xffBDB5D0),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Container(
+                              width: 1,
+                              height: 38,
+                              color: MyColors.primary,
+                            ),
+                          ],
+                        ),
+                      ),
+                      hint: 'phone number'.tr,
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -109,29 +135,61 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Flexible(
-                            child: _getCodeTextField(
-                                controller.codeControllers[0]),
+                            child: CustomTextField(
+                              controller: controller.codeControllers[0],
+                              color: MyColors.textFieldColor,
+                              textAlign: TextAlign.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(
+                                  1,
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Flexible(
-                            child: _getCodeTextField(
-                                controller.codeControllers[1]),
+                            child: CustomTextField(
+                              controller: controller.codeControllers[1],
+                              color: MyColors.textFieldColor,
+                              textAlign: TextAlign.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(
+                                  1,
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Flexible(
-                            child: _getCodeTextField(
-                                controller.codeControllers[2]),
+                            child: CustomTextField(
+                              controller: controller.codeControllers[2],
+                              color: MyColors.textFieldColor,
+                              textAlign: TextAlign.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(
+                                  1,
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           Flexible(
-                            child: _getCodeTextField(
-                                controller.codeControllers[3]),
+                            child: CustomTextField(
+                              controller: controller.codeControllers[3],
+                              color: MyColors.textFieldColor,
+                              textAlign: TextAlign.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(
+                                  1,
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -190,49 +248,6 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
           ],
         ),
       ),
-    );
-  }
-
-  _getPhoneTextField() {
-    return CustomTextField(
-      controller: controller.phoneController,
-      color: MyColors.textFieldColor,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.local_phone_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'phone number'.tr,
-    );
-  }
-
-  _getCodeTextField(controller) {
-    return CustomTextField(
-      controller: controller,
-      color: MyColors.textFieldColor,
-      textAlign: TextAlign.center,
-      inputFormatters: [
-        LengthLimitingTextInputFormatter(
-          1,
-        ),
-      ],
     );
   }
 }

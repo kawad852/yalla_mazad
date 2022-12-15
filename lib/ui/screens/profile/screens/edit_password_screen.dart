@@ -17,15 +17,96 @@ class EditPasswordScreen extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          _getOldPasswordTextField(),
+          CustomTextField(
+            controller: controller.oldPasswordController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.lock_open_outlined,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'old password'.tr,
+          ),
           const SizedBox(
             height: 10,
           ),
-          _getPasswordTextField(),
+          CustomTextField(
+            controller: controller.passwordController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.lock_open_outlined,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'password'.tr,
+          ),
           const SizedBox(
             height: 20,
           ),
-          _getConfirmPasswordTextField(),
+          CustomTextField(
+            controller: controller.confirmPasswordController,
+            color: MyColors.textFieldColor,
+            obscureText: true,
+            prefixIcon: SizedBox(
+              width: 60,
+              child: Row(
+                children: [
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  const Icon(
+                    Icons.lock_open_outlined,
+                    color: Color(0xffBDB5D0),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Container(
+                    width: 1,
+                    height: 38,
+                    color: MyColors.primary,
+                  ),
+                ],
+              ),
+            ),
+            hint: 'confirm password'.tr,
+          ),
           const SizedBox(
             height: 20,
           ),
@@ -56,99 +137,6 @@ class EditPasswordScreen extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  _getOldPasswordTextField() {
-    return CustomTextField(
-      controller: controller.oldPasswordController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.lock_open_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'old password'.tr,
-    );
-  }
-
-  _getPasswordTextField() {
-    return CustomTextField(
-      controller: controller.passwordController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.lock_open_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'password'.tr,
-    );
-  }
-
-  _getConfirmPasswordTextField() {
-    return CustomTextField(
-      controller: controller.confirmPasswordController,
-      color: MyColors.textFieldColor,
-      obscureText: true,
-      prefixIcon: SizedBox(
-        width: 60,
-        child: Row(
-          children: [
-            const SizedBox(
-              width: 18,
-            ),
-            const Icon(
-              Icons.lock_open_outlined,
-              color: Color(0xffBDB5D0),
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Container(
-              width: 1,
-              height: 38,
-              color: MyColors.primary,
-            ),
-          ],
-        ),
-      ),
-      hint: 'confirm password'.tr,
     );
   }
 }
