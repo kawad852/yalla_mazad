@@ -24,7 +24,9 @@ final Map<String, String> ar = {
   'please enter the verification code': 'يرجى ادخال رمز التحقق',
   'enter the verification code sent to your phone number':
       'ادخل رمز التحقق المرسل إلى رقم هاتفك',
-  'didn\'t receive a code? resend after': 'لم تستلم رمز ؟ اعادة ارسال بعد',
+  'didn\'t receive a code?': 'لم تستلم رمز ؟',
+  'resend after': ' اعادة ارسال بعد',
+  'seconds': ' ثانية',
   'congratulations': 'تهانينا',
   'you have been registered successfully': '، تم تسجيلك بنجاح ',
   'help us know your interests to give you the best':

@@ -42,16 +42,16 @@ class _MyAppState extends State<MyApp> {
   }
 
   Bindings? _initialBinding() {
-    if (MySharedPreferences.isLogIn) {
-      ///TODO: change to home
-      //return NavBarBinding();
-    } else if (!MySharedPreferences.isLogIn &&
-        !MySharedPreferences.isPassedIntro) {
-      ///TODO: make sure
-      return null;
-    } else {
+    // if (MySharedPreferences.isLogIn) {
+    //   ///TODO: change to home
+    //   //return NavBarBinding();
+    // } else if (!MySharedPreferences.isLogIn &&
+    //     !MySharedPreferences.isPassedIntro) {
+    //   ///TODO: make sure
+    //   return null;
+    // } else {
       return AuthenticationBinding();
-    }
+    //}
   }
 
   @override

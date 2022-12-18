@@ -45,8 +45,7 @@ class MyImages {
 
   static const String jordanFlag = "${authentication}jordan.png";
 
+  static const String pencilField = "${authentication}pencil.png";
 
   static const String justice = "${subscription}justice.png";
-
-
 }

@@ -57,7 +57,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 CustomTextField(
                   controller: controller.phoneController,
-                  //textAlign: TextAlign.end,
                   color: MyColors.textFieldColor,
                   validator: (text) {
                     if (text == '' || text!.isEmpty) {

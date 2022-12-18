@@ -22,222 +22,232 @@ class SignUpScreen extends StatelessWidget {
       child: SingleChildScrollView(
         child: Form(
           key: controller.formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              CustomTextField(
-                controller: controller.nameController,
-                color: MyColors.textFieldColor,
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      Image.asset(
-                        MyImages.userField,
-                        width: 20,
-                        height: 20,
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
-                  ),
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-                hint: 'name'.tr,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomTextField(
-                controller: controller.emailController,
-                color: MyColors.textFieldColor,
-                validator: (text) {
-                  if (text == '' || text!.isEmpty) {
-                    return 'cannot be empty'.tr;
-                  } else if (!text.contains(RegExp(
-                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
-                    return 'not a valid email'.tr;
-                  }
-                  return null;
-                },
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.alternate_email,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
-                  ),
-                ),
-                hint: 'email'.tr,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomTextField(
-                controller: controller.passwordController,
-                color: MyColors.textFieldColor,
-                obscureText: true,
-                validator: (text) {
-                  if (text == '' || text!.isEmpty) {
-                    return 'cannot be empty'.tr;
-                  } else if (text.length < 8) {
-                    return 'password too short'.tr;
-                  } else if (!text.contains(RegExp(r'[0-9]'))) {
-                    return 'password too weak'.tr;
-                  }
-                  return null;
-                },
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.lock_open_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
-                  ),
-                ),
-                hint: 'password'.tr,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              CustomTextField(
-                controller: controller.confirmPasswordController,
-                color: MyColors.textFieldColor,
-                obscureText: true,
-                validator: (text) {
-                  if (text == '' || text!.isEmpty) {
-                    return 'cannot be empty'.tr;
-                  } else if (text.length < 8) {
-                    return 'password too short'.tr;
-                  } else if (!text.contains(RegExp(r'[0-9]'))) {
-                    return 'password too weak'.tr;
-                  }
-                  return null;
-                },
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.lock_open_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
-                  ),
-                ),
-                hint: 'password'.tr,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              Row(
-                children: [
-                  GetBuilder<SignUpController>(builder: (v) {
-                    return Checkbox(
-                      activeColor: MyColors.primary,
-                      value: v.isChecked,
-                      onChanged: (value) {
-                        v.isChecked = !v.isChecked;
-                        v.update();
-                      },
-                    );
-                  }),
-                  Expanded(
-                    child: Text(
-                      'I agree to the terms and conditions, privacy policy'.tr,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: MyColors.primary,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              GestureDetector(
-                onTap: () async {
-                  await controller.fetchSignUpData(
-                      name: controller.nameController.text,
-                      email: controller.emailController.text,
-                      password: controller.passwordController.text,
-                      context: context);
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                    color: MyColors.primary,
-                    borderRadius: BorderRadius.circular(
-                      25,
+                CustomTextField(
+                  controller: controller.nameController,
+                  color: MyColors.textFieldColor,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    }
+                    return null;
+                  },
+                  prefixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        Image.asset(
+                          MyImages.userField,
+                          width: 20,
+                          height: 20,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 38,
+                          color: MyColors.primary,
+                        ),
+                      ],
                     ),
                   ),
-                  child: Center(
-                    child: Text(
-                      'next'.tr,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                  hint: 'name'.tr,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomTextField(
+                  controller: controller.emailController,
+                  color: MyColors.textFieldColor,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (!text.contains(RegExp(
+                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+                      return 'not a valid email'.tr;
+                    }
+                    return null;
+                  },
+                  prefixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        const Icon(
+                          Icons.alternate_email,
+                          color: Color(0xffBDB5D0),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 38,
+                          color: MyColors.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                  hint: 'email'.tr,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomTextField(
+                  controller: controller.passwordController,
+                  color: MyColors.textFieldColor,
+                  obscureText: true,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 8) {
+                      return 'password too short'.tr;
+                    } else if (!text.contains(RegExp(r'[0-9]'))) {
+                      return 'password too weak'.tr;
+                    }
+                    return null;
+                  },
+                  prefixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        const Icon(
+                          Icons.lock_open_outlined,
+                          color: Color(0xffBDB5D0),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 38,
+                          color: MyColors.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                  hint: 'password'.tr,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CustomTextField(
+                  controller: controller.confirmPasswordController,
+                  color: MyColors.textFieldColor,
+                  obscureText: true,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 8) {
+                      return 'password too short'.tr;
+                    } else if (!text.contains(RegExp(r'[0-9]'))) {
+                      return 'password too weak'.tr;
+                    }
+                    return null;
+                  },
+                  prefixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        const Icon(
+                          Icons.lock_open_outlined,
+                          color: Color(0xffBDB5D0),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 38,
+                          color: MyColors.primary,
+                        ),
+                      ],
+                    ),
+                  ),
+                  hint: 'password'.tr,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Row(
+                  children: [
+                    GetBuilder<SignUpController>(builder: (v) {
+                      return Checkbox(
+                        activeColor: MyColors.primary,
+                        value: v.isChecked,
+                        onChanged: (value) {
+                          v.isChecked = !v.isChecked;
+                          v.update();
+                        },
+                      );
+                    }),
+                    Expanded(
+                      child: Text(
+                        'I agree to the terms and conditions, privacy policy'
+                            .tr,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: MyColors.primary,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                GestureDetector(
+                  onTap: () async {
+                    await controller.fetchSignUpData(
+                        name: controller.nameController.text,
+                        email: controller.emailController.text,
+                        password: controller.passwordController.text,
+                        context: context);
+                  },
+                  child: Container(
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: MyColors.primary,
+                      borderRadius: BorderRadius.circular(
+                        25,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'next'.tr,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -67,7 +67,12 @@ class User {
     phone = json['phone'];
     email = json['email'];
     image = json['image'];
-    badges = json['badges'];
+    if (json['badges'] != null) {
+      badges = <Badge?>[];
+      json['badges'].forEach((v) {
+        badges!.add(Badge.fromJson(v));
+      });
+    }
   }
   int? id;
   String? name;
@@ -83,7 +88,9 @@ class User {
     map['phone'] = phone;
     map['email'] = email;
     map['image'] = image;
-    map['badges'] = badges;
+    if (badges != null) {
+      map['badges'] = badges!.map((v) => v?.toJson()).toList();
+    }
     return map;
   }
 }

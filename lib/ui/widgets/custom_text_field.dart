@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
   const CustomTextField({
     required this.controller,
     required this.color,
@@ -29,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
     this.onChanged,
     this.validator,
+    this.textInputAction,
     Key? key,
   }) : super(key: key);
 
@@ -39,6 +41,7 @@ class CustomTextField extends StatelessWidget {
       maxLines: maxLines,
       textAlign: textAlign,
       inputFormatters: inputFormatters,
+      textInputAction: textInputAction,
       controller: controller,
       obscureText: obscureText,
       obscuringCharacter: '•',

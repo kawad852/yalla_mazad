@@ -16,7 +16,7 @@ class SignUpController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isChecked = false;
   RegisterModel? registerModel;
 
@@ -69,5 +69,9 @@ class SignUpController extends GetxController {
     } else {
       Fluttertoast.showToast(msg: 'you did not agree'.tr);
     }
+  }
+  @override
+  void onClose() {
+    super.onClose();
   }
 }

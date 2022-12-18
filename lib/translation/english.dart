@@ -25,8 +25,9 @@ final Map<String, String> en = {
   'please enter the verification code': 'Please enter the verification code',
   'enter the verification code sent to your phone number':
       'Enter the verification code sent to your phone number',
-  'didn\'t receive a code? resend after':
-      'Didn\'t receive a code? Resend after',
+  'didn\'t receive a code?': 'Didn\'t receive a code?',
+  'resend after': ' Resend after',
+  'seconds': ' seconds',
   'congratulations': 'Congratulations',
   'you have been registered successfully':
       ' ,You have been registered successfully',

@@ -10,7 +10,7 @@ import '../../utils/shared_prefrences.dart';
 class SignInController extends GetxController {
   static SignInController get find => Get.find();
   final TextEditingController phoneController = TextEditingController();
-  final formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   SignInModel? signInModel;
 
