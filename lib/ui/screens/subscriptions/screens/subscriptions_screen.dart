@@ -10,9 +10,14 @@ import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../controller/subscriptions/subscriptions_controller.dart';
 
-class SubscriptionsScreen extends StatelessWidget {
+class SubscriptionsScreen extends StatefulWidget {
   const SubscriptionsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<SubscriptionsScreen> createState() => _SubscriptionsScreenState();
+}
+
+class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = SubscriptionsController.find;
@@ -71,7 +76,7 @@ class SubscriptionsScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
-              horizontal: 30,
+              horizontal: 0,
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,87 +90,107 @@ class SubscriptionsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(
-                        height: 40,
+                        height: 60,
                       ),
-                      RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text: 'congratulations'.tr,
-                              style: const TextStyle(
-                                color: MyColors.red,
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: 'congratulations'.tr,
+                                style: const TextStyle(
+                                  color: MyColors.red,
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                            TextSpan(
-                              text:
-                                  'you\'ve got a free subscription, valid for one auction'
-                                      .tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 32,
-                                fontWeight: FontWeight.bold,
+                              TextSpan(
+                                text:
+                                    'you\'ve got a free subscription, valid for one auction'
+                                        .tr,
+                                style: const TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 32,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
                       Expanded(
                         child: SingleChildScrollView(
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'you can change your subscription to any other subscription at any time'
-                                    .tr,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 16,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0),
+                                child: Text(
+                                  'you can change your subscription to any other subscription at any time'
+                                      .tr,
+                                  style: const TextStyle(
+                                    color: MyColors.primary,
+                                    fontSize: 18,
+                                  ),
                                 ),
                               ),
                               const SizedBox(
                                 height: 30,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Image.asset(
-                                    MyImages.justice,
-                                    width: 20,
-                                    height: 20,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ),
-                                  Text(
-                                    'subscriptions'.tr,
-                                    style: const TextStyle(
-                                      color: MyColors.primary,
-                                      fontSize: 20,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Image.asset(
+                                      MyImages.justice,
+                                      width: 20,
+                                      height: 20,
                                     ),
-                                  )
-                                ],
+                                    const SizedBox(
+                                      width: 4,
+                                    ),
+                                    Text(
+                                      'subscriptions'.tr,
+                                      style: const TextStyle(
+                                        color: MyColors.primary,
+                                        fontSize: 20,
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                               const SizedBox(
                                 height: 30,
                               ),
                               CarouselSlider(
-                                items: const [
-                                  SubscriptionItem(),
-                                  SubscriptionItem(),
-                                  SubscriptionItem(),
-                                ],
+                                items: List.generate(
+                                    3,
+                                    (index) => Opacity(
+                                        opacity: controller.pageIndex == index
+                                            ? 1
+                                            : 0.5,
+                                        child: const SubscriptionItem())),
                                 options: CarouselOptions(
-                                  aspectRatio: 1,
-                                  viewportFraction: 0.9,
+                                  onPageChanged: (index, x) {
+                                    setState(() {
+                                      controller.pageIndex = index;
+                                    });
+                                  },
+                                  //aspectRatio: 3/3,
+                                  height: 400,
+                                  viewportFraction: 0.8,
                                   enlargeCenterPage: true,
                                   initialPage: 0,
-                                  autoPlay: true,
-                                  enlargeFactor: 0.5,
+                                  autoPlay: false,
+                                  enlargeFactor: 0.2,
                                   autoPlayInterval: const Duration(
                                     milliseconds: 1000,
                                   ),
@@ -174,29 +199,33 @@ class SubscriptionsScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 60,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  ///TODO: navigate to home
-                                  Get.to(
-                                    () => const EditProfileScreen(),
-                                    binding: ProfileBinding(),
-                                  );
-                                },
-                                child: Container(
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color: MyColors.primary,
-                                    borderRadius: BorderRadius.circular(
-                                      25,
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 30.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    ///TODO: navigate to home
+                                    Get.to(
+                                      () => const EditProfileScreen(),
+                                      binding: ProfileBinding(),
+                                    );
+                                  },
+                                  child: Container(
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                      color: MyColors.primary,
+                                      borderRadius: BorderRadius.circular(
+                                        25,
+                                      ),
                                     ),
-                                  ),
-                                  child: Center(
-                                    child: Text(
-                                      'home screen'.tr,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
+                                    child: Center(
+                                      child: Text(
+                                        'home screen'.tr,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ),
