@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/authentication/interests_controller.dart';
+import 'package:yalla_mazad/controller/interests/interests_controller.dart';
 
 class InterestsBinding extends Bindings {
   @override

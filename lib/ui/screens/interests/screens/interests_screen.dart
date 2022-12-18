@@ -2,15 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/subscriptions/subscriptions_binding.dart';
-import 'package:yalla_mazad/controller/authentication/interests_controller.dart';
-import 'package:yalla_mazad/ui/screens/auth/interests/widgets/interest_item.dart';
+import 'package:yalla_mazad/controller/interests/interests_controller.dart';
+import 'package:yalla_mazad/model/interests/interests_model.dart';
 import 'package:yalla_mazad/ui/screens/subscriptions/screens/subscriptions_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-class InterestsScreen extends StatelessWidget {
+import '../widgets/interest_item.dart';
+
+class InterestsScreen extends StatefulWidget {
   const InterestsScreen({Key? key}) : super(key: key);
 
+  @override
+  State<InterestsScreen> createState() => _InterestsScreenState();
+}
+
+class _InterestsScreenState extends State<InterestsScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = InterestsController.find;
@@ -93,29 +100,77 @@ class InterestsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 30,
                     ),
-                    Wrap(
-                      spacing: 10,
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      runSpacing: 10,
-                      children: const [
-                        InterestItem(
-                          content: 'cars',
-                          isChosen: true,
-                        ),
-                        InterestItem(
-                          content: 'cars',
-                          isChosen: false,
-                        ),
-                        InterestItem(
-                          content: 'cars cars c',
-                          isChosen: true,
-                        ),
-                        InterestItem(
-                          content: 'cars',
-                          isChosen: true,
-                        ),
-                      ],
-                    ),
+                    FutureBuilder<InterestsModel?>(
+                        future: controller.initializeInterestsFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                return Wrap(
+                                  spacing: 10,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  runSpacing: 10,
+                                  children: List.generate(
+                                    controller.interestsModel?.data?.length ??
+                                        0,
+                                    (index) => GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          if (!controller.selectedInterests
+                                              .contains(snapshot
+                                                  .data?.data?[index].id)) {
+                                            controller.selectedInterests.add(
+                                                snapshot.data?.data?[index]
+                                                        .id ??
+                                                    0);
+                                          } else {
+                                            controller.selectedInterests.remove(
+                                                snapshot.data?.data?[index]
+                                                        .id ??
+                                                    0);
+                                          }
+                                        });
+                                      },
+                                      child: InterestItem(
+                                        content:
+                                            snapshot.data?.data?[index].name ??
+                                                '',
+                                        isChosen: controller.selectedInterests
+                                            .contains(
+                                                snapshot.data?.data?[index].id),
+                                      ),
+                                    ),
+                                  ),
+                                  // [
+                                  //   InterestItem(
+                                  //     content: 'cars',
+                                  //     isChosen: true,
+                                  //   ),
+                                  //   InterestItem(
+                                  //     content: 'cars',
+                                  //     isChosen: false,
+                                  //   ),
+                                  //   InterestItem(
+                                  //     content: 'cars cars c',
+                                  //     isChosen: true,
+                                  //   ),
+                                  //   InterestItem(
+                                  //     content: 'cars',
+                                  //     isChosen: true,
+                                  //   ),
+                                  // ],
+                                );
+                              } else if (snapshot.hasError) {
+                                return const Text('error');
+                              } else {
+                                return const Text('error');
+                              }
+                          }
+                        }),
                   ],
                 ),
                 const Expanded(flex: 2, child: SizedBox()),

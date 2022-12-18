@@ -12,4 +12,8 @@ class ApiUrl {
 
   //update user phone
   static const String updateUserPhone = "/api/v1/phone-update/";
+
+  //get all interests
+  static const String fetchAllInterests = "/api/v1/categories";
+
 }

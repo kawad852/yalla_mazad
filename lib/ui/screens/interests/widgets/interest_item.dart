@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
-class InterestItem extends StatelessWidget {
+class InterestItem extends StatefulWidget {
   final String content;
   final bool isChosen;
   const InterestItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
 
+  @override
+  State<InterestItem> createState() => _InterestItemState();
+}
+
+class _InterestItemState extends State<InterestItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -14,7 +19,7 @@ class InterestItem extends StatelessWidget {
         vertical: 12,
       ),
       decoration: BoxDecoration(
-        color: isChosen ? MyColors.primary : Colors.white,
+        color: widget.isChosen ? MyColors.primary : Colors.white,
         borderRadius: BorderRadius.circular(
           17,
         ),
@@ -27,9 +32,9 @@ class InterestItem extends StatelessWidget {
         ),
       ),
       child: Text(
-        content,
+        widget.content,
         style: TextStyle(
-          color: isChosen ? Colors.white : MyColors.primary,
+          color: widget.isChosen ? Colors.white : MyColors.primary,
           fontSize: 14,
         ),
       ),
