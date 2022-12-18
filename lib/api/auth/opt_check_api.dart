@@ -16,8 +16,6 @@ class OptCheckApi {
         'Content-Type': 'application/json',
         // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
-
-      ///TODO: why is the country code always +962
       var body = jsonEncode({
         "phone": '+962$phone',
         "code": code,

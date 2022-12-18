@@ -61,4 +61,14 @@ final Map<String, String> en = {
   'your auction amount': 'Your auction amount',
   'current price': 'Current price',
   'jordan': 'Jordan',
+  'cannot be empty': 'Cannot be empty',
+  'not a valid phone number': 'Not a valid phone number',
+  'password too short': 'Password is too short',
+  'password too weak': 'Password too weak',
+  'not a valid email': 'Not a valid email',
+  'incorrect phone or password': 'Incorrect phone or password',
+  'incorrect email or password': 'Incorrect email or password',
+  'passwords do not match': 'Passwords do not match',
+  'you did not agree':
+      'Sorry, but you did not agree to the terms and conditions',
 };

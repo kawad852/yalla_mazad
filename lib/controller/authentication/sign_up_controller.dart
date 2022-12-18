@@ -8,7 +8,6 @@ import 'package:yalla_mazad/model/auth/register_model.dart';
 import '../../binding/authentication/phone_number_binding.dart';
 import '../../ui/screens/auth/phone_number/screens/phone_number_screen.dart';
 import '../../utils/app_constants.dart';
-import '../../utils/shared_prefrences.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get find => Get.find();
@@ -17,6 +16,7 @@ class SignUpController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  final formKey = GlobalKey<FormState>();
   bool isChecked = false;
   RegisterModel? registerModel;
 
@@ -28,37 +28,41 @@ class SignUpController extends GetxController {
   }) async {
     if (isChecked) {
       if (passwordController.text == confirmPasswordController.text) {
-        Loader.show(context);
-        // OverLayLoader.showLoading(context);
-        registerModel = await RegisterApi()
-            .data(name: name, email: email, password: password);
-        if (registerModel == null) {
-          Fluttertoast.showToast(msg: AppConstants.failedMessage);
-          Loader.hide();
-          return;
-        }
+        if (formKey.currentState != null) {
+          if (formKey.currentState!.validate()) {
+            Loader.show(context);
+            // OverLayLoader.showLoading(context);
+            registerModel = await RegisterApi()
+                .data(name: name, email: email, password: password);
+            if (registerModel == null) {
+              Fluttertoast.showToast(msg: AppConstants.failedMessage);
+              Loader.hide();
+              return;
+            }
 
-        ///Todo: not sure if i need to add them after register or after otp check
-        if (registerModel!.code == 200) {
-          // MySharedPreferences.accessToken = registerModel!.data!.token!;
-          // MySharedPreferences.email = registerModel!.data!.user!.email!;
-          // MySharedPreferences.name = registerModel!.data!.user!.name!;
-          // MySharedPreferences.userId = registerModel!.data!.user!.id!;
-          // MySharedPreferences.image = registerModel!.data!.user!.image!;
-          // MySharedPreferences.phone = registerModel!.data!.user!.phone!;
-          // MySharedPreferences.isLogIn = true;
+            ///Todo: not sure if i need to add them after register or after otp check
+            if (registerModel!.code == 200) {
+              // MySharedPreferences.accessToken = registerModel!.data!.token!;
+              // MySharedPreferences.email = registerModel!.data!.user!.email!;
+              // MySharedPreferences.name = registerModel!.data!.user!.name!;
+              // MySharedPreferences.userId = registerModel!.data!.user!.id!;
+              // MySharedPreferences.image = registerModel!.data!.user!.image!;
+              // MySharedPreferences.phone = registerModel!.data!.user!.phone!;
+              // MySharedPreferences.isLogIn = true;
 
-          // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
-        } else if (registerModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'Incorrect phone or password'.tr);
-        } else {
-          Fluttertoast.showToast(msg: registerModel!.msg!);
+              // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+            } else if (registerModel!.code == 500) {
+              Fluttertoast.showToast(msg: 'incorrect email or password'.tr);
+            } else {
+              Fluttertoast.showToast(msg: registerModel!.msg!);
+            }
+            Loader.hide();
+            Get.to(
+              () => const PhoneNumberScreen(),
+              binding: PhoneNumberBinding(),
+            );
+          }
         }
-        Loader.hide();
-        Get.to(
-          () => const PhoneNumberScreen(),
-          binding: PhoneNumberBinding(),
-        );
       } else {
         Fluttertoast.showToast(msg: 'passwords do not match'.tr);
       }

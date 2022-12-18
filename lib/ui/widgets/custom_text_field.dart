@@ -14,6 +14,7 @@ class CustomTextField extends StatelessWidget {
   final TextAlign textAlign;
   final int maxLines;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
   const CustomTextField({
     required this.controller,
     required this.color,
@@ -27,12 +28,13 @@ class CustomTextField extends StatelessWidget {
     this.textAlign = TextAlign.start,
     this.maxLines = 1,
     this.onChanged,
+    this.validator,
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       onChanged: onChanged,
       maxLines: maxLines,
       textAlign: textAlign,
@@ -41,11 +43,13 @@ class CustomTextField extends StatelessWidget {
       obscureText: obscureText,
       obscuringCharacter: '•',
       readOnly: readOnly,
+      validator: validator,
       style: const TextStyle(
         fontSize: 18,
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+        //hintTextDirection: TextDirection.rtl,
         filled: true,
         fillColor: color,
         prefixIcon: prefixIcon,

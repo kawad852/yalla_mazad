@@ -9,7 +9,8 @@ import '../../utils/shared_prefrences.dart';
 
 class SignInController extends GetxController {
   static SignInController get find => Get.find();
-  final TextEditingController phoneController = TextEditingController(text: '+962');
+  final TextEditingController phoneController = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   final TextEditingController passwordController = TextEditingController();
   SignInModel? signInModel;
 
@@ -18,28 +19,32 @@ class SignInController extends GetxController {
     required String password,
     required BuildContext context,
   }) async {
-    Loader.show(context);
-    // OverLayLoader.showLoading(context);
-    signInModel = await SignInApi().data(phone: phone, password: password);
-    if (signInModel == null) {
-      Fluttertoast.showToast(msg: AppConstants.failedMessage);
-      Loader.hide();
-      return;
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
+        Loader.show(context);
+        // OverLayLoader.showLoading(context);
+        signInModel = await SignInApi().data(phone: phone, password: password);
+        if (signInModel == null) {
+          Fluttertoast.showToast(msg: AppConstants.failedMessage);
+          Loader.hide();
+          return;
+        }
+        if (signInModel!.code == 200) {
+          MySharedPreferences.accessToken = signInModel!.data!.token!;
+          MySharedPreferences.email = signInModel!.data!.user!.email!;
+          MySharedPreferences.name = signInModel!.data!.user!.name!;
+          MySharedPreferences.userId = signInModel!.data!.user!.id!;
+          MySharedPreferences.image = signInModel!.data!.user!.image!;
+          MySharedPreferences.phone = signInModel!.data!.user!.phone!;
+          MySharedPreferences.isLogIn = true;
+          // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+        } else if (signInModel!.code == 500) {
+          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+        } else {
+          Fluttertoast.showToast(msg: signInModel!.msg!);
+        }
+        Loader.hide();
+      }
     }
-    if (signInModel!.code == 200) {
-      MySharedPreferences.accessToken = signInModel!.data!.token!;
-      MySharedPreferences.email = signInModel!.data!.user!.email!;
-      MySharedPreferences.name = signInModel!.data!.user!.name!;
-      MySharedPreferences.userId = signInModel!.data!.user!.id!;
-      MySharedPreferences.image = signInModel!.data!.user!.image!;
-      MySharedPreferences.phone = signInModel!.data!.user!.phone!;
-      MySharedPreferences.isLogIn = true;
-      // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
-    } else if (signInModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'Incorrect phone or password'.tr);
-    } else {
-      Fluttertoast.showToast(msg: signInModel!.msg!);
-    }
-    Loader.hide();
   }
 }

@@ -41,6 +41,8 @@ class MyImages {
 
   static const String circleBackground = "${authentication}circle.svg";
 
+  static const String userField = "${authentication}user.png";
+
   static const String jordanFlag = "${authentication}jordan.png";
 
 
