@@ -17,8 +17,8 @@ import '../../utils/shared_prefrences.dart';
 
 class VerificationCodeController extends GetxController {
   static VerificationCodeController get find => Get.find();
-  final TextEditingController phoneController = TextEditingController(
-      text: PhoneNumberController.find.phoneController.text);
+  final TextEditingController phoneController =
+      TextEditingController(text: '+962${MySharedPreferences.phone}');
   final List<TextEditingController> codeControllers = List.generate(
     4,
     (index) => TextEditingController(),
@@ -95,7 +95,6 @@ class VerificationCodeController extends GetxController {
     }
     if (updateUserPhoneModel!.code == 200) {
       MySharedPreferences.phone = phone;
-      MySharedPreferences.isLogIn = true;
       Get.to(() => const InterestsScreen(), binding: InterestsBinding());
       // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
     } else if (updateUserPhoneModel!.code == 500) {

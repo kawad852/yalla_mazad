@@ -69,4 +69,5 @@ final Map<String, String> ar = {
   'incorrect email or password': 'خطأ في البريد الإلكتروني أو كلمة المرور',
   'passwords do not match': 'كلمتا السر غير متطابقتين',
   'you did not agree': 'عذرا، لم توافق على الشروط والأحكام',
+  'resend now': 'إعادة الإرسال',
 };

@@ -36,7 +36,6 @@ class PhoneNumberController extends GetxController {
         }
         if (updateUserPhoneModel!.code == 200) {
           MySharedPreferences.phone = phone;
-          MySharedPreferences.isLogIn = true;
           Get.to(
             () => const VerificationCodeScreen(),
             binding: VerificationCodeBinding(),

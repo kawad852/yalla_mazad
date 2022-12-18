@@ -72,4 +72,5 @@ final Map<String, String> en = {
   'passwords do not match': 'Passwords do not match',
   'you did not agree':
       'Sorry, but you did not agree to the terms and conditions',
+  'resend now': 'Resend now',
 };

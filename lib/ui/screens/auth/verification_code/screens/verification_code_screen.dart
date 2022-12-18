@@ -28,79 +28,79 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
             height: false,
           ),
         ),
-        child: Directionality(
-          textDirection: TextDirection.ltr,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Image.asset(
-                      MyImages.logoColored,
-                      width: 150,
-                      height: 75,
-                    ),
-                    const SizedBox(),
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: ScreenSize.phoneSize(
-                          30,
-                          height: false,
-                        ),
-                      ),
-                      child: Container(
-                        height: 67,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Image.asset(
+                    MyImages.logoColored,
+                    width: 150,
+                    height: 75,
+                  ),
+                  const SizedBox(),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: ScreenSize.phoneSize(
+                        30,
+                        height: false,
                       ),
                     ),
-                  ],
-                ),
+                    child: Container(
+                      height: 67,
+                    ),
+                  ),
+                ],
               ),
-              Expanded(
-                flex: 5,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4.0,
-                        ),
-                        child: Text(
-                          'please enter the verification code'.tr,
-                          style: const TextStyle(
-                            fontSize: 32,
-                            color: MyColors.primary,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+            ),
+            Expanded(
+              flex: 5,
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4.0,
-                        ),
-                        child: Text(
-                          'enter the verification code sent to your phone number'
-                              .tr,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: MyColors.primary,
-                          ),
+                      child: Text(
+                        'please enter the verification code'.tr,
+                        style: const TextStyle(
+                          fontSize: 32,
+                          color: MyColors.primary,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(
-                        height: 40,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 4.0,
                       ),
-                      CustomTextField(
+                      child: Text(
+                        'enter the verification code sent to your phone number'
+                            .tr,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: MyColors.primary,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Directionality(
+                      textDirection: TextDirection.ltr,
+                      child: CustomTextField(
                         controller: controller.phoneController,
                         color: MyColors.textFieldColor,
                         readOnly: true,
@@ -136,13 +136,16 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                         ),
                         hint: 'phone number'.tr,
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Form(
-                          key: controller.formKey,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Form(
+                        key: controller.formKey,
+                        child: Directionality(
+                          textDirection: TextDirection.ltr,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -239,131 +242,128 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      Center(
-                        child: GetBuilder<VerificationCodeController>(
-                          init: VerificationCodeController(),
-                          builder: (controller) {
-                            return controller.remaining != 0
-                                ? RichText(
-                                    textAlign: TextAlign.center,
-                                    text: TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: 'didn\'t receive a code?'.tr,
-                                          style: const TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const TextSpan(
-                                          text: ' ',
-                                          style: TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: 'resend after'.tr,
-                                          style: const TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: ' ${controller.remaining} ',
-                                          style: const TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        TextSpan(
-                                          text: 'seconds'.tr,
-                                          style: const TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  )
-                                : Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Center(
+                      child: GetBuilder<VerificationCodeController>(
+                        init: VerificationCodeController(),
+                        builder: (controller) {
+                          return controller.remaining != 0
+                              ? RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
                                     children: [
-                                      Text(
-                                        'didn\'t receive a code?'.tr,
+                                      TextSpan(
+                                        text: 'didn\'t receive a code?'.tr,
                                         style: const TextStyle(
                                           color: MyColors.primary,
                                           fontSize: 14,
                                         ),
                                       ),
-                                      TextButton(
-                                        onPressed: () async {
-                                          await controller
-                                              .fetchUpdateUserPhoneData(
-                                                  phone:
-                                                      MySharedPreferences.phone,
-                                                  id: MySharedPreferences
-                                                      .userId,
-                                                  context: context);
-                                        },
-                                        child: Text(
-                                          'resend now'.tr,
-                                          style: const TextStyle(
-                                            color: MyColors.primary,
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                      const TextSpan(
+                                        text: ' ',
+                                        style: TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'resend after'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: ' ${controller.remaining} ',
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: 'seconds'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
                                         ),
                                       ),
                                     ],
-                                  );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height / 4,
-                      ),
-                      GestureDetector(
-                        onTap: () async {
-                          ///TODO: make sure of the direction of the code in both locales
-                          controller.code =
-                              '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
-                          await controller.fetchOTPCheckData(
-                              phone: MySharedPreferences.phone,
-                              context: context);
+                                  ),
+                                )
+                              : Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      'didn\'t receive a code?'.tr,
+                                      style: const TextStyle(
+                                        color: MyColors.primary,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        await controller
+                                            .fetchUpdateUserPhoneData(
+                                                phone:
+                                                    MySharedPreferences.phone,
+                                                id: MySharedPreferences.userId,
+                                                context: context);
+                                      },
+                                      child: Text(
+                                        'resend now'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
                         },
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            color: MyColors.primary,
-                            borderRadius: BorderRadius.circular(
-                              25,
-                            ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 4,
+                    ),
+                    GestureDetector(
+                      onTap: () async {
+                        controller.code =
+                            '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
+                        await controller.fetchOTPCheckData(
+                            phone: MySharedPreferences.phone, context: context);
+                      },
+                      child: Container(
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: MyColors.primary,
+                          borderRadius: BorderRadius.circular(
+                            25,
                           ),
-                          child: Center(
-                            child: Text(
-                              'next'.tr,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                              ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            'next'.tr,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

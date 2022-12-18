@@ -8,6 +8,7 @@ import 'package:yalla_mazad/model/auth/register_model.dart';
 import '../../binding/authentication/phone_number_binding.dart';
 import '../../ui/screens/auth/phone_number/screens/phone_number_screen.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/shared_prefrences.dart';
 
 class SignUpController extends GetxController {
   static SignUpController get find => Get.find();
@@ -42,11 +43,11 @@ class SignUpController extends GetxController {
 
             ///Todo: not sure if i need to add them after register or after otp check
             if (registerModel!.code == 200) {
-              // MySharedPreferences.accessToken = registerModel!.data!.token!;
-              // MySharedPreferences.email = registerModel!.data!.user!.email!;
-              // MySharedPreferences.name = registerModel!.data!.user!.name!;
-              // MySharedPreferences.userId = registerModel!.data!.user!.id!;
-              // MySharedPreferences.image = registerModel!.data!.user!.image!;
+              MySharedPreferences.accessToken = registerModel!.data!.token!;
+              MySharedPreferences.email = registerModel!.data!.user!.email!;
+              MySharedPreferences.name = registerModel!.data!.user!.name!;
+              MySharedPreferences.userId = registerModel!.data!.user!.id!;
+              MySharedPreferences.image = registerModel!.data!.user!.image!;
               // MySharedPreferences.phone = registerModel!.data!.user!.phone!;
               // MySharedPreferences.isLogIn = true;
 
@@ -70,6 +71,7 @@ class SignUpController extends GetxController {
       Fluttertoast.showToast(msg: 'you did not agree'.tr);
     }
   }
+
   @override
   void onClose() {
     super.onClose();

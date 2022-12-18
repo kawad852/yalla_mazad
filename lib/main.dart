@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
     //   ///TODO: make sure
     //   return null;
     // } else {
-      return AuthenticationBinding();
+    return AuthenticationBinding();
     //}
   }
 
@@ -66,7 +66,7 @@ class _MyAppState extends State<MyApp> {
         Locale('en', 'US'),
         Locale('ar', 'JO'),
       ],
-      // locale: Locale('ar'),
+      //locale: Locale('ar'),
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
