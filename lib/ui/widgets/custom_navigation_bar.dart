@@ -2,41 +2,43 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
+import 'package:yalla_mazad/utils/images.dart';
 
 import '../../utils/colors.dart';
 
 late PersistentTabController navBarController;
 
-class BaseNavBar extends StatefulWidget {
-  const BaseNavBar({Key? key}) : super(key: key);
+class CustomNavigationBar extends StatefulWidget {
+  const CustomNavigationBar({Key? key}) : super(key: key);
 
   @override
-  State<BaseNavBar> createState() => _BaseNavBarState();
+  State<CustomNavigationBar> createState() => _CustomNavigationBarState();
 }
 
-class _BaseNavBarState extends State<BaseNavBar> {
+class _CustomNavigationBarState extends State<CustomNavigationBar> {
   List<Widget> _buildScreens() {
     return [
-      // Home(),
-      // Search(),
-      // addAuction(),
-      // trending(),
-      // profile(),
+      TrendingAuctionScreen(),
+      TrendingAuctionScreen(),
+      TrendingAuctionScreen(),
+      TrendingAuctionScreen(),
+      TrendingAuctionScreen(),
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(''),
-        inactiveIcon: SvgPicture.asset(''),
+        icon: SvgPicture.asset(MyImages.navHome,color: MyColors.red,),
+        inactiveIcon: SvgPicture.asset(MyImages.navHome,color: Colors.white,),
         title: ("Home"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(''),
-        inactiveIcon: SvgPicture.asset(''),
+        icon: SvgPicture.asset(MyImages.navSearch,color: MyColors.red,),
+        inactiveIcon: SvgPicture.asset(MyImages.navSearch,color: Colors.white,),
         title: ("Search"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -44,22 +46,22 @@ class _BaseNavBarState extends State<BaseNavBar> {
 
       ///TODO: make sure
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(''),
-        inactiveIcon: SvgPicture.asset(''),
+        icon: SvgPicture.asset(MyImages.navAdd,color: MyColors.red,),
+        inactiveIcon: SvgPicture.asset(MyImages.navAdd,color: Colors.white,),
         title: ("Add Auction"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(''),
-        inactiveIcon: SvgPicture.asset(''),
+        icon: SvgPicture.asset(MyImages.navBolt,color: MyColors.red,),
+        inactiveIcon: SvgPicture.asset(MyImages.navBolt,color: Colors.white,),
         title: ("Trending"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(''),
-        inactiveIcon: SvgPicture.asset(''),
+        icon: SvgPicture.asset(MyImages.navUser,color: MyColors.red,),
+        inactiveIcon: SvgPicture.asset(MyImages.navUser,color: Colors.white,),
         title: ("Profile"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -69,7 +71,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
 
   @override
   void initState() {
-    navBarController = PersistentTabController(initialIndex: 0);
+    navBarController = PersistentTabController(initialIndex: 3);
     super.initState();
   }
 
@@ -77,6 +79,8 @@ class _BaseNavBarState extends State<BaseNavBar> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
+      margin: EdgeInsets.only(bottom: 30),
+      padding:  NavBarPadding.only(top: 20),
       controller: navBarController,
       screens: _buildScreens(),
       onItemSelected: (value) {
@@ -99,6 +103,7 @@ class _BaseNavBarState extends State<BaseNavBar> {
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle: NavBarStyle.style12,
+      backgroundColor: MyColors.primary,
     );
   }
 }

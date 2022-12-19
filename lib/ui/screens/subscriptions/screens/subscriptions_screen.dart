@@ -41,207 +41,217 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 40,
-              left: 20,
-              right: 20,
-            ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.cancel_outlined,
-                      color: MyColors.primary,
-                      size: 25,
-                    ),
-                  ),
-                  Text(
-                    'subscriptions'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 0,
-            ),
+          SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(
-                        height: 60,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'congratulations'.tr,
-                                style: const TextStyle(
-                                  color: MyColors.red,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    'you\'ve got a free subscription, valid for one auction'
-                                        .tr,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 45,
+                    left: 20,
+                    right: 20,
+                  ),
+                  child: Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.cancel_outlined,
+                            color: MyColors.primary,
+                            size: 25,
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                        Text(
+                          'subscriptions'.tr,
+                          style: const TextStyle(
+                            color: MyColors.primary,
+                            fontSize: 18,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 50,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Get.height,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
                       Expanded(
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0),
-                                child: Text(
-                                  'you can change your subscription to any other subscription at any time'
-                                      .tr,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              child: RichText(
+                                text: TextSpan(
                                   children: [
-                                    Image.asset(
-                                      MyImages.justice,
-                                      width: 20,
-                                      height: 20,
+                                    TextSpan(
+                                      text: 'congratulations'.tr,
+                                      style: const TextStyle(
+                                        color: MyColors.red,
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      'subscriptions'.tr,
+                                    TextSpan(
+                                      text:
+                                          'you\'ve got a free subscription, valid for one auction'
+                                              .tr,
                                       style: const TextStyle(
                                         color: MyColors.primary,
-                                        fontSize: 20,
+                                        fontSize: 32,
+                                        fontWeight: FontWeight.bold,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              CarouselSlider(
-                                items: List.generate(
-                                    3,
-                                    (index) => Opacity(
-                                        opacity: controller.pageIndex == index
-                                            ? 1
-                                            : 0.5,
-                                        child: const SubscriptionItem())),
-                                options: CarouselOptions(
-                                  onPageChanged: (index, x) {
-                                    setState(() {
-                                      controller.pageIndex = index;
-                                    });
-                                  },
-                                  //aspectRatio: 3/3,
-                                  height: 400,
-                                  viewportFraction: 0.8,
-                                  enlargeCenterPage: true,
-                                  initialPage: 0,
-                                  autoPlay: false,
-                                  enlargeFactor: 0.2,
-                                  autoPlayInterval: const Duration(
-                                    milliseconds: 1000,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 60,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 30.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    ///TODO: navigate to home
-                                    Get.to(
-                                      () => const EditProfileScreen(),
-                                      binding: ProfileBinding(),
-                                    );
-                                  },
-                                  child: Container(
-                                    height: 60,
-                                    decoration: BoxDecoration(
-                                      color: MyColors.primary,
-                                      borderRadius: BorderRadius.circular(
-                                        25,
-                                      ),
-                                    ),
-                                    child: Center(
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 1.5,
+                              child: SingleChildScrollView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30.0),
                                       child: Text(
-                                        'home screen'.tr,
+                                        'you can change your subscription to any other subscription at any time'
+                                            .tr,
                                         style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
+                                          color: MyColors.primary,
+                                          fontSize: 18,
                                         ),
                                       ),
                                     ),
-                                  ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            MyImages.justice,
+                                            width: 20,
+                                            height: 20,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            'subscriptions'.tr,
+                                            style: const TextStyle(
+                                              color: MyColors.primary,
+                                              fontSize: 20,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 30,
+                                    ),
+                                    CarouselSlider(
+                                      items: List.generate(
+                                          3,
+                                          (index) => Opacity(
+                                              opacity:
+                                                  controller.pageIndex == index
+                                                      ? 1
+                                                      : 0.5,
+                                              child: const SubscriptionItem())),
+                                      options: CarouselOptions(
+                                        onPageChanged: (index, x) {
+                                          setState(() {
+                                            controller.pageIndex = index;
+                                          });
+                                        },
+                                        //aspectRatio: 3/3,
+                                        height: 400,
+                                        viewportFraction: 0.8,
+                                        enlargeCenterPage: true,
+                                        initialPage: 0,
+                                        autoPlay: false,
+                                        enlargeFactor: 0.2,
+                                        autoPlayInterval: const Duration(
+                                          milliseconds: 1000,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 60,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          ///TODO: navigate to home
+                                          Get.to(
+                                            () => const EditProfileScreen(),
+                                            binding: ProfileBinding(),
+                                          );
+                                        },
+                                        child: Container(
+                                          height: 60,
+                                          decoration: BoxDecoration(
+                                            color: MyColors.primary,
+                                            borderRadius: BorderRadius.circular(
+                                              25,
+                                            ),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              'home screen'.tr,
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
                   ),
                 ),
-
               ],
             ),
           ),

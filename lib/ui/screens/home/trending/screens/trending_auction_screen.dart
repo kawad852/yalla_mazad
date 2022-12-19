@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -53,7 +54,9 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                         Container(
                           width: 35,
                           height: 35,
-                          padding: const EdgeInsets.only(right: 4,),
+                          padding: const EdgeInsets.only(
+                            right: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: const Color(
                               0xffD3CFDC,
@@ -83,9 +86,8 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                         Container(
                           width: 35,
                           height: 35,
-                          //margin: const EdgeInsets.only(right: 15),
                           decoration: BoxDecoration(
-                            color:Color.fromRGBO(202, 195, 212, 0.3),
+                            color: const Color.fromRGBO(202, 195, 212, 0.3),
                             // color: const Color(
                             //   0xffD3CFDC,
                             // ).withOpacity(0.4),

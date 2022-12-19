@@ -7,6 +7,8 @@ class MyImages {
 
   static const String subscription = "${_path}subscriptions/";
 
+  static const String navBar = "${_path}navigation_bar/";
+
   static const String logo = "${_path}logo.png";
 
   static const String introCar = "${intro}car.png";
@@ -48,4 +50,14 @@ class MyImages {
   static const String pencilField = "${authentication}pencil.png";
 
   static const String justice = "${subscription}justice.png";
+
+  static const String navAdd = "${navBar}add.svg";
+
+  static const String navBolt = "${navBar}bolt.svg";
+
+  static const String navHome = "${navBar}home.svg";
+
+  static const String navSearch = "${navBar}search.svg";
+
+  static const String navUser = "${navBar}user.svg";
 }
