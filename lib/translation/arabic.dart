@@ -70,4 +70,5 @@ final Map<String, String> ar = {
   'passwords do not match': 'كلمتا السر غير متطابقتين',
   'you did not agree': 'عذرا، لم توافق على الشروط والأحكام',
   'resend now': 'إعادة الإرسال',
+  'trending auctions':'',
 };

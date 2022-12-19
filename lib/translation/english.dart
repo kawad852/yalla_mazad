@@ -73,4 +73,5 @@ final Map<String, String> en = {
   'you did not agree':
       'Sorry, but you did not agree to the terms and conditions',
   'resend now': 'Resend now',
+  'trending auctions':'Trending Auctions',
 };
