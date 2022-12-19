@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
+import 'package:yalla_mazad/binding/profile/profile_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -60,6 +63,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
+      // initialBinding: ProfileBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
@@ -71,6 +75,7 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
+      // home: EditProfileScreen(),
     );
   }
 }

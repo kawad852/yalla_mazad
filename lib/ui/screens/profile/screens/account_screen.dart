@@ -20,7 +20,6 @@ class AccountScreen extends StatelessWidget {
           CustomTextField(
             controller: controller.nameController,
             color: MyColors.textFieldColor,
-            obscureText: true,
             prefixIcon: SizedBox(
               width: 60,
               child: Row(
@@ -51,7 +50,6 @@ class AccountScreen extends StatelessWidget {
           CustomTextField(
             controller: controller.emailController,
             color: MyColors.textFieldColor,
-            obscureText: true,
             prefixIcon: SizedBox(
               width: 60,
               child: Row(
@@ -82,7 +80,6 @@ class AccountScreen extends StatelessWidget {
           CustomTextField(
             controller: controller.phoneController,
             color: MyColors.textFieldColor,
-            obscureText: true,
             prefixIcon: SizedBox(
               width: 60,
               child: Row(

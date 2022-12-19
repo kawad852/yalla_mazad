@@ -27,6 +27,7 @@ class SignUpController extends GetxController {
     required String password,
     required BuildContext context,
   }) async {
+    ///Todo: bring back
     if (isChecked) {
       if (passwordController.text == confirmPasswordController.text) {
         if (formKey.currentState != null) {
@@ -50,7 +51,10 @@ class SignUpController extends GetxController {
               MySharedPreferences.image = registerModel!.data!.user!.image!;
               // MySharedPreferences.phone = registerModel!.data!.user!.phone!;
               // MySharedPreferences.isLogIn = true;
-
+              Get.to(
+                () => const PhoneNumberScreen(),
+                binding: PhoneNumberBinding(),
+              );
               // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
             } else if (registerModel!.code == 500) {
               Fluttertoast.showToast(msg: 'incorrect email or password'.tr);
@@ -58,10 +62,6 @@ class SignUpController extends GetxController {
               Fluttertoast.showToast(msg: registerModel!.msg!);
             }
             Loader.hide();
-            Get.to(
-              () => const PhoneNumberScreen(),
-              binding: PhoneNumberBinding(),
-            );
           }
         }
       } else {
@@ -72,8 +72,4 @@ class SignUpController extends GetxController {
     }
   }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 }

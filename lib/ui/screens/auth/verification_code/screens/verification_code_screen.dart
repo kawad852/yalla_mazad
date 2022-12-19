@@ -22,353 +22,348 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-        child: SizedBox(
-          height: Get.height,
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.phoneSize(
-                30,
-                height: false,
-              ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: ScreenSize.phoneSize(
+              30,
+              height: false,
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Image.asset(
-                        MyImages.logoColored,
-                        width: 150,
-                        height: 75,
-                      ),
-                      const SizedBox(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: ScreenSize.phoneSize(
-                            30,
-                            height: false,
-                          ),
-                        ),
-                        child: Container(
-                          height: 67,
-                        ),
-                      ),
-                    ],
-                  ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height / 2.8,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
+                    Image.asset(
+                      MyImages.logoColored,
+                      width: 150,
+                      height: 75,
+                    ),
+                    // const SizedBox(),
+                    // Padding(
+                    //   padding: EdgeInsets.symmetric(
+                    //     horizontal: ScreenSize.phoneSize(
+                    //       30,
+                    //       height: false,
+                    //     ),
+                    //   ),
+                    //   child: Container(
+                    //     height: 67,
+                    //   ),
+                    // ),
+                  ],
                 ),
-                Expanded(
-                  flex: 5,
-                  child: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 4.0,
+              ),
+              SizedBox(
+                height: 2 * MediaQuery.of(context).size.height / 2.3,
+                child: SingleChildScrollView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4.0,
+                        ),
+                        child: Text(
+                          'please enter the verification code'.tr,
+                          style: const TextStyle(
+                            fontSize: 32,
+                            color: MyColors.primary,
+                            fontWeight: FontWeight.bold,
                           ),
-                          child: Text(
-                            'please enter the verification code'.tr,
-                            style: const TextStyle(
-                              fontSize: 32,
-                              color: MyColors.primary,
-                              fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4.0,
+                        ),
+                        child: Text(
+                          'enter the verification code sent to your phone number'
+                              .tr,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: MyColors.primary,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: CustomTextField(
+                          controller: controller.phoneController,
+                          color: MyColors.textFieldColor,
+                          readOnly: true,
+                          suffixIcon: Transform.scale(
+                            scale: 0.5,
+                            child: Image.asset(
+                              MyImages.pencilField,
+                              width: 10,
+                              height: 10,
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 4.0,
-                          ),
-                          child: Text(
-                            'enter the verification code sent to your phone number'
-                                .tr,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: MyColors.primary,
+                          prefixIcon: SizedBox(
+                            width: 60,
+                            child: Row(
+                              children: [
+                                const SizedBox(
+                                  width: 18,
+                                ),
+                                const Icon(
+                                  Icons.local_phone_outlined,
+                                  color: Color(0xffBDB5D0),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 1,
+                                  height: 38,
+                                  color: MyColors.primary,
+                                ),
+                              ],
                             ),
                           ),
+                          hint: 'phone number'.tr,
                         ),
-                        const SizedBox(
-                          height: 40,
-                        ),
-                        Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: CustomTextField(
-                            controller: controller.phoneController,
-                            color: MyColors.textFieldColor,
-                            readOnly: true,
-                            suffixIcon: Transform.scale(
-                              scale: 0.5,
-                              child: Image.asset(
-                                MyImages.pencilField,
-                                width: 10,
-                                height: 10,
-                              ),
-                            ),
-                            prefixIcon: SizedBox(
-                              width: 60,
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 18,
-                                  ),
-                                  const Icon(
-                                    Icons.local_phone_outlined,
-                                    color: Color(0xffBDB5D0),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    width: 1,
-                                    height: 38,
-                                    color: MyColors.primary,
-                                  ),
-                                ],
-                              ),
-                            ),
-                            hint: 'phone number'.tr,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: Form(
-                            key: controller.formKey,
-                            child: Directionality(
-                              textDirection: TextDirection.ltr,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Flexible(
-                                    child: CustomTextField(
-                                      controller: controller.codeControllers[0],
-                                      color: MyColors.textFieldColor,
-                                      textAlign: TextAlign.center,
-                                      textInputAction: TextInputAction.next,
-                                      hint: '1',
-                                      validator: (text) {
-                                        if (text!.isEmpty || text == '') {
-                                          return '';
-                                        }
-                                        return null;
-                                      },
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(
-                                          1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                    child: CustomTextField(
-                                      controller: controller.codeControllers[1],
-                                      color: MyColors.textFieldColor,
-                                      textAlign: TextAlign.center,
-                                      textInputAction: TextInputAction.next,
-                                      hint: '2',
-                                      validator: (text) {
-                                        if (text!.isEmpty || text == '') {
-                                          return '';
-                                        }
-                                        return null;
-                                      },
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(
-                                          1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                    child: CustomTextField(
-                                      controller: controller.codeControllers[2],
-                                      color: MyColors.textFieldColor,
-                                      textAlign: TextAlign.center,
-                                      textInputAction: TextInputAction.next,
-                                      hint: '3',
-                                      validator: (text) {
-                                        if (text!.isEmpty || text == '') {
-                                          return '';
-                                        }
-                                        return null;
-                                      },
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(
-                                          1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Flexible(
-                                    child: CustomTextField(
-                                      controller: controller.codeControllers[3],
-                                      color: MyColors.textFieldColor,
-                                      textAlign: TextAlign.center,
-                                      textInputAction: TextInputAction.done,
-                                      hint: '4',
-                                      validator: (text) {
-                                        if (text!.isEmpty || text == '') {
-                                          return '';
-                                        }
-                                        return null;
-                                      },
-                                      inputFormatters: [
-                                        LengthLimitingTextInputFormatter(
-                                          1,
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Center(
-                          child: GetBuilder<VerificationCodeController>(
-                            init: VerificationCodeController(),
-                            builder: (controller) {
-                              return controller.remaining != 0
-                                  ? RichText(
-                                      textAlign: TextAlign.center,
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                            text: 'didn\'t receive a code?'.tr,
-                                            style: const TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          const TextSpan(
-                                            text: ' ',
-                                            style: TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: 'resend after'.tr,
-                                            style: const TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: ' ${controller.remaining} ',
-                                            style: const TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: 'seconds'.tr,
-                                            style: const TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Form(
+                          key: controller.formKey,
+                          child: Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Flexible(
+                                  child: CustomTextField(
+                                    controller: controller.codeControllers[0],
+                                    color: MyColors.textFieldColor,
+                                    textAlign: TextAlign.center,
+                                    textInputAction: TextInputAction.next,
+                                    hint: '1',
+                                    validator: (text) {
+                                      if (text!.isEmpty || text == '') {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(
+                                        1,
                                       ),
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  child: CustomTextField(
+                                    controller: controller.codeControllers[1],
+                                    color: MyColors.textFieldColor,
+                                    textAlign: TextAlign.center,
+                                    textInputAction: TextInputAction.next,
+                                    hint: '2',
+                                    validator: (text) {
+                                      if (text!.isEmpty || text == '') {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(
+                                        1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  child: CustomTextField(
+                                    controller: controller.codeControllers[2],
+                                    color: MyColors.textFieldColor,
+                                    textAlign: TextAlign.center,
+                                    textInputAction: TextInputAction.next,
+                                    hint: '3',
+                                    validator: (text) {
+                                      if (text!.isEmpty || text == '') {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(
+                                        1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Flexible(
+                                  child: CustomTextField(
+                                    controller: controller.codeControllers[3],
+                                    color: MyColors.textFieldColor,
+                                    textAlign: TextAlign.center,
+                                    textInputAction: TextInputAction.done,
+                                    hint: '4',
+                                    validator: (text) {
+                                      if (text!.isEmpty || text == '') {
+                                        return '';
+                                      }
+                                      return null;
+                                    },
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(
+                                        1,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Center(
+                        child: GetBuilder<VerificationCodeController>(
+                          init: VerificationCodeController(),
+                          builder: (controller) {
+                            return controller.remaining != 0
+                                ? RichText(
+                                    textAlign: TextAlign.center,
+                                    text: TextSpan(
                                       children: [
-                                        Text(
-                                          'didn\'t receive a code?'.tr,
+                                        TextSpan(
+                                          text: 'didn\'t receive a code?'.tr,
                                           style: const TextStyle(
                                             color: MyColors.primary,
                                             fontSize: 14,
                                           ),
                                         ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            await controller.resendOtpData(
-                                                id: MySharedPreferences.userId,
-                                                context: context);
-                                          },
-                                          child: Text(
-                                            'resend now'.tr,
-                                            style: const TextStyle(
-                                              color: MyColors.primary,
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                        const TextSpan(
+                                          text: ' ',
+                                          style: TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'resend after'.tr,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: ' ${controller.remaining} ',
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          text: 'seconds'.tr,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 14,
                                           ),
                                         ),
                                       ],
-                                    );
-                            },
-                          ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 4,
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            controller.code =
-                                '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
-                            await controller.fetchOTPCheckData(
-                                phone: MySharedPreferences.phone,
-                                context: context);
+                                    ),
+                                  )
+                                : Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'didn\'t receive a code?'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () async {
+                                          await controller.resendOtpData(
+                                              id: MySharedPreferences.userId,
+                                              context: context);
+                                        },
+                                        child: Text(
+                                          'resend now'.tr,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  );
                           },
-                          child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: MyColors.primary,
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height / 6,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          controller.code =
+                              '${controller.codeControllers[0].text}${controller.codeControllers[1].text}${controller.codeControllers[2].text}${controller.codeControllers[3].text}';
+                          await controller.fetchOTPCheckData(
+                              phone: MySharedPreferences.phone,
+                              context: context);
+                        },
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: MyColors.primary,
+                            borderRadius: BorderRadius.circular(
+                              25,
                             ),
-                            child: Center(
-                              child: Text(
-                                'next'.tr,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'next'.tr,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

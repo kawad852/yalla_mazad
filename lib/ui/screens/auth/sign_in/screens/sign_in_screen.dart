@@ -45,6 +45,7 @@ class _SignInScreenState extends State<SignInScreen> {
         ),
       ),
       child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Form(
           key: controller.formKey,
           child: Directionality(

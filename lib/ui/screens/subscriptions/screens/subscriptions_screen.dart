@@ -231,6 +231,9 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(
+                                height: 20,
+                              ),
                             ],
                           ),
                         ),
@@ -238,9 +241,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+
               ],
             ),
           ),

@@ -20,6 +20,7 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
       child: SingleChildScrollView(
+        physics: const NeverScrollableScrollPhysics(),
         child: Form(
           key: controller.formKey,
           child: Directionality(
@@ -213,7 +214,7 @@ class SignUpScreen extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 40,
+                  height: 65,
                 ),
                 GestureDetector(
                   onTap: () async {
