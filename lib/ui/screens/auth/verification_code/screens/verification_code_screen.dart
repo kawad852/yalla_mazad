@@ -311,13 +311,9 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                         ),
                                         TextButton(
                                           onPressed: () async {
-                                            await controller
-                                                .fetchUpdateUserPhoneData(
-                                                    phone: MySharedPreferences
-                                                        .phone,
-                                                    id: MySharedPreferences
-                                                        .userId,
-                                                    context: context);
+                                            await controller.resendOtpData(
+                                                id: MySharedPreferences.userId,
+                                                context: context);
                                           },
                                           child: Text(
                                             'resend now'.tr,

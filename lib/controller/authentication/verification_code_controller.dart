@@ -5,7 +5,9 @@ import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/api/auth/opt_check_api.dart';
+import 'package:yalla_mazad/api/auth/resend_otp_api.dart';
 import 'package:yalla_mazad/model/auth/opt_check_model.dart';
+import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
 
 import '../../api/auth/update_user_phone_api.dart';
 import '../../binding/interests/interests_binding.dart';
@@ -30,7 +32,7 @@ class VerificationCodeController extends GetxController {
   }
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  UpdateUserPhoneModel? updateUserPhoneModel;
+  ResendOtpModel? resendOtpModel;
   OptCheckModel? optCheckModel;
   late String code;
   Timer? timer;
@@ -78,26 +80,24 @@ class VerificationCodeController extends GetxController {
     // }
   }
 
-  Future fetchUpdateUserPhoneData({
-    required String phone,
+  Future resendOtpData({
     required int id,
     required BuildContext context,
   }) async {
     Loader.show(context);
-    updateUserPhoneModel =
-        await UpdateUserPhoneApi().data(phone: phone, id: id);
-    if (updateUserPhoneModel == null) {
+    resendOtpModel =
+        await ResendOtpApi().data( id: id);
+    if (resendOtpModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();
       return;
     }
-    if (updateUserPhoneModel!.code == 200) {
-      MySharedPreferences.phone = phone;
+    if (resendOtpModel!.code == 200) {
       // Get.to(() => const InterestsScreen(), binding: InterestsBinding());
-    } else if (updateUserPhoneModel!.code == 500) {
+    } else if (resendOtpModel!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     } else {
-      Fluttertoast.showToast(msg: updateUserPhoneModel!.msg!);
+      Fluttertoast.showToast(msg: resendOtpModel!.msg!);
     }
     Loader.hide();
   }

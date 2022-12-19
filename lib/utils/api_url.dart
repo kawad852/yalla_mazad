@@ -13,7 +13,13 @@ class ApiUrl {
   //update user phone
   static const String updateUserPhone = "/api/v1/phone-update/";
 
+  //resend otp
+  static const String resendOtp = "/api/v1/resend-otp/";
+
+
   //get all interests
   static const String fetchAllInterests = "/api/v1/categories";
 
+  //get all subscriptions
+  static const String fetchAllSubscriptions = "/api/v1/subscriptions";
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/model/subscriptions/subscriptions_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
 import '../../../../utils/images.dart';
@@ -11,7 +12,7 @@ class SubscriptionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 354,
-      width: MediaQuery.of(context).size.width-75,
+      width: MediaQuery.of(context).size.width - 75,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
           25,
