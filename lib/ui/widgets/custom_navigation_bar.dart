@@ -30,15 +30,27 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(MyImages.navHome,color: MyColors.red,),
-        inactiveIcon: SvgPicture.asset(MyImages.navHome,color: Colors.white,),
+        icon: SvgPicture.asset(
+          MyImages.navHome,
+          color: MyColors.red,
+        ),
+        inactiveIcon: SvgPicture.asset(
+          MyImages.navHome,
+          color: Colors.white,
+        ),
         title: ("Home"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(MyImages.navSearch,color: MyColors.red,),
-        inactiveIcon: SvgPicture.asset(MyImages.navSearch,color: Colors.white,),
+        icon: SvgPicture.asset(
+          MyImages.navSearch,
+          color: MyColors.red,
+        ),
+        inactiveIcon: SvgPicture.asset(
+          MyImages.navSearch,
+          color: Colors.white,
+        ),
         title: ("Search"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -46,22 +58,40 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
       ///TODO: make sure
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(MyImages.navAdd,color: MyColors.red,),
-        inactiveIcon: SvgPicture.asset(MyImages.navAdd,color: Colors.white,),
+        icon: SvgPicture.asset(
+          MyImages.navAdd,
+          color: MyColors.red,
+        ),
+        inactiveIcon: SvgPicture.asset(
+          MyImages.navAdd,
+          color: Colors.white,
+        ),
         title: ("Add Auction"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(MyImages.navBolt,color: MyColors.red,),
-        inactiveIcon: SvgPicture.asset(MyImages.navBolt,color: Colors.white,),
+        icon: SvgPicture.asset(
+          MyImages.navBolt,
+          color: MyColors.red,
+        ),
+        inactiveIcon: SvgPicture.asset(
+          MyImages.navBolt,
+          color: Colors.white,
+        ),
         title: ("Trending"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
       ),
       PersistentBottomNavBarItem(
-        icon: SvgPicture.asset(MyImages.navUser,color: MyColors.red,),
-        inactiveIcon: SvgPicture.asset(MyImages.navUser,color: Colors.white,),
+        icon: SvgPicture.asset(
+          MyImages.navUser,
+          color: MyColors.red,
+        ),
+        inactiveIcon: SvgPicture.asset(
+          MyImages.navUser,
+          color: Colors.white,
+        ),
         title: ("Profile"),
         activeColorPrimary: MyColors.primary,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -71,7 +101,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   void initState() {
-    navBarController = PersistentTabController(initialIndex: 3);
+    navBarController = PersistentTabController(initialIndex: 0);
     super.initState();
   }
 
@@ -79,17 +109,18 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      margin: EdgeInsets.only(bottom: 30),
-      padding:  NavBarPadding.only(top: 20),
+      margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
       controller: navBarController,
       screens: _buildScreens(),
       onItemSelected: (value) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
       items: _navBarsItems(),
-      confineInSafeArea: true,
+      confineInSafeArea: false,
+      resizeToAvoidBottomInset: true,
       decoration: const NavBarDecoration(
         colorBehindNavBar: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(25)),
       ),
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
+import 'package:yalla_mazad/controller/introduction/iintroduction_controller.dart';
+import 'package:yalla_mazad/model/introduction/introduction_model.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/widgets/intro_card_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_slide_button.dart';
@@ -17,6 +19,7 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = IntroductionController.find;
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -180,56 +183,71 @@ class IntroScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.phoneSize(
-                30,
-                height: false,
-              ),
-            ),
-            child: Text(
-              'Buy and sell, simply and securely'.tr,
-              maxLines: 3,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: MyColors.primary,
-                fontSize: 45,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenSize.phoneSize(
-                50,
-                height: false,
-              ),
-            ),
-            child: RichText(
-              text: TextSpan(
-                children: [
-                  TextSpan(
-                    text:
-                        "Official real auctions that you can participate in with ease, register now and start participating in public auctions"
-                            .tr,
-                    style: const TextStyle(
-                      color: MyColors.greyText,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const TextSpan(
-                    text: '\n',
-                  ),
-                  TextSpan(
-                    text: "Do not miss the opportunity".tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          FutureBuilder<IntroductionModel?>(
+              future: controller.initializeIntroductionFuture,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center(child: CircularProgressIndicator());
+                  case ConnectionState.done:
+                  default:
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ScreenSize.phoneSize(
+                                30,
+                                height: false,
+                              ),
+                            ),
+                            child: Text(
+                              controller.introductionModel?.data?[0].title ??
+                                  '',
+                              maxLines: 3,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: MyColors.primary,
+                                fontSize: 45,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: ScreenSize.phoneSize(
+                                50,
+                                height: false,
+                              ),
+                            ),
+                            child: RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: controller
+                                            .introductionModel?.data?[0].body ??
+                                        '',
+                                    style: const TextStyle(
+                                      color: MyColors.greyText,
+                                      fontSize: 18,
+                                    ),
+                                  ),
+                                  const TextSpan(
+                                    text: '\n',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      ///TODO: failure widget
+                      return const Text('error');
+                    } else {
+                      return const Text('error');
+                    }
+                }
+              }),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: ScreenSize.phoneSize(
@@ -250,7 +268,6 @@ class IntroScreen extends StatelessWidget {
                 Future.delayed(
                   const Duration(seconds: 1),
                   () {
-                    ///Todo: remove intro screen
                     Get.to(
                       () => const AuthenticationScreen(),
                       binding: AuthenticationBinding(),

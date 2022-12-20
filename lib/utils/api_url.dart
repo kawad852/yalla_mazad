@@ -1,6 +1,9 @@
 class ApiUrl {
   static const String mainUrl = "https://admin.yallamzad.com";
 
+  //introduction
+  static const String introduction = "/api/v1/introductions";
+
   //sign in
   static const String signIn = "/api/v1/login";
 
@@ -15,7 +18,6 @@ class ApiUrl {
 
   //resend otp
   static const String resendOtp = "/api/v1/resend-otp/";
-
 
   //get all interests
   static const String fetchAllInterests = "/api/v1/categories";

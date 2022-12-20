@@ -145,26 +145,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                       ),
                                     ),
                                   ),
-                                  // [
-                                  //   InterestItem(
-                                  //     content: 'cars',
-                                  //     isChosen: true,
-                                  //   ),
-                                  //   InterestItem(
-                                  //     content: 'cars',
-                                  //     isChosen: false,
-                                  //   ),
-                                  //   InterestItem(
-                                  //     content: 'cars cars c',
-                                  //     isChosen: true,
-                                  //   ),
-                                  //   InterestItem(
-                                  //     content: 'cars',
-                                  //     isChosen: true,
-                                  //   ),
-                                  // ],
                                 );
                               } else if (snapshot.hasError) {
+                                ///TODO: failure widget
                                 return const Text('error');
                               } else {
                                 return const Text('error');

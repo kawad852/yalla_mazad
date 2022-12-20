@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
+import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
+import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
+import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -42,16 +45,17 @@ class _MyAppState extends State<MyApp> {
   }
 
   Bindings? _initialBinding() {
-    // if (MySharedPreferences.isLogIn) {
-    //   ///TODO: change to home
-    //   //return NavBarBinding();
-    // } else if (!MySharedPreferences.isLogIn &&
-    //     !MySharedPreferences.isPassedIntro) {
-    //   ///TODO: make sure
-    //   return null;
-    // } else {
-    return AuthenticationBinding();
-    //}
+    if (MySharedPreferences.isLogIn) {
+      ///TODO: change to home
+      return AuthenticationBinding();
+      //return NavBarBinding();
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
+      ///TODO: make sure
+      return IntroductionBinding();
+    } else {
+      return AuthenticationBinding();
+    }
   }
 
   @override
@@ -60,17 +64,20 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
+     // initialBinding: Binding,
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('ar', 'JO'),
       ],
+
       //locale: Locale('ar'),
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
+      //home:CustomNavigationBar(),
     );
   }
 }
