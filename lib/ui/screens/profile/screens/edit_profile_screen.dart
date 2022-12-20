@@ -43,7 +43,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
           ),
           Padding(
             padding: const EdgeInsets.only(
-              top: 40,
+              top: 45,
               left: 20,
               right: 20,
             ),
@@ -95,18 +95,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 50,
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(
+                height: 50,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
                 ),
-                Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
@@ -184,7 +184,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                   ],
                 ),
-                Container(
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 30,
+                ),
+                child: Container(
                   height: 67,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
@@ -314,19 +319,19 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: controller.pageController,
-                    children: [
-                      const MySubscriptionScreen(),
-                      AccountScreen(),
-                      EditPasswordScreen(),
-                    ],
-                  ),
+              ),
+              Expanded(
+                child: PageView(
+                  physics: const NeverScrollableScrollPhysics(),
+                  controller: controller.pageController,
+                  children: [
+                    const MySubscriptionScreen(),
+                    AccountScreen(),
+                    EditPasswordScreen(),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

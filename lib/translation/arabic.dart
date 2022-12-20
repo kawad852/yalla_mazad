@@ -61,7 +61,7 @@ final Map<String, String> ar = {
   'current price': 'السعر الحالي',
   'jordan': 'الأردن',
   'cannot be empty': 'لا يمكن أن يكون فارغا',
-  'not a valid phone number': 'ليست كلمة مرور صالحة',
+  'not a valid phone number': 'ليس رقم هاتف صالح',
   'password too short': 'كلمة السر قصيرة جدا',
   'password too weak': 'كلمة السر ضعيفة جدا',
   'not a valid email': 'ليس بريد إلكتروني صالح',
@@ -70,5 +70,5 @@ final Map<String, String> ar = {
   'passwords do not match': 'كلمتا السر غير متطابقتين',
   'you did not agree': 'عذرا، لم توافق على الشروط والأحكام',
   'resend now': 'إعادة الإرسال',
-  'trending auctions':'',
+  'trending auctions': '',
 };

@@ -3,9 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
+import 'package:yalla_mazad/binding/profile/profile_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
-import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
@@ -33,8 +33,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
-      ///TODO: change to home
-      return const AuthenticationScreen();
+      return const CustomNavigationBar();
       //return const BaseNavBar();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
@@ -47,11 +46,10 @@ class _MyAppState extends State<MyApp> {
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       ///TODO: change to home
-      return AuthenticationBinding();
+      return ProfileBinding();
       //return NavBarBinding();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
-      ///TODO: make sure
       return IntroductionBinding();
     } else {
       return AuthenticationBinding();
@@ -64,7 +62,7 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
-     // initialBinding: Binding,
+      // initialBinding: Binding,
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [

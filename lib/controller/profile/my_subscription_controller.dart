@@ -4,4 +4,5 @@ import 'package:get/get.dart';
 class MySubscriptionController extends GetxController {
   static MySubscriptionController get find => Get.find();
   CarouselController carouselController = CarouselController();
+  int pageIndex = 0;
 }

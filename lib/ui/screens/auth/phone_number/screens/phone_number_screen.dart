@@ -39,26 +39,11 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
                       Image.asset(
                         MyImages.logoColored,
                         width: 150,
                         height: 75,
                       ),
-                      // const SizedBox(),
-                      // Padding(
-                      //   padding: EdgeInsets.symmetric(
-                      //     horizontal: ScreenSize.phoneSize(
-                      //       30,
-                      //       height: false,
-                      //     ),
-                      //   ),
-                      //   child: Container(
-                      //     height: 67,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

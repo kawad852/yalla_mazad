@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import '../../api/auth/sign_in_api.dart';
 import '../../model/auth/sign_in_model.dart';
 import '../../utils/app_constants.dart';
@@ -37,6 +38,7 @@ class SignInController extends GetxController {
           MySharedPreferences.image = signInModel!.data!.user!.image!;
           MySharedPreferences.phone = signInModel!.data!.user!.phone!;
           MySharedPreferences.isLogIn = true;
+          Get.offAll(() => const CustomNavigationBar());
           // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
         } else if (signInModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);

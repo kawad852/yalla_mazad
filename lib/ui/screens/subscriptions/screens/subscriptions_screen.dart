@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/profile/profile_binding.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/subscriptions/widgets/subscription_item.dart';
+import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -178,6 +179,7 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                                       height: 30,
                                     ),
                                     CarouselSlider(
+                                      ///TODO: from api
                                       items: List.generate(
                                           3,
                                           (index) => Opacity(
@@ -212,9 +214,9 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                                           horizontal: 30.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          ///TODO: navigate to home
+                                          ///TODO: make sure of binding
                                           Get.to(
-                                            () => const EditProfileScreen(),
+                                            () => const CustomNavigationBar(),
                                             binding: ProfileBinding(),
                                           );
                                         },
