@@ -16,6 +16,9 @@ class ApiUrl {
   //update user phone
   static const String updateUserPhone = "/api/v1/phone-update/";
 
+  //update user
+  static const String updateUser = "/api/v1/user-update";
+
   //resend otp
   static const String resendOtp = "/api/v1/resend-otp/";
 

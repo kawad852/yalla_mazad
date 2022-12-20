@@ -86,81 +86,97 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                          SizedBox(
                           height: ScreenSize.phoneSize(40, height: true),
                         ),
-                        CustomTextField(
-                          controller: controller.countryCodeController,
-                          readOnly: true,
-                          color: MyColors.textFieldColor,
-                          suffixIcon: const Icon(
-                            Icons.keyboard_arrow_down_rounded,
-                            color: MyColors.primary,
-                          ),
-                          prefixIcon: SizedBox(
-                            width: 60,
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 18,
-                                ),
-                                Image.asset(
-                                  MyImages.jordanFlag,
-                                  width: 20,
-                                  height: 20,
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 38,
-                                  color: MyColors.primary,
-                                ),
-                              ],
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: CustomTextField(
+                            controller: controller.countryCodeController,
+                            readOnly: true,
+                            color: MyColors.textFieldColor,
+                            suffixIcon: const Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: MyColors.primary,
+                            ),
+                            prefixIcon: SizedBox(
+                              width: 60,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 18,
+                                  ),
+                                  Image.asset(
+                                    MyImages.jordanFlag,
+                                    width: 20,
+                                    height: 20,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    width: 1,
+                                    height: 38,
+                                    color: MyColors.primary,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                        CustomTextField(
-                          controller: controller.phoneController,
-                          color: MyColors.textFieldColor,
-                          validator: (text) {
-                            if (text == '' || text!.isEmpty) {
-                              return 'cannot be empty'.tr;
-                            } else if (text.length < 9) {
-                              return 'not a valid phone number'.tr;
-                            }
-                            return null;
-                          },
-                          inputFormatters: [
-                            LengthLimitingTextInputFormatter(
-                              9,
+                        Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: CustomTextField(
+                            controller: controller.phoneController,
+                            color: MyColors.textFieldColor,
+                            validator: (text) {
+                              if (text == '' || text!.isEmpty) {
+                                return 'cannot be empty'.tr;
+                              } else if (text.length < 9) {
+                                return 'not a valid phone number'.tr;
+                              }
+                              return null;
+                            },
+                            inputFormatters: [
+                              LengthLimitingTextInputFormatter(
+                                9,
+                              ),
+                              FilteringTextInputFormatter.digitsOnly,
+                            ],
+                            prefixIcon: SizedBox(
+                              width: 105,
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 18,
+                                  ),
+                                  const Icon(
+                                    Icons.local_phone_outlined,
+                                    color: Color(0xffBDB5D0),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    width: 1,
+                                    height: 38,
+                                    color: MyColors.primary,
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Text(
+                                    '+962',
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            FilteringTextInputFormatter.digitsOnly,
-                          ],
-                          prefixIcon: SizedBox(
-                            width: 60,
-                            child: Row(
-                              children: [
-                                const SizedBox(
-                                  width: 18,
-                                ),
-                                const Icon(
-                                  Icons.local_phone_outlined,
-                                  color: Color(0xffBDB5D0),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                Container(
-                                  width: 1,
-                                  height: 38,
-                                  color: MyColors.primary,
-                                ),
-                              ],
-                            ),
+                            hint: 'phone number'.tr,
                           ),
-                          hint: 'phone number'.tr,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 4,

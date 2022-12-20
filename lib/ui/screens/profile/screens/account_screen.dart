@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/account_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
@@ -26,6 +27,7 @@ class AccountScreen extends StatelessWidget {
               CustomTextField(
                 controller: controller.nameController,
                 color: MyColors.textFieldColor,
+                readOnly: true,
                 prefixIcon: SizedBox(
                   width: 60,
                   child: Row(
@@ -56,6 +58,7 @@ class AccountScreen extends StatelessWidget {
               CustomTextField(
                 controller: controller.emailController,
                 color: MyColors.textFieldColor,
+                readOnly: true,
                 prefixIcon: SizedBox(
                   width: 60,
                   child: Row(
@@ -83,38 +86,69 @@ class AccountScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              CustomTextField(
-                controller: controller.phoneController,
-                color: MyColors.textFieldColor,
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.phone_enabled_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
+              Form(
+                key: controller.formKey,
+                child: CustomTextField(
+                  controller: controller.phoneController,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 9) {
+                      return 'not a valid phone number'.tr;
+                    }
+                    return null;
+                  },
+                  inputFormatters: [
+                    LengthLimitingTextInputFormatter(
+                      9,
+                    ),
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  color: MyColors.textFieldColor,
+                  prefixIcon: SizedBox(
+                    width: 105,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        const Icon(
+                          Icons.phone_enabled_outlined,
+                          color: Color(0xffBDB5D0),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                          width: 1,
+                          height: 38,
+                          color: MyColors.primary,
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const Text(
+                          '+962',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
+                  hint: 'phone'.tr,
                 ),
-                hint: 'phone'.tr,
               ),
               const SizedBox(
                 height: 20,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async {
+                  await controller.fetchUpdateUserData(
+                      phone: controller.phoneController.text,
+                      context: context);
+                },
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
