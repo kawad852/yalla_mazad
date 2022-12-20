@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/add_auction/add_auction_binding.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
+import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
 import 'package:yalla_mazad/binding/profile/profile_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
@@ -61,8 +63,8 @@ class _MyAppState extends State<MyApp> {
     // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialBinding: _initialBinding(),
-      // initialBinding: Binding,
+     // initialBinding: _initialBinding(),
+      initialBinding: HomeBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
@@ -74,8 +76,8 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: _toggleScreen(),
-      //home:CustomNavigationBar(),
+      //home: _toggleScreen(),
+      home:CustomNavigationBar(),
     );
   }
 }

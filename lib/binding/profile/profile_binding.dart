@@ -7,6 +7,7 @@ import '../../controller/profile/profile_controller.dart';
 class ProfileBinding extends Bindings {
   @override
   void dependencies() {
+    ///TODO:maybe delete it
     Get.lazyPut(() => ProfileController());
     Get.lazyPut(() => EditPasswordController());
     Get.lazyPut(() => AccountController());

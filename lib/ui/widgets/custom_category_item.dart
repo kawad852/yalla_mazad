@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
+import 'custom_network_image.dart';
+
 class CustomCategoryItem extends StatelessWidget {
-  const CustomCategoryItem({Key? key}) : super(key: key);
+  final String? url;
+  final String? name;
+  const CustomCategoryItem({required this.url, required this.name, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +31,22 @@ class CustomCategoryItem extends StatelessWidget {
                 15,
               ),
             ),
-            child: const Center(
-              child: Icon(
-                Icons.account_box_outlined,
-                color: MyColors.primary,
+            child: Center(
+              child: CustomNetworkImage(
+                url: '${url}',
+                radius: 15,
               ),
             ),
+            // child: const Center(
+            //   child: Icon(
+            //     Icons.account_box_outlined,
+            //     color: MyColors.primary,
+            //   ),
+            // ),
           ),
-          const Text(
-            'cars',
-            style: TextStyle(
+          Text(
+            name ?? '',
+            style: const TextStyle(
               color: MyColors.primary,
             ),
           )

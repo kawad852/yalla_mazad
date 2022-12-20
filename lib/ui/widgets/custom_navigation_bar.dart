@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
+import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
@@ -20,9 +22,9 @@ class CustomNavigationBar extends StatefulWidget {
 class _CustomNavigationBarState extends State<CustomNavigationBar> {
   List<Widget> _buildScreens() {
     return [
+      const HomeScreen(),
       const TrendingAuctionScreen(),
-      const TrendingAuctionScreen(),
-      const TrendingAuctionScreen(),
+      AddAuctionScreen(),
       const TrendingAuctionScreen(),
       const EditProfileScreen(),
     ];
