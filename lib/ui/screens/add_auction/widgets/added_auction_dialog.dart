@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:yalla_mazad/controller/add_auction/add_auction_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_slide_button.dart';
@@ -14,8 +15,14 @@ class AddedAuctionDialog extends StatelessWidget {
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
-        width: ScreenSize.phoneSize(354, height: false,),
-        height:  ScreenSize.phoneSize(281, height: false,),
+        width: ScreenSize.phoneSize(
+          354,
+          height: false,
+        ),
+        height: ScreenSize.phoneSize(
+          281,
+          height: false,
+        ),
         padding: const EdgeInsets.only(
           top: 10,
         ),
@@ -49,7 +56,9 @@ class AddedAuctionDialog extends StatelessWidget {
                       color: MyColors.primary,
                     ),
                   ),
-                  const SizedBox(width: 40,),
+                  const SizedBox(
+                    width: 40,
+                  ),
                 ],
               ),
             ),
@@ -80,10 +89,8 @@ class AddedAuctionDialog extends StatelessWidget {
               onSubmitted: () {
                 Future.delayed(
                   const Duration(seconds: 1),
-                  () {
+                  () async {
                     _key.currentState?.reset();
-                    ///TODO: edit
-                    Get.back();
                   },
                 );
               },

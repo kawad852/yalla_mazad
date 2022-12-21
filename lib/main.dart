@@ -48,7 +48,7 @@ class _MyAppState extends State<MyApp> {
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       ///TODO: change to home
-      return ProfileBinding();
+      return HomeBinding();
       //return NavBarBinding();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
@@ -63,8 +63,8 @@ class _MyAppState extends State<MyApp> {
     // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-     // initialBinding: _initialBinding(),
-      initialBinding: HomeBinding(),
+      initialBinding: _initialBinding(),
+      //initialBinding: HomeBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
@@ -76,8 +76,8 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      //home: _toggleScreen(),
-      home:CustomNavigationBar(),
+      home: _toggleScreen(),
+      //home:CustomNavigationBar(),
     );
   }
 }

@@ -91,191 +91,200 @@ class AddAuctionScreen extends StatelessWidget {
               ),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30,
-                      ),
-                      child: Text(
-                        'choose the advertisement section'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 16,
+          SingleChildScrollView(
+            child: SizedBox(
+              height: Get.height*1.3,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 40,
                         ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    FutureBuilder(
-                        future: controller.initializeCategoriesFuture,
-                        builder: (context, snapshot) {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.waiting:
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            case ConnectionState.done:
-                            default:
-                              if (snapshot.hasData) {
-                                return SizedBox(
-                                  height: 100,
-                                  child: ListView.separated(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: controller
-                                            .categoriesModel?.data?.length ??
-                                        0,
-                                    itemBuilder: (context, index) {
-                                      return CustomCategoryItem(
-                                        url: controller.categoriesModel
-                                                ?.data?[index].image ??
-                                            '',
-                                        name: controller.categoriesModel
-                                                ?.data?[index].name ??
-                                            '',
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) {
-                                      return const SizedBox(
-                                        width: 10,
-                                      );
-                                    },
-                                  ),
-                                );
-                              } else if (snapshot.hasError) {
-                                ///TODO: failure widget
-                                return const Text('error');
-                              } else {
-                                return const Text('error');
-                              }
-                          }
-                        }),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Padding(
+                        Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 30,
                           ),
-                          child: Column(
-                            children: [
-                              CustomTextField(
-                                controller: controller.addressController,
-                                color: MyColors.textFieldColor,
-                                hint: 'address'.tr,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextField(
-                                controller: controller.descriptionController,
-                                color: MyColors.textFieldColor,
-                                maxLines: 10,
-                                hint: 'description'.tr,
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              InkWell(
-                                onTap: () async{
-                                  await controller.pickImage();
-                                },
-                                child: AbsorbPointer(
-                                  child: CustomTextField(
-                                    controller: controller.mainPictureController,
-                                    color: MyColors.textFieldColor,
-                                    hint: 'main picture'.tr,
-                                    readOnly: true,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              GestureDetector(
-                                onTap: () async{
-                                  await controller.pickMultipleImages();
-                                },
-                                child: AbsorbPointer(
-                                  child: CustomTextField(
-                                    controller: controller.morePicturesController,
-                                    color: MyColors.textFieldColor,
-                                    hint: 'more pictures'.tr,
-                                    readOnly: true,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextField(
-                                controller:
-                                    controller.auctionStartingPriceController,
-                                color: MyColors.textFieldColor,
-                                hint: 'auction starting price'.tr,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              CustomTextField(
-                                controller:
-                                    controller.directSellPriceController,
-                                color: MyColors.textFieldColor,
-                                hint: 'direct sell price'.tr,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                ],
-                              ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              CustomSlideButton(
-                                borderRadius: 25,
-                                height: ScreenSize.phoneSize(
-                                  60,
-                                  height: true,
-                                ),
-                                color: MyColors.primary,
-                                stateKey: _key,
-                                text: 'send advertisement'.tr,
-                                onSubmitted: () {
-                                  Future.delayed(
-                                    const Duration(seconds: 1),
-                                    () {
-                                      _key.currentState?.reset();
-                                      Get.dialog(AddedAuctionDialog());
-                                    },
-                                  );
-                                },
-                              ),
-                              const SizedBox(
-                                height: 60,
-                              ),
-                            ],
+                          child: Text(
+                            'choose the advertisement section'.tr,
+                            style: const TextStyle(
+                              color: MyColors.primary,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        FutureBuilder(
+                            future: controller.initializeCategoriesFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return SizedBox(
+                                      height: 100,
+                                      child: ListView.separated(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 30),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: controller
+                                                .categoriesModel?.data?.length ??
+                                            0,
+                                        itemBuilder: (context, index) {
+                                          return CustomCategoryItem(
+                                            url: controller.categoriesModel
+                                                    ?.data?[index].image ??
+                                                '',
+                                            name: controller.categoriesModel
+                                                    ?.data?[index].name ??
+                                                '',
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return const SizedBox(
+                                            width: 10,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    ///TODO: failure widget
+                                    return const Text('error');
+                                  } else {
+                                    return const Text('error');
+                                  }
+                              }
+                            }),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30,
+                              ),
+                              child: Column(
+                                children: [
+                                  CustomTextField(
+                                    controller: controller.addressController,
+                                    color: MyColors.textFieldColor,
+                                    hint: 'address'.tr,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomTextField(
+                                    controller: controller.descriptionController,
+                                    color: MyColors.textFieldColor,
+                                    maxLines: 10,
+                                    hint: 'description'.tr,
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  InkWell(
+                                    onTap: () async {
+                                      await controller.pickImage();
+                                    },
+                                    child: AbsorbPointer(
+                                      child: CustomTextField(
+                                        controller:
+                                            controller.mainPictureController,
+                                        color: MyColors.textFieldColor,
+                                        hint: 'main picture'.tr,
+                                        readOnly: true,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await controller.pickMultipleImages();
+                                    },
+                                    child: AbsorbPointer(
+                                      child: CustomTextField(
+                                        controller:
+                                            controller.morePicturesController,
+                                        color: MyColors.textFieldColor,
+                                        hint: 'more pictures'.tr,
+                                        readOnly: true,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomTextField(
+                                    controller:
+                                        controller.auctionStartingPriceController,
+                                    color: MyColors.textFieldColor,
+                                    hint: 'auction starting price'.tr,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomTextField(
+                                    controller:
+                                        controller.directSellPriceController,
+                                    color: MyColors.textFieldColor,
+                                    hint: 'direct sell price'.tr,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    height: 50,
+                                  ),
+                                  CustomSlideButton(
+                                    borderRadius: 25,
+                                    height: ScreenSize.phoneSize(
+                                      60,
+                                      height: true,
+                                    ),
+                                    color: MyColors.primary,
+                                    stateKey: _key,
+                                    text: 'send advertisement'.tr,
+                                    onSubmitted: () {
+                                      Future.delayed(
+                                        const Duration(seconds: 1),
+                                        () async{
+                                          _key.currentState?.reset();
+                                          await controller.fetchAddAuctionData(
+                                              context: context);
+                                          Get.dialog(AddedAuctionDialog());
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    height: 60,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
         ],
       ),

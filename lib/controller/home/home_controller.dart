@@ -6,6 +6,7 @@ import 'package:yalla_mazad/model/slider/slider_model.dart';
 
 class HomeController extends GetxController {
   static HomeController get find => Get.find();
+
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;
 

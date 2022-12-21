@@ -3,6 +3,7 @@ import 'package:yalla_mazad/controller/home/home_controller.dart';
 import 'package:yalla_mazad/controller/home/search_controller.dart';
 
 import '../../controller/add_auction/add_auction_controller.dart';
+import '../../controller/custom_navigation_bar_controller.dart';
 import '../../controller/profile/account_controller.dart';
 import '../../controller/profile/edit_password_controller.dart';
 import '../../controller/profile/my_subscription_controller.dart';
@@ -18,5 +19,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut(() => AddAuctionController());
     Get.lazyPut(() => HomeController());
     Get.lazyPut(() => SearchController());
+    Get.lazyPut(() => AddAuctionController());
+    Get.lazyPut(() => CustomNavigationBarController());
   }
 }

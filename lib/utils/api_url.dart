@@ -33,4 +33,8 @@ class ApiUrl {
 
   //get all sliders
   static const String fetchAllSliders = "/api/v1/sliders";
+
+  //add auction
+  static const String addAuction = "/api/v1/advertisement-create";
+
 }

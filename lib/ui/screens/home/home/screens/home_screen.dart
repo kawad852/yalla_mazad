@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
@@ -280,10 +280,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 247,
                         child: ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return AuctionItem(
+                            return const AuctionItem(
                               image: 'img/16704982118127.jpg',
                               name: 'abc',
                               user: '/def',
@@ -291,7 +291,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           },
                           separatorBuilder: (context, index) {
-                            return SizedBox(
+                            return const SizedBox(
                               width: 10,
                             );
                           },
@@ -329,18 +329,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         height: 247,
                         child: ListView.separated(
-                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          padding: const EdgeInsets.symmetric(horizontal: 30),
                           scrollDirection: Axis.horizontal,
                           itemBuilder: (context, index) {
-                            return AuctionItem(
-                              image: 'img/16704982118127.jpg',
-                              name: 'abc',
-                              user: '/def',
-                              price: '120 jod',
+                            return GestureDetector(
+                              onTap: () {
+                               CustomNavigationBarController.find.tabController.jumpToTab(3);
+                              },
+                              child: const AuctionItem(
+                                image: 'img/16704982118127.jpg',
+                                name: 'abc',
+                                user: '/def',
+                                price: '120 jod',
+                              ),
                             );
                           },
                           separatorBuilder: (context, index) {
-                            return SizedBox(
+                            return const SizedBox(
                               width: 10,
                             );
                           },

@@ -9,6 +9,7 @@ import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_sc
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../controller/custom_navigation_bar_controller.dart';
 import '../../utils/colors.dart';
 
 late PersistentTabController navBarController;
@@ -103,7 +104,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
   @override
   void initState() {
-    navBarController = PersistentTabController(initialIndex: 0);
+    navBarController = CustomNavigationBarController.find.tabController;
     super.initState();
   }
 
