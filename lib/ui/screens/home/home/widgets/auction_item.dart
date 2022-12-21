@@ -19,13 +19,14 @@ class AuctionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
-      height: 250,
+      width: 180,
+      height: 180,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 230,
-            width: 230,
+            height: 180,
+            width: 180,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 25,
@@ -38,7 +39,7 @@ class AuctionItem extends StatelessWidget {
                   1,
                 ),
                 width: 7,
-                strokeAlign: StrokeAlign.outside,
+                strokeAlign: StrokeAlign.inside,
               ),
               // image: DecorationImage(
               //   image: CustomNetworkImage(
@@ -48,8 +49,8 @@ class AuctionItem extends StatelessWidget {
               // ),
             ),
             child: SizedBox(
-              height: 230,
-              width: 230,
+              height: 190,
+              width: 190,
               child: Stack(
                 children: [
                   CustomNetworkImage(
@@ -59,18 +60,26 @@ class AuctionItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Container(
-                      decoration: BoxDecoration(
+                      width: 72,
+                      height: 23,
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(3),
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            topLeft: Radius.circular(10),
-                            bottomRight: Radius.circular(10),
+                            topRight: Radius.circular(5),
+                            topLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(5),
                             bottomLeft: Radius.circular(25)),
                         color: MyColors.primary,
                       ),
-                      child: Text(
-                        price!,
-                        style: TextStyle(
-                          color: Colors.white,
+                      child: Center(
+                        child: FittedBox(
+                          child: Text(
+                            price!,
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -78,19 +87,27 @@ class AuctionItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Container(
-                      decoration: BoxDecoration(
+                      width: 72,
+                      height: 23,
+                      margin: const EdgeInsets.all(5),
+                      padding: const EdgeInsets.all(3),
+                      decoration: const BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(10),
-                            topLeft: Radius.circular(10),
-                            bottomLeft: Radius.circular(10),
-                          bottomRight : Radius.circular(25)),
+                            topRight: Radius.circular(5),
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                            bottomRight: Radius.circular(25)),
                         color: Colors.white,
                       ),
-                      child: Text(
-                        //TODO: edit timer
-                        price!,
-                        style: TextStyle(
-                          color: MyColors.primary,
+                      child: Center(
+                        child: FittedBox(
+                          child: Text(
+                            //TODO: edit timer
+                            price!,
+                            style: const TextStyle(
+                              color: MyColors.primary,
+                            ),
+                          ),
                         ),
                       ),
                     ),
@@ -99,18 +116,24 @@ class AuctionItem extends StatelessWidget {
               ),
             ),
           ),
-          Text(
-            name!,
-            style: const TextStyle(
-              color: MyColors.primary,
-              fontSize: 20,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              name!,
+              style: const TextStyle(
+                color: MyColors.primary,
+                fontSize: 20,
+              ),
             ),
           ),
-          Text(
-            user!,
-            style: const TextStyle(
-              color: MyColors.greyText,
-              fontSize: 18,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Text(
+              user!,
+              style: const TextStyle(
+                color: MyColors.greyText,
+                fontSize: 18,
+              ),
             ),
           ),
         ],

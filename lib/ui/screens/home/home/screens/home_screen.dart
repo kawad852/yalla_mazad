@@ -1,9 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
-import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
       body: Stack(
         children: [
           Positioned(
@@ -93,7 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height,
+                  // height: Get.height * 3 / 2.4,
+                  height: 1200,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -191,9 +192,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             Text(
                               'categories'.tr,
                               style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 20,
-                              ),
+                                  color: MyColors.primary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ],
                         ),
@@ -267,6 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 20,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
@@ -276,17 +278,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 15,
                       ),
                       SizedBox(
-                        height: 300,
-                        child: ListView.builder(
+                        height: 247,
+                        child: ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
                           scrollDirection: Axis.horizontal,
-                            itemBuilder: (context, index) {
-                          return AuctionItem(
-                            image: 'img/16704982118127.jpg',
-                            name: 'abc',
-                            user: '/def',
-                            price: '120 jod',
-                          );
-                        }),
+                          itemBuilder: (context, index) {
+                            return AuctionItem(
+                              image: 'img/16704982118127.jpg',
+                              name: 'abc',
+                              user: '/def',
+                              price: '120 jod',
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: 10,
+                            );
+                          },
+                          itemCount: 10,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -307,9 +317,34 @@ class _HomeScreenState extends State<HomeScreen> {
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 20,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 247,
+                        child: ListView.separated(
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) {
+                            return AuctionItem(
+                              image: 'img/16704982118127.jpg',
+                              name: 'abc',
+                              user: '/def',
+                              price: '120 jod',
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              width: 10,
+                            );
+                          },
+                          itemCount: 10,
                         ),
                       ),
                     ],
