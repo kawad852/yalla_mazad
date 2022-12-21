@@ -128,19 +128,19 @@ class ConfirmAuctionDialog extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
-                      AuctionItem(
+                      AuctionBidItem(
                         content: '5 JOD',
                         isChosen: true,
                       ),
-                      AuctionItem(
+                      AuctionBidItem(
                         content: '10 JOD',
                         isChosen: false,
                       ),
-                      AuctionItem(
+                      AuctionBidItem(
                         content: '20 JOD',
                         isChosen: false,
                       ),
-                      AuctionItem(
+                      AuctionBidItem(
                         content: '50 JOD',
                         isChosen: false,
                       ),

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
-class AuctionItem extends StatelessWidget {
+class AuctionBidItem extends StatelessWidget {
   final String content;
   final bool isChosen;
-  const AuctionItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
+  const AuctionBidItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

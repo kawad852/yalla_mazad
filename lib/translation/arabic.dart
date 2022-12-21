@@ -72,4 +72,5 @@ final Map<String, String> ar = {
   'resend now': 'إعادة الإرسال',
   'trending auctions': 'المزادات الرائجة',
   'categories': 'التصنيفات',
+  'you may also like': 'قد يعجبك أيضا',
 };

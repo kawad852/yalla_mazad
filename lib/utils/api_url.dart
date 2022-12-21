@@ -30,4 +30,7 @@ class ApiUrl {
 
   //get all categories
   static const String fetchAllCategories = "/api/v1/categories";
+
+  //get all sliders
+  static const String fetchAllSliders = "/api/v1/sliders";
 }

@@ -75,4 +75,5 @@ final Map<String, String> en = {
   'resend now': 'Resend now',
   'trending auctions': 'Trending Auctions',
   'categories': 'Categories',
+  'you may also like': 'You may also like',
 };

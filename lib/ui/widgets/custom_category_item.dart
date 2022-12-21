@@ -6,13 +6,14 @@ import 'custom_network_image.dart';
 class CustomCategoryItem extends StatelessWidget {
   final String? url;
   final String? name;
-  const CustomCategoryItem({required this.url, required this.name, Key? key})
+  final bool isChecked;
+  const CustomCategoryItem(
+      {required this.url, required this.name, this.isChecked = false, Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //color: Colors.red,
       height: 90,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -21,12 +22,14 @@ class CustomCategoryItem extends StatelessWidget {
             width: 60,
             height: 60,
             decoration: BoxDecoration(
-              color: const Color.fromRGBO(
-                175,
-                164,
-                197,
-                0.8,
-              ),
+              color: !isChecked
+                  ? const Color.fromRGBO(
+                      175,
+                      164,
+                      197,
+                      0.8,
+                    )
+                  : MyColors.red,
               borderRadius: BorderRadius.circular(
                 15,
               ),
@@ -35,6 +38,9 @@ class CustomCategoryItem extends StatelessWidget {
               child: CustomNetworkImage(
                 url: '${url}',
                 radius: 15,
+                margin: EdgeInsets.all(5),
+                // width: 40,
+                // height: 40,
               ),
             ),
             // child: const Center(

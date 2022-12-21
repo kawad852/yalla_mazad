@@ -1,7 +1,11 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
+import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
+import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -96,24 +100,55 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 5,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Container(
-                          ///TODO: banner from back
-                          height: 190,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              25,
-                            ),
-                            image: const DecorationImage(
-                              image: AssetImage(
-                                MyImages.introChair,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
+                      FutureBuilder(
+                          future: controller.initializeSliderFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return CarouselSlider(
+                                      items: List.generate(
+                                        controller.sliderModel?.data?.length ??
+                                            0,
+                                        (index) => Container(
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 30),
+                                          height: 190,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              25,
+                                            ),
+                                            // image: const DecorationImage(
+                                            //   image: AssetImage(
+                                            //     MyImages.introChair,
+                                            //   ),
+                                            //   fit: BoxFit.cover,
+                                            // ),
+                                          ),
+                                          child: CustomNetworkImage(
+                                            url: controller.sliderModel
+                                                    ?.data?[index].image ??
+                                                '',
+                                            radius: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      options: CarouselOptions(
+                                        viewportFraction: 1,
+                                      ));
+                                } else if (snapshot.hasError) {
+                                  ///TODO: failure widget
+                                  return const Text('error');
+                                } else {
+                                  return const Text('error');
+                                }
+                            }
+                          }),
                       const SizedBox(
                         height: 10,
                       ),
@@ -140,13 +175,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 15,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 35.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.start,
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.asset(
                               MyImages.justice,
@@ -165,9 +197,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       FutureBuilder(
                           future: controller.initializeCategoriesFuture,
                           builder: (context, snapshot) {
@@ -185,15 +218,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           horizontal: 30),
                                       scrollDirection: Axis.horizontal,
                                       itemCount: controller
-                                          .categoriesModel?.data?.length ??
+                                              .categoriesModel?.data?.length ??
                                           0,
                                       itemBuilder: (context, index) {
                                         return CustomCategoryItem(
                                           url: controller.categoriesModel
-                                              ?.data?[index].image ??
+                                                  ?.data?[index].image ??
                                               '',
                                           name: controller.categoriesModel
-                                              ?.data?[index].name ??
+                                                  ?.data?[index].name ??
                                               '',
                                         );
                                       },
@@ -216,13 +249,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 15,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 35.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
                         child: Row(
-                          mainAxisAlignment:
-                          MainAxisAlignment.start,
-                          crossAxisAlignment:
-                          CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Image.asset(
                               MyImages.justice,
@@ -241,7 +271,46 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ],
                         ),
-
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      SizedBox(
+                        height: 300,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                          return AuctionItem(
+                            image: 'img/16704982118127.jpg',
+                            name: 'abc',
+                            user: '/def',
+                            price: '120 jod',
+                          );
+                        }),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Image.asset(
+                              MyImages.justice,
+                              width: 20,
+                              height: 20,
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              'you may also like'.tr,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
