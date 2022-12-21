@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
-import 'package:yalla_mazad/controller/introduction/iintroduction_controller.dart';
+import 'package:yalla_mazad/controller/introduction/introduction_controller.dart';
 import 'package:yalla_mazad/model/introduction/introduction_model.dart';
 import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/widgets/intro_card_item.dart';

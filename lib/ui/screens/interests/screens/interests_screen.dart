@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/subscriptions/subscriptions_binding.dart';
+import 'package:yalla_mazad/binding/plans/plans_binding.dart';
 import 'package:yalla_mazad/controller/interests/interests_controller.dart';
 import 'package:yalla_mazad/model/interests/interests_model.dart';
-import 'package:yalla_mazad/ui/screens/subscriptions/screens/subscriptions_screen.dart';
+import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -160,8 +160,8 @@ class _InterestsScreenState extends State<InterestsScreen> {
                 GestureDetector(
                   onTap: () {
                     Get.to(
-                      () => const SubscriptionsScreen(),
-                      binding: SubscriptionsBinding(),
+                      () => const PlansScreen(),
+                      binding: PlansBinding(),
                     );
                   },
                   child: Container(

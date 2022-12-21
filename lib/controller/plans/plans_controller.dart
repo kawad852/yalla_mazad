@@ -1,12 +1,10 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:get/get.dart';
 
 import '../../api/plans/plans_api.dart';
 import '../../model/plans/plans_model.dart';
 
-class MySubscriptionController extends GetxController {
-  static MySubscriptionController get find => Get.find();
-  CarouselController carouselController = CarouselController();
+class PlansController extends GetxController {
+  static PlansController get find => Get.find();
   int pageIndex = 0;
   PlansModel? plansModel;
   late Future<PlansModel?> initializePlansFuture;

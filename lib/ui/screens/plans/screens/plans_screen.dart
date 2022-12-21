@@ -3,25 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/profile/profile_binding.dart';
-import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
-import 'package:yalla_mazad/ui/screens/subscriptions/widgets/subscription_item.dart';
+import 'package:yalla_mazad/controller/plans/plans_controller.dart';
+import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-import '../../../../controller/subscriptions/subscriptions_controller.dart';
-
-class SubscriptionsScreen extends StatefulWidget {
-  const SubscriptionsScreen({Key? key}) : super(key: key);
+class PlansScreen extends StatefulWidget {
+  const PlansScreen({Key? key}) : super(key: key);
 
   @override
-  State<SubscriptionsScreen> createState() => _SubscriptionsScreenState();
+  State<PlansScreen> createState() => _PlansScreenState();
 }
 
-class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
+class _PlansScreenState extends State<PlansScreen> {
   @override
   Widget build(BuildContext context) {
-    final controller = SubscriptionsController.find;
+    final controller = PlansController.find;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -178,34 +176,79 @@ class _SubscriptionsScreenState extends State<SubscriptionsScreen> {
                                     const SizedBox(
                                       height: 30,
                                     ),
-                                    CarouselSlider(
-                                      ///TODO: from api
-                                      items: List.generate(
-                                          3,
-                                          (index) => Opacity(
-                                              opacity:
-                                                  controller.pageIndex == index
-                                                      ? 1
-                                                      : 0.5,
-                                              child: const SubscriptionItem())),
-                                      options: CarouselOptions(
-                                        onPageChanged: (index, x) {
-                                          setState(() {
-                                            controller.pageIndex = index;
-                                          });
-                                        },
-                                        //aspectRatio: 3/3,
-                                        height: 400,
-                                        viewportFraction: 0.8,
-                                        enlargeCenterPage: true,
-                                        initialPage: 0,
-                                        autoPlay: false,
-                                        enlargeFactor: 0.2,
-                                        autoPlayInterval: const Duration(
-                                          milliseconds: 1000,
-                                        ),
-                                      ),
-                                    ),
+                                    FutureBuilder(
+                                        future:
+                                            controller.initializePlansFuture,
+                                        builder: (context, snapshot) {
+                                          switch (snapshot.connectionState) {
+                                            case ConnectionState.waiting:
+                                              return const Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              );
+                                            case ConnectionState.done:
+                                            default:
+                                              if (snapshot.hasData) {
+                                                return CarouselSlider(
+                                                  items: List.generate(
+                                                      snapshot.data?.data
+                                                              ?.length ??
+                                                          0,
+                                                      (index) => Opacity(
+                                                          opacity: controller
+                                                                      .pageIndex ==
+                                                                  index
+                                                              ? 1
+                                                              : 0.5,
+                                                          child: PlanItem(
+                                                            price: snapshot
+                                                                .data
+                                                                ?.data?[index]
+                                                                .price,
+                                                            name: snapshot
+                                                                .data
+                                                                ?.data?[index]
+                                                                .name,
+                                                            details: snapshot
+                                                                .data
+                                                                ?.data?[index]
+                                                                .details,
+                                                            numberOfAuctions:
+                                                                snapshot
+                                                                    .data
+                                                                    ?.data?[
+                                                                        index]
+                                                                    .numberOfAuction,
+                                                          ))),
+                                                  options: CarouselOptions(
+                                                    onPageChanged: (index, x) {
+                                                      setState(() {
+                                                        controller.pageIndex =
+                                                            index;
+                                                      });
+                                                    },
+                                                    //aspectRatio: 3/3,
+                                                    enableInfiniteScroll: false,
+                                                    height: 400,
+                                                    viewportFraction: 0.8,
+                                                    enlargeCenterPage: true,
+                                                    initialPage: 0,
+                                                    autoPlay: false,
+                                                    enlargeFactor: 0.2,
+                                                    autoPlayInterval:
+                                                        const Duration(
+                                                      milliseconds: 1000,
+                                                    ),
+                                                  ),
+                                                );
+                                              } else if (snapshot.hasError) {
+                                                ///TODO: failure widget
+                                                return const Text('error');
+                                              } else {
+                                                return const Text('error');
+                                              }
+                                          }
+                                        }),
                                     const SizedBox(
                                       height: 60,
                                     ),

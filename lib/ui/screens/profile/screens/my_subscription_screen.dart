@@ -2,10 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_subscription_controller.dart';
+import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
-import '../../subscriptions/widgets/subscription_item.dart';
 
 class MySubscriptionScreen extends StatefulWidget {
   const MySubscriptionScreen({Key? key}) : super(key: key);
@@ -34,7 +34,13 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      const SubscriptionItem(),
+                      ///Todo: my subscription
+                      const PlanItem(
+                        price: '99',
+                        numberOfAuctions: 4,
+                        name: 'aa',
+                        details: 'bb',
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
@@ -67,32 +73,64 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                       const SizedBox(
                         height: 30,
                       ),
-                      CarouselSlider(
-                        ///TODO: from api
-                        items: List.generate(
-                            3,
-                            (index) => Opacity(
-                                opacity:
-                                    controller.pageIndex == index ? 1 : 0.5,
-                                child: const SubscriptionItem())),
-                        options: CarouselOptions(
-                          onPageChanged: (index, x) {
-                            setState(() {
-                              controller.pageIndex = index;
-                            });
-                          },
-                          //aspectRatio: 3/3,
-                          height: 400,
-                          viewportFraction: 0.8,
-                          enlargeCenterPage: true,
-                          initialPage: 0,
-                          autoPlay: false,
-                          enlargeFactor: 0.2,
-                          autoPlayInterval: const Duration(
-                            milliseconds: 1000,
-                          ),
-                        ),
-                      ),
+                      FutureBuilder(
+                          future: controller.initializePlansFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return CarouselSlider(
+                                    items: List.generate(
+                                        snapshot.data?.data?.length ?? 0,
+                                        (index) => Opacity(
+                                            opacity:
+                                                controller.pageIndex == index
+                                                    ? 1
+                                                    : 0.5,
+                                            child: PlanItem(
+                                              price: snapshot
+                                                  .data?.data?[index].price,
+                                              name: snapshot
+                                                  .data?.data?[index].name,
+                                              details: snapshot
+                                                  .data?.data?[index].details,
+                                              numberOfAuctions: snapshot
+                                                  .data
+                                                  ?.data?[index]
+                                                  .numberOfAuction,
+                                            ))),
+                                    options: CarouselOptions(
+                                      onPageChanged: (index, x) {
+                                        setState(() {
+                                          controller.pageIndex = index;
+                                        });
+                                      },
+                                      //aspectRatio: 3/3,
+                                      enableInfiniteScroll: false,
+                                      height: 400,
+                                      viewportFraction: 0.8,
+                                      enlargeCenterPage: true,
+                                      initialPage: 0,
+                                      autoPlay: false,
+                                      enlargeFactor: 0.2,
+                                      autoPlayInterval: const Duration(
+                                        milliseconds: 1000,
+                                      ),
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  ///TODO: failure widget
+                                  return const Text('error');
+                                } else {
+                                  return const Text('error');
+                                }
+                            }
+                          }),
                       const SizedBox(
                         height: 60,
                       ),

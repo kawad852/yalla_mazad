@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/model/subscriptions/subscriptions_model.dart';
+import 'package:yalla_mazad/model/plans/plans_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
 import '../../../../utils/images.dart';
 
-class SubscriptionItem extends StatelessWidget {
-  const SubscriptionItem({Key? key}) : super(key: key);
+class PlanItem extends StatelessWidget {
+  final String? price;
+  final String? details;
+  final String? name;
+  final int? numberOfAuctions;
+  const PlanItem({required this.price,
+  required this.name,required this.details, required this.numberOfAuctions, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +81,7 @@ class SubscriptionItem extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            'subscriptions'.tr,
+                            name!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -101,7 +106,7 @@ class SubscriptionItem extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            'subscriptions'.tr,
+                            details!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -114,7 +119,7 @@ class SubscriptionItem extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        '99.99',
+                        price.toString(),
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

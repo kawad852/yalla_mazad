@@ -112,7 +112,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
   Widget build(BuildContext context) {
     return PersistentTabView(
       context,
-      margin: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+      margin: const EdgeInsets.only(
+        bottom: 30,
+        left: 30,
+        right: 30,
+      ),
+      navBarHeight: 67,
       controller: navBarController,
       screens: _buildScreens(),
       onItemSelected: (value) {

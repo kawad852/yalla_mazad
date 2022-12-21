@@ -25,8 +25,8 @@ class ApiUrl {
   //get all interests
   static const String fetchAllInterests = "/api/v1/categories";
 
-  //get all subscriptions
-  static const String fetchAllSubscriptions = "/api/v1/subscriptions";
+  //get all plans
+  static const String fetchAllPlans = "/api/v1/plans";
 
   //get all categories
   static const String fetchAllCategories = "/api/v1/categories";
