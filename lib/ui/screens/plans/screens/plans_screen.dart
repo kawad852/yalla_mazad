@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/profile/profile_binding.dart';
+import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/controller/plans/plans_controller.dart';
 import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
@@ -260,7 +260,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                           ///TODO: make sure of binding
                                           Get.to(
                                             () => const CustomNavigationBar(),
-                                            binding: ProfileBinding(),
+                                            binding: HomeBinding(),
                                           );
                                         },
                                         child: Container(

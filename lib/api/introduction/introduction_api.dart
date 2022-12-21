@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:yalla_mazad/model/interests/interests_model.dart';
 import 'package:yalla_mazad/model/introduction/introduction_model.dart';
 
 import '../../utils/api_url.dart';

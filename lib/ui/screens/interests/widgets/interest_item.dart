@@ -14,7 +14,7 @@ class _InterestItemState extends State<InterestItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 30,
         vertical: 12,
       ),
@@ -26,7 +26,7 @@ class _InterestItemState extends State<InterestItem> {
         border: Border.all(
           strokeAlign: StrokeAlign.inside,
           width: 1,
-          color: Color(
+          color: const Color(
             0xff2D0050,
           ),
         ),

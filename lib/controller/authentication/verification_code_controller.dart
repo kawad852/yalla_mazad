@@ -4,14 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/api/auth/opt_check_api.dart';
 import 'package:yalla_mazad/api/auth/resend_otp_api.dart';
 import 'package:yalla_mazad/model/auth/opt_check_model.dart';
 import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
 
-import '../../api/auth/update_user_phone_api.dart';
 import '../../binding/interests/interests_binding.dart';
-import '../../model/auth/update_user_phone_model.dart';
 import '../../ui/screens/interests/screens/interests_screen.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/shared_prefrences.dart';
@@ -69,7 +66,7 @@ class VerificationCodeController extends GetxController {
     //     if (optCheckModel!.code == 200) {
     //       MySharedPreferences.phone = phone;
     //       MySharedPreferences.isLogIn = true;
-          Get.to(()=>InterestsScreen(),binding: InterestsBinding());
+          Get.to(()=>const InterestsScreen(),binding: InterestsBinding());
     //     } else if (optCheckModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     //     } else {

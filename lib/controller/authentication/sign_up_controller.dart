@@ -27,7 +27,6 @@ class SignUpController extends GetxController {
     required String password,
     required BuildContext context,
   }) async {
-    ///Todo: bring back
     if (isChecked) {
       if (passwordController.text == confirmPasswordController.text) {
         if (formKey.currentState != null) {

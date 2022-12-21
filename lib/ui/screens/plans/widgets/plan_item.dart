@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/model/plans/plans_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
 import '../../../../utils/images.dart';
@@ -120,13 +119,13 @@ class PlanItem extends StatelessWidget {
                     children: [
                       Text(
                         price.toString(),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 45,
                         ),
                       ),
-                      Text(
+                      const Text(
                         'دينار اردني',
                         style: TextStyle(
                           color: Colors.white,
@@ -148,7 +147,7 @@ class PlanItem extends StatelessWidget {
                 25,
               ),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'اشترك الان',
                 style: TextStyle(

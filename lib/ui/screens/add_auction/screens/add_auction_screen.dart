@@ -11,7 +11,6 @@ import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_slide_button.dart';
-import '../widgets/added_auction_dialog.dart';
 
 class AddAuctionScreen extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();

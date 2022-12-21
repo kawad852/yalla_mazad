@@ -36,9 +36,9 @@ class CustomCategoryItem extends StatelessWidget {
             ),
             child: Center(
               child: CustomNetworkImage(
-                url: '${url}',
+                url: '$url',
                 radius: 15,
-                margin: EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
                 // width: 40,
                 // height: 40,
               ),

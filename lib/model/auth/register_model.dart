@@ -1,4 +1,3 @@
-import 'package:yalla_mazad/model/auth/sign_in_model.dart';
 
 class RegisterModel {
   RegisterModel({

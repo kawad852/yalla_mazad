@@ -86,8 +86,8 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                       color: MyColors.textFieldColor,
                     ),
-                    child: Center(
-                      child: const Text(
+                    child: const Center(
+                      child: Text(
                         '130 JOD',
                         style: TextStyle(
                           color: MyColors.red,
@@ -124,7 +124,7 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 5,),
+                  const SizedBox(height: 5,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
@@ -171,8 +171,8 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                       color: MyColors.primary,
                     ),
-                    child: Center(
-                      child: const Text(
+                    child: const Center(
+                      child: Text(
                         '135 JOD',
                         style: TextStyle(
                           color: Colors.white,
