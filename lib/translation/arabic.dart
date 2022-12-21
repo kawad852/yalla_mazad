@@ -73,4 +73,6 @@ final Map<String, String> ar = {
   'trending auctions': 'المزادات الرائجة',
   'categories': 'التصنيفات',
   'you may also like': 'قد يعجبك أيضا',
+  'what do you want to search for?': 'عن ماذا تود البحث ؟',
+  'search': 'البحث',
 };

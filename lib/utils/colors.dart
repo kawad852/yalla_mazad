@@ -7,6 +7,7 @@ class MyColors {
   static const Color textFieldColor = Color(0xffF4F2F6);
   static const Color red = Color(0xffDF3264);
   static const Color greyPrimary = Color(0xff796E6E);
+  static const Color primary5D0 = Color(0xffBDB5D0);
 
   //grey
   static const Color greyED0 = Color(0xFF263238);

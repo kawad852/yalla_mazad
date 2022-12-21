@@ -76,4 +76,6 @@ final Map<String, String> en = {
   'trending auctions': 'Trending Auctions',
   'categories': 'Categories',
   'you may also like': 'You may also like',
+  'what do you want to search for?': 'What do you want to search for?',
+  'search': 'Search',
 };
