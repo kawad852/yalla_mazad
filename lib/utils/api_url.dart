@@ -37,4 +37,6 @@ class ApiUrl {
   //add auction
   static const String addAuction = "/api/v1/advertisement-create";
 
+  //get popular ads
+  static const String fetchAllPopularAds = "/api/v1/popular-advertisements";
 }

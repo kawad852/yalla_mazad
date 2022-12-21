@@ -43,54 +43,7 @@ class AddAuctionScreen extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 45,
-              left: 20,
-              right: 20,
-            ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Text(
-                    'add auction'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                ],
-              ),
-            ),
-          ),
+
           SingleChildScrollView(
             child: SizedBox(
               height: Get.height*1.3,
@@ -98,15 +51,60 @@ class AddAuctionScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(
-                    height: 50,
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      top: 45,
+                      left: 20,
+                      right: 20,
+                    ),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 35,
+                            height: 35,
+                            padding: const EdgeInsets.only(right: 2),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffD3CFDC,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                7,
+                              ),
+                            ),
+                            child: Center(
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(
+                                  Icons.arrow_back_ios,
+                                  color: MyColors.primary,
+                                  size: 20,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Text(
+                            'add auction'.tr,
+                            style: const TextStyle(
+                              color: MyColors.primary,
+                              fontSize: 18,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const SizedBox(
-                          height: 40,
+                          height: 10,
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(
@@ -266,7 +264,7 @@ class AddAuctionScreen extends StatelessWidget {
                                           _key.currentState?.reset();
                                           await controller.fetchAddAuctionData(
                                               context: context);
-                                          Get.dialog(AddedAuctionDialog());
+
                                         },
                                       );
                                     },

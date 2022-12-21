@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
+import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -279,24 +280,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(
                         height: 247,
-                        child: ListView.separated(
-                          padding: const EdgeInsets.symmetric(horizontal: 30),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) {
-                            return const AuctionItem(
-                              image: 'img/16704982118127.jpg',
-                              name: 'abc',
-                              user: '/def',
-                              price: '120 jod',
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              width: 10,
-                            );
-                          },
-                          itemCount: 10,
-                        ),
+                        child: FutureBuilder<PopularAdvertisementModel?>(
+                            future: controller.initializePopularAdsFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30),
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder: (context, index) {
+                                        return AuctionItem(
+                                          image:
+                                              snapshot.data?.data?[index].image,
+                                          name:
+                                              snapshot.data?.data?[index].name,
+                                          user: snapshot
+                                              .data?.data?[index].user?.name,
+                                          price:
+                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                      itemCount:
+                                          snapshot.data?.data?.length ?? 0,
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    ///TODO: failure widget
+                                    return const Text('error');
+                                  } else {
+                                    return const Text('error');
+                                  }
+                              }
+                            }),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -334,7 +359,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
-                               CustomNavigationBarController.find.tabController.jumpToTab(3);
+                                CustomNavigationBarController.find.tabController
+                                    .jumpToTab(3);
                               },
                               child: const AuctionItem(
                                 image: 'img/16704982118127.jpg',

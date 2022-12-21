@@ -12,6 +12,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../model/add_auction/add_auction_model.dart';
+import '../../ui/screens/add_auction/widgets/added_auction_dialog.dart';
 import '../../utils/app_constants.dart';
 
 class AddAuctionController extends GetxController {
@@ -24,6 +25,7 @@ class AddAuctionController extends GetxController {
       TextEditingController();
   final TextEditingController directSellPriceController =
       TextEditingController();
+
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;
 
@@ -86,7 +88,13 @@ class AddAuctionController extends GetxController {
       return;
     }
     if (addAuctionModel!.code == 200) {
-      Fluttertoast.showToast(msg: 'added'.tr);
+      Get.dialog(AddedAuctionDialog());
+      addressController.clear();
+      descriptionController.clear();
+      auctionStartingPriceController.clear();
+      directSellPriceController.clear();
+      image = null;
+      images=[];
       // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
     } else if (addAuctionModel!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
