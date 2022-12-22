@@ -39,4 +39,10 @@ class ApiUrl {
 
   //get popular ads
   static const String fetchAllPopularAds = "/api/v1/popular-advertisements";
+
+  //get my subscription
+  static const String fetchMySubscription = "/api/v1/my-subscriptions/";
+
+  //get all ads
+  static const String fetchAllAds = "/api/v1/advertisements";
 }

@@ -78,4 +78,7 @@ final Map<String, String> en = {
   'you may also like': 'You may also like',
   'what do you want to search for?': 'What do you want to search for?',
   'search': 'Search',
+  'direct sell': 'Direct Sell',
+  'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
+      'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly'
 };

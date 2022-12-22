@@ -123,6 +123,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       onItemSelected: (value) {
         FocusManager.instance.primaryFocus?.unfocus();
       },
+      bottomScreenMargin: 0,
       items: _navBarsItems(),
       confineInSafeArea: false,
       resizeToAvoidBottomInset: true,

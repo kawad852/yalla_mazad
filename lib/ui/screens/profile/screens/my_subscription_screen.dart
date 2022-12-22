@@ -35,12 +35,33 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                   child: Column(
                     children: [
                       ///Todo: my subscription
-                      const PlanItem(
-                        price: '99',
-                        numberOfAuctions: 4,
-                        name: 'aa',
-                        details: 'bb',
-                      ),
+                      FutureBuilder(
+                          future: controller.initializeMySubscriptionFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return PlanItem(
+                                    price: snapshot.data?.data?[0].plan?.price,
+                                    name: snapshot.data?.data?[0].plan?.name,
+                                    details:
+                                        snapshot.data?.data?[0].plan?.details,
+                                    numberOfAuctions: snapshot
+                                        .data?.data?[0].plan?.numberOfAuction,
+                                  );
+                                } else if (snapshot.hasError) {
+                                  ///TODO: failure widget
+                                  return const Text('error');
+                                } else {
+                                  return const Text('error');
+                                }
+                            }
+                          }),
                       const SizedBox(
                         height: 30,
                       ),
@@ -142,7 +163,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 50,
         ),
       ],
     );
