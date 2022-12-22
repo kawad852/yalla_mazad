@@ -5,5 +5,6 @@ class EditPasswordController extends GetxController {
   static EditPasswordController get find => Get.find();
   final TextEditingController oldPasswordController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 }

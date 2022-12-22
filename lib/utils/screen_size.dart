@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ScreenSize{
+class ScreenSize {
   static double phoneSize(double hardSize, {required bool height}) {
     double res;
     if (height) {

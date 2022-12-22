@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
+import 'package:yalla_mazad/binding/home/home_binding.dart';
+import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
+import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
+import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -26,44 +31,50 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // Widget _toggleScreen() {
-  //   if (MySharedPreferences.isLogIn) {
-  //     return const BaseNavBar();
-  //   } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
-  //     return const IntroScreen();
-  //   } else {
-  //     return const RegistrationScreen();
-  //   }
-  // }
-  //
-  // Bindings? _initialBinding() {
-  //   if (MySharedPreferences.isLogIn) {
-  //     return NavBarBinding();
-  //   } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
-  //     return null;
-  //   } else {
-  //     return RegistrationBinding();
-  //   }
-  // }
+  Widget _toggleScreen() {
+    if (MySharedPreferences.isLogIn) {
+      return const CustomNavigationBar();
+      //return const BaseNavBar();
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
+      return IntroScreen();
+    } else {
+      return const AuthenticationScreen();
+    }
+  }
+
+  Bindings? _initialBinding() {
+    if (MySharedPreferences.isLogIn) {
+      return HomeBinding();
+      //return NavBarBinding();
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
+      return IntroductionBinding();
+    } else {
+      return AuthenticationBinding();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // initialBinding: _initialBinding(),
+      initialBinding: _initialBinding(),
+      //initialBinding: HomeBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
         Locale('en', 'US'),
         Locale('ar', 'JO'),
       ],
-      // locale: Locale(MySharedPreferences.language),
+
+      //locale: Locale('ar'),
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home:  IntroScreen(),
-      //home: const IntroScreen(),
+      home: _toggleScreen(),
+      //home:CustomNavigationBar(),
     );
   }
 }

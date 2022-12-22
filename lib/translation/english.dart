@@ -25,8 +25,9 @@ final Map<String, String> en = {
   'please enter the verification code': 'Please enter the verification code',
   'enter the verification code sent to your phone number':
       'Enter the verification code sent to your phone number',
-  'didn\'t receive a code? resend after':
-      'Didn\'t receive a code? Resend after',
+  'didn\'t receive a code?': 'Didn\'t receive a code?',
+  'resend after': ' Resend after',
+  'seconds': ' seconds',
   'congratulations': 'Congratulations',
   'you have been registered successfully':
       ' ,You have been registered successfully',
@@ -60,4 +61,21 @@ final Map<String, String> en = {
   'auction': 'Auction',
   'your auction amount': 'Your auction amount',
   'current price': 'Current price',
+  'jordan': 'Jordan',
+  'cannot be empty': 'Cannot be empty',
+  'not a valid phone number': 'Not a valid phone number',
+  'password too short': 'Password is too short',
+  'password too weak': 'Password too weak',
+  'not a valid email': 'Not a valid email',
+  'incorrect phone or password': 'Incorrect phone or password',
+  'incorrect email or password': 'Incorrect email or password',
+  'passwords do not match': 'Passwords do not match',
+  'you did not agree':
+      'Sorry, but you did not agree to the terms and conditions',
+  'resend now': 'Resend now',
+  'trending auctions': 'Trending Auctions',
+  'categories': 'Categories',
+  'you may also like': 'You may also like',
+  'what do you want to search for?': 'What do you want to search for?',
+  'search': 'Search',
 };
