@@ -45,4 +45,17 @@ class ApiUrl {
 
   //get all ads
   static const String fetchAllAds = "/api/v1/advertisements";
+
+  //get my favorites
+  static const String fetchMyFavorites = "/api/v1/my-favorites";
+
+  //get my ads
+  static const String fetchMyAds = "/api/v1/my-advertisements";
+
+  //get ad details (view)
+  static const String fetchAdDetails = "/api/v1/advertisement/";
+
+  //get ads by category
+  static const String fetchAdsByCategory =
+      "/api/v1/advertisement/get-advertisements/";
 }

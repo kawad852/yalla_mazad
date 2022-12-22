@@ -6,6 +6,7 @@ import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/controller/add_auction/add_auction_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_category_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
+import 'package:yalla_mazad/ui/widgets/failure_widget.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
@@ -157,10 +158,9 @@ class AddAuctionScreen extends StatelessWidget {
                                       ),
                                     );
                                   } else if (snapshot.hasError) {
-                                    ///TODO: failure widget
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   } else {
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   }
                               }
                             }),

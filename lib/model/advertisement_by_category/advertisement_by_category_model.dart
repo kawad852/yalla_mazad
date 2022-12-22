@@ -1,12 +1,12 @@
-class MySubscriptionModel {
+class AdvertisementByCategoryModel {
   bool? status;
   int? code;
   String? msg;
   List<Data>? data;
 
-  MySubscriptionModel({this.status, this.code, this.msg, this.data});
+  AdvertisementByCategoryModel({this.status, this.code, this.msg, this.data});
 
-  MySubscriptionModel.fromJson(Map<String, dynamic> json) {
+  AdvertisementByCategoryModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];
@@ -32,40 +32,80 @@ class MySubscriptionModel {
 
 class Data {
   int? id;
+  String? name;
+  String? content;
+  int? startPrice;
   String? startDate;
   String? endDate;
   String? status;
+  int? buyNowPrice;
+  int? views;
+  int? numberOfBids;
+  String? image;
   User? user;
-  Plan? plan;
+  Category? category;
+  List<Images>? images;
 
   Data(
       {this.id,
+      this.name,
+      this.content,
+      this.startPrice,
       this.startDate,
       this.endDate,
       this.status,
+      this.buyNowPrice,
+      this.views,
+      this.numberOfBids,
+      this.image,
       this.user,
-      this.plan});
+      this.category,
+      this.images});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    name = json['name'];
+    content = json['content'];
+    startPrice = json['start_price'];
     startDate = json['start_date'];
     endDate = json['end_date'];
     status = json['status'];
+    buyNowPrice = json['buy_now_price'];
+    views = json['views'];
+    numberOfBids = json['number_of_bids'];
+    image = json['image'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
-    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
+    category =
+        json['category'] != null ? Category.fromJson(json['category']) : null;
+    if (json['images'] != null) {
+      images = <Images>[];
+      json['images'].forEach((v) {
+        images!.add(Images.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
+    data['name'] = name;
+    data['content'] = content;
+    data['start_price'] = startPrice;
     data['start_date'] = startDate;
     data['end_date'] = endDate;
     data['status'] = status;
+    data['buy_now_price'] = buyNowPrice;
+    data['views'] = views;
+    data['number_of_bids'] = numberOfBids;
+    data['image'] = image;
     if (user != null) {
       data['user'] = user!.toJson();
     }
-    if (plan != null) {
-      data['plan'] = plan!.toJson();
+    if (category != null) {
+      data['category'] = category!.toJson();
+    }
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -128,41 +168,46 @@ class Badges {
   }
 }
 
-class Plan {
+class Category {
   int? id;
   String? name;
-  String? details;
-  String? price;
-  int? numberOfAuction;
+  String? image;
 
-  ///TODO: not sure
-  String? time;
+  Category({this.id, this.name, this.image});
 
-  Plan(
-      {this.id,
-      this.name,
-      this.details,
-      this.price,
-      this.numberOfAuction,
-      this.time});
-
-  Plan.fromJson(Map<String, dynamic> json) {
+  Category.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    details = json['details'];
-    price = json['price'];
-    numberOfAuction = json['number_of_auction'];
-    time = json['time'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
-    data['details'] = details;
-    data['price'] = price;
-    data['number_of_auction'] = numberOfAuction;
-    data['time'] = time;
+    data['image'] = image;
+    return data;
+  }
+}
+
+class Images {
+  int? id;
+  String? image;
+  int? advertisement;
+
+  Images({this.id, this.image, this.advertisement});
+
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    image = json['image'];
+    advertisement = json['advertisement'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['image'] = image;
+    data['advertisement'] = advertisement;
     return data;
   }
 }

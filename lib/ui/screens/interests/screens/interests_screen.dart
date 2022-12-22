@@ -8,6 +8,7 @@ import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../widgets/failure_widget.dart';
 import '../widgets/interest_item.dart';
 
 class InterestsScreen extends StatefulWidget {
@@ -147,10 +148,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                   ),
                                 );
                               } else if (snapshot.hasError) {
-                                ///TODO: failure widget
-                                return const Text('error');
+                                return const FailureWidget();
                               } else {
-                                return const Text('error');
+                                return const FailureWidget();
                               }
                           }
                         }),

@@ -9,6 +9,8 @@ import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../widgets/failure_widget.dart';
+
 class PlansScreen extends StatefulWidget {
   const PlansScreen({Key? key}) : super(key: key);
 
@@ -242,10 +244,9 @@ class _PlansScreenState extends State<PlansScreen> {
                                                   ),
                                                 );
                                               } else if (snapshot.hasError) {
-                                                ///TODO: failure widget
-                                                return const Text('error');
+                                                return const FailureWidget();
                                               } else {
-                                                return const Text('error');
+                                                return const FailureWidget();
                                               }
                                           }
                                         }),
@@ -257,7 +258,6 @@ class _PlansScreenState extends State<PlansScreen> {
                                           horizontal: 30.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          ///TODO: make sure of binding
                                           Get.to(
                                             () => const CustomNavigationBar(),
                                             binding: HomeBinding(),

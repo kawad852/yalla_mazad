@@ -6,6 +6,7 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../../widgets/failure_widget.dart';
 
 class MySubscriptionScreen extends StatefulWidget {
   const MySubscriptionScreen({Key? key}) : super(key: key);
@@ -55,10 +56,9 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                         .data?.data?[0].plan?.numberOfAuction,
                                   );
                                 } else if (snapshot.hasError) {
-                                  ///TODO: failure widget
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 } else {
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 }
                             }
                           }),

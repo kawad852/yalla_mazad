@@ -13,6 +13,8 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
+import '../../../widgets/failure_widget.dart';
+
 class IntroScreen extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
   IntroScreen({Key? key}) : super(key: key);
@@ -241,10 +243,9 @@ class IntroScreen extends StatelessWidget {
                         ],
                       );
                     } else if (snapshot.hasError) {
-                      ///TODO: failure widget
-                      return const Text('error');
+                      return const FailureWidget();
                     } else {
-                      return const Text('error');
+                      return const FailureWidget();
                     }
                 }
               }),

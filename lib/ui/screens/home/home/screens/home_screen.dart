@@ -12,6 +12,7 @@ import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../widgets/custom_category_item.dart';
+import '../../../../widgets/failure_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -72,8 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         InkWell(
-                          onTap: ()  {
-                          },
+                          onTap: () {},
                           child: Container(
                             width: 35,
                             height: 35,
@@ -150,10 +150,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                         viewportFraction: 1,
                                       ));
                                 } else if (snapshot.hasError) {
-                                  ///TODO: failure widget
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 } else {
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 }
                             }
                           }),
@@ -246,10 +245,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
-                                  ///TODO: failure widget
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 } else {
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 }
                             }
                           }),
@@ -321,10 +319,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           snapshot.data?.data?.length ?? 0,
                                     );
                                   } else if (snapshot.hasError) {
-                                    ///TODO: failure widget
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   } else {
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   }
                               }
                             }),
@@ -394,10 +391,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           snapshot.data?.data?.length ?? 0,
                                     );
                                   } else if (snapshot.hasError) {
-                                    ///TODO: failure widget
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   } else {
-                                    return const Text('error');
+                                    return const FailureWidget();
                                   }
                               }
                             }),
