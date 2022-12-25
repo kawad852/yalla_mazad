@@ -61,7 +61,6 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
-      //initialBinding: HomeBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
@@ -69,8 +68,8 @@ class _MyAppState extends State<MyApp> {
         Locale('ar', 'JO'),
       ],
 
-      //locale: Locale('ar'),
-      locale: Locale(MySharedPreferences.language),
+      locale: const Locale('ar'),
+      //locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),

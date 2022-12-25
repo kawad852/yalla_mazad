@@ -80,5 +80,10 @@ final Map<String, String> en = {
   'search': 'Search',
   'direct sell': 'Direct Sell',
   'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
-      'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly'
+      'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly',
+  'menu': 'Menu',
+  'terms and conditions': 'Terms and Conditions',
+  'privacy policy': 'Privacy Policy',
+  'call us': 'Call Us',
+  'who we are': 'Who We Are',
 };

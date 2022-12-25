@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
-import 'package:yalla_mazad/ui/screens/home/auctions/widgets/confirm_direct_buy_dialog.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -30,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,
@@ -57,14 +57,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     right: 20,
                   ),
                   child: Directionality(
-                    textDirection: TextDirection.rtl,
+                    textDirection: Get.locale == const Locale('ar')
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ///TODO: edit
                         IconButton(
                           onPressed: () {
-                            Get.dialog(ConfirmDirectBuyDialog());
+                            controller.advancedDrawerController.showDrawer();
                           },
                           icon: const Icon(
                             Icons.menu,

@@ -1,3 +1,4 @@
+import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
 import 'package:yalla_mazad/api/popular_advertisement/popular_advertisement_api.dart';
@@ -11,6 +12,8 @@ import '../../api/all_advertisements/all_advertisements_api.dart';
 
 class HomeController extends GetxController {
   static HomeController get find => Get.find();
+
+  final advancedDrawerController = AdvancedDrawerController();
 
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;

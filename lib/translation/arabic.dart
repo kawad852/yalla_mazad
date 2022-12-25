@@ -78,4 +78,9 @@ final Map<String, String> ar = {
   'direct sell': 'شراء مباشر',
   'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
       'هل ترغب بشراء المنتج بشكل مباشر دون الوصول إلى المزاد ؟ عند تأكيد الطلب سيتواصل فريق يلا مزاد معك مباشرة',
+  'menu': 'القائمة',
+  'terms and conditions': 'الشروط والأحكام',
+  'privacy policy': 'سياسة الخصوصية',
+  'call us': 'اتصل بنا',
+  'who we are': 'من نحن',
 };

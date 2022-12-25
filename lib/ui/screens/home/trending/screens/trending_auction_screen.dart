@@ -19,7 +19,8 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,

@@ -58,4 +58,7 @@ class ApiUrl {
   //get ads by category
   static const String fetchAdsByCategory =
       "/api/v1/advertisement/get-advertisements/";
+
+  //add advertisement to favorites
+  static const String addAdvertisementToFavorites = "/api/v1/favorite-create";
 }
