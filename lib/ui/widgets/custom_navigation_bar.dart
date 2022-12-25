@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
-import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/my_account_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
 import '../../controller/custom_navigation_bar_controller.dart';
@@ -32,7 +31,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       const SearchScreen(),
       AddAuctionScreen(),
       const TrendingAuctionScreen(),
-      const EditProfileScreen(),
+      const MyAccountScreen(),
     ];
   }
 
@@ -125,9 +124,17 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
       ///TODO:make sure
       rtlOpening: Get.locale == const Locale('ar') ? true : false,
-      disabledGestures: false,
-      childDecoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(25)),
+      ///TODO: make sure
+      disabledGestures: true,
+      childDecoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.5),
+            blurRadius: 0,
+            spreadRadius: 30,
+          ),
+        ],
+        borderRadius: const BorderRadius.all(Radius.circular(25)),
       ),
       drawer: SafeArea(
         child: ListTileTheme(

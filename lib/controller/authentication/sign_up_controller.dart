@@ -70,5 +70,4 @@ class SignUpController extends GetxController {
       Fluttertoast.showToast(msg: 'you did not agree'.tr);
     }
   }
-
 }

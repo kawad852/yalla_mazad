@@ -39,7 +39,7 @@ class SignInController extends GetxController {
           MySharedPreferences.image = signInModel!.data!.user!.image!;
           MySharedPreferences.phone = signInModel!.data!.user!.phone!;
           MySharedPreferences.isLogIn = true;
-          Get.offAll(() => const CustomNavigationBar(),binding: HomeBinding());
+          Get.offAll(() => const CustomNavigationBar(), binding: HomeBinding());
           // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
         } else if (signInModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);

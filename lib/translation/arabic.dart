@@ -83,4 +83,7 @@ final Map<String, String> ar = {
   'privacy policy': 'سياسة الخصوصية',
   'call us': 'اتصل بنا',
   'who we are': 'من نحن',
+  'the badges': 'الشارات',
+  'my auctions': 'مزاداتي',
+  'favorites': 'المفضلة',
 };

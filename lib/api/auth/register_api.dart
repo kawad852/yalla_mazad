@@ -19,15 +19,15 @@ class RegisterApi {
       };
       var body = jsonEncode({
         "name": name,
-        "email":email,
+        "email": email,
         "password": password,
       });
       log("Response:: RegisterResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response =
-      await http.post(uri, body: body, headers: headers);
+          await http.post(uri, body: body, headers: headers);
       log("RegisterStatusCode:: ${response.statusCode}  RegisterBody:: ${response.body}");
       RegisterModel registerModel =
-      RegisterModel.fromJson(json.decode(response.body));
+          RegisterModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return registerModel;
       } else if (response.statusCode == 500) {

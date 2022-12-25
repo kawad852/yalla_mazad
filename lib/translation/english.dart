@@ -86,4 +86,7 @@ final Map<String, String> en = {
   'privacy policy': 'Privacy Policy',
   'call us': 'Call Us',
   'who we are': 'Who We Are',
+  'the badges': 'The Badges',
+  'my auctions': 'My Auctions',
+  'favorites': 'Favorites',
 };

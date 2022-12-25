@@ -66,7 +66,7 @@ class VerificationCodeController extends GetxController {
     //     if (optCheckModel!.code == 200) {
     //       MySharedPreferences.phone = phone;
     //       MySharedPreferences.isLogIn = true;
-          Get.to(()=>const InterestsScreen(),binding: InterestsBinding());
+    Get.to(() => const InterestsScreen(), binding: InterestsBinding());
     //     } else if (optCheckModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     //     } else {
@@ -82,8 +82,7 @@ class VerificationCodeController extends GetxController {
     required BuildContext context,
   }) async {
     Loader.show(context);
-    resendOtpModel =
-        await ResendOtpApi().data( id: id);
+    resendOtpModel = await ResendOtpApi().data(id: id);
     if (resendOtpModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();

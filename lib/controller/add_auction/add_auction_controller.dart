@@ -94,7 +94,7 @@ class AddAuctionController extends GetxController {
       auctionStartingPriceController.clear();
       directSellPriceController.clear();
       image = null;
-      images=[];
+      images = [];
       // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
     } else if (addAuctionModel!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);

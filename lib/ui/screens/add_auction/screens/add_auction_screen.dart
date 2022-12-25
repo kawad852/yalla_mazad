@@ -43,10 +43,9 @@ class AddAuctionScreen extends StatelessWidget {
               ),
             ),
           ),
-
           SingleChildScrollView(
             child: SizedBox(
-              height: Get.height*1.3,
+              height: Get.height * 1.3,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,8 +136,8 @@ class AddAuctionScreen extends StatelessWidget {
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 30),
                                         scrollDirection: Axis.horizontal,
-                                        itemCount: controller
-                                                .categoriesModel?.data?.length ??
+                                        itemCount: controller.categoriesModel
+                                                ?.data?.length ??
                                             0,
                                         itemBuilder: (context, index) {
                                           return CustomCategoryItem(
@@ -181,7 +180,8 @@ class AddAuctionScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   CustomTextField(
-                                    controller: controller.descriptionController,
+                                    controller:
+                                        controller.descriptionController,
                                     color: MyColors.textFieldColor,
                                     maxLines: 10,
                                     hint: 'description'.tr,
@@ -224,8 +224,8 @@ class AddAuctionScreen extends StatelessWidget {
                                     height: 10,
                                   ),
                                   CustomTextField(
-                                    controller:
-                                        controller.auctionStartingPriceController,
+                                    controller: controller
+                                        .auctionStartingPriceController,
                                     color: MyColors.textFieldColor,
                                     hint: 'auction starting price'.tr,
                                     inputFormatters: [
@@ -259,11 +259,10 @@ class AddAuctionScreen extends StatelessWidget {
                                     onSubmitted: () {
                                       Future.delayed(
                                         const Duration(seconds: 1),
-                                        () async{
+                                        () async {
                                           _key.currentState?.reset();
                                           await controller.fetchAddAuctionData(
                                               context: context);
-
                                         },
                                       );
                                     },

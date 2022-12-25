@@ -4,7 +4,6 @@ import 'package:yalla_mazad/model/categories/categories_model.dart';
 import 'dart:convert';
 import 'dart:developer';
 
-
 import '../../utils/api_url.dart';
 
 class CategoriesApi {
@@ -19,8 +18,8 @@ class CategoriesApi {
       log("Response:: CategoriesResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);
       log("CategoriesStatusCode:: ${response.statusCode}  CategoriesBody:: ${response.body}");
-    CategoriesModel categoriesModel =
-    CategoriesModel.fromJson(json.decode(response.body));
+      CategoriesModel categoriesModel =
+          CategoriesModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return categoriesModel;
       } else if (response.statusCode == 500) {

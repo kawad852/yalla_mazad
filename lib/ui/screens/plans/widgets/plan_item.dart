@@ -9,8 +9,13 @@ class PlanItem extends StatelessWidget {
   final String? details;
   final String? name;
   final int? numberOfAuctions;
-  const PlanItem({required this.price,
-  required this.name,required this.details, required this.numberOfAuctions, Key? key}) : super(key: key);
+  const PlanItem(
+      {required this.price,
+      required this.name,
+      required this.details,
+      required this.numberOfAuctions,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

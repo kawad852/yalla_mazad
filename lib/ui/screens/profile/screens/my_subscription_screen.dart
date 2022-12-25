@@ -145,10 +145,9 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
-                                  ///TODO: failure widget
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 } else {
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 }
                             }
                           }),
@@ -161,9 +160,6 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 50,
         ),
       ],
     );

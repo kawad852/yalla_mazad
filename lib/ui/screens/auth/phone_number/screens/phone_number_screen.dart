@@ -83,7 +83,7 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                             ),
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: ScreenSize.phoneSize(40, height: true),
                         ),
                         Directionality(

@@ -20,7 +20,7 @@ class CustomSlideButton extends StatelessWidget {
       required this.color,
       required this.stateKey,
       required this.text,
-        required this.onSubmitted,
+      required this.onSubmitted,
       Key? key})
       : super(key: key);
 

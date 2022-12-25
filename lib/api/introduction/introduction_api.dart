@@ -20,7 +20,7 @@ class IntroductionApi {
       http.Response response = await http.get(uri, headers: headers);
       log("IntroductionStatusCode:: ${response.statusCode}  IntroductionBody:: ${response.body}");
       IntroductionModel introductionModel =
-      IntroductionModel.fromJson(json.decode(response.body));
+          IntroductionModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return introductionModel;
       } else if (response.statusCode == 500) {

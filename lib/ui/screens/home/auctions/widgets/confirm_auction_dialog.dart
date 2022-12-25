@@ -124,7 +124,9 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 5,),
+                  const SizedBox(
+                    height: 5,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
@@ -198,6 +200,7 @@ class ConfirmAuctionDialog extends StatelessWidget {
                   const Duration(seconds: 1),
                   () {
                     _key.currentState?.reset();
+
                     ///TODO: edit
                     Get.back();
                   },

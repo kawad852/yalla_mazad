@@ -146,8 +146,7 @@ class AccountScreen extends StatelessWidget {
               GestureDetector(
                 onTap: () async {
                   await controller.fetchUpdateUserData(
-                      phone: controller.phoneController.text,
-                      context: context);
+                      phone: controller.phoneController.text, context: context);
                 },
                 child: Container(
                   height: 60,
