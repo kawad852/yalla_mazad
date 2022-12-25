@@ -75,7 +75,7 @@ class SignUpScreen extends StatelessWidget {
                     if (text == '' || text!.isEmpty) {
                       return 'cannot be empty'.tr;
                     } else if (!text.contains(RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+                        r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
                       return 'not a valid email'.tr;
                     }
                     return null;

@@ -9,6 +9,8 @@ class MyImages {
 
   static const String navBar = "${_path}navigation_bar/";
 
+  static const String home = "${_path}home/";
+
   static const String logo = "${_path}logo.png";
 
   static const String introCar = "${intro}car.png";
@@ -60,4 +62,8 @@ class MyImages {
   static const String navSearch = "${navBar}search.svg";
 
   static const String navUser = "${navBar}user.svg";
+
+  static const String drawerMenu = "${home}menu.png";
+
+  static const String notification = "${home}bell.png";
 }

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../../../controller/custom_navigation_bar_controller.dart';
+
 class TrendingAuctionScreen extends StatefulWidget {
   const TrendingAuctionScreen({Key? key}) : super(key: key);
 
@@ -67,7 +69,10 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                CustomNavigationBarController.find.tabController
+                                    .jumpToTab(0);
+                              },
                               icon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: MyColors.primary,

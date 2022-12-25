@@ -76,7 +76,9 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.back();
+                              },
                               icon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: MyColors.primary,
@@ -85,7 +87,6 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             ),
                           ),
                         ),
-
                         ///TODO: edit to take category name
                         const Text(
                           'name of category',

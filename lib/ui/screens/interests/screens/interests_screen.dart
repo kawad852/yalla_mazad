@@ -43,7 +43,12 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     right: 130,
                     top: 80,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(
+                          () => const PlansScreen(),
+                          binding: PlansBinding(),
+                        );
+                      },
                       icon: const Icon(
                         Icons.cancel_outlined,
                         color: MyColors.primary,

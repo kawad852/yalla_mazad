@@ -60,7 +60,12 @@ class _PlansScreenState extends State<PlansScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(
+                              () => const CustomNavigationBar(),
+                              binding: HomeBinding(),
+                            );
+                          },
                           icon: const Icon(
                             Icons.cancel_outlined,
                             color: MyColors.primary,
@@ -86,9 +91,6 @@ class _PlansScreenState extends State<PlansScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,

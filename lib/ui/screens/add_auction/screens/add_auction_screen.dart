@@ -75,7 +75,9 @@ class AddAuctionScreen extends StatelessWidget {
                             ),
                             child: Center(
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.back();
+                                },
                                 icon: const Icon(
                                   Icons.arrow_back_ios,
                                   color: MyColors.primary,

@@ -29,15 +29,11 @@ class _AuthenticationScreenState extends State<AuthenticationScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const SizedBox(
-                  //   height: 20,
-                  // ),
                   Image.asset(
                     MyImages.logoColored,
                     width: 150,
                     height: 75,
                   ),
-                  // const SizedBox(),
                 ],
               ),
             ),

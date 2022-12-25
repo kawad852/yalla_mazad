@@ -65,15 +65,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ///TODO: edit
                         IconButton(
                           onPressed: () {
                             controller.advancedDrawerController.showDrawer();
                           },
-                          icon: const Icon(
-                            Icons.menu,
-                            color: MyColors.primary,
-                            size: 25,
+                          icon: Image.asset(
+                            MyImages.drawerMenu,
+                            width: 25,
+                            height: 25,
                           ),
                         ),
                         InkWell(
@@ -88,13 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                             child: Center(
-                              ///TODO: edit
                               child: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(
-                                  Icons.notifications_outlined,
-                                  color: MyColors.primary,
-                                  size: 20,
+                                icon: Image.asset(
+                                  MyImages.notification,
+                                  width: 25,
+                                  height: 25,
                                 ),
                               ),
                             ),

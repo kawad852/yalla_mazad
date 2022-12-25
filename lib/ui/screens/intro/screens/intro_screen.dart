@@ -182,6 +182,9 @@ class IntroScreen extends StatelessWidget {
                 viewportFraction: 0.66,
                 reverse: false,
                 autoPlay: true,
+                autoPlayInterval: const Duration(
+                  seconds: 2,
+                ),
               ),
             ),
           ),

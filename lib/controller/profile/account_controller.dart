@@ -14,8 +14,11 @@ class AccountController extends GetxController {
       TextEditingController(text: MySharedPreferences.name);
   final TextEditingController emailController =
       TextEditingController(text: MySharedPreferences.email);
-  final TextEditingController phoneController =
-      TextEditingController(text: MySharedPreferences.phone.substring(4));
+
+  final TextEditingController phoneController = TextEditingController(
+      text: MySharedPreferences.phone.length > 4
+          ? MySharedPreferences.phone.substring(4)
+          : '');
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   UpdateUserModel? updateUserModel;

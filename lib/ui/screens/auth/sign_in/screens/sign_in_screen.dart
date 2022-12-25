@@ -17,24 +17,6 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   final controller = SignInController.find;
 
-  // for reference
-  // var khaled = '';
-  // final myList = [];
-  //
-  // void myFunction() {}
-  //
-  // @override
-  // void initState() {
-  //
-  //   super.initState();
-  // }
-  //
-  // @override
-  // void dispose() {
-  //
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Padding(

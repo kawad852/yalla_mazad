@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/profile/my_account_controller.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_auctions_screen.dart';
@@ -8,6 +9,8 @@ import 'package:yalla_mazad/ui/screens/profile/screens/my_favorites_screen.dart'
 import 'package:yalla_mazad/ui/screens/profile/widgets/badge_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+
+import '../../../../binding/profile/profile_binding.dart';
 
 class MyAccountScreen extends StatefulWidget {
   const MyAccountScreen({Key? key}) : super(key: key);
@@ -67,7 +70,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          ///TODO edit and ask about it
+                         CustomNavigationBarController.find.tabController.jumpToTab(0);
                         },
                         icon: const Icon(
                           Icons.arrow_back_ios,
@@ -101,7 +104,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          Get.to(() => const EditProfileScreen());
+                          Get.to(
+                            () => const EditProfileScreen(),
+                            binding: ProfileBinding(),
+                          );
                         },
                         icon: const Icon(
                           Icons.settings,

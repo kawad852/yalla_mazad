@@ -39,7 +39,9 @@ class _MyAppState extends State<MyApp> {
         !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
     } else {
-      return const AuthenticationScreen();
+      ///TODO:bring back
+      return const CustomNavigationBar();
+     // return const AuthenticationScreen();
     }
   }
 
@@ -51,7 +53,9 @@ class _MyAppState extends State<MyApp> {
         !MySharedPreferences.isPassedIntro) {
       return IntroductionBinding();
     } else {
-      return AuthenticationBinding();
+      ///TODO:bring back
+      return HomeBinding();
+      //return AuthenticationBinding();
     }
   }
 

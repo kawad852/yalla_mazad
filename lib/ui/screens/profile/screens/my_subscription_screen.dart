@@ -23,9 +23,6 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // const SizedBox(
-        //   height: 10,
-        // ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +32,6 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      ///Todo: my subscription
                       FutureBuilder(
                           future: controller.initializeMySubscriptionFuture,
                           builder: (context, snapshot) {

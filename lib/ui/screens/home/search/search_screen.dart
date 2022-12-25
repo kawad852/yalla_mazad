@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/search_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
@@ -68,7 +69,9 @@ class SearchScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                CustomNavigationBarController.find.tabController.jumpToTab(0);
+                              },
                               icon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: MyColors.primary,
@@ -89,9 +92,6 @@ class SearchScreen extends StatelessWidget {
                           height: 35,
                           decoration: BoxDecoration(
                             color: const Color.fromRGBO(202, 195, 212, 0.3),
-                            // color: const Color(
-                            //   0xffD3CFDC,
-                            // ).withOpacity(0.4),
                             borderRadius: BorderRadius.circular(
                               7,
                             ),
@@ -99,10 +99,10 @@ class SearchScreen extends StatelessWidget {
                           child: Center(
                             child: IconButton(
                               onPressed: () {},
-                              icon: const Icon(
-                                Icons.notifications_outlined,
-                                color: MyColors.primary,
-                                size: 20,
+                              icon: Image.asset(
+                                MyImages.notification,
+                                width: 25,
+                                height: 25,
                               ),
                             ),
                           ),
