@@ -58,6 +58,7 @@ class MyAuctionItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
+
               ///TODO: change all text style when i get the design
               children: [
                 Text(
@@ -96,7 +97,9 @@ class MyAuctionItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 4,),
+                          const SizedBox(
+                            width: 4,
+                          ),
                           const Text(
                             '1:23:02:00',
                             style: TextStyle(
@@ -127,7 +130,9 @@ class MyAuctionItem extends StatelessWidget {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 4,),
+                          const SizedBox(
+                            width: 4,
+                          ),
                           Text(
                             price!,
                             style: const TextStyle(
@@ -142,6 +147,7 @@ class MyAuctionItem extends StatelessWidget {
                 Text(
                   status!,
                   style: const TextStyle(),
+
                   ///TODO: change color according to status
                 ),
               ],

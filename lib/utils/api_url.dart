@@ -61,4 +61,8 @@ class ApiUrl {
 
   //add advertisement to favorites
   static const String addAdvertisementToFavorites = "/api/v1/favorite-create";
+
+  //delete advertisement from favorites
+  static const String deleteAdvertisementFromFavorites =
+      "/api/v1/favorite/delete/";
 }

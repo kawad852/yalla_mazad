@@ -124,6 +124,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
 
       ///TODO:make sure
       rtlOpening: Get.locale == const Locale('ar') ? true : false,
+
       ///TODO: make sure
       disabledGestures: true,
       childDecoration: BoxDecoration(
