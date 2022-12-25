@@ -89,4 +89,5 @@ final Map<String, String> en = {
   'the badges': 'The Badges',
   'my auctions': 'My Auctions',
   'favorites': 'Favorites',
+  'all auctions': 'All Auctions',
 };

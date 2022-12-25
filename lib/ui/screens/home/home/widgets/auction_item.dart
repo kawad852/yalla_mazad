@@ -55,7 +55,7 @@ class AuctionItem extends StatelessWidget {
                 children: [
                   CustomNetworkImage(
                     url: image!,
-                    radius: 25,
+                    radius: 18,
                   ),
                   Align(
                     alignment: Alignment.bottomLeft,

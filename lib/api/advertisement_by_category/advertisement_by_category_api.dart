@@ -6,7 +6,7 @@ import 'dart:developer';
 
 import '../../utils/api_url.dart';
 
-class AdvertisementDetailsApi {
+class AdvertisementByCategoryApi {
   Future<AdvertisementByCategoryModel?> data({required int categoryId}) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAdsByCategory}$categoryId';

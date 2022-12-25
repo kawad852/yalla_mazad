@@ -86,4 +86,5 @@ final Map<String, String> ar = {
   'the badges': 'الشارات',
   'my auctions': 'مزاداتي',
   'favorites': 'المفضلة',
+  'all auctions': 'جميع المزادات',
 };

@@ -140,7 +140,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       drawer: SafeArea(
         child: ListTileTheme(
           textColor: Colors.white,
-          iconColor: Colors.white,
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
@@ -202,6 +201,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'subscriptions'.tr,
@@ -211,6 +211,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'terms and conditions'.tr,
@@ -220,6 +221,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'privacy policy'.tr,
@@ -229,6 +231,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'call us'.tr,
@@ -238,6 +241,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'who we are'.tr,
@@ -247,6 +251,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'terms and conditions'.tr,
@@ -256,6 +261,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'privacy policy'.tr,
@@ -265,6 +271,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
               ),
               ListTile(
+                visualDensity: const VisualDensity(vertical: -4),
                 onTap: () {},
                 title: Text(
                   'call us'.tr,

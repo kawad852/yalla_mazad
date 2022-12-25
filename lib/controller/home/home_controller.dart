@@ -48,6 +48,7 @@ class HomeController extends GetxController {
     return popularAdvertisementModel;
   }
 
+  ///TOdo: change into you may like
   AllAdvertisementsModel? allAdvertisementsModel;
   late Future<AllAdvertisementsModel?> initializeAllAdsFuture;
 

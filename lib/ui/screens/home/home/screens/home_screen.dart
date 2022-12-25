@@ -2,9 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/home/auctions_by_category_binding.dart';
 import 'package:yalla_mazad/controller/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/screens/auctions_by_category/auctions_by_category_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -230,13 +232,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                               .categoriesModel?.data?.length ??
                                           0,
                                       itemBuilder: (context, index) {
-                                        return CustomCategoryItem(
-                                          url: controller.categoriesModel
-                                                  ?.data?[index].image ??
-                                              '',
-                                          name: controller.categoriesModel
-                                                  ?.data?[index].name ??
-                                              '',
+                                        return InkWell(
+                                          onTap: () {
+                                            Get.to(
+                                                () =>
+                                                    const AuctionsByCategoryScreen(),
+                                                binding:
+                                                    AuctionsByCategoryBinding());
+                                          },
+                                          child: CustomCategoryItem(
+                                            url: controller.categoriesModel
+                                                    ?.data?[index].image ??
+                                                '',
+                                            name: controller.categoriesModel
+                                                    ?.data?[index].name ??
+                                                '',
+                                          ),
                                         );
                                       },
                                       separatorBuilder: (context, index) {
