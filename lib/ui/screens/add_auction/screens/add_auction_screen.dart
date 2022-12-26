@@ -274,6 +274,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                         const Duration(seconds: 1),
                                         () async {
                                           _key.currentState?.reset();
+                                          //controller.getListOfFiles();
                                           await controller.fetchAddAuctionData(
                                               context: context);
                                         },

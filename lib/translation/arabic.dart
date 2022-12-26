@@ -99,4 +99,7 @@ final Map<String, String> ar = {
   'save': 'حفظ',
   'your password has been reset successfully':
       'تم إعادة تعيين كلمة المرور الخاصة بك بنجاح',
+  'current password': 'كلمة المرور الحالية',
+  'confirm new password':'تأكيد كلمة المرور الجديدة',
+  'new password':'كلمة المرور الجديدة',
 };

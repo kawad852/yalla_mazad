@@ -7,4 +7,6 @@ class EditPasswordController extends GetxController {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
+  bool oldIsVisible = false;
+  bool newIsVisible = false;
 }

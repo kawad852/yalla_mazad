@@ -13,16 +13,16 @@ class SearchAdvertisementModel {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['code'] = this.code;
-    data['msg'] = this.msg;
+    final Map<String, dynamic> data = {};
+    data['status'] = status;
+    data['code'] = code;
+    data['msg'] = msg;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -48,19 +48,19 @@ class Data {
 
   Data(
       {this.id,
-        this.name,
-        this.content,
-        this.startPrice,
-        this.startDate,
-        this.endDate,
-        this.status,
-        this.buyNowPrice,
-        this.views,
-        this.numberOfBids,
-        this.image,
-        this.user,
-        this.category,
-        this.images});
+      this.name,
+      this.content,
+      this.startPrice,
+      this.startDate,
+      this.endDate,
+      this.status,
+      this.buyNowPrice,
+      this.views,
+      this.numberOfBids,
+      this.image,
+      this.user,
+      this.category,
+      this.images});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -74,39 +74,38 @@ class Data {
     views = json['views'];
     numberOfBids = json['number_of_bids'];
     image = json['image'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    category = json['category'] != null
-        ? new Category.fromJson(json['category'])
-        : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    category =
+        json['category'] != null ? Category.fromJson(json['category']) : null;
     if (json['images'] != null) {
       images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(new Images.fromJson(v));
+        images!.add(Images.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['content'] = this.content;
-    data['start_price'] = this.startPrice;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
-    data['status'] = this.status;
-    data['buy_now_price'] = this.buyNowPrice;
-    data['views'] = this.views;
-    data['number_of_bids'] = this.numberOfBids;
-    data['image'] = this.image;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['content'] = content;
+    data['start_price'] = startPrice;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    data['status'] = status;
+    data['buy_now_price'] = buyNowPrice;
+    data['views'] = views;
+    data['number_of_bids'] = numberOfBids;
+    data['image'] = image;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    if (this.category != null) {
-      data['category'] = this.category!.toJson();
+    if (category != null) {
+      data['category'] = category!.toJson();
     }
-    if (this.images != null) {
-      data['images'] = this.images!.map((v) => v.toJson()).toList();
+    if (images != null) {
+      data['images'] = images!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -131,20 +130,20 @@ class User {
     if (json['badges'] != null) {
       badges = <Badges>[];
       json['badges'].forEach((v) {
-        badges!.add(new Badges.fromJson(v));
+        badges!.add(Badges.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['image'] = this.image;
-    data['phone'] = this.phone;
-    if (this.badges != null) {
-      data['badges'] = this.badges!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['image'] = image;
+    data['phone'] = phone;
+    if (badges != null) {
+      data['badges'] = badges!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -162,9 +161,9 @@ class Badges {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['image'] = image;
     return data;
   }
 }
@@ -183,10 +182,10 @@ class Category {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
     return data;
   }
 }
@@ -205,10 +204,10 @@ class Images {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['image'] = this.image;
-    data['advertisement'] = this.advertisement;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['image'] = image;
+    data['advertisement'] = advertisement;
     return data;
   }
 }

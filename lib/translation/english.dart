@@ -102,4 +102,7 @@ final Map<String, String> en = {
   'save': 'Save',
   'your password has been reset successfully':
       'Your password has been reset successfully',
+  'current password': 'Current password',
+  'confirm new password':'Confirm new password',
+  'new password':'New password',
 };

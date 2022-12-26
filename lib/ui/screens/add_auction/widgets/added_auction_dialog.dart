@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_slide_button.dart';
@@ -90,6 +91,9 @@ class AddedAuctionDialog extends StatelessWidget {
                   const Duration(seconds: 1),
                   () async {
                     _key.currentState?.reset();
+                    Get.back();
+                    CustomNavigationBarController.find.tabController
+                        .jumpToTab(4);
                   },
                 );
               },

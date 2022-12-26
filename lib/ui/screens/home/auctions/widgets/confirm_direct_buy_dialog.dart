@@ -138,7 +138,6 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                   const Duration(seconds: 1),
                   () {
                     _key.currentState?.reset();
-
                     ///TODO: edit
                     Get.back();
                   },

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/account_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
+import 'package:yalla_mazad/utils/images.dart';
 
 class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key}) : super(key: key);
@@ -35,9 +37,13 @@ class AccountScreen extends StatelessWidget {
                       const SizedBox(
                         width: 18,
                       ),
-                      const Icon(
-                        Icons.account_box_outlined,
-                        color: Color(0xffBDB5D0),
+                      SvgPicture.asset(
+                        MyImages.navUser,
+                        color: const Color(
+                          0xffBDB5D0,
+                        ),
+                        width: 25,
+                        height: 25,
                       ),
                       const SizedBox(
                         width: 10,
@@ -69,6 +75,7 @@ class AccountScreen extends StatelessWidget {
                       const Icon(
                         Icons.alternate_email,
                         color: Color(0xffBDB5D0),
+                        size: 22,
                       ),
                       const SizedBox(
                         width: 10,
@@ -115,6 +122,7 @@ class AccountScreen extends StatelessWidget {
                         const Icon(
                           Icons.phone_enabled_outlined,
                           color: Color(0xffBDB5D0),
+                          size: 22,
                         ),
                         const SizedBox(
                           width: 10,

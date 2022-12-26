@@ -10,7 +10,7 @@ import '../../model/add_auction/add_auction_model.dart';
 
 class AddAuctionApi {
   Future<AddAuctionModel?> data({
-    required File? file,
+    required File? item,
     required String? name,
     required String? content,
     required String? startPrice,
@@ -18,17 +18,25 @@ class AddAuctionApi {
     required int? userId,
     required int? categoryId,
   }) async {
+    String url = '${ApiUrl.mainUrl}${ApiUrl.addAuction}';
+    Uri uri = Uri.parse(url);
+    var request = http.MultipartRequest('POST', uri);
     try {
       http.MultipartFile? multipartFile;
-      if (file != null) {
-        var stream = http.ByteStream(file.openRead());
-        var length = await file.length();
-        multipartFile = http.MultipartFile('images', stream, length,
-            filename: basename(file.path));
+      //if (file != null) {
+       // for (var item in file) {
+          if (item != null) {
+            var stream = http.ByteStream(item.openRead());
+            var length = await item.length();
+            multipartFile = http.MultipartFile('images', stream, length,
+                filename: basename(item.path));
+            if (multipartFile != null) {
+              request.files.add(multipartFile);
+            }
+          //}
+      //  }
       }
-      String url = '${ApiUrl.mainUrl}${ApiUrl.addAuction}';
-      Uri uri = Uri.parse(url);
-      var request = http.MultipartRequest('POST', uri);
+
       var headers = {
         'Content-Type': 'application/json',
       };
@@ -40,9 +48,7 @@ class AddAuctionApi {
       request.fields['buy_now_price'] = buyNowPrice!;
       request.fields['user_id'] = userId.toString();
       request.fields['category_id'] = categoryId.toString();
-      if (multipartFile != null) {
-        request.files.add(multipartFile);
-      }
+
       var response = await request.send();
       log("Response:: AddAuctionResponse\nUrl:: $url\nheaders:: $headers\n");
 

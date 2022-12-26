@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/profile/my_account_controller.dart';
+import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
-import 'package:yalla_mazad/ui/screens/profile/screens/my_auctions_screen.dart';
-import 'package:yalla_mazad/ui/screens/profile/screens/my_favorites_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_auctions_screen.dart';
+import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_favorites_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/widgets/badge_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-import '../../../../binding/profile/profile_binding.dart';
-import '../../../../controller/home/custom_navigation_bar_controller.dart';
+import '../../../../../binding/profile/profile_binding.dart';
+import '../../../../../controller/home/custom_navigation_bar_controller.dart';
+import '../../../../../utils/shared_prefrences.dart';
+import '../../../../widgets/custom_network_image.dart';
 
 class MyAccountScreen extends StatefulWidget {
   const MyAccountScreen({Key? key}) : super(key: key);
@@ -167,13 +169,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                 ),
                                 width: 8,
                               ),
-
-                              ///TODO: change image (from api)
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  MyImages.introTeapot,
-                                ),
-                              ),
+                            ),
+                            child: CustomNetworkImage(
+                              url: MySharedPreferences.image,
+                              radius: 100,
                             ),
                           ),
                           const SizedBox(
@@ -184,28 +183,29 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
+                              children: [
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  MySharedPreferences.name,
+                                  style: const TextStyle(
                                     color: MyColors.primary,
                                     fontSize: 18,
                                   ),
                                 ),
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  '@${MySharedPreferences.userId}',
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
                                     color: MyColors.greyPrimary,
                                     fontSize: 14,
                                   ),
                                 ),
-                                Text(
-                                  'ahmad',
-                                  style: TextStyle(
-                                    color: MyColors.red,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                // Text(
+                                //   'ahmad',
+                                //   style: TextStyle(
+                                //     color: MyColors.red,
+                                //     fontSize: 18,
+                                //   ),
+                                // ),
                               ],
                             ),
                           ),

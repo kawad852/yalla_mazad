@@ -5,8 +5,10 @@ import 'package:yalla_mazad/controller/profile/profile_controller.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_password_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_subscription_screen.dart';
+import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -129,13 +131,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 width: 8,
                               ),
-
-                              ///TODO: change image (from api)
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  MyImages.introTeapot,
-                                ),
-                              ),
+                            ),
+                            child: CustomNetworkImage(
+                              url: MySharedPreferences.image,
+                              radius: 100,
                             ),
                           ),
                           const SizedBox(
@@ -146,28 +145,29 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
+                              children: [
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  MySharedPreferences.name,
+                                  style: const TextStyle(
                                     color: MyColors.primary,
                                     fontSize: 18,
                                   ),
                                 ),
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  '@${MySharedPreferences.userId}',
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
                                     color: MyColors.greyPrimary,
                                     fontSize: 14,
                                   ),
                                 ),
-                                Text(
-                                  'ahmad',
-                                  style: TextStyle(
-                                    color: MyColors.red,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                //   Text(
+                                //     'ahmad',
+                                //     style: TextStyle(
+                                //       color: MyColors.red,
+                                //       fontSize: 18,
+                                //     ),
+                                //   ),
                               ],
                             ),
                           ),

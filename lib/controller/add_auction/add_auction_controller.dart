@@ -48,9 +48,13 @@ class AddAuctionController extends GetxController {
       maxWidth: 1800,
       maxHeight: 1800,
     );
+
     for (var item in pickedFile) {
+
       if (item != null) {
+        log(pickedFile.length.toString() ?? '0');
         images?.add(item.path);
+        log(item.path);
       }
     }
   }
@@ -66,6 +70,24 @@ class AddAuctionController extends GetxController {
     return categoriesModel;
   }
 
+  List<File?>? getListOfFiles() {
+    List<File?> files = [];
+    if (image != null) {
+      files.add(File(image!));
+    }
+    if (images != null) {
+      for (var item in images!) {
+        if (item != null) {
+          var file = File(item);
+          files.add(file);
+          log(file.path);
+          log('aaaa');
+        }
+      }
+    }
+    return files;
+  }
+
   AddAuctionModel? addAuctionModel;
   Future fetchAddAuctionData({
     required BuildContext context,
@@ -74,7 +96,7 @@ class AddAuctionController extends GetxController {
     //   if (formKey.currentState!.validate()) {
     Loader.show(context);
     addAuctionModel = await AddAuctionApi().data(
-      file: File(image!),
+      item: File(image!),
       name: addressController.text,
       content: descriptionController.text,
       startPrice: auctionStartingPriceController.text,
@@ -95,7 +117,6 @@ class AddAuctionController extends GetxController {
       directSellPriceController.clear();
       image = null;
       images = [];
-      // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
     } else if (addAuctionModel!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     } else {
