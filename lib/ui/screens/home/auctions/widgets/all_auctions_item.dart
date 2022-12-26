@@ -4,7 +4,6 @@ import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../widgets/custom_network_image.dart';
 
-
 class AllAuctionsItem extends StatelessWidget {
   final String? image;
   final String? name;

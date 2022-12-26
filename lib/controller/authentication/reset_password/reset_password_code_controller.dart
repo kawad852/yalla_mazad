@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/reset_password/reset_password_new_password_binding.dart';
-import 'package:yalla_mazad/ui/screens/auth/reset_password/reset_password_new_password_screen.dart';
 
 import '../../../model/auth/opt_check_model.dart';
+import '../../../ui/screens/authentication/reset_password/reset_password_new_password_screen.dart';
 import '../../../utils/shared_prefrences.dart';
 
 class ResetPasswordCodeController extends GetxController {

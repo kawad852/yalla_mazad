@@ -76,9 +76,4 @@ class MyImages {
   static const String congrats = "${resetPassword}congrats.png";
 
   static const String phone = "${resetPassword}phone.png";
-
-
-
-
-
 }

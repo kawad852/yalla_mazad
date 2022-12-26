@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/home/auctions_by_category_controller.dart';
+import 'package:yalla_mazad/controller/home/auctions/auctions_by_category_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -87,6 +87,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             ),
                           ),
                         ),
+
                         ///TODO: edit to take category name
                         const Text(
                           'name of category',
@@ -107,10 +108,10 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                           child: Center(
                             child: IconButton(
                               onPressed: () {},
-                              icon: const Icon(
-                                Icons.notifications_outlined,
-                                color: MyColors.primary,
-                                size: 20,
+                              icon: Image.asset(
+                                MyImages.notification,
+                                width: 20,
+                                height: 20,
                               ),
                             ),
                           ),
@@ -173,8 +174,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                       return AuctionItem(
                                         image:
                                             snapshot.data?.data?[index].image,
-                                        name:
-                                            snapshot.data?.data?[index].name,
+                                        name: snapshot.data?.data?[index].name,
                                         user: snapshot
                                             .data?.data?[index].user?.name,
                                         price:
@@ -186,8 +186,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                         width: 10,
                                       );
                                     },
-                                    itemCount:
-                                        snapshot.data?.data?.length ?? 0,
+                                    itemCount: snapshot.data?.data?.length ?? 0,
                                   );
                                 } else if (snapshot.hasError) {
                                   return const FailureWidget();
@@ -226,55 +225,56 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                       height: 15,
                     ),
                     FutureBuilder<AllAdvertisementsModel?>(
-                        future: controller.initializeAllAdsFuture,
-                        builder: (context, snapshot) {
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.waiting:
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            case ConnectionState.done:
-                            default:
-                              if (snapshot.hasData) {
-                                return Column(
-                                  children: [
-                                    ListView.separated(
-                                      shrinkWrap: true,
-                                      physics:  const NeverScrollableScrollPhysics(),
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30),
-                                      scrollDirection: Axis.vertical,
-                                      itemBuilder: (context, index) {
-                                        return AllAuctionsItem(
-                                          image: snapshot
-                                              .data?.data?[index].image,
-                                          name: snapshot
-                                              .data?.data?[index].name,
-                                          price:
-                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
-                                          details: snapshot
-                                              .data?.data?[index].content,
-                                          status: snapshot
-                                              .data?.data?[index].status,
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          height: 10,
-                                        );
-                                      },
-                                      itemCount:
-                                          snapshot.data?.data?.length ?? 0,
-                                    ),
-                                    const SizedBox(height: 30,),
-                                  ],
-                                );
-                              } else if (snapshot.hasError) {
-                                return const FailureWidget();
-                              } else {
-                                return const FailureWidget();
-                              }
-                          }
-                        },
+                      future: controller.initializeAllAdsFuture,
+                      builder: (context, snapshot) {
+                        switch (snapshot.connectionState) {
+                          case ConnectionState.waiting:
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          case ConnectionState.done:
+                          default:
+                            if (snapshot.hasData) {
+                              return Column(
+                                children: [
+                                  ListView.separated(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 30),
+                                    scrollDirection: Axis.vertical,
+                                    itemBuilder: (context, index) {
+                                      return AllAuctionsItem(
+                                        image:
+                                            snapshot.data?.data?[index].image,
+                                        name: snapshot.data?.data?[index].name,
+                                        price:
+                                            '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                        details:
+                                            snapshot.data?.data?[index].content,
+                                        status:
+                                            snapshot.data?.data?[index].status,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(
+                                        height: 10,
+                                      );
+                                    },
+                                    itemCount: snapshot.data?.data?.length ?? 0,
+                                  ),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                ],
+                              );
+                            } else if (snapshot.hasError) {
+                              return const FailureWidget();
+                            } else {
+                              return const FailureWidget();
+                            }
+                        }
+                      },
                     ),
                   ],
                 ),

@@ -3,11 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/reset_password/reset_password_phone_number_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_in_controller.dart';
-import 'package:yalla_mazad/ui/screens/auth/reset_password/reset_password_phone_number_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
+
+import '../../reset_password/reset_password_phone_number_screen.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);

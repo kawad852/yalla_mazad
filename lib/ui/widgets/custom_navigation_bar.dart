@@ -4,7 +4,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:yalla_mazad/controller/home/home_controller.dart';
+import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';
@@ -12,7 +12,7 @@ import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_sc
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-import '../../controller/custom_navigation_bar_controller.dart';
+import '../../controller/home/custom_navigation_bar_controller.dart';
 import '../../utils/colors.dart';
 
 late PersistentTabController navBarController;
@@ -29,7 +29,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
     return [
       const HomeScreen(),
       const SearchScreen(),
-      AddAuctionScreen(),
+      const AddAuctionScreen(),
       const TrendingAuctionScreen(),
       const MyAccountScreen(),
     ];
@@ -121,11 +121,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       animationCurve: Curves.easeInOut,
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
-
-      ///TODO:make sure
       rtlOpening: Get.locale == const Locale('ar') ? true : false,
-
-      ///TODO: make sure
       disabledGestures: true,
       childDecoration: BoxDecoration(
         boxShadow: [
@@ -245,36 +241,6 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 onTap: () {},
                 title: Text(
                   'who we are'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
-                title: Text(
-                  'terms and conditions'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
-                title: Text(
-                  'privacy policy'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
-                title: Text(
-                  'call us'.tr,
                   style: const TextStyle(
                     fontSize: 18,
                   ),

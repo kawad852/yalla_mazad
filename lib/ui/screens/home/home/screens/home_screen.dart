@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/home/auctions_by_category_binding.dart';
-import 'package:yalla_mazad/controller/home/home_controller.dart';
+import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/screens/auctions_by_category/auctions_by_category_screen.dart';
@@ -122,35 +122,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               default:
                                 if (snapshot.hasData) {
                                   return CarouselSlider(
-                                      items: List.generate(
-                                        controller.sliderModel?.data?.length ??
-                                            0,
-                                        (index) => Container(
-                                          margin: const EdgeInsets.symmetric(
-                                              horizontal: 30),
-                                          height: 190,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              25,
-                                            ),
-                                            // image: const DecorationImage(
-                                            //   image: AssetImage(
-                                            //     MyImages.introChair,
-                                            //   ),
-                                            //   fit: BoxFit.cover,
-                                            // ),
-                                          ),
-                                          child: CustomNetworkImage(
-                                            url: controller.sliderModel
-                                                    ?.data?[index].image ??
-                                                '',
-                                            radius: 25,
+                                    items: List.generate(
+                                      controller.sliderModel?.data?.length ?? 0,
+                                      (index) => Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            horizontal: 30),
+                                        height: 190,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            25,
                                           ),
                                         ),
+                                        child: CustomNetworkImage(
+                                          url: controller.sliderModel
+                                                  ?.data?[index].image ??
+                                              '',
+                                          radius: 25,
+                                        ),
                                       ),
-                                      options: CarouselOptions(
-                                        viewportFraction: 1,
-                                      ));
+                                    ),
+                                    options: CarouselOptions(
+                                      viewportFraction: 1,
+                                      reverse: true,
+                                      autoPlay: true,
+                                    ),
+                                  );
                                 } else if (snapshot.hasError) {
                                   return const FailureWidget();
                                 } else {

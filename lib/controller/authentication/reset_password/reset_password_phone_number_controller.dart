@@ -1,16 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/ui/screens/auth/reset_password/reset_password_code_screen.dart';
 
 import '../../../binding/authentication/reset_password/reset_password_code_binding.dart';
+import '../../../ui/screens/authentication/reset_password/reset_password_code_screen.dart';
 import '../../../utils/shared_prefrences.dart';
+
 class ResetPasswordPhoneNumberController extends GetxController {
   static ResetPasswordPhoneNumberController get find => Get.find();
   final TextEditingController phoneController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
- // UpdateUserPhoneModel? updateUserPhoneModel;
+  // UpdateUserPhoneModel? updateUserPhoneModel;
 
   Future fetchUpdateUserPhoneData({
     required String phone,
@@ -28,11 +28,11 @@ class ResetPasswordPhoneNumberController extends GetxController {
     //       return;
     //     }
     //     if (updateUserPhoneModel!.code == 200) {
-          MySharedPreferences.phone = phone;
-          // Get.to(
-          //       () => const ResetPasswordCodeScreen(),
-          //   binding: ResetPasswordCodeBinding(),
-          // );
+    MySharedPreferences.phone = phone;
+    // Get.to(
+    //       () => const ResetPasswordCodeScreen(),
+    //   binding: ResetPasswordCodeBinding(),
+    // );
     //       // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
     //     } else if (updateUserPhoneModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
@@ -44,10 +44,9 @@ class ResetPasswordPhoneNumberController extends GetxController {
     // }
 
     ///TODO: edit when api is ready
-          Get.off(
-                () => const ResetPasswordCodeScreen(),
-            binding: ResetPasswordCodeBinding(),
-          );
-
+    Get.off(
+      () => const ResetPasswordCodeScreen(),
+      binding: ResetPasswordCodeBinding(),
+    );
   }
 }

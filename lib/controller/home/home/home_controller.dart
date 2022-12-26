@@ -8,7 +8,7 @@ import 'package:yalla_mazad/model/categories/categories_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/model/slider/slider_model.dart';
 
-import '../../api/all_advertisements/all_advertisements_api.dart';
+import '../../../api/all_advertisements/all_advertisements_api.dart';
 
 class HomeController extends GetxController {
   static HomeController get find => Get.find();

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/controller/introduction/introduction_controller.dart';
 import 'package:yalla_mazad/model/introduction/introduction_model.dart';
-import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/widgets/intro_card_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_slide_button.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -14,6 +13,7 @@ import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../../widgets/failure_widget.dart';
+import '../../authentication/screens/authentication_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();

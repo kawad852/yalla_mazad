@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/custom_navigation_bar_controller.dart';
-import 'package:yalla_mazad/controller/home/search_controller.dart';
+import 'package:yalla_mazad/controller/home/search/search_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
+import '../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 
@@ -16,8 +16,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-
-
   @override
   void initState() {
     Get.put(SearchController());

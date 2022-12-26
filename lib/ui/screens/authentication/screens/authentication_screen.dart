@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/authentication/authentication_controller.dart';
-import 'package:yalla_mazad/ui/screens/auth/sign_up/screens/sign_up_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../sign_in/screens/sign_in_screen.dart';
+import '../sign_up/screens/sign_up_screen.dart';
 
 class AuthenticationScreen extends StatefulWidget {
   const AuthenticationScreen({Key? key}) : super(key: key);

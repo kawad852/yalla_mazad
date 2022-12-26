@@ -85,7 +85,6 @@ class _ResetPasswordCongratsScreenState
                         ),
                         GestureDetector(
                           onTap: () async {
-
                             Get.offAll(() => const AuthenticationScreen(),
                                 binding: AuthenticationBinding());
                           },

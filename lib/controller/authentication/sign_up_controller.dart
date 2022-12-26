@@ -6,7 +6,7 @@ import 'package:yalla_mazad/api/auth/register_api.dart';
 import 'package:yalla_mazad/model/auth/register_model.dart';
 
 import '../../binding/authentication/phone_number_binding.dart';
-import '../../ui/screens/auth/phone_number/screens/phone_number_screen.dart';
+import '../../ui/screens/authentication/phone_number/screens/phone_number_screen.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/shared_prefrences.dart';
 

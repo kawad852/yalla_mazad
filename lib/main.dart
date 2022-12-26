@@ -5,7 +5,7 @@ import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
-import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
+import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
         !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
     } else {
-     return const AuthenticationScreen();
+      return const AuthenticationScreen();
     }
   }
 
