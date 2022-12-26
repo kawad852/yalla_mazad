@@ -1,9 +1,13 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/widgets/trending_auction_item.dart';
 import 'package:yalla_mazad/utils/images.dart';
+
+import '../../../../../model/popular_advertisement/popular_advertisement_model.dart';
+import '../../../../widgets/failure_widget.dart';
 
 class TrendingAuctionScreen extends StatefulWidget {
   const TrendingAuctionScreen({Key? key}) : super(key: key);
@@ -13,15 +17,18 @@ class TrendingAuctionScreen extends StatefulWidget {
 }
 
 class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
+
   @override
   void initState() {
     Get.put(TrendingAuctionController());
+    controller = TrendingAuctionController.find;
     super.initState();
   }
 
+  late final TrendingAuctionController controller;
+
   @override
   Widget build(BuildContext context) {
-    final controller = TrendingAuctionController.find;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -43,22 +50,35 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
               ),
             ),
           ),
-          PageView(
-            controller: controller.pageController,
-            children: List.generate(
-              controller.popularAdvertisementModel?.data?.length ?? 0,
-              (index) => TrendingAuctionItem(
-                image:
-                    controller.popularAdvertisementModel?.data?[index].image ??
-                        '',
-                name: controller.popularAdvertisementModel?.data?[index].name ??
-                    '',
-                user: controller
-                        .popularAdvertisementModel?.data?[index].user?.name ??
-                    '',
-              ),
-            ),
-          ),
+          FutureBuilder<PopularAdvertisementModel?>(
+              future: controller.initializePopularAdsFuture,
+              builder: (context, snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  case ConnectionState.done:
+                  default:
+                    if (snapshot.hasData) {
+                      return PageView(
+                        controller: controller.pageController,
+                        children: List.generate(
+                          snapshot.data?.data?.length ?? 0,
+                          (index) => TrendingAuctionItem(
+                            image: snapshot.data?.data?[index].image ?? '',
+                            name: snapshot.data?.data?[index].name ?? '',
+                            user: snapshot.data?.data?[index].user?.name ?? '',
+                          ),
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return const FailureWidget();
+                    } else {
+                      return const FailureWidget();
+                    }
+                }
+              }),
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
+import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';

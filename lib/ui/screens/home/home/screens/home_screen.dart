@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/home/auctions_by_category_binding.dart';
+import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
+import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/screens/auctions_by_category/auctions_by_category_screen.dart';
@@ -306,15 +308,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                           horizontal: 30),
                                       scrollDirection: Axis.horizontal,
                                       itemBuilder: (context, index) {
-                                        return AuctionItem(
-                                          image:
-                                              snapshot.data?.data?[index].image,
-                                          name:
-                                              snapshot.data?.data?[index].name,
-                                          user: snapshot
-                                              .data?.data?[index].user?.name,
-                                          price:
-                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                        return InkWell(
+                                          onTap: () {
+                                            controller.selectedIndex = index;
+                                            CustomNavigationBarController
+                                                .find.tabController
+                                                .jumpToTab(3);
+                                            Future.delayed(
+                                                const Duration(seconds: 2), () {
+                                              TrendingAuctionController
+                                                  .find.pageController
+                                                  .jumpToPage(
+                                                      controller.selectedIndex);
+                                            });
+                                          },
+                                          child: AuctionItem(
+                                            image: snapshot
+                                                .data?.data?[index].image,
+                                            name: snapshot
+                                                .data?.data?[index].name,
+                                            user: snapshot
+                                                .data?.data?[index].user?.name,
+                                            price:
+                                                '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                          ),
                                         );
                                       },
                                       separatorBuilder: (context, index) {
