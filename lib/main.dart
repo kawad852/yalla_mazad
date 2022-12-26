@@ -34,28 +34,22 @@ class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
       return const CustomNavigationBar();
-      //return const BaseNavBar();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
     } else {
-      ///TODO:bring back
-      return const CustomNavigationBar();
-     // return const AuthenticationScreen();
+     return const AuthenticationScreen();
     }
   }
 
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return HomeBinding();
-      //return NavBarBinding();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
       return IntroductionBinding();
     } else {
-      ///TODO:bring back
-      return HomeBinding();
-      //return AuthenticationBinding();
+      return AuthenticationBinding();
     }
   }
 

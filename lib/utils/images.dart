@@ -11,6 +11,8 @@ class MyImages {
 
   static const String home = "${_path}home/";
 
+  static const String resetPassword = "${authentication}reset_password/";
+
   static const String logo = "${_path}logo.png";
 
   static const String introCar = "${intro}car.png";
@@ -66,4 +68,17 @@ class MyImages {
   static const String drawerMenu = "${home}menu.png";
 
   static const String notification = "${home}bell.png";
+
+  static const String lock = "${resetPassword}lock.png";
+
+  static const String lockQuestion = "${resetPassword}question_lock.png";
+
+  static const String congrats = "${resetPassword}congrats.png";
+
+  static const String phone = "${resetPassword}phone.png";
+
+
+
+
+
 }

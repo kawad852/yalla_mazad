@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/authentication/reset_password/reset_password_phone_number_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_in_controller.dart';
+import 'package:yalla_mazad/ui/screens/auth/reset_password/reset_password_phone_number_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
@@ -129,6 +131,31 @@ class _SignInScreenState extends State<SignInScreen> {
                     ),
                   ),
                   hint: 'password'.tr,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Get.to(
+                          () => const ResetPasswordPhoneNumberScreen(),
+                          binding: ResetPasswordPhoneNumberBinding(),
+                        );
+                      },
+                      child: Text(
+                        'did you forget your password?'.tr,
+                        textAlign: TextAlign.left,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: MyColors.primary,
+                        ),
+                      ),
+                    ),
+                    Expanded(child: SizedBox()),
+                  ],
                 ),
                 const SizedBox(
                   height: 20,

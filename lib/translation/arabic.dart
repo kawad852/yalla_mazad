@@ -87,4 +87,16 @@ final Map<String, String> ar = {
   'my auctions': 'مزاداتي',
   'favorites': 'المفضلة',
   'all auctions': 'جميع المزادات',
+  'did you forget your password?': 'نسيت كلمة المرور ؟',
+  'please enter your phone number to receive a verification code':
+      'الرجاء إدخال رقم هاتفك لتلقي رمز التحقق',
+  'confirm your phone number': 'تأكيد رقم هاتفك',
+  'please enter the 4-digit verification code sent to':
+      'الرجاء إدخال رمز التحقق المكون من 4 أرقام المرسل إلى ',
+  'create a new password': 'إنشاء كلمة مرور جديدة',
+  'the new password must be different from the previously used password':
+      'كلمة المرور الجديدة يجب أن تكون مختلفة عن كلمة المرور المستخدمة سابقا',
+  'save': 'حفظ',
+  'your password has been reset successfully':
+      'تم إعادة تعيين كلمة المرور الخاصة بك بنجاح',
 };

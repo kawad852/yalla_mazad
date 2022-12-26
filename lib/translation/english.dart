@@ -90,4 +90,16 @@ final Map<String, String> en = {
   'my auctions': 'My Auctions',
   'favorites': 'Favorites',
   'all auctions': 'All Auctions',
+  'did you forget your password?': 'Did you forget your password?',
+  'please enter your phone number to receive a verification code':
+      'Please enter your phone number to receive a verification code',
+  'confirm your phone number': 'Confirm your phone number',
+  'please enter the 4-digit verification code sent to':
+      'Please enter the 4-digit verification code sent to',
+  'create a new password': 'Create a new password',
+  'the new password must be different from the previously used password':
+      'The new password must be different from the previously used password',
+  'save': 'Save',
+  'your password has been reset successfully':
+      'Your password has been reset successfully',
 };
