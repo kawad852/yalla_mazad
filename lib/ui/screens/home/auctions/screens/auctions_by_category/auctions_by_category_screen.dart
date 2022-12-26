@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/auctions/auctions_by_category_controller.dart';
+import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../../../../controller/home/custom_navigation_bar_controller.dart';
+import '../../../../../../controller/home/trending/trending_auction_controller.dart';
 import '../../../../../../model/advertisement_by_category/advertisement_by_category_model.dart';
 import '../../../../../widgets/failure_widget.dart';
 import '../../../home/widgets/auction_item.dart';
@@ -87,11 +90,9 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             ),
                           ),
                         ),
-
-                        ///TODO: edit to take category name
-                        const Text(
-                          'name of category',
-                          style: TextStyle(
+                        Text(
+                          HomeController.find.category.key,
+                          style: const TextStyle(
                             color: MyColors.primary,
                             fontSize: 18,
                           ),
@@ -171,14 +172,33 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                         horizontal: 30),
                                     scrollDirection: Axis.horizontal,
                                     itemBuilder: (context, index) {
-                                      return AuctionItem(
-                                        image:
-                                            snapshot.data?.data?[index].image,
-                                        name: snapshot.data?.data?[index].name,
-                                        user: snapshot
-                                            .data?.data?[index].user?.name,
-                                        price:
-                                            '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                      return InkWell(
+                                        onTap: () {
+                                          Get.back();
+                                          ///TODO: find a way for the change in index
+                                          HomeController.find.selectedIndex =
+                                              index;
+                                          CustomNavigationBarController
+                                              .find.tabController
+                                              .jumpToTab(3);
+                                          Future.delayed(
+                                              const Duration(seconds: 2), () {
+                                            TrendingAuctionController
+                                                .find.pageController
+                                                .jumpToPage(HomeController
+                                                    .find.selectedIndex);
+                                          });
+                                        },
+                                        child: AuctionItem(
+                                          image:
+                                              snapshot.data?.data?[index].image,
+                                          name:
+                                              snapshot.data?.data?[index].name,
+                                          user: snapshot
+                                              .data?.data?[index].user?.name,
+                                          price:
+                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                        ),
                                       );
                                     },
                                     separatorBuilder: (context, index) {
@@ -252,8 +272,10 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                             '${snapshot.data?.data?[index].startPrice.toString()} JOD',
                                         details:
                                             snapshot.data?.data?[index].content,
-                                        status:
-                                            snapshot.data?.data?[index].status,
+                                        userImage: snapshot
+                                            .data?.data?[index].user?.image,
+                                        userName: snapshot
+                                            .data?.data?[index].user?.name,
                                       );
                                     },
                                     separatorBuilder: (context, index) {

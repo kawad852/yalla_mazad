@@ -58,13 +58,12 @@ class MyAuctionItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-
-              ///TODO: change all text style when i get the design
               children: [
                 Text(
                   name!,
                   style: const TextStyle(
                     color: MyColors.primary,
+                    fontSize: 16,
                   ),
                 ),
                 Text(
@@ -72,6 +71,7 @@ class MyAuctionItem extends StatelessWidget {
                   maxLines: 3,
                   style: const TextStyle(
                     color: MyColors.primary,
+                    fontSize: 12,
                   ),
                 ),
                 Row(
@@ -104,6 +104,7 @@ class MyAuctionItem extends StatelessWidget {
                             '1:23:02:00',
                             style: TextStyle(
                               color: MyColors.primary,
+                              fontSize: 12,
                             ),
                           ),
                         ],
@@ -137,6 +138,7 @@ class MyAuctionItem extends StatelessWidget {
                             price!,
                             style: const TextStyle(
                               color: MyColors.primary,
+                              fontSize: 12,
                             ),
                           ),
                         ],
@@ -146,9 +148,16 @@ class MyAuctionItem extends StatelessWidget {
                 ),
                 Text(
                   status!,
-                  style: const TextStyle(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: status! == 'pending'
+                        ? MyColors.primary
+                        : status! == 'rejected'
+                            ? MyColors.red
+                            : Colors.green,
+                  ),
 
-                  ///TODO: change color according to status
+                  ///TODO: make sure of status
                 ),
               ],
             ),

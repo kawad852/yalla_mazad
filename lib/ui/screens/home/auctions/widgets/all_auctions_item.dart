@@ -8,8 +8,9 @@ class AllAuctionsItem extends StatelessWidget {
   final String? image;
   final String? name;
   final String? details;
-  final String? status;
   final String? price;
+  final String? userImage;
+  final String? userName;
 
   ///TODO: add time left
   const AllAuctionsItem(
@@ -17,7 +18,8 @@ class AllAuctionsItem extends StatelessWidget {
       required this.name,
       required this.details,
       required this.price,
-      required this.status,
+      required this.userImage,
+      required this.userName,
       Key? key})
       : super(key: key);
 
@@ -58,13 +60,12 @@ class AllAuctionsItem extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
-
-              ///TODO: change all text style when i get the design
               children: [
                 Text(
                   name!,
                   style: const TextStyle(
                     color: MyColors.primary,
+                    fontSize: 16,
                   ),
                 ),
                 Text(
@@ -72,6 +73,7 @@ class AllAuctionsItem extends StatelessWidget {
                   maxLines: 3,
                   style: const TextStyle(
                     color: MyColors.primary,
+                    fontSize: 12,
                   ),
                 ),
                 Row(
@@ -104,6 +106,7 @@ class AllAuctionsItem extends StatelessWidget {
                             '1:23:02:00',
                             style: TextStyle(
                               color: MyColors.primary,
+                              fontSize: 12,
                             ),
                           ),
                         ],
@@ -137,6 +140,7 @@ class AllAuctionsItem extends StatelessWidget {
                             price!,
                             style: const TextStyle(
                               color: MyColors.primary,
+                              fontSize: 12,
                             ),
                           ),
                         ],
@@ -144,11 +148,32 @@ class AllAuctionsItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                Text(
-                  status!,
-                  style: const TextStyle(),
-
-                  ///TODO: change color according to status
+                Row(
+                  children: [
+                    Container(
+                      width: 25,
+                      height: 25,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      child: CustomNetworkImage(
+                        radius: 6,
+                        url: userImage!,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      userName!,
+                      style: const TextStyle(
+                        color: MyColors.primary,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 30,
+                    top: 40,
                     left: 20,
                     right: 20,
                   ),
@@ -230,6 +230,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () {
+                                            controller.category = MapEntry(
+                                                controller.categoriesModel
+                                                        ?.data?[index].name ??
+                                                    '',
+                                                controller.categoriesModel
+                                                        ?.data?[index].id ??
+                                                    0);
                                             Get.to(
                                                 () =>
                                                     const AuctionsByCategoryScreen(),

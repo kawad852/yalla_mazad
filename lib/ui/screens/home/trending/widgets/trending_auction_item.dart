@@ -23,7 +23,7 @@ class TrendingAuctionItem extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(
-              top: 37,
+              top: 45,
               left: 20,
               right: 20,
             ),
