@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/search/search_controller.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
 import '../../../../controller/home/custom_navigation_bar_controller.dart';
@@ -48,7 +49,6 @@ class _SearchScreenState extends State<SearchScreen> {
             ),
           ),
           SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,32 +123,68 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: Get.height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: CustomTextField(
-                          controller: controller.searchController,
-                          color: MyColors.primary5D0,
-                          hint: 'what do you want to search for?'.tr,
-                          suffixIcon: const Icon(
-                            Icons.search_sharp,
-                            color: MyColors.primary,
-                            size: 30,
-                          ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      child: CustomTextField(
+                        controller: controller.searchController,
+                        color: MyColors.primary5D0,
+                        hint: 'what do you want to search for?'.tr,
+                        suffixIcon: const Icon(
+                          Icons.search_sharp,
+                          color: MyColors.primary,
+                          size: 30,
                         ),
+                        onChanged: (value) {
+                          if (controller.searchQuery.value != value) {
+                            controller.onSearchChanged(value);
+                          }
+                        },
                       ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                    ],
-                  ),
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Obx(
+                      () => controller.searchQuery.isEmpty
+                          ? const SizedBox.shrink()
+                          : controller.isLoading.value
+                              ? const Center(
+                                  child: CircularProgressIndicator(),
+                                )
+                              : ListView.separated(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    height: 10,
+                                  ),
+                                  itemCount:
+                                      controller.model.value!.data!.length,
+                                  itemBuilder: (context, index) {
+                                    final data =
+                                        controller.model.value!.data![index];
+                                    return AllAuctionsItem(
+                                      image: data.image,
+                                      name: data.name,
+                                      details: data.content,
+                                      price: data.startPrice.toString(),
+                                      userImage: data.user?.image,
+                                      userName: data.user?.name,
+                                    );
+                                  },
+                                ),
+                    ),
+                    const SizedBox(
+                      height: 90,
+                    ),
+                  ],
                 ),
               ],
             ),

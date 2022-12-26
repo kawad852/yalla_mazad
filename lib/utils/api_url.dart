@@ -65,4 +65,7 @@ class ApiUrl {
   //delete advertisement from favorites
   static const String deleteAdvertisementFromFavorites =
       "/api/v1/favorite/delete/";
+
+  //search advertisement
+  static const String searchAdvertisement = "/api/v1/advertisements/search";
 }
