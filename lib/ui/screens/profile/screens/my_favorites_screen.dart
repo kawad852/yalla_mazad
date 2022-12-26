@@ -7,6 +7,7 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../widgets/failure_widget.dart';
 import '../widgets/my_auction_item.dart';
+import 'package:get/get.dart';
 
 class MyFavoritesScreen extends StatefulWidget {
   const MyFavoritesScreen({Key? key}) : super(key: key);
@@ -16,10 +17,15 @@ class MyFavoritesScreen extends StatefulWidget {
 }
 
 class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
-  final controller = MyFavoritesController.find;
+  @override
+  initState() {
+    super.initState();
+    Get.put(MyFavoritesController());
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = MyFavoritesController.find;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenSize.phoneSize(

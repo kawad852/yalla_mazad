@@ -8,8 +8,21 @@ import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+
+
+  @override
+  void initState() {
+    Get.put(SearchController());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +83,8 @@ class SearchScreen extends StatelessWidget {
                           child: Center(
                             child: IconButton(
                               onPressed: () {
-                                CustomNavigationBarController.find.tabController.jumpToTab(0);
+                                CustomNavigationBarController.find.tabController
+                                    .jumpToTab(0);
                               },
                               icon: const Icon(
                                 Icons.arrow_back_ios,

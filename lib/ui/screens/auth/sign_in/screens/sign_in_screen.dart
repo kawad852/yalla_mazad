@@ -52,9 +52,10 @@ class _SignInScreenState extends State<SignInScreen> {
                     return null;
                   },
                   inputFormatters: [
-                    LengthLimitingTextInputFormatter(
-                      9,
-                    ),
+                    ///TODO: bring back
+                    // LengthLimitingTextInputFormatter(
+                    //   9,
+                    // ),
                     FilteringTextInputFormatter.digitsOnly,
                   ],
                   prefixIcon: SizedBox(
@@ -98,16 +99,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   controller: controller.passwordController,
                   color: MyColors.textFieldColor,
                   obscureText: true,
-                  validator: (text) {
-                    if (text == '' || text!.isEmpty) {
-                      return 'cannot be empty'.tr;
-                    } else if (text.length < 8) {
-                      return 'password too short'.tr;
-                    } else if (!text.contains(RegExp(r'[0-9]'))) {
-                      return 'password too weak'.tr;
-                    }
-                    return null;
-                  },
+
+                  ///TODO: bring back
+                  // validator: (text) {
+                  //   if (text == '' || text!.isEmpty) {
+                  //     return 'cannot be empty'.tr;
+                  //   } else if (text.length < 8) {
+                  //     return 'password too short'.tr;
+                  //   } else if (!text.contains(RegExp(r'[0-9]'))) {
+                  //     return 'password too weak'.tr;
+                  //   }
+                  //   return null;
+                  // },
                   prefixIcon: SizedBox(
                     width: 60,
                     child: Row(
@@ -136,7 +139,6 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 20,
                 ),
                 Row(
-
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -154,7 +156,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    Expanded(child: SizedBox()),
+                    const Expanded(
+                      child: SizedBox(),
+                    ),
                   ],
                 ),
                 const SizedBox(

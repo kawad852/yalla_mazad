@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_auctions_controller.dart';
 import 'package:yalla_mazad/model/my_advertisements/my_advertisements_model.dart';
 import 'package:yalla_mazad/ui/screens/profile/widgets/my_auction_item.dart';
@@ -14,10 +15,15 @@ class MyAuctionsScreen extends StatefulWidget {
 }
 
 class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
-  final controller = MyAuctionsController.find;
+  @override
+  void initState() {
+    Get.put(MyAuctionsController());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = MyAuctionsController.find;
     return Padding(
       padding: EdgeInsets.symmetric(
         horizontal: ScreenSize.phoneSize(

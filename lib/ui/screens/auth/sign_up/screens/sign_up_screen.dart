@@ -189,29 +189,34 @@ class SignUpScreen extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                Row(
-                  children: [
-                    GetBuilder<SignUpController>(builder: (v) {
-                      return Checkbox(
-                        activeColor: MyColors.primary,
-                        value: v.isChecked,
-                        onChanged: (value) {
-                          v.isChecked = !v.isChecked;
-                          v.update();
-                        },
-                      );
-                    }),
-                    Expanded(
-                      child: Text(
-                        'I agree to the terms and conditions, privacy policy'
-                            .tr,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: MyColors.primary,
+                Directionality(
+                  textDirection: Get.locale == const Locale('ar')
+                      ? TextDirection.rtl
+                      : TextDirection.ltr,
+                  child: Row(
+                    children: [
+                      GetBuilder<SignUpController>(builder: (v) {
+                        return Checkbox(
+                          activeColor: MyColors.primary,
+                          value: v.isChecked,
+                          onChanged: (value) {
+                            v.isChecked = !v.isChecked;
+                            v.update();
+                          },
+                        );
+                      }),
+                      Expanded(
+                        child: Text(
+                          'I agree to the terms and conditions, privacy policy'
+                              .tr,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: MyColors.primary,
+                          ),
                         ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
                 const SizedBox(
                   height: 65,

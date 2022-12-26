@@ -55,7 +55,6 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),

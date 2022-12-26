@@ -13,13 +13,24 @@ import '../../../../utils/images.dart';
 import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_slide_button.dart';
 
-class AddAuctionScreen extends StatelessWidget {
-  final GlobalKey<SlideActionState> _key = GlobalKey();
-  AddAuctionScreen({Key? key}) : super(key: key);
+class AddAuctionScreen extends StatefulWidget {
+  const AddAuctionScreen({Key? key}) : super(key: key);
 
-  final controller = AddAuctionController.find;
+  @override
+  State<AddAuctionScreen> createState() => _AddAuctionScreenState();
+}
+
+class _AddAuctionScreenState extends State<AddAuctionScreen> {
+  final GlobalKey<SlideActionState> _key = GlobalKey();
+  @override
+  void initState() {
+    Get.put(AddAuctionController());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = AddAuctionController.find;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(

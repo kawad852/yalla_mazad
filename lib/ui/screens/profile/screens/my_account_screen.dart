@@ -20,9 +20,14 @@ class MyAccountScreen extends StatefulWidget {
 }
 
 class _MyAccountScreenState extends State<MyAccountScreen> {
-  final controller = MyAccountController.find;
+  @override
+  void initState() {
+    Get.put(MyAccountController());
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
+    final controller = MyAccountController.find;
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
