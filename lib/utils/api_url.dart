@@ -68,4 +68,8 @@ class ApiUrl {
 
   //search advertisement
   static const String searchAdvertisement = "/api/v1/advertisements/search";
+
+  //forgot password step 1
+  static const String forgotPasswordOtp = "/api/v1/password-otp";
+
 }

@@ -57,6 +57,7 @@ class VerificationCodeController extends GetxController {
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
     //     Loader.show(context);
+    // code =   '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
     //     optCheckModel = await OptCheckApi().data(phone: phone, code: code);
     //     if (optCheckModel == null) {
     //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
