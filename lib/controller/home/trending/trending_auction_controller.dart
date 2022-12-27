@@ -17,8 +17,6 @@ class TrendingAuctionController extends GetxController {
     super.onInit();
   }
 
-
-
   PopularAdvertisementModel? popularAdvertisementModel;
   late Future<PopularAdvertisementModel?> initializePopularAdsFuture;
 

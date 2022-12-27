@@ -105,26 +105,24 @@ class EditPasswordScreen extends StatelessWidget {
             const SizedBox(
               height: 6,
             ),
-            GetBuilder<EditPasswordController>(
-              builder: (value) {
-                return CustomTextField(
-                  controller: controller.confirmPasswordController,
-                  color: MyColors.textFieldColor,
-                  obscureText: value.newIsVisible,
-                  obscureChar: '*',
-                  hint: 'confirm new password'.tr,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      value.newIsVisible = !value.newIsVisible;
-                      value.update();
-                    },
-                    icon: Icon(value.newIsVisible
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
-                  ),
-                );
-              }
-            ),
+            GetBuilder<EditPasswordController>(builder: (value) {
+              return CustomTextField(
+                controller: controller.confirmPasswordController,
+                color: MyColors.textFieldColor,
+                obscureText: value.newIsVisible,
+                obscureChar: '*',
+                hint: 'confirm new password'.tr,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    value.newIsVisible = !value.newIsVisible;
+                    value.update();
+                  },
+                  icon: Icon(value.newIsVisible
+                      ? Icons.remove_red_eye
+                      : Icons.remove_red_eye_outlined),
+                ),
+              );
+            }),
             const SizedBox(
               height: 20,
             ),

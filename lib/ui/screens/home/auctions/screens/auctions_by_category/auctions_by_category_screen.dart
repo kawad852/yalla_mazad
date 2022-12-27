@@ -5,6 +5,7 @@ import 'package:yalla_mazad/controller/home/auctions/auctions_by_category_contro
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
+import 'package:yalla_mazad/ui/screens/notifications/screens/notifications_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -108,7 +109,11 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(
+                                  () => const NotificationsScreen(),
+                                );
+                              },
                               icon: Image.asset(
                                 MyImages.notification,
                                 width: 20,
@@ -175,6 +180,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                       return InkWell(
                                         onTap: () {
                                           Get.back();
+
                                           ///TODO: find a way for the change in index
                                           HomeController.find.selectedIndex =
                                               index;

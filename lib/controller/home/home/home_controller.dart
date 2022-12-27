@@ -13,8 +13,7 @@ import '../../../api/all_advertisements/all_advertisements_api.dart';
 class HomeController extends GetxController {
   static HomeController get find => Get.find();
   int selectedIndex = 0;
-  MapEntry<String, int> category =const MapEntry('',0);
-
+  MapEntry<String, int> category = const MapEntry('', 0);
 
   final advancedDrawerController = AdvancedDrawerController();
 

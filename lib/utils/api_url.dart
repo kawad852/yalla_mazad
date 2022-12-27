@@ -74,5 +74,4 @@ class ApiUrl {
 
   //forgot password step 3
   static const String forgotPasswordChange = "/api/v1/change-password";
-
 }

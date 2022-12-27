@@ -5,5 +5,4 @@ class CustomNavigationBarController extends GetxController {
   static CustomNavigationBarController get find => Get.find();
   final PersistentTabController tabController =
       PersistentTabController(initialIndex: 0);
-
 }

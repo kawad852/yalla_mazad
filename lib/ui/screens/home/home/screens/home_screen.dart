@@ -16,6 +16,7 @@ import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
+import '../../../notifications/screens/notifications_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -90,7 +91,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: Center(
                               child: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Get.to(
+                                    () => const NotificationsScreen(),
+                                  );
+                                },
                                 icon: Image.asset(
                                   MyImages.notification,
                                   width: 25,
@@ -322,11 +327,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 .find.tabController
                                                 .jumpToTab(3);
                                             Future.delayed(
-                                                const Duration(seconds: 2), () {
-                                              TrendingAuctionController
-                                                  .find.pageController
-                                                  .jumpToPage(
-                                                      controller.selectedIndex);
+                                                const Duration(
+                                                    milliseconds: 50), () {
+                                              if (TrendingAuctionController.find
+                                                  .pageController.hasClients) {
+                                                TrendingAuctionController
+                                                    .find.pageController
+                                                    .jumpToPage(controller
+                                                        .selectedIndex);
+                                              }
                                             });
                                           },
                                           child: AuctionItem(

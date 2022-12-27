@@ -8,6 +8,7 @@ import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import '../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../notifications/screens/notifications_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -110,7 +111,11 @@ class _SearchScreenState extends State<SearchScreen> {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Get.to(
+                                      () => const NotificationsScreen(),
+                                );
+                              },
                               icon: Image.asset(
                                 MyImages.notification,
                                 width: 25,

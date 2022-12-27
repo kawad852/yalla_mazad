@@ -107,5 +107,6 @@ final Map<String, String> ar = {
   'I agree to the privacy policy': 'أوافق على سياسة الخصوصية',
   'decline': 'رفض',
   'accept': 'موافق',
-  'we are here for you! how can we help?':'نحن هنا من أجلك! كيف يمكننا المساعدة؟',
+  'we are here for you! how can we help?':
+      'نحن هنا من أجلك! كيف يمكننا المساعدة؟',
 };

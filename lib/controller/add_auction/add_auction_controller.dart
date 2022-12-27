@@ -50,7 +50,6 @@ class AddAuctionController extends GetxController {
     );
 
     for (var item in pickedFile) {
-
       if (item != null) {
         log(pickedFile.length.toString() ?? '0');
         images?.add(item.path);

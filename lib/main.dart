@@ -65,7 +65,7 @@ class _MyAppState extends State<MyApp> {
         Locale('ar', 'JO'),
       ],
 
-      locale: const Locale('en'),
+      locale: const Locale('ar'),
       //locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,

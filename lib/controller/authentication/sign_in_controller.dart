@@ -37,7 +37,8 @@ class SignInController extends GetxController {
           MySharedPreferences.name = signInModel!.data!.user!.name!;
           MySharedPreferences.userId = signInModel!.data!.user!.id!;
           MySharedPreferences.image = signInModel!.data!.user!.image!;
-          MySharedPreferences.phone = signInModel!.data!.user!.phone!.substring(4);
+          MySharedPreferences.phone =
+              signInModel!.data!.user!.phone!.substring(4);
           MySharedPreferences.isLogIn = true;
           Get.offAll(() => const CustomNavigationBar(), binding: HomeBinding());
           // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());

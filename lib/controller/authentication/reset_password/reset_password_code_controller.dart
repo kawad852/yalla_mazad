@@ -42,8 +42,8 @@ class ResetPasswordCodeController extends GetxController {
     //     if (optCheckModel!.code == 200) {
     //       MySharedPreferences.phone = phone;
     //       MySharedPreferences.isLogIn = true;
-          Get.off(() => const ResetPasswordNewPasswordScreen(),
-              binding: ResetPasswordNewPasswordBinding());
+    Get.off(() => const ResetPasswordNewPasswordScreen(),
+        binding: ResetPasswordNewPasswordBinding());
     //     } else if (optCheckModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     //     } else {

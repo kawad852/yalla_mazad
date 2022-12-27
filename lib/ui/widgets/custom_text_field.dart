@@ -32,7 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.textInputAction,
-    this.obscureChar='•',
+    this.obscureChar = '•',
     Key? key,
   }) : super(key: key);
 
@@ -54,7 +54,6 @@ class CustomTextField extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
-
         //hintTextDirection: TextDirection.rtl,
         filled: true,
         fillColor: color,

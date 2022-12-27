@@ -5,6 +5,7 @@ import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
+import '../../../notifications/screens/notifications_screen.dart';
 
 class TrendingAuctionItem extends StatelessWidget {
   final String image;
@@ -78,7 +79,11 @@ class TrendingAuctionItem extends StatelessWidget {
                     ),
                     child: Center(
                       child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(
+                                () => const NotificationsScreen(),
+                          );
+                        },
                         icon: Image.asset(
                           MyImages.notification,
                           width: 20,

@@ -24,17 +24,17 @@ class AddAuctionApi {
     try {
       http.MultipartFile? multipartFile;
       //if (file != null) {
-       // for (var item in file) {
-          if (item != null) {
-            var stream = http.ByteStream(item.openRead());
-            var length = await item.length();
-            multipartFile = http.MultipartFile('images', stream, length,
-                filename: basename(item.path));
-            if (multipartFile != null) {
-              request.files.add(multipartFile);
-            }
-          //}
-      //  }
+      // for (var item in file) {
+      if (item != null) {
+        var stream = http.ByteStream(item.openRead());
+        var length = await item.length();
+        multipartFile = http.MultipartFile('images', stream, length,
+            filename: basename(item.path));
+        if (multipartFile != null) {
+          request.files.add(multipartFile);
+        }
+        //}
+        //  }
       }
 
       var headers = {

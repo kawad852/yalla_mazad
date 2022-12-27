@@ -43,14 +43,19 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                               case ConnectionState.done:
                               default:
                                 if (snapshot.hasData) {
-                                  return PlanItem(
-                                    price: snapshot.data?.data?[0].plan?.price,
-                                    name: snapshot.data?.data?[0].plan?.name,
-                                    details:
-                                        snapshot.data?.data?[0].plan?.details,
-                                    numberOfAuctions: snapshot
-                                        .data?.data?[0].plan?.numberOfAuction,
-                                  );
+                                  if (snapshot.data!.data!.isNotEmpty) {
+                                    return PlanItem(
+                                      price:
+                                          snapshot.data?.data?[0].plan?.price,
+                                      name: snapshot.data?.data?[0].plan?.name,
+                                      details:
+                                          snapshot.data?.data?[0].plan?.details,
+                                      numberOfAuctions: snapshot
+                                          .data?.data?[0].plan?.numberOfAuction,
+                                    );
+                                  } else {
+                                    return const SizedBox();
+                                  }
                                 } else if (snapshot.hasError) {
                                   return const FailureWidget();
                                 } else {

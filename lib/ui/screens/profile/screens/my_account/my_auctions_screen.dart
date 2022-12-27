@@ -50,17 +50,18 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                             top: 10,
                           ),
                           itemCount:
-                              controller.myAdvertisementsModel?.data?.length ?? 0,
+                              controller.myAdvertisementsModel?.data?.length ??
+                                  0,
                           itemBuilder: (context, index) {
                             return MyAuctionItem(
                               image: controller
                                   .myAdvertisementsModel?.data?[index].image,
-                              name:
-                                  controller.myAdvertisementsModel?.data?[index].name,
+                              name: controller
+                                  .myAdvertisementsModel?.data?[index].name,
                               details: controller
                                   .myAdvertisementsModel?.data?[index].content,
-                              price: controller
-                                  .myAdvertisementsModel?.data?[index].startPrice
+                              price: controller.myAdvertisementsModel
+                                  ?.data?[index].startPrice
                                   .toString(),
                               status: controller
                                   .myAdvertisementsModel?.data?[index].status,
@@ -73,7 +74,9 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                           },
                         ),
                       ),
-                      const SizedBox(height: 100,),
+                      const SizedBox(
+                        height: 100,
+                      ),
                     ],
                   );
                 } else if (snapshot.hasError) {
