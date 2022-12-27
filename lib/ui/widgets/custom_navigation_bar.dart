@@ -4,15 +4,21 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/call_us_screen.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/terms_and_conditions_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../binding/drawer/call_us_binding.dart';
+import '../../binding/profile/profile_binding.dart';
 import '../../controller/home/custom_navigation_bar_controller.dart';
 import '../../utils/colors.dart';
+import '../screens/profile/screens/edit_profile_screen.dart';
 import '../screens/profile/screens/my_account/my_account_screen.dart';
 
 late PersistentTabController navBarController;
@@ -198,7 +204,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
               ListTile(
                 visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    () => const EditProfileScreen(),
+                    binding: ProfileBinding(),
+                  );
+                },
                 title: Text(
                   'subscriptions'.tr,
                   style: const TextStyle(
@@ -208,7 +219,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
               ListTile(
                 visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    () => const TermsAndConditionsScreen(),
+                    binding: TermsAndConditionsBinding(),
+                  );
+                },
                 title: Text(
                   'terms and conditions'.tr,
                   style: const TextStyle(
@@ -218,7 +234,13 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
               ListTile(
                 visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
+                onTap: () {
+                  ///TODO: make sure of the navigation
+                  Get.to(
+                    () => const TermsAndConditionsScreen(),
+                    binding: TermsAndConditionsBinding(),
+                  );
+                },
                 title: Text(
                   'privacy policy'.tr,
                   style: const TextStyle(
@@ -228,7 +250,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
               ),
               ListTile(
                 visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
+                onTap: () {
+                  Get.to(
+                    () => const CallUsScreen(),
+                    binding: CallUsBinding(),
+                  );
+                },
                 title: Text(
                   'call us'.tr,
                   style: const TextStyle(

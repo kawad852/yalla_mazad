@@ -124,14 +124,15 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
                 Column(
-                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     const SizedBox(
                       height: 20,
                     ),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0,
+                      ),
                       child: CustomTextField(
                         controller: controller.searchController,
                         color: MyColors.primary5D0,
@@ -148,17 +149,27 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
                     Obx(
                       () => controller.searchQuery.isEmpty
-                          ? const SizedBox.shrink()
+                          ? const SizedBox(
+                              height: 100,
+                            )
                           : controller.isLoading.value
-                              ? const Center(
-                                  child: CircularProgressIndicator(),
+                              ? const SizedBox(
+                                  height: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
                                 )
                               : ListView.separated(
+                                  padding: const EdgeInsets.only(
+                                    left: 30,
+                                    right: 30,
+                                    top: 20,
+                                  ),
                                   physics: const NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
                                   separatorBuilder: (context, index) =>

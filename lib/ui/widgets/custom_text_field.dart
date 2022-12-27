@@ -54,6 +54,7 @@ class CustomTextField extends StatelessWidget {
         fontWeight: FontWeight.w500,
       ),
       decoration: InputDecoration(
+
         //hintTextDirection: TextDirection.rtl,
         filled: true,
         fillColor: color,

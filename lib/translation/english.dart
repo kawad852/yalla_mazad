@@ -103,6 +103,13 @@ final Map<String, String> en = {
   'your password has been reset successfully':
       'Your password has been reset successfully',
   'current password': 'Current password',
-  'confirm new password':'Confirm new password',
-  'new password':'New password',
+  'confirm new password': 'Confirm new password',
+  'new password': 'New password',
+  'service conditions': 'Service Conditions',
+  'I agree to the terms and conditions': 'I agree to the terms and conditions',
+  'I agree to the privacy policy': 'I agree to the privacy policy',
+  'decline': 'decline',
+  'accept': 'accept',
+  'we are here for you! how can we help?':
+      'We are here for you! How can we help?',
 };

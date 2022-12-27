@@ -100,6 +100,12 @@ final Map<String, String> ar = {
   'your password has been reset successfully':
       'تم إعادة تعيين كلمة المرور الخاصة بك بنجاح',
   'current password': 'كلمة المرور الحالية',
-  'confirm new password':'تأكيد كلمة المرور الجديدة',
-  'new password':'كلمة المرور الجديدة',
+  'confirm new password': 'تأكيد كلمة المرور الجديدة',
+  'new password': 'كلمة المرور الجديدة',
+  'service conditions': 'شروط الخدمة',
+  'I agree to the terms and conditions': 'أوافق على الشروط و الأحكام',
+  'I agree to the privacy policy': 'أوافق على سياسة الخصوصية',
+  'decline': 'رفض',
+  'accept': 'موافق',
+  'we are here for you! how can we help?':'نحن هنا من أجلك! كيف يمكننا المساعدة؟',
 };
