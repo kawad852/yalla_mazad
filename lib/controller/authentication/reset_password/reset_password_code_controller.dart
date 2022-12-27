@@ -4,7 +4,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
 import '../../../api/auth/opt_check_api.dart';
+import '../../../binding/authentication/reset_password/reset_password_new_password_binding.dart';
 import '../../../model/auth/opt_check_model.dart';
+import '../../../ui/screens/authentication/reset_password/reset_password_new_password_screen.dart';
 import '../../../utils/app_constants.dart';
 import '../../../utils/shared_prefrences.dart';
 
@@ -25,29 +27,30 @@ class ResetPasswordCodeController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    if (formKey.currentState != null) {
-      if (formKey.currentState!.validate()) {
-        code =
-            '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
-        Loader.show(context);
-        optCheckModel = await OptCheckApi().data(phone: phone, code: code);
-        if (optCheckModel == null) {
-          Fluttertoast.showToast(msg: AppConstants.failedMessage);
-          Loader.hide();
-          return;
-        }
-        if (optCheckModel!.code == 200) {
-          MySharedPreferences.phone = phone;
-          MySharedPreferences.isLogIn = true;
-          // Get.off(() => const ResetPasswordNewPasswordScreen(),
-          //     binding: ResetPasswordNewPasswordBinding());
-        } else if (optCheckModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-        } else {
-          Fluttertoast.showToast(msg: optCheckModel!.msg!);
-        }
-        Loader.hide();
-      }
-    }
+    ///TODO bring baxck and make sure
+    // if (formKey.currentState != null) {
+    //   if (formKey.currentState!.validate()) {
+    //     code =
+    //         '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
+    //     Loader.show(context);
+    //     optCheckModel = await OptCheckApi().data(phone: phone, code: code);
+    //     if (optCheckModel == null) {
+    //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
+    //       Loader.hide();
+    //       return;
+    //     }
+    //     if (optCheckModel!.code == 200) {
+    //       MySharedPreferences.phone = phone;
+    //       MySharedPreferences.isLogIn = true;
+          Get.off(() => const ResetPasswordNewPasswordScreen(),
+              binding: ResetPasswordNewPasswordBinding());
+    //     } else if (optCheckModel!.code == 500) {
+    //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+    //     } else {
+    //       Fluttertoast.showToast(msg: optCheckModel!.msg!);
+    //     }
+    //     Loader.hide();
+    //   }
+    // }
   }
 }

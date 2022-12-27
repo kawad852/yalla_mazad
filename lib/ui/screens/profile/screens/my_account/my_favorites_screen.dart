@@ -44,29 +44,41 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                    ),
-                    itemCount: controller.myFavoritesModel?.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return MyAuctionItem(
-                        image: controller.myFavoritesModel?.data?[index].image,
-                        name: controller.myFavoritesModel?.data?[index].name,
-                        details:
-                            controller.myFavoritesModel?.data?[index].content,
-                        price: controller
-                            .myFavoritesModel?.data?[index].startPrice
-                            .toString(),
-                        status:
-                            controller.myFavoritesModel?.data?[index].status,
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 10,
-                      );
-                    },
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                          ),
+                          itemCount:
+                              controller.myFavoritesModel?.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return MyAuctionItem(
+                              image: controller
+                                  .myFavoritesModel?.data?[index].image,
+                              name: controller
+                                  .myFavoritesModel?.data?[index].name,
+                              details: controller
+                                  .myFavoritesModel?.data?[index].content,
+                              price: controller
+                                  .myFavoritesModel?.data?[index].startPrice
+                                  .toString(),
+                              status: controller
+                                  .myFavoritesModel?.data?[index].status,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 10,
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                    ],
                   );
                 } else if (snapshot.hasError) {
                   return const FailureWidget();

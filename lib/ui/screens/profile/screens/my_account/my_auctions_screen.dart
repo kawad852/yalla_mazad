@@ -42,32 +42,39 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
               case ConnectionState.done:
               default:
                 if (snapshot.hasData) {
-                  return ListView.separated(
-                    padding: const EdgeInsets.only(
-                      top: 10,
-                    ),
-                    itemCount:
-                        controller.myAdvertisementsModel?.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return MyAuctionItem(
-                        image: controller
-                            .myAdvertisementsModel?.data?[index].image,
-                        name:
-                            controller.myAdvertisementsModel?.data?[index].name,
-                        details: controller
-                            .myAdvertisementsModel?.data?[index].content,
-                        price: controller
-                            .myAdvertisementsModel?.data?[index].startPrice
-                            .toString(),
-                        status: controller
-                            .myAdvertisementsModel?.data?[index].status,
-                      );
-                    },
-                    separatorBuilder: (context, index) {
-                      return const SizedBox(
-                        height: 10,
-                      );
-                    },
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          padding: const EdgeInsets.only(
+                            top: 10,
+                          ),
+                          itemCount:
+                              controller.myAdvertisementsModel?.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return MyAuctionItem(
+                              image: controller
+                                  .myAdvertisementsModel?.data?[index].image,
+                              name:
+                                  controller.myAdvertisementsModel?.data?[index].name,
+                              details: controller
+                                  .myAdvertisementsModel?.data?[index].content,
+                              price: controller
+                                  .myAdvertisementsModel?.data?[index].startPrice
+                                  .toString(),
+                              status: controller
+                                  .myAdvertisementsModel?.data?[index].status,
+                            );
+                          },
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 10,
+                            );
+                          },
+                        ),
+                      ),
+                      const SizedBox(height: 100,),
+                    ],
                   );
                 } else if (snapshot.hasError) {
                   return const FailureWidget();
