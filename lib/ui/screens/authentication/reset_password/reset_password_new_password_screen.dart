@@ -5,6 +5,7 @@ import 'package:yalla_mazad/ui/screens/authentication/reset_password/reset_passw
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../../widgets/custom_text_field.dart';
 
@@ -181,9 +182,9 @@ class _ResetPasswordNewPasswordScreenState
                           ),
                           GestureDetector(
                             onTap: () async {
-                              ///TODO: change to api
-                              Get.off(
-                                  () => const ResetPasswordCongratsScreen());
+                              await controller.fetchUpdateUserPasswordData(
+                                  phone: MySharedPreferences.phone,
+                                  context: context);
                             },
                             child: Container(
                               height: 60,

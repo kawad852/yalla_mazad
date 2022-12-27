@@ -72,4 +72,7 @@ class ApiUrl {
   //forgot password step 1
   static const String forgotPasswordOtp = "/api/v1/password-otp";
 
+  //forgot password step 3
+  static const String forgotPasswordChange = "/api/v1/change-password";
+
 }
