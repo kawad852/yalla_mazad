@@ -8,7 +8,6 @@ import 'package:yalla_mazad/api/auth/resend_otp_api.dart';
 import 'package:yalla_mazad/model/auth/opt_check_model.dart';
 import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
 
-import '../../api/auth/opt_check_api.dart';
 import '../../binding/interests/interests_binding.dart';
 import '../../ui/screens/interests/screens/interests_screen.dart';
 import '../../utils/app_constants.dart';

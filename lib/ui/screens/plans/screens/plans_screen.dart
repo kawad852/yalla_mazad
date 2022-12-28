@@ -87,7 +87,7 @@ class _PlansScreenState extends State<PlansScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height,
+                  height: Get.height*1.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -130,7 +130,7 @@ class _PlansScreenState extends State<PlansScreen> {
                               height: 20,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height / 1.5,
+                              height: MediaQuery.of(context).size.height,
                               child: SingleChildScrollView(
                                 physics: const NeverScrollableScrollPhysics(),
                                 child: Column(
@@ -287,9 +287,9 @@ class _PlansScreenState extends State<PlansScreen> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
+                                    // const SizedBox(
+                                    //   height: 20,
+                                    // ),
                                   ],
                                 ),
                               ),

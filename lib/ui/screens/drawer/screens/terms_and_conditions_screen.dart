@@ -106,7 +106,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 100,
                     ),
                     Row(
@@ -134,7 +134,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                               child: FittedBox(
                                 child: Text(
                                   'decline'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: MyColors.primary,
                                     fontSize: 18,
                                   ),
@@ -161,7 +161,7 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
                               child: FittedBox(
                                 child: Text(
                                   'accept'.tr,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                     fontSize: 18,
                                   ),

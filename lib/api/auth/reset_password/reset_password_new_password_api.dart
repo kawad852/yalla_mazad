@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/auth/reset_password/reset_password_new_password_model.dart';
-import 'package:yalla_mazad/model/auth/reset_password/reset_password_phone_number_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
 class ResetPasswordNewPasswordApi {

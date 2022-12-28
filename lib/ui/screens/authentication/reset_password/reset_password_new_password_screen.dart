@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/authentication/reset_password/reset_password_new_password_controller.dart';
-import 'package:yalla_mazad/ui/screens/authentication/reset_password/reset_password_congrats.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';

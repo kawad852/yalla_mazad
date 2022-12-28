@@ -30,9 +30,7 @@ class AddAuctionApi {
         var length = await item.length();
         multipartFile = http.MultipartFile('images', stream, length,
             filename: basename(item.path));
-        if (multipartFile != null) {
-          request.files.add(multipartFile);
-        }
+        request.files.add(multipartFile);
         //}
         //  }
       }

@@ -74,4 +74,7 @@ class ApiUrl {
 
   //forgot password step 3
   static const String forgotPasswordChange = "/api/v1/change-password";
+
+  // add categories to user
+  static const String addCategoriesToUser = "/api/v1/add-categories";
 }

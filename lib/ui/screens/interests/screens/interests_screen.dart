@@ -129,16 +129,17 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                         setState(() {
                                           if (!controller.selectedInterests
                                               .contains(snapshot
-                                                  .data?.data?[index].id)) {
+                                                  .data?.data?[index].id
+                                                  .toString())) {
                                             controller.selectedInterests.add(
-                                                snapshot.data?.data?[index]
-                                                        .id ??
-                                                    0);
+                                                snapshot.data?.data?[index].id
+                                                        .toString() ??
+                                                    '0');
                                           } else {
                                             controller.selectedInterests.remove(
-                                                snapshot.data?.data?[index]
-                                                        .id ??
-                                                    0);
+                                                snapshot.data?.data?[index].id
+                                                        .toString() ??
+                                                    '0');
                                           }
                                         });
                                       },
@@ -148,7 +149,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                                 '',
                                         isChosen: controller.selectedInterests
                                             .contains(
-                                                snapshot.data?.data?[index].id),
+                                          snapshot.data?.data?[index].id
+                                              .toString(),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -164,11 +167,10 @@ class _InterestsScreenState extends State<InterestsScreen> {
                 ),
                 const Expanded(flex: 2, child: SizedBox()),
                 GestureDetector(
-                  onTap: () {
-                    Get.to(
-                      () => const PlansScreen(),
-                      binding: PlansBinding(),
-                    );
+                  onTap: () async {
+                    await controller.fetchAddCategoriesData(
+                        categories: controller.selectedInterests,
+                        context: context);
                   },
                   child: Container(
                     height: 60,
