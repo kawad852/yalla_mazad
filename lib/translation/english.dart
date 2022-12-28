@@ -112,4 +112,8 @@ final Map<String, String> en = {
   'accept': 'accept',
   'we are here for you! how can we help?':
       'We are here for you! How can we help?',
+  'current auction': 'Current Auction',
+  'highest price': 'Highest price',
+  'time left': 'Time left',
+  'submit a bid': 'Submit a bid',
 };

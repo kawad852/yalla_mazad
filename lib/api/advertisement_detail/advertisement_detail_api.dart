@@ -7,13 +7,12 @@ import 'dart:developer';
 import '../../utils/api_url.dart';
 
 class AdvertisementDetailsApi {
-  Future<AdvertisementDetailsModel?> data({required int adId}) async {
+  Future<AdvertisementDetailsModel?> data({required String adId}) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAdDetails}$adId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: AdvertisementDetailsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

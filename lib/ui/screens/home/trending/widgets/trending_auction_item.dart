@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/auctions/current_auction_binding.dart';
+import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
@@ -11,9 +13,14 @@ class TrendingAuctionItem extends StatelessWidget {
   final String image;
   final String name;
   final String user;
-  const TrendingAuctionItem(
-      {required this.name, required this.image, required this.user, Key? key})
-      : super(key: key);
+  final String id;
+  const TrendingAuctionItem({
+    required this.name,
+    required this.image,
+    required this.user,
+    required this.id,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +88,7 @@ class TrendingAuctionItem extends StatelessWidget {
                       child: IconButton(
                         onPressed: () {
                           Get.to(
-                                () => const NotificationsScreen(),
+                            () => const NotificationsScreen(),
                           );
                         },
                         icon: Image.asset(
@@ -106,27 +113,39 @@ class TrendingAuctionItem extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                  child: Container(
-                    height: 3 * MediaQuery.of(context).size.height / 5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        25,
+                  child: InkWell(
+                    onTap: () {
+                      Get.to(() => const CurrentAuctionScreen(),
+                          binding: CurrentAuctionBinding(), arguments: id);
+                    },
+                    child: Container(
+                      height: 3 * MediaQuery.of(context).size.height / 5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          25,
+                        ),
                       ),
-                    ),
-                    child: CustomNetworkImage(
-                      radius: 25,
-                      url: image,
+                      child: CustomNetworkImage(
+                        radius: 25,
+                        url: image,
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(
                   height: 40,
                 ),
-                Text(
-                  name,
-                  style: const TextStyle(
-                    color: MyColors.primary,
-                    fontSize: 22,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const CurrentAuctionScreen(),
+                        binding: CurrentAuctionBinding(), arguments: id);
+                  },
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 22,
+                    ),
                   ),
                 ),
                 const SizedBox(

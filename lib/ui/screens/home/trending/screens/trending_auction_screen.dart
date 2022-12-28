@@ -67,6 +67,7 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                             image: snapshot.data?.data?[index].image ?? '',
                             name: snapshot.data?.data?[index].name ?? '',
                             user: snapshot.data?.data?[index].user?.name ?? '',
+                            id: snapshot.data?.data?[index].id.toString() ?? '0',
                           ),
                         ),
                       );

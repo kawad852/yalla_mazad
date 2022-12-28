@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
 
-import '../../../../../utils/colors.dart';
-import '../../../../../utils/screen_size.dart';
-import '../../../../widgets/custom_slide_button.dart';
+import '../../../../utils/colors.dart';
+import '../../../../utils/images.dart';
+import '../../../../utils/screen_size.dart';
+import '../../../widgets/custom_slide_button.dart';
 
-class ConfirmDirectBuyDialog extends StatelessWidget {
+class ConfirmAuctionDialog extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
-  ConfirmDirectBuyDialog({Key? key}) : super(key: key);
+  ConfirmAuctionDialog({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    'direct sell'.tr,
+                    'auction'.tr,
                     style: const TextStyle(
                       fontSize: 18,
                       color: MyColors.primary,
@@ -62,9 +64,6 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 100,
@@ -72,14 +71,11 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    'direct sell price'.tr,
+                    'current price'.tr,
                     style: const TextStyle(
                       color: MyColors.primary,
                       fontSize: 16,
                     ),
-                  ),
-                  const SizedBox(
-                    height: 7,
                   ),
                   Container(
                     width: 133,
@@ -93,7 +89,6 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                     child: const Center(
                       child: Text(
                         '130 JOD',
-                        textAlign: TextAlign.center,
                         style: TextStyle(
                           color: MyColors.red,
                           fontSize: 16,
@@ -104,25 +99,92 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 20,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        MyImages.justice,
+                        width: 20,
+                        height: 20,
+                      ),
+                      const SizedBox(
+                        width: 4,
+                      ),
+                      Text(
+                        'your auction amount'.tr,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      AuctionBidItem(
+                        content: '5 JOD',
+                        isChosen: true,
+                      ),
+                      AuctionBidItem(
+                        content: '10 JOD',
+                        isChosen: false,
+                      ),
+                      AuctionBidItem(
+                        content: '20 JOD',
+                        isChosen: false,
+                      ),
+                      AuctionBidItem(
+                        content: '50 JOD',
+                        isChosen: false,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 30,
+                horizontal: 100,
               ),
-              child: Text(
-                'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly'
-                    .tr,
-                style: const TextStyle(
-                  color: MyColors.primary,
-                  fontSize: 18,
-                  height: 1.5,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    'your auction'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 16,
+                    ),
+                  ),
+                  Container(
+                    width: 133,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        5,
+                      ),
+                      color: MyColors.primary,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        '135 JOD',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const Expanded(
-              child: SizedBox(),
             ),
             CustomSlideButton(
               borderRadius: 25,
@@ -130,7 +192,7 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                 60,
                 height: true,
               ),
-              color: MyColors.red,
+              color: MyColors.primary,
               stateKey: _key,
               text: 'confirm'.tr,
               onSubmitted: () {

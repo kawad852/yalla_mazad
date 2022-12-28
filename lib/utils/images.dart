@@ -69,6 +69,8 @@ class MyImages {
 
   static const String notification = "${home}bell.png";
 
+  static const String favorite = "${home}heart.png";
+
   static const String lock = "${resetPassword}lock.png";
 
   static const String lockQuestion = "${resetPassword}question_lock.png";

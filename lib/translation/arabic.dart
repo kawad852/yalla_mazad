@@ -109,4 +109,8 @@ final Map<String, String> ar = {
   'accept': 'موافق',
   'we are here for you! how can we help?':
       'نحن هنا من أجلك! كيف يمكننا المساعدة؟',
+  'current auction': 'مزاد جاري',
+  'highest price': 'اعلى سعر',
+  'time left': 'الوقت المتبقي',
+  'submit a bid': 'تقديم مزايدة',
 };
