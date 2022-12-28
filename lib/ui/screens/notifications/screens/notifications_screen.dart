@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/ui/screens/notifications/widgets/notification_item.dart';
 
@@ -81,10 +80,10 @@ class NotificationsScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: 15,
                     itemBuilder: (context, index) {
-                      return NotificationItem(user: 'mohammed',
+                      return NotificationItem(
+                        user: 'mohammed',
                         content: 'added a new ad',
                         date: DateTime.now().toString(),
-
                       );
                     },
                     separatorBuilder: (context, index) {

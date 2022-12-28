@@ -87,7 +87,7 @@ class _PlansScreenState extends State<PlansScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height*1.4,
+                  height: Get.height * 1.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -138,7 +138,8 @@ class _PlansScreenState extends State<PlansScreen> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
+                                        horizontal: 30.0,
+                                      ),
                                       child: Text(
                                         'you can change your subscription to any other subscription at any time'
                                             .tr,

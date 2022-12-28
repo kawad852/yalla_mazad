@@ -58,7 +58,6 @@ class NotificationItem extends StatelessWidget {
               ),
               Text(
                 date!,
-
                 style: const TextStyle(
                   fontSize: 12,
                   color: MyColors.primary,

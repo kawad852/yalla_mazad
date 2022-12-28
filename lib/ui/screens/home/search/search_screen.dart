@@ -113,7 +113,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             child: IconButton(
                               onPressed: () {
                                 Get.to(
-                                      () => const NotificationsScreen(),
+                                  () => const NotificationsScreen(),
                                 );
                               },
                               icon: Image.asset(

@@ -113,4 +113,8 @@ final Map<String, String> ar = {
   'highest price': 'اعلى سعر',
   'time left': 'الوقت المتبقي',
   'submit a bid': 'تقديم مزايدة',
+  'auction will start after': 'سيبدأ المزاد بعد',
+  'coming auction': 'مزاد قادم',
+  'done auction': 'مزاد منتهي',
+  'auction is over': 'انتهى المزاد',
 };

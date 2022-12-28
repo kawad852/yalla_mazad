@@ -116,4 +116,8 @@ final Map<String, String> en = {
   'highest price': 'Highest price',
   'time left': 'Time left',
   'submit a bid': 'Submit a bid',
+  'auction will start after': 'Auction will start after',
+  'coming auction': 'Coming Auction',
+  'done auction': 'Done Auction',
+  'auction is over': 'Auction is over',
 };

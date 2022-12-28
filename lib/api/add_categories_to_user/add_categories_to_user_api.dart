@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/add_categories_to_user/add_categories_to_user_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
-
 class AddCategoriesToUserApi {
   Future<AddCategoriesToUserModel?> data({
     required String userId,
