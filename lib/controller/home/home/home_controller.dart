@@ -1,9 +1,11 @@
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/api/all_tips/all_tips_api.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
 import 'package:yalla_mazad/api/popular_advertisement/popular_advertisement_api.dart';
 import 'package:yalla_mazad/api/slider/slider_spi.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
+import 'package:yalla_mazad/model/all_tips/all_tips_model.dart';
 import 'package:yalla_mazad/model/categories/categories_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/model/slider/slider_model.dart';
@@ -26,6 +28,7 @@ class HomeController extends GetxController {
     initializeSliderFuture = fetchAllSliders();
     initializePopularAdsFuture = fetchAllPopularAds();
     initializeAllAdsFuture = fetchAllAds();
+    initializeTipsFuture = fetchAllTips();
     super.onInit();
   }
 
@@ -57,5 +60,14 @@ class HomeController extends GetxController {
   Future<AllAdvertisementsModel?> fetchAllAds() async {
     allAdvertisementsModel = await ALlAdvertisementsApi().data();
     return allAdvertisementsModel;
+  }
+
+
+  AllTipsModel? allTipsModel;
+  late Future<AllTipsModel?> initializeTipsFuture;
+
+  Future<AllTipsModel?> fetchAllTips() async {
+    allTipsModel = await AllTipsApi().data();
+    return allTipsModel;
   }
 }

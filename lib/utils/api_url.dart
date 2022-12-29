@@ -77,4 +77,10 @@ class ApiUrl {
 
   // add categories to user
   static const String addCategoriesToUser = "/api/v1/add-categories";
+
+  //get all tips
+  static const String fetchAllTips = "/api/v1/tips";
+
+  //get my badges
+  static const String fetchMyBadges = "/api/v1/my-badges";
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
+import 'package:yalla_mazad/model/my_badges/my_badges_model.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_auctions_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_favorites_screen.dart';
@@ -13,6 +14,7 @@ import '../../../../../binding/profile/profile_binding.dart';
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../utils/shared_prefrences.dart';
 import '../../../../widgets/custom_network_image.dart';
+import '../../../../widgets/failure_widget.dart';
 
 class MyAccountScreen extends StatefulWidget {
   const MyAccountScreen({Key? key}) : super(key: key);
@@ -239,24 +241,45 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                     SizedBox(
                       height: 47,
                       child: Center(
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                          ),
-                          itemCount: 20,
-                          itemBuilder: (context, index) {
-                            return const BadgeItem(
-                              image: 'img/16704997544211.jpg',
-                              message: 'aabb',
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              width: 10,
-                            );
-                          },
-                        ),
+                        child: FutureBuilder<MyBadgesModel?>(
+                            future: controller.initializeMyBadgesFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 10,
+                                      ),
+                                      itemCount: snapshot.data?.data?.length ?? 0,
+                                      itemBuilder: (context, index) {
+                                        return BadgeItem(
+                                          image:
+                                              snapshot.data?.data?[index].image,
+                                          message: snapshot
+                                              .data?.data?[index].id
+                                              .toString(),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return const FailureWidget();
+                                  } else {
+                                    return const FailureWidget();
+                                  }
+                              }
+                            }),
                       ),
                     ),
                   ],

@@ -165,23 +165,59 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 10,
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: Container(
-                          ///TODO: notes from back
-                          height: 67,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(
-                              25,
-                            ),
-                            color: MyColors.primary,
-                          ),
-                          child: const Center(
-                            child: Text(
-                              '“لا تنسى توثيق حسابك من خلال الهوية”',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
+                        child: FutureBuilder(
+                            future: controller.initializeTipsFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return CarouselSlider(
+                                      items: List.generate(
+                                        controller.allTipsModel?.data?.length ??
+                                            0,
+                                        (index) => Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 30,
+                                          ),
+                                          height: 67,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              25,
+                                            ),
+                                            color: MyColors.primary,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              snapshot.data?.data?[index]
+                                                      .note ??
+                                                  '',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      options: CarouselOptions(
+                                        viewportFraction: 1,
+                                        height: 67,
+                                        reverse: true,
+                                        autoPlay: true,
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return const FailureWidget();
+                                  } else {
+                                    return const FailureWidget();
+                                  }
+                              }
+                            }),
                       ),
                       const SizedBox(
                         height: 15,
