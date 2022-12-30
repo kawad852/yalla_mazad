@@ -10,7 +10,7 @@ import '../../model/add_auction/add_auction_model.dart';
 
 class AddAuctionApi {
   Future<AddAuctionModel?> data({
-    required File? item,
+    required List<File?>? file,
     required String? name,
     required String? content,
     required String? startPrice,
@@ -18,27 +18,36 @@ class AddAuctionApi {
     required int? userId,
     required int? categoryId,
   }) async {
-    String url = '${ApiUrl.mainUrl}${ApiUrl.addAuction}';
-    Uri uri = Uri.parse(url);
-    var request = http.MultipartRequest('POST', uri);
     try {
       http.MultipartFile? multipartFile;
-      //if (file != null) {
-      // for (var item in file) {
-      if (item != null) {
-        var stream = http.ByteStream(item.openRead());
-        var length = await item.length();
-        multipartFile = http.MultipartFile('images', stream, length,
-            filename: basename(item.path));
-        request.files.add(multipartFile);
-        //}
-        //  }
+      List<http.MultipartFile?> multipartFiles = [];
+      if (file != null) {
+        for (var item in file) {
+          if (item != null) {
+            log('paath::::::    ${item.path}');
+            var stream = http.ByteStream(item.openRead());
+            var length = await item.length();
+            multipartFile = http.MultipartFile("images[]", stream, length,
+                filename: basename(item.path));
+            multipartFiles.add(multipartFile);
+            // request.files.add(multipartFile);
+          }
+        }
       }
-
+      String url = '${ApiUrl.mainUrl}${ApiUrl.addAuction}';
+      Uri uri = Uri.parse(url);
+      var request = http.MultipartRequest('POST', uri);
       var headers = {
         'Content-Type': 'application/json',
       };
       request.headers.addAll(headers);
+      for (var item in multipartFiles) {
+        if (item != null) {
+          log('added:::::   ${item.filename}');
+          request.files.add(item);
+        }
+      }
+      log(request.files.length.toString());
       request.fields['name'] = name!;
       request.fields['content'] = content!;
       request.fields['start_price'] = startPrice!;

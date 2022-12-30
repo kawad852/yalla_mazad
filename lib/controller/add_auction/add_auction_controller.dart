@@ -72,9 +72,13 @@ class AddAuctionController extends GetxController {
   List<File?>? getListOfFiles() {
     List<File?> files = [];
     if (image != null) {
+      log('image !=null');
       files.add(File(image!));
+    } else {
+      log('image ==null');
     }
     if (images != null) {
+      log('images !=null');
       for (var item in images!) {
         if (item != null) {
           var file = File(item);
@@ -83,6 +87,8 @@ class AddAuctionController extends GetxController {
           log('aaaa');
         }
       }
+    } else {
+      log('images ==null');
     }
     return files;
   }
@@ -95,7 +101,7 @@ class AddAuctionController extends GetxController {
     //   if (formKey.currentState!.validate()) {
     Loader.show(context);
     addAuctionModel = await AddAuctionApi().data(
-      item: File(image!),
+      file: getListOfFiles(),
       name: addressController.text,
       content: descriptionController.text,
       startPrice: auctionStartingPriceController.text,
