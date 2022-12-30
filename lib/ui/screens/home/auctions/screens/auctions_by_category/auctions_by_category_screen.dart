@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/notifications/notifications_binding.dart';
 import 'package:yalla_mazad/controller/home/auctions/auctions_by_category_controller.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
@@ -112,6 +113,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                               onPressed: () {
                                 Get.to(
                                   () => const NotificationsScreen(),
+                                  binding: NotificationsBinding(),
                                 );
                               },
                               icon: Image.asset(

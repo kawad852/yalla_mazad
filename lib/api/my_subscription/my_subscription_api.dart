@@ -14,7 +14,6 @@ class MySubscriptionApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: MySubscriptionResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

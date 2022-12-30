@@ -14,6 +14,7 @@ import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
@@ -94,6 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 onPressed: () {
                                   Get.to(
                                     () => const NotificationsScreen(),
+                                    binding: NotificationsBinding(),
                                   );
                                 },
                                 icon: Image.asset(

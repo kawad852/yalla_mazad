@@ -5,6 +5,7 @@ import 'package:yalla_mazad/controller/home/search/search_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
+import '../../../../binding/notifications/notifications_binding.dart';
 import '../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
@@ -114,6 +115,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               onPressed: () {
                                 Get.to(
                                   () => const NotificationsScreen(),
+                                  binding: NotificationsBinding(),
                                 );
                               },
                               icon: Image.asset(

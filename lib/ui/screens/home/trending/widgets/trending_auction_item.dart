@@ -4,6 +4,7 @@ import 'package:yalla_mazad/binding/auctions/current_auction_binding.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 
+import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
@@ -89,6 +90,7 @@ class TrendingAuctionItem extends StatelessWidget {
                         onPressed: () {
                           Get.to(
                             () => const NotificationsScreen(),
+                            binding: NotificationsBinding(),
                           );
                         },
                         icon: Image.asset(
