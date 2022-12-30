@@ -16,7 +16,7 @@ class AccountController extends GetxController {
       TextEditingController(text: MySharedPreferences.email);
 
   final TextEditingController phoneController =
-      TextEditingController(text: '+962${MySharedPreferences.phone}');
+      TextEditingController(text: MySharedPreferences.phone);
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   UpdateUserModel? updateUserModel;

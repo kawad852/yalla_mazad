@@ -83,4 +83,7 @@ class ApiUrl {
 
   //get my badges
   static const String fetchMyBadges = "/api/v1/my-badges";
+
+  //get my badges
+  static const String changePassword = "/api/v1/update-password";
 }

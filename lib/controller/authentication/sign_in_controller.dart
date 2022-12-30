@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -41,7 +43,6 @@ class SignInController extends GetxController {
               signInModel!.data!.user!.phone!.substring(4);
           MySharedPreferences.isLogIn = true;
           Get.offAll(() => const CustomNavigationBar(), binding: HomeBinding());
-          // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
         } else if (signInModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
         } else {
