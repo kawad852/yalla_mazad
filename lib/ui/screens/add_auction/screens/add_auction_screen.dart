@@ -135,69 +135,67 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                           height: 5,
                         ),
                         FutureBuilder(
-                            future: controller.initializeCategoriesFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return SizedBox(
-                                      height: 100,
-                                      child: ListView.separated(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 30),
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: controller.categoriesModel
-                                                ?.data?.length ??
-                                            0,
-                                        itemBuilder: (context, index) {
-                                          return GetBuilder<
-                                                  AddAuctionController>(
-                                              builder: (value) {
-                                            return InkWell(
-                                              onTap: () {
-                                                value.selectedCategory =
-                                                    MapEntry(
-                                                        index.toString(),
-                                                        value
-                                                                .categoriesModel
-                                                                ?.data?[index]
-                                                                .id
-                                                                .toString() ??
-                                                            '0');
-                                                value.update();
-                                              },
-                                              child: CustomCategoryItem(
-                                                url: controller.categoriesModel
-                                                        ?.data?[index].image ??
-                                                    '',
-                                                name: controller.categoriesModel
-                                                        ?.data?[index].name ??
-                                                    '',
-                                                isChecked: controller
-                                                        .selectedCategory.key ==
-                                                    index.toString(),
-                                              ),
-                                            );
-                                          });
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const SizedBox(
-                                            width: 10,
+                          future: controller.initializeCategoriesFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return SizedBox(
+                                    height: 100,
+                                    child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 30),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: controller
+                                              .categoriesModel?.data?.length ??
+                                          0,
+                                      itemBuilder: (context, index) {
+                                        return GetBuilder<AddAuctionController>(
+                                            builder: (value) {
+                                          return InkWell(
+                                            onTap: () {
+                                              value.selectedCategory = MapEntry(
+                                                  index.toString(),
+                                                  value.categoriesModel
+                                                          ?.data?[index].id
+                                                          .toString() ??
+                                                      '0');
+                                              value.update();
+                                            },
+                                            child: CustomCategoryItem(
+                                              url: controller.categoriesModel
+                                                      ?.data?[index].image ??
+                                                  '',
+                                              name: controller.categoriesModel
+                                                      ?.data?[index].name ??
+                                                  '',
+                                              isChecked: controller
+                                                      .selectedCategory.key ==
+                                                  index.toString(),
+                                            ),
                                           );
-                                        },
-                                      ),
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
+                                        });
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return const FailureWidget();
+                                } else {
+                                  return const FailureWidget();
+                                }
+                            }
+                          },
+                        ),
                         Expanded(
                           child: SingleChildScrollView(
                             child: Padding(
@@ -293,12 +291,15 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                     text: 'send advertisement'.tr,
                                     onSubmitted: () {
                                       Future.delayed(
-                                        const Duration(seconds: 1),
+                                        const Duration(
+                                          seconds: 1,
+                                        ),
                                         () async {
                                           _key.currentState?.reset();
                                           //controller.getListOfFiles();
                                           await controller.fetchAddAuctionData(
-                                              context: context);
+                                            context: context,
+                                          );
                                         },
                                       );
                                     },

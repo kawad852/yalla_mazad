@@ -120,4 +120,6 @@ final Map<String, String> en = {
   'coming auction': 'Coming Auction',
   'done auction': 'Done Auction',
   'auction is over': 'Auction is over',
+  'added to favorites successfully': 'Added to favorites successfully',
+  'already here': 'Already here',
 };

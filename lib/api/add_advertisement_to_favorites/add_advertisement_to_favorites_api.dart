@@ -14,7 +14,6 @@ class AddAdvertisementToFavoritesApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       var body = jsonEncode({
         "user_id": userId,

@@ -19,14 +19,17 @@ class ComingAuctionController extends GetxController {
   @override
   void onInit() {
     String id = Get.arguments;
-    initializeAdvertisementFuture = fetchAuctionDetails(addId: id);
+    initializeAdvertisementFuture = fetchAuctionDetails(
+      addId: id,
+    );
     super.onInit();
   }
 
   Future<AdvertisementDetailsModel?> fetchAuctionDetails(
       {required String addId}) async {
-    advertisementDetailsModel =
-        await AdvertisementDetailsApi().data(adId: addId);
+    advertisementDetailsModel = await AdvertisementDetailsApi().data(
+      adId: addId,
+    );
     return advertisementDetailsModel;
   }
 
@@ -43,17 +46,24 @@ class ComingAuctionController extends GetxController {
       advertisementId: adId,
     );
     if (addAdvertisementToFavoritesModel == null) {
-      Fluttertoast.showToast(msg: AppConstants.failedMessage);
+      Fluttertoast.showToast(
+        msg: AppConstants.failedMessage,
+      );
       Loader.hide();
       return;
     }
     if (addAdvertisementToFavoritesModel!.code == 200) {
-      Fluttertoast.showToast(msg: 'added to favorites successfully'.tr);
+      Fluttertoast.showToast(
+        msg: 'added to favorites successfully'.tr,
+      );
     } else if (addAdvertisementToFavoritesModel!.code == 500) {
       Fluttertoast.showToast(
-          msg: addAdvertisementToFavoritesModel?.msg ?? 'already here'.tr);
+        msg: addAdvertisementToFavoritesModel?.msg ?? 'already here'.tr,
+      );
     } else {
-      Fluttertoast.showToast(msg: addAdvertisementToFavoritesModel!.msg!);
+      Fluttertoast.showToast(
+        msg: addAdvertisementToFavoritesModel!.msg!,
+      );
     }
     Loader.hide();
   }

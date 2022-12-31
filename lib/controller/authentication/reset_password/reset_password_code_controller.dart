@@ -23,7 +23,7 @@ class ResetPasswordCodeController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    ///TODO bring baxck and make sure
+    ///TODO bring back and make sure
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
     //     code =
