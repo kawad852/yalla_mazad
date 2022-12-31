@@ -16,7 +16,7 @@ class AddAuctionApi {
     required String? startPrice,
     required String? buyNowPrice,
     required int? userId,
-    required int? categoryId,
+    required String? categoryId,
   }) async {
     try {
       http.MultipartFile? multipartFile;
@@ -54,7 +54,7 @@ class AddAuctionApi {
       request.fields['status'] = 'pending';
       request.fields['buy_now_price'] = buyNowPrice!;
       request.fields['user_id'] = userId.toString();
-      request.fields['category_id'] = categoryId.toString();
+      request.fields['category_id'] = categoryId!;
 
       var response = await request.send();
       log("Response:: AddAuctionResponse\nUrl:: $url\nheaders:: $headers\n");

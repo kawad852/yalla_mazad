@@ -154,14 +154,35 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                                 ?.data?.length ??
                                             0,
                                         itemBuilder: (context, index) {
-                                          return CustomCategoryItem(
-                                            url: controller.categoriesModel
-                                                    ?.data?[index].image ??
-                                                '',
-                                            name: controller.categoriesModel
-                                                    ?.data?[index].name ??
-                                                '',
-                                          );
+                                          return GetBuilder<
+                                                  AddAuctionController>(
+                                              builder: (value) {
+                                            return InkWell(
+                                              onTap: () {
+                                                value.selectedCategory =
+                                                    MapEntry(
+                                                        index.toString(),
+                                                        value
+                                                                .categoriesModel
+                                                                ?.data?[index]
+                                                                .id
+                                                                .toString() ??
+                                                            '0');
+                                                value.update();
+                                              },
+                                              child: CustomCategoryItem(
+                                                url: controller.categoriesModel
+                                                        ?.data?[index].image ??
+                                                    '',
+                                                name: controller.categoriesModel
+                                                        ?.data?[index].name ??
+                                                    '',
+                                                isChecked: controller
+                                                        .selectedCategory.key ==
+                                                    index.toString(),
+                                              ),
+                                            );
+                                          });
                                         },
                                         separatorBuilder: (context, index) {
                                           return const SizedBox(

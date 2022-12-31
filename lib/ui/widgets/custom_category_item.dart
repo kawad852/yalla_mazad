@@ -29,7 +29,7 @@ class CustomCategoryItem extends StatelessWidget {
                       197,
                       0.8,
                     )
-                  : MyColors.red,
+                  : const Color(0xffDF3264).withOpacity(0.2),
               borderRadius: BorderRadius.circular(
                 15,
               ),

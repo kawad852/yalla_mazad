@@ -25,6 +25,7 @@ class AddAuctionController extends GetxController {
       TextEditingController();
   final TextEditingController directSellPriceController =
       TextEditingController();
+  MapEntry<String, String> selectedCategory =  const MapEntry('-1', '0');
 
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;
@@ -39,7 +40,8 @@ class AddAuctionController extends GetxController {
     );
     if (pickedFile != null) {
       image = pickedFile.path;
-      log(image!);
+      // log(image!);
+      mainPictureController.text = '1 selected';
     }
   }
 
@@ -49,13 +51,16 @@ class AddAuctionController extends GetxController {
       maxHeight: 1800,
     );
 
+    int i = 0;
     for (var item in pickedFile) {
       if (item != null) {
-        log(pickedFile.length.toString());
+        i++;
+        // log(pickedFile.length.toString());
         images?.add(item.path);
-        log(item.path);
+        // log(item.path);
       }
     }
+    morePicturesController.text = '$i pictures selected';
   }
 
   @override
@@ -99,6 +104,7 @@ class AddAuctionController extends GetxController {
   }) async {
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
+    log(selectedCategory.value);
     Loader.show(context);
     addAuctionModel = await AddAuctionApi().data(
       file: getListOfFiles(),
@@ -106,7 +112,7 @@ class AddAuctionController extends GetxController {
       content: descriptionController.text,
       startPrice: auctionStartingPriceController.text,
       userId: MySharedPreferences.userId,
-      categoryId: 1,
+      categoryId: selectedCategory.value,
       buyNowPrice: directSellPriceController.text,
     );
     if (addAuctionModel == null) {
