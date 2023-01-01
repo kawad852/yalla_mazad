@@ -111,43 +111,43 @@ class AddAuctionController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-    Loader.show(context);
-    addAuctionModel = await AddAuctionApi().data(
-      file: getListOfFiles(),
-      name: addressController.text,
-      content: descriptionController.text,
-      startPrice: auctionStartingPriceController.text,
-      userId: MySharedPreferences.userId,
-      categoryId: selectedCategory.value,
-      buyNowPrice: directSellPriceController.text,
-    );
-    if (addAuctionModel == null) {
-      Fluttertoast.showToast(
-        msg: AppConstants.failedMessage,
-      );
-      Loader.hide();
-      return;
-    }
-    if (addAuctionModel!.code == 200) {
-      Get.dialog(
-        AddedAuctionDialog(),
-      );
-      addressController.clear();
-      descriptionController.clear();
-      auctionStartingPriceController.clear();
-      directSellPriceController.clear();
-      image = null;
-      images = [];
-    } else if (addAuctionModel!.code == 500) {
-      Fluttertoast.showToast(
-        msg: AppConstants.failedMessage,
-      );
-    } else {
-      Fluttertoast.showToast(
-        msg: addAuctionModel!.msg!,
-      );
-    }
-    Loader.hide();
+        Loader.show(context);
+        addAuctionModel = await AddAuctionApi().data(
+          file: getListOfFiles(),
+          name: addressController.text,
+          content: descriptionController.text,
+          startPrice: auctionStartingPriceController.text,
+          userId: MySharedPreferences.userId,
+          categoryId: selectedCategory.value,
+          buyNowPrice: directSellPriceController.text,
+        );
+        if (addAuctionModel == null) {
+          Fluttertoast.showToast(
+            msg: AppConstants.failedMessage,
+          );
+          Loader.hide();
+          return;
+        }
+        if (addAuctionModel!.code == 200) {
+          Get.dialog(
+            AddedAuctionDialog(),
+          );
+          addressController.clear();
+          descriptionController.clear();
+          auctionStartingPriceController.clear();
+          directSellPriceController.clear();
+          image = null;
+          images = [];
+        } else if (addAuctionModel!.code == 500) {
+          Fluttertoast.showToast(
+            msg: AppConstants.failedMessage,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: addAuctionModel!.msg!,
+          );
+        }
+        Loader.hide();
       }
     }
   }

@@ -159,7 +159,7 @@ class EditPasswordScreen extends StatelessWidget {
                 height: 20,
               ),
               GestureDetector(
-                onTap: () async{
+                onTap: () async {
                   await controller.fetchChangePasswordData(
                     oldPassword: controller.oldPasswordController.text,
                     newPassword: controller.passwordController.text,

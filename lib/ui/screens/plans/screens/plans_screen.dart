@@ -239,7 +239,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                                     },
                                                     //aspectRatio: 1.1,
                                                     enableInfiniteScroll: false,
-                                                   height: 392,
+                                                    height: 392,
                                                     viewportFraction: 0.8,
                                                     enlargeCenterPage: true,
                                                     initialPage: 0,

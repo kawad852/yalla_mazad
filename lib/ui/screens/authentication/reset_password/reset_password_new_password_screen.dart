@@ -140,6 +140,7 @@ class _ResetPasswordNewPasswordScreenState
                                   return null;
                                 },
                                 hint: 'password'.tr,
+
                                 ///TODO: edit eye icon
                                 suffixIcon: IconButton(
                                   icon: Icon(value.visible

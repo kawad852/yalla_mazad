@@ -4,7 +4,6 @@ import 'package:yalla_mazad/model/my_notifications/my_notifications_model.dart';
 import 'dart:convert';
 import 'dart:developer';
 
-
 import '../../utils/api_url.dart';
 import '../../utils/shared_prefrences.dart';
 

@@ -62,54 +62,63 @@ class _HomeScreenState extends State<HomeScreen> {
                     left: 20,
                     right: 20,
                   ),
-                  child: Directionality(
-                    textDirection: Get.locale == const Locale('ar')
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            controller.advancedDrawerController.showDrawer();
-                          },
-                          icon: Image.asset(
+                  // child: Directionality(
+                  // textDirection: Get.locale == const Locale('ar')
+                  //     ? TextDirection.rtl
+                  //     : TextDirection.ltr,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          controller.advancedDrawerController.showDrawer();
+                        },
+                        icon: RotatedBox(
+                          quarterTurns:
+                              Get.locale == const Locale('ar') ? 0 : 2,
+                          child: Image.asset(
                             MyImages.drawerMenu,
                             width: 25,
                             height: 25,
                           ),
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(202, 195, 212, 0.3),
-                              borderRadius: BorderRadius.circular(
-                                7,
-                              ),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 35,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(
+                              202,
+                              195,
+                              212,
+                              0.3,
                             ),
-                            child: Center(
-                              child: IconButton(
-                                onPressed: () {
-                                  Get.to(
-                                    () => const NotificationsScreen(),
-                                    binding: NotificationsBinding(),
-                                  );
-                                },
-                                icon: Image.asset(
-                                  MyImages.notification,
-                                  width: 25,
-                                  height: 25,
-                                ),
+                            borderRadius: BorderRadius.circular(
+                              7,
+                            ),
+                          ),
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () {
+                                Get.to(
+                                  () => const NotificationsScreen(),
+                                  binding: NotificationsBinding(),
+                                );
+                              },
+                              icon: Image.asset(
+                                MyImages.notification,
+                                width: 25,
+                                height: 25,
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
+                  // ),
                 ),
                 SizedBox(
                   height: 1200,

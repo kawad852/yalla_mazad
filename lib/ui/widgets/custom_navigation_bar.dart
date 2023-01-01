@@ -137,7 +137,11 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             spreadRadius: 30,
           ),
         ],
-        borderRadius: const BorderRadius.all(Radius.circular(25)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(
+            25,
+          ),
+        ),
       ),
       drawer: SafeArea(
         child: ListTileTheme(

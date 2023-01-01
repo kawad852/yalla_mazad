@@ -161,75 +161,75 @@ class DoneAuctionItem extends StatelessWidget {
                 const SizedBox(
                   height: 50,
                 ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 30,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          width: 60,
-                          height: 60,
-                          decoration: BoxDecoration(
+                Padding(
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 30,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xffD3CFDC,
+                          ),
+                          shape: BoxShape.circle,
+                          border: Border.all(
                             color: const Color(
                               0xffD3CFDC,
                             ),
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              color: const Color(
-                                0xffD3CFDC,
+                            width: 4,
+                          ),
+                        ),
+                        child: CustomNetworkImage(
+                          url: MySharedPreferences.image,
+                          radius: 100,
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.phoneSize(
+                          170,
+                          height: false,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              MySharedPreferences.name,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 14,
                               ),
-                              width: 4,
                             ),
-                          ),
-                          child: CustomNetworkImage(
-                            url: MySharedPreferences.image,
-                            radius: 100,
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                          width: 170,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                MySharedPreferences.name,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 14,
-                                ),
+                            Text(
+                              '@${MySharedPreferences.userId}',
+                              textDirection: TextDirection.ltr,
+                              style: const TextStyle(
+                                color: MyColors.greyPrimary,
+                                fontSize: 12,
                               ),
-                              Text(
-                                '@${MySharedPreferences.userId}',
-                                textDirection: TextDirection.ltr,
-                                style: const TextStyle(
-                                  color: MyColors.greyPrimary,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    right: 50,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 50,
                   ),
                   child: Text(
                     name,
@@ -244,8 +244,8 @@ class DoneAuctionItem extends StatelessWidget {
                 ),
                 Flexible(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      right: 50,
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 50,
                     ),
                     child: Text(
                       description,
@@ -279,8 +279,14 @@ class DoneAuctionItem extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            width: 133,
-                            height: 28,
+                            width: ScreenSize.phoneSize(
+                              133,
+                              height: false,
+                            ),
+                            height: ScreenSize.phoneSize(
+                              28,
+                              height: false,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 5,
@@ -311,8 +317,14 @@ class DoneAuctionItem extends StatelessWidget {
                             ),
                           ),
                           Container(
-                            width: 133,
-                            height: 28,
+                            width: ScreenSize.phoneSize(
+                              133,
+                              height: false,
+                            ),
+                            height: ScreenSize.phoneSize(
+                              28,
+                              height: false,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 5,

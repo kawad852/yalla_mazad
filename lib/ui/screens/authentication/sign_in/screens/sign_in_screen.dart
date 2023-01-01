@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           width: 18,
                         ),
                         Image.asset(
-                         MyImages.phoneField,
+                          MyImages.phoneField,
                           width: 20,
                           height: 20,
                         ),

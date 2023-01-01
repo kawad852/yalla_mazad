@@ -20,14 +20,26 @@ class AuctionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width:ScreenSize.phoneSize(180, height: false,),
-      height: ScreenSize.phoneSize(180, height: false,),
+      width: ScreenSize.phoneSize(
+        180,
+        height: false,
+      ),
+      height: ScreenSize.phoneSize(
+        180,
+        height: false,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: ScreenSize.phoneSize(180, height: false,),
-            width:ScreenSize.phoneSize(180, height: false,),
+            height: ScreenSize.phoneSize(
+              180,
+              height: false,
+            ),
+            width: ScreenSize.phoneSize(
+              180,
+              height: false,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 25,
@@ -50,8 +62,14 @@ class AuctionItem extends StatelessWidget {
               // ),
             ),
             child: SizedBox(
-              height: ScreenSize.phoneSize(190, height: false,),
-              width: ScreenSize.phoneSize(190, height: false,),
+              height: ScreenSize.phoneSize(
+                190,
+                height: false,
+              ),
+              width: ScreenSize.phoneSize(
+                190,
+                height: false,
+              ),
               child: Stack(
                 children: [
                   CustomNetworkImage(
@@ -61,8 +79,14 @@ class AuctionItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Container(
-                      width:ScreenSize.phoneSize(72, height: false,),
-                      height: ScreenSize.phoneSize(23, height: false,),
+                      width: ScreenSize.phoneSize(
+                        72,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        23,
+                        height: false,
+                      ),
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(3),
                       decoration: const BoxDecoration(
@@ -88,8 +112,14 @@ class AuctionItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Container(
-                      width: ScreenSize.phoneSize(72, height: false,),
-                      height:ScreenSize.phoneSize(23, height: false,),
+                      width: ScreenSize.phoneSize(
+                        72,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        23,
+                        height: false,
+                      ),
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(3),
                       decoration: const BoxDecoration(

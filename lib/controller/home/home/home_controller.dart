@@ -62,7 +62,6 @@ class HomeController extends GetxController {
     return allAdvertisementsModel;
   }
 
-
   AllTipsModel? allTipsModel;
   late Future<AllTipsModel?> initializeTipsFuture;
 

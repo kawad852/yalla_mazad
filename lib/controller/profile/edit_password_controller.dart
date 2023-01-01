@@ -27,24 +27,24 @@ class EditPasswordController extends GetxController {
     if (passwordController.text == confirmPasswordController.text) {
       if (formKey.currentState != null) {
         //if (formKey.currentState!.validate()) {
-          Loader.show(context);
-          changePasswordModel = await ChangePasswordApi()
-              .data(oldPassword: oldPassword, newPassword: newPassword);
-          if (changePasswordModel == null) {
-            Fluttertoast.showToast(msg: AppConstants.failedMessage);
-            Loader.hide();
-            return;
-          }
-          if (changePasswordModel!.code == 200) {
-            Fluttertoast.showToast(msg: changePasswordModel!.msg!);
-          } else if (changePasswordModel!.code == 500) {
-            Fluttertoast.showToast(msg: 'password not matched'.tr);
-          } else {
-            Fluttertoast.showToast(msg: changePasswordModel!.msg!);
-          }
+        Loader.show(context);
+        changePasswordModel = await ChangePasswordApi()
+            .data(oldPassword: oldPassword, newPassword: newPassword);
+        if (changePasswordModel == null) {
+          Fluttertoast.showToast(msg: AppConstants.failedMessage);
           Loader.hide();
+          return;
         }
-     // }
+        if (changePasswordModel!.code == 200) {
+          Fluttertoast.showToast(msg: changePasswordModel!.msg!);
+        } else if (changePasswordModel!.code == 500) {
+          Fluttertoast.showToast(msg: 'password not matched'.tr);
+        } else {
+          Fluttertoast.showToast(msg: changePasswordModel!.msg!);
+        }
+        Loader.hide();
+      }
+      // }
     } else {
       Fluttertoast.showToast(msg: 'passwords do not match'.tr);
     }
