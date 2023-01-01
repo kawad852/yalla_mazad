@@ -142,138 +142,143 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       drawer: SafeArea(
         child: ListTileTheme(
           textColor: Colors.white,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(
-                      left: 3,
-                      right: 3,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
+          child: Padding(
+            padding: const EdgeInsets.only(
+              top: 10,
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsets.only(
+                        left: 3,
+                        right: 3,
                       ),
-                      borderRadius: BorderRadius.circular(
-                        7,
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
                       ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          controller.advancedDrawerController.hideDrawer();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 20,
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () {
+                            controller.advancedDrawerController.hideDrawer();
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios,
+                            color: MyColors.primary,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      'menu'.tr,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 50,
+                    ),
+                  ],
+                ),
+                Container(
+                  width: 128.0,
+                  height: 128.0,
+                  margin: const EdgeInsets.only(
+                    top: 30.0,
+                    bottom: 5.0,
                   ),
-                  const SizedBox(
-                    width: 20,
+                  child: Image.asset(
+                    'assets/images/logo.png',
                   ),
-                  Text(
-                    'menu'.tr,
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    Get.to(
+                      () => const EditProfileScreen(),
+                      binding: ProfileBinding(),
+                    );
+                  },
+                  title: Text(
+                    'subscriptions'.tr,
                     style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
+                      fontSize: 18,
                     ),
                   ),
-                  const SizedBox(
-                    width: 50,
-                  ),
-                ],
-              ),
-              Container(
-                width: 128.0,
-                height: 128.0,
-                margin: const EdgeInsets.only(
-                  top: 30.0,
-                  bottom: 5.0,
                 ),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {
-                  Get.to(
-                    () => const EditProfileScreen(),
-                    binding: ProfileBinding(),
-                  );
-                },
-                title: Text(
-                  'subscriptions'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    Get.to(
+                      () => const TermsAndConditionsScreen(),
+                      binding: TermsAndConditionsBinding(),
+                    );
+                  },
+                  title: Text(
+                    'terms and conditions'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {
-                  Get.to(
-                    () => const TermsAndConditionsScreen(),
-                    binding: TermsAndConditionsBinding(),
-                  );
-                },
-                title: Text(
-                  'terms and conditions'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    ///TODO: make sure of the navigation
+                    Get.to(
+                      () => const TermsAndConditionsScreen(),
+                      binding: TermsAndConditionsBinding(),
+                    );
+                  },
+                  title: Text(
+                    'privacy policy'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {
-                  ///TODO: make sure of the navigation
-                  Get.to(
-                    () => const TermsAndConditionsScreen(),
-                    binding: TermsAndConditionsBinding(),
-                  );
-                },
-                title: Text(
-                  'privacy policy'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    Get.to(
+                      () => const CallUsScreen(),
+                      binding: CallUsBinding(),
+                    );
+                  },
+                  title: Text(
+                    'call us'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {
-                  Get.to(
-                    () => const CallUsScreen(),
-                    binding: CallUsBinding(),
-                  );
-                },
-                title: Text(
-                  'call us'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {},
+                  title: Text(
+                    'who we are'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              ListTile(
-                visualDensity: const VisualDensity(vertical: -4),
-                onTap: () {},
-                title: Text(
-                  'who we are'.tr,
-                  style: const TextStyle(
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

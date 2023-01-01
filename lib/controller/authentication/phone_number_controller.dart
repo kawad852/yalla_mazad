@@ -23,30 +23,29 @@ class PhoneNumberController extends GetxController {
     required int id,
     required BuildContext context,
   }) async {
-    ///TODO: bring back
-    // if (formKey.currentState != null) {
-    //   if (formKey.currentState!.validate()) {
-    //     Loader.show(context);
-    //     updateUserPhoneModel =
-    //         await UpdateUserPhoneApi().data(phone: phone, id: id);
-    //     if (updateUserPhoneModel == null) {
-    //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
-    //       Loader.hide();
-    //       return;
-    //     }
-    //     if (updateUserPhoneModel!.code == 200) {
-    //       MySharedPreferences.phone = phone;
-    Get.to(
-      () => const VerificationCodeScreen(),
-      binding: VerificationCodeBinding(),
-    );
-    //   } else if (updateUserPhoneModel!.code == 500) {
-    //     Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-    //   } else {
-    //     Fluttertoast.showToast(msg: updateUserPhoneModel!.msg!);
-    //   }
-    //   Loader.hide();
-    // }
-    // }
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
+        Loader.show(context);
+        updateUserPhoneModel =
+            await UpdateUserPhoneApi().data(phone: phone, id: id);
+        if (updateUserPhoneModel == null) {
+          Fluttertoast.showToast(msg: AppConstants.failedMessage);
+          Loader.hide();
+          return;
+        }
+        if (updateUserPhoneModel!.code == 200) {
+          MySharedPreferences.phone = phone;
+          Get.to(
+            () => const VerificationCodeScreen(),
+            binding: VerificationCodeBinding(),
+          );
+        } else if (updateUserPhoneModel!.code == 500) {
+          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+        } else {
+          Fluttertoast.showToast(msg: updateUserPhoneModel!.msg!);
+        }
+        Loader.hide();
+      }
+    }
   }
 }

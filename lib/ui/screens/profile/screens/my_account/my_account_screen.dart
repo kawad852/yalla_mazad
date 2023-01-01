@@ -12,6 +12,7 @@ import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../../binding/profile/profile_binding.dart';
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
+import '../../../../../utils/screen_size.dart';
 import '../../../../../utils/shared_prefrences.dart';
 import '../../../../widgets/custom_network_image.dart';
 import '../../../../widgets/failure_widget.dart';
@@ -140,8 +141,11 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                 height: 50,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
+                padding: EdgeInsets.only(
+                  right: ScreenSize.phoneSize(
+                    0,
+                    height: false,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -181,7 +185,10 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                             width: 10,
                           ),
                           SizedBox(
-                            width: 170,
+                            width: ScreenSize.phoneSize(
+                              170,
+                              height: false,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -257,7 +264,8 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 10,
                                       ),
-                                      itemCount: snapshot.data?.data?.length ?? 0,
+                                      itemCount:
+                                          snapshot.data?.data?.length ?? 0,
                                       itemBuilder: (context, index) {
                                         return BadgeItem(
                                           image:

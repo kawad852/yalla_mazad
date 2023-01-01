@@ -134,7 +134,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                       },
                                       //aspectRatio: 3/3,
                                       enableInfiniteScroll: false,
-                                      height: 400,
+                                      height: 392,
                                       viewportFraction: 0.8,
                                       enlargeCenterPage: true,
                                       initialPage: 0,

@@ -172,9 +172,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                   ),
                                 )
                               : ListView.separated(
-                                  padding: const EdgeInsets.only(
-                                    left: 30,
-                                    right: 30,
+                                  padding: const EdgeInsetsDirectional.only(
+                                    start: 30,
                                     top: 20,
                                   ),
                                   physics: const NeverScrollableScrollPhysics(),

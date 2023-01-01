@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../../widgets/custom_network_image.dart';
 
@@ -26,13 +27,24 @@ class AllAuctionsItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //color: Colors.red,
-      height: 146,
+      // height: 146,
+      height: ScreenSize.phoneSize(
+        126,
+        height: true,
+      ),
       child: Row(
         children: [
           Container(
-            height: 140,
-            width: 140,
+            // height: 140,
+            // width: 140,
+            height: ScreenSize.phoneSize(
+              120,
+              height: true,
+            ),
+            width: ScreenSize.phoneSize(
+              120,
+              height: true,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 25,
@@ -77,36 +89,49 @@ class AllAuctionsItem extends StatelessWidget {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Expanded(
                       child: Row(
                         children: [
                           Container(
-                            width: 25,
-                            height: 25,
+                            width: ScreenSize.phoneSize(
+                              25,
+                              height: false,
+                            ),
+                            height: ScreenSize.phoneSize(
+                              25,
+                              height: false,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 5,
                               ),
                               color: MyColors.red,
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Icon(
                                 Icons.alarm,
                                 color: Colors.white,
-                                size: 20,
+                                size: ScreenSize.phoneSize(
+                                  20,
+                                  height: false,
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(
                             width: 4,
                           ),
-                          const Text(
-                            '1:23:02:00',
-                            style: TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 12,
+                          const Flexible(
+                            child: FittedBox(
+                              child: Text(
+                                '1:23:02:00',
+                                style: TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ),
                         ],
@@ -116,8 +141,14 @@ class AllAuctionsItem extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
-                            width: 25,
-                            height: 25,
+                            width: ScreenSize.phoneSize(
+                              25,
+                              height: false,
+                            ),
+                            height: ScreenSize.phoneSize(
+                              25,
+                              height: false,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(
                                 5,
@@ -128,8 +159,14 @@ class AllAuctionsItem extends StatelessWidget {
                               child: Image.asset(
                                 MyImages.justice,
                                 color: Colors.white,
-                                width: 20,
-                                height: 20,
+                                width: ScreenSize.phoneSize(
+                                  20,
+                                  height: false,
+                                ),
+                                height: ScreenSize.phoneSize(
+                                  20,
+                                  height: false,
+                                ),
                               ),
                             ),
                           ),
@@ -151,8 +188,14 @@ class AllAuctionsItem extends StatelessWidget {
                 Row(
                   children: [
                     Container(
-                      width: 25,
-                      height: 25,
+                      width: ScreenSize.phoneSize(
+                        25,
+                        height: false,
+                      ),
+                      height: ScreenSize.phoneSize(
+                        25,
+                        height: false,
+                      ),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(
                           6,
@@ -163,14 +206,21 @@ class AllAuctionsItem extends StatelessWidget {
                         url: userImage!,
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
+                    SizedBox(
+                      width: ScreenSize.phoneSize(
+                        10,
+                        height: false,
+                      ),
                     ),
-                    Text(
-                      userName!,
-                      style: const TextStyle(
-                        color: MyColors.primary,
-                        fontSize: 12,
+                    Flexible(
+                      child: FittedBox(
+                        child: Text(
+                          userName!,
+                          style: const TextStyle(
+                            color: MyColors.primary,
+                            fontSize: 12,
+                          ),
+                        ),
                       ),
                     ),
                   ],

@@ -25,6 +25,7 @@ class AddAuctionController extends GetxController {
   final TextEditingController directSellPriceController =
       TextEditingController();
   MapEntry<String, String> selectedCategory = const MapEntry('-1', '0');
+  final formKey = GlobalKey<FormState>();
 
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;
@@ -108,9 +109,8 @@ class AddAuctionController extends GetxController {
   Future fetchAddAuctionData({
     required BuildContext context,
   }) async {
-    ///TODO: bring back
-    // if (formKey.currentState != null) {
-    //   if (formKey.currentState!.validate()) {
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
     Loader.show(context);
     addAuctionModel = await AddAuctionApi().data(
       file: getListOfFiles(),
@@ -148,7 +148,7 @@ class AddAuctionController extends GetxController {
       );
     }
     Loader.hide();
-    //   }
-    // }
+      }
+    }
   }
 }

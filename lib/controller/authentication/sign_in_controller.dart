@@ -23,36 +23,35 @@ class SignInController extends GetxController {
     required String password,
     required BuildContext context,
   }) async {
-    ///TODO: bring back
-    // if (formKey.currentState != null) {
-    //   if (formKey.currentState!.validate()) {
-    //     Loader.show(context);
-    //     signInModel = await SignInApi().data(phone: phone, password: password);
-    //     if (signInModel == null) {
-    //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
-    //       Loader.hide();
-    //       return;
-    //     }
-    //     if (signInModel!.code == 200) {
-    //       MySharedPreferences.accessToken = signInModel!.data!.token!;
-    //       MySharedPreferences.email = signInModel!.data!.user!.email!;
-    //       MySharedPreferences.name = signInModel!.data!.user!.name!;
-    //       MySharedPreferences.userId = signInModel!.data!.user!.id!;
-    //       MySharedPreferences.image = signInModel!.data!.user!.image!;
-    //       MySharedPreferences.phone =
-    //           signInModel!.data!.user!.phone!.substring(4);
-    //       MySharedPreferences.isLogIn = true;
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
+        Loader.show(context);
+        signInModel = await SignInApi().data(phone: phone, password: password);
+        if (signInModel == null) {
+          Fluttertoast.showToast(msg: AppConstants.failedMessage);
+          Loader.hide();
+          return;
+        }
+        if (signInModel!.code == 200) {
+          MySharedPreferences.accessToken = signInModel!.data!.token!;
+          MySharedPreferences.email = signInModel!.data!.user!.email!;
+          MySharedPreferences.name = signInModel!.data!.user!.name!;
+          MySharedPreferences.userId = signInModel!.data!.user!.id!;
+          MySharedPreferences.image = signInModel!.data!.user!.image!;
+          MySharedPreferences.phone =
+              signInModel!.data!.user!.phone!.substring(4);
+          MySharedPreferences.isLogIn = true;
     Get.offAll(
       () => const CustomNavigationBar(),
       binding: HomeBinding(),
     );
-    //     } else if (signInModel!.code == 500) {
-    //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-    //     } else {
-    //       Fluttertoast.showToast(msg: signInModel!.msg!);
-    //     }
-    //     Loader.hide();
-    //   }
-    // }
+        } else if (signInModel!.code == 500) {
+          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+        } else {
+          Fluttertoast.showToast(msg: signInModel!.msg!);
+        }
+        Loader.hide();
+      }
+    }
   }
 }

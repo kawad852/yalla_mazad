@@ -27,45 +27,43 @@ class SignUpController extends GetxController {
     required String password,
     required BuildContext context,
   }) async {
-    ///TODO: bring back
-    // if (isChecked) {
-    //   if (passwordController.text == confirmPasswordController.text) {
-    //     if (formKey.currentState != null) {
-    //       if (formKey.currentState!.validate()) {
-    //         Loader.show(context);
-    //         // OverLayLoader.showLoading(context);
-    //         registerModel = await RegisterApi()
-    //             .data(name: name, email: email, password: password);
-    //         if (registerModel == null) {
-    //           Fluttertoast.showToast(msg: AppConstants.failedMessage);
-    //           Loader.hide();
-    //           return;
-    //         }
-    //
-    //         ///Todo: not sure if i need to add them after register or after otp check
-    //         if (registerModel!.code == 200) {
-    //           MySharedPreferences.accessToken = registerModel!.data!.token!;
-    //           MySharedPreferences.email = registerModel!.data!.user!.email!;
-    //           MySharedPreferences.name = registerModel!.data!.user!.name!;
-    //           MySharedPreferences.userId = registerModel!.data!.user!.id!;
-    //           MySharedPreferences.image = registerModel!.data!.user!.image!;
+    if (isChecked) {
+      if (passwordController.text == confirmPasswordController.text) {
+        if (formKey.currentState != null) {
+          if (formKey.currentState!.validate()) {
+            Loader.show(context);
+            // OverLayLoader.showLoading(context);
+            registerModel = await RegisterApi()
+                .data(name: name, email: email, password: password);
+            if (registerModel == null) {
+              Fluttertoast.showToast(msg: AppConstants.failedMessage);
+              Loader.hide();
+              return;
+            }
+
+            if (registerModel!.code == 200) {
+              MySharedPreferences.accessToken = registerModel!.data!.token!;
+              MySharedPreferences.email = registerModel!.data!.user!.email!;
+              MySharedPreferences.name = registerModel!.data!.user!.name!;
+              MySharedPreferences.userId = registerModel!.data!.user!.id!;
+              MySharedPreferences.image = registerModel!.data!.user!.image!;
               Get.to(
                 () => const PhoneNumberScreen(),
                 binding: PhoneNumberBinding(),
               );
-    //         } else if (registerModel!.code == 500) {
-    //           Fluttertoast.showToast(msg: 'incorrect email or password'.tr);
-    //         } else {
-    //           Fluttertoast.showToast(msg: registerModel!.msg!);
-    //         }
-    //         Loader.hide();
-    //       }
-    //     }
-    //   } else {
-    //     Fluttertoast.showToast(msg: 'passwords do not match'.tr);
-    //   }
-    // } else {
-    //   Fluttertoast.showToast(msg: 'you did not agree'.tr);
-    // }
+            } else if (registerModel!.code == 500) {
+              Fluttertoast.showToast(msg: 'incorrect email or password'.tr);
+            } else {
+              Fluttertoast.showToast(msg: registerModel!.msg!);
+            }
+            Loader.hide();
+          }
+        }
+      } else {
+        Fluttertoast.showToast(msg: 'passwords do not match'.tr);
+      }
+    } else {
+      Fluttertoast.showToast(msg: 'you did not agree'.tr);
+    }
   }
 }

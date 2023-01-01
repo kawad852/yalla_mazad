@@ -10,6 +10,8 @@ import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
+import '../../../../utils/screen_size.dart';
+
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
 
@@ -100,8 +102,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 height: 50,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
+                padding: EdgeInsets.only(
+                  right: ScreenSize.phoneSize(
+                    0,
+                    height: false,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,7 +146,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             width: 10,
                           ),
                           SizedBox(
-                            width: 170,
+                            width: ScreenSize.phoneSize(
+                              170,
+                              height: false,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

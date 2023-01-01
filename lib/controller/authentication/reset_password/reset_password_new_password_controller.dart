@@ -22,32 +22,31 @@ class ResetPasswordNewPasswordController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    ///TODO: bring back
-    // if (passwordController.text == confirmPasswordController.text) {
-    //   if (formKey.currentState != null) {
-    //     if (formKey.currentState!.validate()) {
-    //       Loader.show(context);
-    //       resetPasswordNewPasswordModel = await ResetPasswordNewPasswordApi()
-    //           .data(phone: phone, password: passwordController.text);
-    //       if (resetPasswordNewPasswordModel == null) {
-    //         Fluttertoast.showToast(msg: AppConstants.failedMessage);
-    //         Loader.hide();
-    //         return;
-    //       }
-    //       if (resetPasswordNewPasswordModel!.code == 200) {
+    if (passwordController.text == confirmPasswordController.text) {
+      if (formKey.currentState != null) {
+        if (formKey.currentState!.validate()) {
+          Loader.show(context);
+          resetPasswordNewPasswordModel = await ResetPasswordNewPasswordApi()
+              .data(phone: phone, password: passwordController.text);
+          if (resetPasswordNewPasswordModel == null) {
+            Fluttertoast.showToast(msg: AppConstants.failedMessage);
+            Loader.hide();
+            return;
+          }
+          if (resetPasswordNewPasswordModel!.code == 200) {
     Get.off(
       () => const ResetPasswordCongratsScreen(),
     );
-    //       } else if (resetPasswordNewPasswordModel!.code == 500) {
-    //         Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-    //       } else {
-    //         Fluttertoast.showToast(msg: resetPasswordNewPasswordModel!.msg!);
-    //       }
-    //       Loader.hide();
-    //     }
-    //   }
-    // } else {
-    //   Fluttertoast.showToast(msg: 'passwords do not match'.tr);
-    // }
+          } else if (resetPasswordNewPasswordModel!.code == 500) {
+            Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+          } else {
+            Fluttertoast.showToast(msg: resetPasswordNewPasswordModel!.msg!);
+          }
+          Loader.hide();
+        }
+      }
+    } else {
+      Fluttertoast.showToast(msg: 'passwords do not match'.tr);
+    }
   }
 }

@@ -53,7 +53,7 @@ class VerificationCodeController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    ///TODO:bring back
+    ///TODO:bring back and make sure
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
     //     Loader.show(context);

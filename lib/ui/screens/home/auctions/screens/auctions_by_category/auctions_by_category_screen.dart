@@ -268,8 +268,10 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                     shrinkWrap: true,
                                     physics:
                                         const NeverScrollableScrollPhysics(),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
+                                    padding: const EdgeInsetsDirectional.only(
+                                      start: 30,
+                                      top: 20,
+                                    ),
                                     scrollDirection: Axis.vertical,
                                     itemBuilder: (context, index) {
                                       return AllAuctionsItem(

@@ -10,18 +10,25 @@ class BadgeItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ///TODO: make sure
     return Tooltip(
       message: message!,
       textStyle: const TextStyle(
         color: MyColors.primary,
       ),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        color: MyColors.textFieldColor,
+        borderRadius: BorderRadius.circular(
+          15,
+        ),
+        color: MyColors.primary.withOpacity(
+          0.3,
+        ),
       ),
-      showDuration: const Duration(seconds: 2),
-      waitDuration: const Duration(seconds: 1),
+      showDuration: const Duration(
+        seconds: 2,
+      ),
+      waitDuration: const Duration(
+        seconds: 1,
+      ),
       child: Container(
         width: 47,
         height: 47,
