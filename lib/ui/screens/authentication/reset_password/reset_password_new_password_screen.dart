@@ -34,185 +34,203 @@ class _ResetPasswordNewPasswordScreenState
             key: controller.formKey,
             child: SafeArea(
               bottom: false,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    'create a new password'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  top: 30,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'create a new password'.tr,
+                      style: const TextStyle(
+                        color: MyColors.primary,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 25,
-                  ),
-                  Container(
-                    height: 244,
-                    width: 244,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: MyColors.textFieldColor,
+                    const SizedBox(
+                      height: 25,
                     ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          MyImages.lock,
-                          width: 120,
-                          height: 120,
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  SizedBox(
-                    height: 2 * MediaQuery.of(context).size.height / 2.3,
-                    child: SingleChildScrollView(
-                      physics: const NeverScrollableScrollPhysics(),
+                    Container(
+                      height: ScreenSize.phoneSize(
+                        244,
+                        height: false,
+                      ),
+                      width: ScreenSize.phoneSize(
+                        244,
+                        height: false,
+                      ),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: MyColors.textFieldColor,
+                      ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 4.0,
+                          Image.asset(
+                            MyImages.lock,
+                            width: ScreenSize.phoneSize(
+                              120,
+                              height: false,
                             ),
-                            child: Text(
-                              'The new password must be different from the previously used password'
-                                  .tr,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 18,
-                                color: MyColors.primary,
-                              ),
+                            height: ScreenSize.phoneSize(
+                              120,
+                              height: false,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 56,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 12,
-                            ),
-                            child: Text(
-                              'password'.tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                          GetBuilder<ResetPasswordNewPasswordController>(
-                              builder: (value) {
-                            return CustomTextField(
-                              controller: value.passwordController,
-                              color: MyColors.textFieldColor,
-                              obscureText: value.visible,
-                              validator: (text) {
-                                if (text == '' || text!.isEmpty) {
-                                  return 'cannot be empty'.tr;
-                                } else if (text.length < 8) {
-                                  return 'password too short'.tr;
-                                } else if (!text.contains(RegExp(r'[0-9]'))) {
-                                  return 'password too weak'.tr;
-                                }
-                                return null;
-                              },
-                              hint: 'password'.tr,
-                              suffixIcon: IconButton(
-                                icon: Icon(value.visible
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye),
-                                onPressed: () {
-                                  value.visible = !value.visible;
-                                  value.update();
-                                },
-                              ),
-                            );
-                          }),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 12,
-                              vertical: 12,
-                            ),
-                            child: Text(
-                              'confirm password'.tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 17,
-                              ),
-                            ),
-                          ),
-                          GetBuilder<ResetPasswordNewPasswordController>(
-                              builder: (value) {
-                            return CustomTextField(
-                              controller: value.confirmPasswordController,
-                              color: MyColors.textFieldColor,
-                              obscureText: value.visible,
-                              validator: (text) {
-                                if (text == '' || text!.isEmpty) {
-                                  return 'cannot be empty'.tr;
-                                } else if (text.length < 8) {
-                                  return 'password too short'.tr;
-                                } else if (!text.contains(RegExp(r'[0-9]'))) {
-                                  return 'password too weak'.tr;
-                                }
-                                return null;
-                              },
-                              hint: 'confirm password'.tr,
-                              suffixIcon: IconButton(
-                                icon: Icon(value.visible
-                                    ? Icons.remove_red_eye_outlined
-                                    : Icons.remove_red_eye),
-                                onPressed: () {
-                                  value.visible = !value.visible;
-                                  value.update();
-                                },
-                              ),
-                            );
-                          }),
-                          const SizedBox(
-                            height: 90,
-                          ),
-                          GestureDetector(
-                            onTap: () async {
-                              await controller.fetchUpdateUserPasswordData(
-                                  phone: MySharedPreferences.phone,
-                                  context: context);
-                            },
-                            child: Container(
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: MyColors.primary,
-                                borderRadius: BorderRadius.circular(
-                                  25,
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'save'.tr,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
                           ),
                         ],
                       ),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    SizedBox(
+                      height: 2 * MediaQuery.of(context).size.height / 2.3,
+                      child: SingleChildScrollView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 4.0,
+                              ),
+                              child: Text(
+                                'the new password must be different from the previously used password'
+                                    .tr,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: MyColors.primary,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 56,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 12,
+                              ),
+                              child: Text(
+                                'password'.tr,
+                                style: const TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            GetBuilder<ResetPasswordNewPasswordController>(
+                                builder: (value) {
+                              return CustomTextField(
+                                controller: value.passwordController,
+                                color: MyColors.textFieldColor,
+                                obscureText: value.visible,
+                                validator: (text) {
+                                  if (text == '' || text!.isEmpty) {
+                                    return 'cannot be empty'.tr;
+                                  } else if (text.length < 8) {
+                                    return 'password too short'.tr;
+                                  } else if (!text.contains(RegExp(r'[0-9]'))) {
+                                    return 'password too weak'.tr;
+                                  }
+                                  return null;
+                                },
+                                hint: 'password'.tr,
+                                ///TODO: edit eye icon
+                                suffixIcon: IconButton(
+                                  icon: Icon(value.visible
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.remove_red_eye),
+                                  onPressed: () {
+                                    value.visible = !value.visible;
+                                    value.update();
+                                  },
+                                ),
+                              );
+                            }),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 12,
+                              ),
+                              child: Text(
+                                'confirm password'.tr,
+                                style: const TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 17,
+                                ),
+                              ),
+                            ),
+                            GetBuilder<ResetPasswordNewPasswordController>(
+                                builder: (value) {
+                              return CustomTextField(
+                                controller: value.confirmPasswordController,
+                                color: MyColors.textFieldColor,
+                                obscureText: value.visible,
+                                validator: (text) {
+                                  if (text == '' || text!.isEmpty) {
+                                    return 'cannot be empty'.tr;
+                                  } else if (text.length < 8) {
+                                    return 'password too short'.tr;
+                                  } else if (!text.contains(RegExp(r'[0-9]'))) {
+                                    return 'password too weak'.tr;
+                                  }
+                                  return null;
+                                },
+                                hint: 'confirm password'.tr,
+                                suffixIcon: IconButton(
+                                  icon: Icon(value.visible
+                                      ? Icons.remove_red_eye_outlined
+                                      : Icons.remove_red_eye),
+                                  onPressed: () {
+                                    value.visible = !value.visible;
+                                    value.update();
+                                  },
+                                ),
+                              );
+                            }),
+                            const SizedBox(
+                              height: 90,
+                            ),
+                            GestureDetector(
+                              onTap: () async {
+                                await controller.fetchUpdateUserPasswordData(
+                                    phone: MySharedPreferences.phone,
+                                    context: context);
+                              },
+                              child: Container(
+                                height: 60,
+                                decoration: BoxDecoration(
+                                  color: MyColors.primary,
+                                  borderRadius: BorderRadius.circular(
+                                    25,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'save'.tr,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

@@ -84,7 +84,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: ScreenSize.phoneSize(40, height: true),
+                          height: ScreenSize.phoneSize(
+                            40,
+                            height: true,
+                          ),
                         ),
                         Directionality(
                           textDirection: TextDirection.ltr,
@@ -150,9 +153,10 @@ class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
                                   const SizedBox(
                                     width: 18,
                                   ),
-                                  const Icon(
-                                    Icons.local_phone_outlined,
-                                    color: Color(0xffBDB5D0),
+                                  Image.asset(
+                                    MyImages.phoneField,
+                                    width: 20,
+                                    height: 20,
                                   ),
                                   const SizedBox(
                                     width: 10,

@@ -30,92 +30,103 @@ class _ResetPasswordCongratsScreenState
           ),
           child: SafeArea(
             bottom: false,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const SizedBox(
-                  height: 35,
-                ),
-                SizedBox(
-                  height: ScreenSize.phoneSize(
-                    280,
-                    height: true,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 30,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  const SizedBox(
+                    height: 35,
                   ),
-                  width: ScreenSize.phoneSize(
-                    280,
-                    height: false,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        MyImages.congrats,
-                        width: 250,
-                        height: 250,
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: SingleChildScrollView(
-                    physics: const NeverScrollableScrollPhysics(),
+                  SizedBox(
+                    height: ScreenSize.phoneSize(
+                      280,
+                      height: true,
+                    ),
+                    width: ScreenSize.phoneSize(
+                      280,
+                      height: false,
+                    ),
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 4.0,
+                        Image.asset(
+                          MyImages.congrats,
+                          width: ScreenSize.phoneSize(
+                            250,
+                            height: true,
                           ),
-                          child: Text(
-                            'your password has been reset successfully'.tr,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: MyColors.primary,
-                            ),
+                          height: ScreenSize.phoneSize(
+                            250,
+                            height: true,
                           ),
-                        ),
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height / 3,
-                        ),
-                        GestureDetector(
-                          onTap: () async {
-                            Get.offAll(() => const AuthenticationScreen(),
-                                binding: AuthenticationBinding());
-                          },
-                          child: Container(
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: MyColors.primary,
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'login'.tr,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
                         ),
                       ],
                     ),
                   ),
-                ),
-              ],
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height,
+                    child: SingleChildScrollView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 4.0,
+                            ),
+                            child: Text(
+                              'your password has been reset successfully'.tr,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 18,
+                                color: MyColors.primary,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 3,
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              Get.offAll(() => const AuthenticationScreen(),
+                                  binding: AuthenticationBinding());
+                            },
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: MyColors.primary,
+                                borderRadius: BorderRadius.circular(
+                                  25,
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'login'.tr,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

@@ -8,6 +8,7 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../widgets/failure_widget.dart';
 
@@ -99,8 +100,9 @@ class _PlansScreenState extends State<PlansScreen> {
                               height: 20,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30.0,
+                              ),
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -154,7 +156,8 @@ class _PlansScreenState extends State<PlansScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
+                                        horizontal: 30.0,
+                                      ),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -197,45 +200,46 @@ class _PlansScreenState extends State<PlansScreen> {
                                               if (snapshot.hasData) {
                                                 return CarouselSlider(
                                                   items: List.generate(
-                                                      snapshot.data?.data
-                                                              ?.length ??
-                                                          0,
-                                                      (index) => Opacity(
-                                                          opacity: controller
-                                                                      .pageIndex ==
-                                                                  index
-                                                              ? 1
-                                                              : 0.5,
-                                                          child: PlanItem(
-                                                            price: snapshot
+                                                    snapshot.data?.data
+                                                            ?.length ??
+                                                        0,
+                                                    (index) => Opacity(
+                                                      opacity: controller
+                                                                  .pageIndex ==
+                                                              index
+                                                          ? 1
+                                                          : 0.5,
+                                                      child: PlanItem(
+                                                        price: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .price,
+                                                        name: snapshot.data
+                                                            ?.data?[index].name,
+                                                        details: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .details,
+                                                        numberOfAuctions:
+                                                            snapshot
                                                                 .data
                                                                 ?.data?[index]
-                                                                .price,
-                                                            name: snapshot
-                                                                .data
-                                                                ?.data?[index]
-                                                                .name,
-                                                            details: snapshot
-                                                                .data
-                                                                ?.data?[index]
-                                                                .details,
-                                                            numberOfAuctions:
-                                                                snapshot
-                                                                    .data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .numberOfAuction,
-                                                          ))),
+                                                                .numberOfAuction,
+                                                      ),
+                                                    ),
+                                                  ),
                                                   options: CarouselOptions(
                                                     onPageChanged: (index, x) {
-                                                      setState(() {
-                                                        controller.pageIndex =
-                                                            index;
-                                                      });
+                                                      setState(
+                                                        () {
+                                                          controller.pageIndex =
+                                                              index;
+                                                        },
+                                                      );
                                                     },
-                                                    //aspectRatio: 3/3,
+                                                    //aspectRatio: 1.1,
                                                     enableInfiniteScroll: false,
-                                                    height: 400,
+                                                   height: 392,
                                                     viewportFraction: 0.8,
                                                     enlargeCenterPage: true,
                                                     initialPage: 0,

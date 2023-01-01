@@ -20,29 +20,30 @@ class ResetPasswordPhoneNumberController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    if (formKey.currentState != null) {
-      if (formKey.currentState!.validate()) {
-        Loader.show(context);
-        resetPasswordPhoneNumberModel =
-            await ResetPasswordPhoneNumberApi().data(phone: phone);
-        if (resetPasswordPhoneNumberModel == null) {
-          Fluttertoast.showToast(msg: AppConstants.failedMessage);
-          Loader.hide();
-          return;
-        }
-        if (resetPasswordPhoneNumberModel!.code == 200) {
-          MySharedPreferences.phone = phone;
+    ///TODO: bring back
+    // if (formKey.currentState != null) {
+    //   if (formKey.currentState!.validate()) {
+    //     Loader.show(context);
+    //     resetPasswordPhoneNumberModel =
+    //         await ResetPasswordPhoneNumberApi().data(phone: phone);
+    //     if (resetPasswordPhoneNumberModel == null) {
+    //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
+    //       Loader.hide();
+    //       return;
+    //     }
+    //     if (resetPasswordPhoneNumberModel!.code == 200) {
+    //       MySharedPreferences.phone = phone;
           Get.to(
             () => const ResetPasswordCodeScreen(),
             binding: ResetPasswordCodeBinding(),
           );
-        } else if (resetPasswordPhoneNumberModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-        } else {
-          Fluttertoast.showToast(msg: resetPasswordPhoneNumberModel!.msg!);
-        }
-        Loader.hide();
-      }
-    }
+    //     } else if (resetPasswordPhoneNumberModel!.code == 500) {
+    //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+    //     } else {
+    //       Fluttertoast.showToast(msg: resetPasswordPhoneNumberModel!.msg!);
+    //     }
+    //     Loader.hide();
+    //   }
+    // }
   }
 }

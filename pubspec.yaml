@@ -89,6 +89,8 @@ flutter:
     - assets/images/navigation_bar/
     - assets/images/home/
     - assets/images/authentication/reset_password/
+    - assets/images/authentication/phone_call.png
+    - assets/images/authentication/unlock.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

@@ -128,9 +128,10 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(
                           width: 18,
                         ),
-                        const Icon(
-                          Icons.lock_open_outlined,
-                          color: Color(0xffBDB5D0),
+                        Image.asset(
+                          MyImages.lockField,
+                          width: 20,
+                          height: 20,
                         ),
                         const SizedBox(
                           width: 10,
@@ -169,9 +170,10 @@ class SignUpScreen extends StatelessWidget {
                         const SizedBox(
                           width: 18,
                         ),
-                        const Icon(
-                          Icons.lock_open_outlined,
-                          color: Color(0xffBDB5D0),
+                        Image.asset(
+                          MyImages.lockField,
+                          width: 20,
+                          height: 20,
                         ),
                         const SizedBox(
                           width: 10,

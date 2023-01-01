@@ -66,9 +66,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(
                           width: 18,
                         ),
-                        const Icon(
-                          Icons.local_phone_outlined,
-                          color: Color(0xffBDB5D0),
+                        Image.asset(
+                         MyImages.phoneField,
+                          width: 20,
+                          height: 20,
                         ),
                         const SizedBox(
                           width: 10,
@@ -119,9 +120,10 @@ class _SignInScreenState extends State<SignInScreen> {
                         const SizedBox(
                           width: 18,
                         ),
-                        const Icon(
-                          Icons.lock_open_outlined,
-                          color: Color(0xffBDB5D0),
+                        Image.asset(
+                          MyImages.lockField,
+                          width: 20,
+                          height: 20,
                         ),
                         const SizedBox(
                           width: 10,

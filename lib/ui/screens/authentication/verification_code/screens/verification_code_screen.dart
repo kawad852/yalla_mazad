@@ -106,9 +106,10 @@ class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
                                 const SizedBox(
                                   width: 18,
                                 ),
-                                const Icon(
-                                  Icons.local_phone_outlined,
-                                  color: Color(0xffBDB5D0),
+                                Image.asset(
+                                  MyImages.phoneField,
+                                  width: 20,
+                                  height: 20,
                                 ),
                                 const SizedBox(
                                   width: 10,
