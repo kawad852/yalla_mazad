@@ -50,7 +50,7 @@ final Map<String, String> ar = {
   'main picture': 'الصورة الرئيسية',
   'more pictures': 'المزيد من الصور',
   'auction starting price': 'سعر بداية المزاد',
-  'direct sell price': 'سعر البيع المباشر',
+  'direct sell price': 'سعر الشراء المباشر',
   'my account': 'حسابي',
   'sent': 'تم الإرسال',
   'congratulations, your ad has been successfully submitted. The Yalla Mazad team will contact you as soon as possible':
@@ -75,4 +75,49 @@ final Map<String, String> ar = {
   'you may also like': 'قد يعجبك أيضا',
   'what do you want to search for?': 'عن ماذا تود البحث ؟',
   'search': 'البحث',
+  'direct sell': 'شراء مباشر',
+  'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
+      'هل ترغب بشراء المنتج بشكل مباشر دون الوصول إلى المزاد ؟ عند تأكيد الطلب سيتواصل فريق يلا مزاد معك مباشرة',
+  'menu': 'القائمة',
+  'terms and conditions': 'الشروط والأحكام',
+  'privacy policy': 'سياسة الخصوصية',
+  'call us': 'اتصل بنا',
+  'who we are': 'من نحن',
+  'the badges': 'الشارات',
+  'my auctions': 'مزاداتي',
+  'favorites': 'المفضلة',
+  'all auctions': 'جميع المزادات',
+  'did you forget your password?': 'نسيت كلمة المرور ؟',
+  'please enter your phone number to receive a verification code':
+      'الرجاء إدخال رقم هاتفك لتلقي رمز التحقق',
+  'confirm your phone number': 'تأكيد رقم هاتفك',
+  'please enter the 4-digit verification code sent to':
+      'الرجاء إدخال رمز التحقق المكون من 4 أرقام المرسل إلى ',
+  'create a new password': 'إنشاء كلمة مرور جديدة',
+  'the new password must be different from the previously used password':
+      'كلمة المرور الجديدة يجب أن تكون مختلفة عن كلمة المرور المستخدمة سابقا',
+  'save': 'حفظ',
+  'your password has been reset successfully':
+      'تم إعادة تعيين كلمة المرور الخاصة بك بنجاح',
+  'current password': 'كلمة المرور الحالية',
+  'confirm new password': 'تأكيد كلمة المرور الجديدة',
+  'new password': 'كلمة المرور الجديدة',
+  'service conditions': 'شروط الخدمة',
+  'I agree to the terms and conditions': 'أوافق على الشروط و الأحكام',
+  'I agree to the privacy policy': 'أوافق على سياسة الخصوصية',
+  'decline': 'رفض',
+  'accept': 'موافق',
+  'we are here for you! how can we help?':
+      'نحن هنا من أجلك! كيف يمكننا المساعدة؟',
+  'current auction': 'مزاد جاري',
+  'highest price': 'اعلى سعر',
+  'time left': 'الوقت المتبقي',
+  'submit a bid': 'تقديم مزايدة',
+  'auction will start after': 'سيبدأ المزاد بعد',
+  'coming auction': 'مزاد قادم',
+  'done auction': 'مزاد منتهي',
+  'auction is over': 'انتهى المزاد',
+  'added to favorites successfully':'تمت الإضافة إلى المفضلة بنجاح',
+  'already here':'موجود مسبقا',
+
 };

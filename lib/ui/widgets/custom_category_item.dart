@@ -7,9 +7,12 @@ class CustomCategoryItem extends StatelessWidget {
   final String? url;
   final String? name;
   final bool isChecked;
-  const CustomCategoryItem(
-      {required this.url, required this.name, this.isChecked = false, Key? key})
-      : super(key: key);
+  const CustomCategoryItem({
+    required this.url,
+    required this.name,
+    this.isChecked = false,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +32,9 @@ class CustomCategoryItem extends StatelessWidget {
                       197,
                       0.8,
                     )
-                  : MyColors.red,
+                  : const Color(0xffDF3264).withOpacity(
+                      0.1,
+                    ),
               borderRadius: BorderRadius.circular(
                 15,
               ),
@@ -38,7 +43,9 @@ class CustomCategoryItem extends StatelessWidget {
               child: CustomNetworkImage(
                 url: '$url',
                 radius: 15,
-                margin: const EdgeInsets.all(5),
+                margin: const EdgeInsets.all(
+                  5,
+                ),
                 // width: 40,
                 // height: 40,
               ),

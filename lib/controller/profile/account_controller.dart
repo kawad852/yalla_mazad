@@ -14,8 +14,9 @@ class AccountController extends GetxController {
       TextEditingController(text: MySharedPreferences.name);
   final TextEditingController emailController =
       TextEditingController(text: MySharedPreferences.email);
+
   final TextEditingController phoneController =
-      TextEditingController(text: MySharedPreferences.phone.substring(4));
+      TextEditingController(text: MySharedPreferences.phone);
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   UpdateUserModel? updateUserModel;
@@ -37,9 +38,9 @@ class AccountController extends GetxController {
           return;
         }
         if (updateUserModel!.code == 200) {
-          MySharedPreferences.phone = updateUserModel!.user!.phone!;
+          MySharedPreferences.phone =
+              updateUserModel!.user!.phone!.substring(4);
           Fluttertoast.showToast(msg: updateUserModel!.msg!);
-          // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
         } else if (updateUserModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
         } else {

@@ -4,7 +4,9 @@ import 'package:yalla_mazad/utils/colors.dart';
 class AuctionBidItem extends StatelessWidget {
   final String content;
   final bool isChosen;
-  const AuctionBidItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
+  const AuctionBidItem(
+      {required this.content, required this.isChosen, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

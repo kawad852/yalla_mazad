@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
+  final String obscureChar;
   const CustomTextField({
     required this.controller,
     required this.color,
@@ -31,6 +32,7 @@ class CustomTextField extends StatelessWidget {
     this.onChanged,
     this.validator,
     this.textInputAction,
+    this.obscureChar = '•',
     Key? key,
   }) : super(key: key);
 
@@ -44,7 +46,7 @@ class CustomTextField extends StatelessWidget {
       textInputAction: textInputAction,
       controller: controller,
       obscureText: obscureText,
-      obscuringCharacter: '•',
+      obscuringCharacter: obscureChar,
       readOnly: readOnly,
       validator: validator,
       style: const TextStyle(

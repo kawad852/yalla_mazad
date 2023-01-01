@@ -6,6 +6,7 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../../widgets/failure_widget.dart';
 
 class MySubscriptionScreen extends StatefulWidget {
   const MySubscriptionScreen({Key? key}) : super(key: key);
@@ -22,9 +23,6 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // const SizedBox(
-        //   height: 10,
-        // ),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,13 +32,37 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                   padding: const EdgeInsets.only(top: 20),
                   child: Column(
                     children: [
-                      ///Todo: my subscription
-                      const PlanItem(
-                        price: '99',
-                        numberOfAuctions: 4,
-                        name: 'aa',
-                        details: 'bb',
-                      ),
+                      FutureBuilder(
+                          future: controller.initializeMySubscriptionFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  if (snapshot.data!.data!.isNotEmpty) {
+                                    return PlanItem(
+                                      price:
+                                          snapshot.data?.data?[0].plan?.price,
+                                      name: snapshot.data?.data?[0].plan?.name,
+                                      details:
+                                          snapshot.data?.data?[0].plan?.details,
+                                      numberOfAuctions: snapshot
+                                          .data?.data?[0].plan?.numberOfAuction,
+                                    );
+                                  } else {
+                                    return const SizedBox();
+                                  }
+                                } else if (snapshot.hasError) {
+                                  return const FailureWidget();
+                                } else {
+                                  return const FailureWidget();
+                                }
+                            }
+                          }),
                       const SizedBox(
                         height: 30,
                       ),
@@ -112,7 +134,7 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                       },
                                       //aspectRatio: 3/3,
                                       enableInfiniteScroll: false,
-                                      height: 400,
+                                      height: 392,
                                       viewportFraction: 0.8,
                                       enlargeCenterPage: true,
                                       initialPage: 0,
@@ -124,10 +146,9 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
-                                  ///TODO: failure widget
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 } else {
-                                  return const Text('error');
+                                  return const FailureWidget();
                                 }
                             }
                           }),
@@ -140,9 +161,6 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
               ),
             ],
           ),
-        ),
-        const SizedBox(
-          height: 20,
         ),
       ],
     );

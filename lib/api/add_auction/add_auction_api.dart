@@ -10,21 +10,29 @@ import '../../model/add_auction/add_auction_model.dart';
 
 class AddAuctionApi {
   Future<AddAuctionModel?> data({
-    required File? file,
+    required List<File?>? file,
     required String? name,
     required String? content,
     required String? startPrice,
     required String? buyNowPrice,
     required int? userId,
-    required int? categoryId,
+    required String? categoryId,
   }) async {
     try {
       http.MultipartFile? multipartFile;
+      List<http.MultipartFile?> multipartFiles = [];
       if (file != null) {
-        var stream = http.ByteStream(file.openRead());
-        var length = await file.length();
-        multipartFile = http.MultipartFile('images', stream, length,
-            filename: basename(file.path));
+        for (var item in file) {
+          if (item != null) {
+            // log('paath::::::    ${item.path}');
+            var stream = http.ByteStream(item.openRead());
+            var length = await item.length();
+            multipartFile = http.MultipartFile("images[]", stream, length,
+                filename: basename(item.path));
+            multipartFiles.add(multipartFile);
+            // request.files.add(multipartFile);
+          }
+        }
       }
       String url = '${ApiUrl.mainUrl}${ApiUrl.addAuction}';
       Uri uri = Uri.parse(url);
@@ -33,16 +41,21 @@ class AddAuctionApi {
         'Content-Type': 'application/json',
       };
       request.headers.addAll(headers);
+      for (var item in multipartFiles) {
+        if (item != null) {
+          // log('added:::::   ${item.filename}');
+          request.files.add(item);
+        }
+      }
+      // log(request.files.length.toString());
       request.fields['name'] = name!;
       request.fields['content'] = content!;
       request.fields['start_price'] = startPrice!;
       request.fields['status'] = 'pending';
       request.fields['buy_now_price'] = buyNowPrice!;
       request.fields['user_id'] = userId.toString();
-      request.fields['category_id'] = categoryId.toString();
-      if (multipartFile != null) {
-        request.files.add(multipartFile);
-      }
+      request.fields['category_id'] = categoryId!;
+
       var response = await request.send();
       log("Response:: AddAuctionResponse\nUrl:: $url\nheaders:: $headers\n");
 

@@ -1,4 +1,3 @@
-
 class RegisterModel {
   RegisterModel({
     this.status,

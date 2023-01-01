@@ -9,13 +9,18 @@ class PlanItem extends StatelessWidget {
   final String? details;
   final String? name;
   final int? numberOfAuctions;
-  const PlanItem({required this.price,
-  required this.name,required this.details, required this.numberOfAuctions, Key? key}) : super(key: key);
+  const PlanItem(
+      {required this.price,
+      required this.name,
+      required this.details,
+      required this.numberOfAuctions,
+      Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 354,
+      height: 392,
       width: MediaQuery.of(context).size.width - 75,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(

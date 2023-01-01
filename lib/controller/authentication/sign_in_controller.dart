@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,7 +26,6 @@ class SignInController extends GetxController {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
         Loader.show(context);
-        // OverLayLoader.showLoading(context);
         signInModel = await SignInApi().data(phone: phone, password: password);
         if (signInModel == null) {
           Fluttertoast.showToast(msg: AppConstants.failedMessage);
@@ -37,10 +38,13 @@ class SignInController extends GetxController {
           MySharedPreferences.name = signInModel!.data!.user!.name!;
           MySharedPreferences.userId = signInModel!.data!.user!.id!;
           MySharedPreferences.image = signInModel!.data!.user!.image!;
-          MySharedPreferences.phone = signInModel!.data!.user!.phone!;
+          MySharedPreferences.phone =
+              signInModel!.data!.user!.phone!.substring(4);
           MySharedPreferences.isLogIn = true;
-          Get.offAll(() => const CustomNavigationBar(),binding: HomeBinding());
-          // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+    Get.offAll(
+      () => const CustomNavigationBar(),
+      binding: HomeBinding(),
+    );
         } else if (signInModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
         } else {

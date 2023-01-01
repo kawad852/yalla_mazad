@@ -4,7 +4,8 @@ import 'package:yalla_mazad/utils/colors.dart';
 class InterestItem extends StatefulWidget {
   final String content;
   final bool isChosen;
-  const InterestItem({required this.content, required this.isChosen, Key? key}) : super(key: key);
+  const InterestItem({required this.content, required this.isChosen, Key? key})
+      : super(key: key);
 
   @override
   State<InterestItem> createState() => _InterestItemState();

@@ -18,8 +18,7 @@ class PlansApi {
       log("Response:: PlansResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);
       log("PlansStatusCode:: ${response.statusCode}  PlansBody:: ${response.body}");
-      PlansModel plansModel =
-      PlansModel.fromJson(json.decode(response.body));
+      PlansModel plansModel = PlansModel.fromJson(json.decode(response.body));
       if (response.statusCode == 200) {
         return plansModel;
       } else if (response.statusCode == 500) {

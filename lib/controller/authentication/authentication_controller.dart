@@ -8,21 +8,6 @@ class AuthenticationController extends GetxController {
   int currentIndex = 0;
   final isExpanded = false.obs;
 
-  // void toggle(bool status) {
-  //   isExpanded.value = status;
-  //   update();
-  // }
-  //
-  // Future getData() async {
-  //   //...
-  // }
-
-  // @override
-  // void onInit() {
-  //   // getData();
-  //   super.onInit();
-  // }
-
   @override
   void onClose() {
     pageController.dispose();

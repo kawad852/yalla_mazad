@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/add_auction/add_auction_binding.dart';
 import 'package:yalla_mazad/controller/profile/profile_controller.dart';
-import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_password_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_subscription_screen.dart';
+import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
+
+import '../../../../utils/screen_size.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key? key}) : super(key: key);
@@ -26,7 +28,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,
@@ -67,11 +70,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          ///TODO edit
-                          Get.to(
-                            () => AddAuctionScreen(),
-                            binding: AddAuctionBinding(),
-                          );
+                          Get.back();
                         },
                         icon: const Icon(
                           Icons.arrow_back_ios,
@@ -103,8 +102,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 height: 50,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
+                padding: EdgeInsets.only(
+                  right: ScreenSize.phoneSize(
+                    0,
+                    height: false,
+                  ),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,45 +136,46 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                                 width: 8,
                               ),
-
-                              ///TODO: change image (from api)
-                              image: const DecorationImage(
-                                image: AssetImage(
-                                  MyImages.introTeapot,
-                                ),
-                              ),
+                            ),
+                            child: CustomNetworkImage(
+                              url: MySharedPreferences.image,
+                              radius: 100,
                             ),
                           ),
                           const SizedBox(
                             width: 10,
                           ),
                           SizedBox(
-                            width: 170,
+                            width: ScreenSize.phoneSize(
+                              170,
+                              height: false,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: const [
+                              children: [
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  MySharedPreferences.name,
+                                  style: const TextStyle(
                                     color: MyColors.primary,
                                     fontSize: 18,
                                   ),
                                 ),
                                 Text(
-                                  'ahmad',
-                                  style: TextStyle(
+                                  '@${MySharedPreferences.userId}',
+                                  textDirection: TextDirection.ltr,
+                                  style: const TextStyle(
                                     color: MyColors.greyPrimary,
                                     fontSize: 14,
                                   ),
                                 ),
-                                Text(
-                                  'ahmad',
-                                  style: TextStyle(
-                                    color: MyColors.red,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                                //   Text(
+                                //     'ahmad',
+                                //     style: TextStyle(
+                                //       color: MyColors.red,
+                                //       fontSize: 18,
+                                //     ),
+                                //   ),
                               ],
                             ),
                           ),

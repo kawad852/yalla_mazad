@@ -53,11 +53,12 @@ class VerificationCodeController extends GetxController {
     required String phone,
     required BuildContext context,
   }) async {
-    ///TODO:bring back
+    ///TODO:bring back and make sure
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
     //     Loader.show(context);
-    //     optCheckModel = await OptCheckApi().data(phone: phone, code: code);
+    // code =   '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
+    //optCheckModel = await OptCheckApi().data(phone: phone, code: code);
     //     if (optCheckModel == null) {
     //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
     //       Loader.hide();
@@ -66,7 +67,7 @@ class VerificationCodeController extends GetxController {
     //     if (optCheckModel!.code == 200) {
     //       MySharedPreferences.phone = phone;
     //       MySharedPreferences.isLogIn = true;
-          Get.to(()=>const InterestsScreen(),binding: InterestsBinding());
+    Get.to(() => const InterestsScreen(), binding: InterestsBinding());
     //     } else if (optCheckModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     //     } else {
@@ -82,8 +83,7 @@ class VerificationCodeController extends GetxController {
     required BuildContext context,
   }) async {
     Loader.show(context);
-    resendOtpModel =
-        await ResendOtpApi().data( id: id);
+    resendOtpModel = await ResendOtpApi().data(id: id);
     if (resendOtpModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
       Loader.hide();

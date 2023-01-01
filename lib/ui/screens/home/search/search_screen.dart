@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/home/search_controller.dart';
+import 'package:yalla_mazad/controller/home/search/search_controller.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
+import '../../../../binding/notifications/notifications_binding.dart';
+import '../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../notifications/screens/notifications_screen.dart';
 
-class SearchScreen extends StatelessWidget {
+class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SearchScreen> createState() => _SearchScreenState();
+}
+
+class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    Get.put(SearchController());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +33,8 @@ class SearchScreen extends StatelessWidget {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,
@@ -35,7 +51,6 @@ class SearchScreen extends StatelessWidget {
             ),
           ),
           SingleChildScrollView(
-            physics: const NeverScrollableScrollPhysics(),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +82,10 @@ class SearchScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                CustomNavigationBarController.find.tabController
+                                    .jumpToTab(0);
+                              },
                               icon: const Icon(
                                 Icons.arrow_back_ios,
                                 color: MyColors.primary,
@@ -88,20 +106,22 @@ class SearchScreen extends StatelessWidget {
                           height: 35,
                           decoration: BoxDecoration(
                             color: const Color.fromRGBO(202, 195, 212, 0.3),
-                            // color: const Color(
-                            //   0xffD3CFDC,
-                            // ).withOpacity(0.4),
                             borderRadius: BorderRadius.circular(
                               7,
                             ),
                           ),
                           child: Center(
                             child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.notifications_outlined,
-                                color: MyColors.primary,
-                                size: 20,
+                              onPressed: () {
+                                Get.to(
+                                  () => const NotificationsScreen(),
+                                  binding: NotificationsBinding(),
+                                );
+                              },
+                              icon: Image.asset(
+                                MyImages.notification,
+                                width: 25,
+                                height: 25,
                               ),
                             ),
                           ),
@@ -110,32 +130,78 @@ class SearchScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: Get.height,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 20,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 30.0,
                       ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: CustomTextField(
-                          controller: controller.searchController,
-                          color: MyColors.primary5D0,
-                          hint: 'what do you want to search for?'.tr,
-                          suffixIcon: const Icon(
-                            Icons.search_sharp,
-                            color: MyColors.primary,
-                            size: 30,
-                          ),
+                      child: CustomTextField(
+                        controller: controller.searchController,
+                        color: MyColors.primary5D0,
+                        hint: 'what do you want to search for?'.tr,
+                        suffixIcon: const Icon(
+                          Icons.search_sharp,
+                          color: MyColors.primary,
+                          size: 30,
                         ),
+                        onChanged: (value) {
+                          if (controller.searchQuery.value != value) {
+                            controller.onSearchChanged(value);
+                          }
+                        },
                       ),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                    ],
-                  ),
+                    ),
+                    // const SizedBox(
+                    //   height: 10,
+                    // ),
+                    Obx(
+                      () => controller.searchQuery.isEmpty
+                          ? const SizedBox(
+                              height: 100,
+                            )
+                          : controller.isLoading.value
+                              ? const SizedBox(
+                                  height: 100,
+                                  child: Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                )
+                              : ListView.separated(
+                                  padding: const EdgeInsetsDirectional.only(
+                                    start: 30,
+                                    top: 20,
+                                  ),
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  separatorBuilder: (context, index) =>
+                                      const SizedBox(
+                                    height: 10,
+                                  ),
+                                  itemCount:
+                                      controller.model.value!.data!.length,
+                                  itemBuilder: (context, index) {
+                                    final data =
+                                        controller.model.value!.data![index];
+                                    return AllAuctionsItem(
+                                      image: data.image,
+                                      name: data.name,
+                                      details: data.content,
+                                      price: data.startPrice.toString(),
+                                      userImage: data.user?.image,
+                                      userName: data.user?.name,
+                                    );
+                                  },
+                                ),
+                    ),
+                    const SizedBox(
+                      height: 90,
+                    ),
+                  ],
                 ),
               ],
             ),

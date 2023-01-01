@@ -8,6 +8,9 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/screen_size.dart';
+
+import '../../../widgets/failure_widget.dart';
 
 class PlansScreen extends StatefulWidget {
   const PlansScreen({Key? key}) : super(key: key);
@@ -25,7 +28,8 @@ class _PlansScreenState extends State<PlansScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,
@@ -57,7 +61,12 @@ class _PlansScreenState extends State<PlansScreen> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Get.to(
+                              () => const CustomNavigationBar(),
+                              binding: HomeBinding(),
+                            );
+                          },
                           icon: const Icon(
                             Icons.cancel_outlined,
                             color: MyColors.primary,
@@ -79,13 +88,10 @@ class _PlansScreenState extends State<PlansScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: Get.height,
+                  height: Get.height * 1.4,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +100,9 @@ class _PlansScreenState extends State<PlansScreen> {
                               height: 20,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 30.0),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 30.0,
+                              ),
                               child: RichText(
                                 text: TextSpan(
                                   children: [
@@ -125,7 +132,7 @@ class _PlansScreenState extends State<PlansScreen> {
                               height: 20,
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height / 1.5,
+                              height: MediaQuery.of(context).size.height,
                               child: SingleChildScrollView(
                                 physics: const NeverScrollableScrollPhysics(),
                                 child: Column(
@@ -133,7 +140,8 @@ class _PlansScreenState extends State<PlansScreen> {
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
+                                        horizontal: 30.0,
+                                      ),
                                       child: Text(
                                         'you can change your subscription to any other subscription at any time'
                                             .tr,
@@ -148,7 +156,8 @@ class _PlansScreenState extends State<PlansScreen> {
                                     ),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
+                                        horizontal: 30.0,
+                                      ),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -191,45 +200,46 @@ class _PlansScreenState extends State<PlansScreen> {
                                               if (snapshot.hasData) {
                                                 return CarouselSlider(
                                                   items: List.generate(
-                                                      snapshot.data?.data
-                                                              ?.length ??
-                                                          0,
-                                                      (index) => Opacity(
-                                                          opacity: controller
-                                                                      .pageIndex ==
-                                                                  index
-                                                              ? 1
-                                                              : 0.5,
-                                                          child: PlanItem(
-                                                            price: snapshot
+                                                    snapshot.data?.data
+                                                            ?.length ??
+                                                        0,
+                                                    (index) => Opacity(
+                                                      opacity: controller
+                                                                  .pageIndex ==
+                                                              index
+                                                          ? 1
+                                                          : 0.5,
+                                                      child: PlanItem(
+                                                        price: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .price,
+                                                        name: snapshot.data
+                                                            ?.data?[index].name,
+                                                        details: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .details,
+                                                        numberOfAuctions:
+                                                            snapshot
                                                                 .data
                                                                 ?.data?[index]
-                                                                .price,
-                                                            name: snapshot
-                                                                .data
-                                                                ?.data?[index]
-                                                                .name,
-                                                            details: snapshot
-                                                                .data
-                                                                ?.data?[index]
-                                                                .details,
-                                                            numberOfAuctions:
-                                                                snapshot
-                                                                    .data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .numberOfAuction,
-                                                          ))),
+                                                                .numberOfAuction,
+                                                      ),
+                                                    ),
+                                                  ),
                                                   options: CarouselOptions(
                                                     onPageChanged: (index, x) {
-                                                      setState(() {
-                                                        controller.pageIndex =
-                                                            index;
-                                                      });
+                                                      setState(
+                                                        () {
+                                                          controller.pageIndex =
+                                                              index;
+                                                        },
+                                                      );
                                                     },
-                                                    //aspectRatio: 3/3,
+                                                    //aspectRatio: 1.1,
                                                     enableInfiniteScroll: false,
-                                                    height: 400,
+                                                   height: 392,
                                                     viewportFraction: 0.8,
                                                     enlargeCenterPage: true,
                                                     initialPage: 0,
@@ -242,10 +252,9 @@ class _PlansScreenState extends State<PlansScreen> {
                                                   ),
                                                 );
                                               } else if (snapshot.hasError) {
-                                                ///TODO: failure widget
-                                                return const Text('error');
+                                                return const FailureWidget();
                                               } else {
-                                                return const Text('error');
+                                                return const FailureWidget();
                                               }
                                           }
                                         }),
@@ -257,7 +266,6 @@ class _PlansScreenState extends State<PlansScreen> {
                                           horizontal: 30.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          ///TODO: make sure of binding
                                           Get.to(
                                             () => const CustomNavigationBar(),
                                             binding: HomeBinding(),
@@ -284,9 +292,9 @@ class _PlansScreenState extends State<PlansScreen> {
                                         ),
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 20,
-                                    ),
+                                    // const SizedBox(
+                                    //   height: 20,
+                                    // ),
                                   ],
                                 ),
                               ),

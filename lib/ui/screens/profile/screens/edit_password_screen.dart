@@ -11,113 +11,161 @@ class EditPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Directionality(
-        textDirection: TextDirection.ltr,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 30,
-          ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 30,
+        ),
+        child: Form(
+          key: controller.formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 20,
+                height: 60,
               ),
-              CustomTextField(
-                controller: controller.oldPasswordController,
-                color: MyColors.textFieldColor,
-                obscureText: true,
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.lock_open_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0,
+                ),
+                child: Text(
+                  'current password'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 16,
                   ),
                 ),
-                hint: 'old password'.tr,
               ),
+              const SizedBox(
+                height: 6,
+              ),
+              GetBuilder<EditPasswordController>(builder: (value) {
+                return CustomTextField(
+                  controller: controller.oldPasswordController,
+                  color: MyColors.textFieldColor,
+                  obscureText: value.oldIsVisible,
+                  obscureChar: '*',
+                  hint: 'current password'.tr,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 8) {
+                      return 'password too short'.tr;
+                    } else if (!text.contains(RegExp(r'[0-9]'))) {
+                      return 'password too weak'.tr;
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      value.oldIsVisible = !value.oldIsVisible;
+                      value.update();
+                    },
+                    icon: Icon(value.oldIsVisible
+                        ? Icons.remove_red_eye
+                        : Icons.remove_red_eye_outlined),
+                  ),
+                );
+              }),
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
-                controller: controller.passwordController,
-                color: MyColors.textFieldColor,
-                obscureText: true,
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.lock_open_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Text(
+                  'new password'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 16,
                   ),
                 ),
-                hint: 'password'.tr,
               ),
               const SizedBox(
-                height: 20,
+                height: 6,
               ),
-              CustomTextField(
-                controller: controller.confirmPasswordController,
-                color: MyColors.textFieldColor,
-                obscureText: true,
-                prefixIcon: SizedBox(
-                  width: 60,
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 18,
-                      ),
-                      const Icon(
-                        Icons.lock_open_outlined,
-                        color: Color(0xffBDB5D0),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Container(
-                        width: 1,
-                        height: 38,
-                        color: MyColors.primary,
-                      ),
-                    ],
+              GetBuilder<EditPasswordController>(builder: (value) {
+                return CustomTextField(
+                  controller: controller.passwordController,
+                  color: MyColors.textFieldColor,
+                  obscureText: value.newIsVisible,
+                  obscureChar: '*',
+                  hint: 'new password'.tr,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 8) {
+                      return 'password too short'.tr;
+                    } else if (!text.contains(RegExp(r'[0-9]'))) {
+                      return 'password too weak'.tr;
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      value.newIsVisible = !value.newIsVisible;
+                      value.update();
+                    },
+                    icon: Icon(value.newIsVisible
+                        ? Icons.remove_red_eye
+                        : Icons.remove_red_eye_outlined),
+                  ),
+                );
+              }),
+              const SizedBox(
+                height: 10,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: Text(
+                  'confirm new password'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 16,
                   ),
                 ),
-                hint: 'confirm password'.tr,
               ),
+              const SizedBox(
+                height: 6,
+              ),
+              GetBuilder<EditPasswordController>(builder: (value) {
+                return CustomTextField(
+                  controller: controller.confirmPasswordController,
+                  color: MyColors.textFieldColor,
+                  obscureText: value.newIsVisible,
+                  obscureChar: '*',
+                  hint: 'confirm new password'.tr,
+                  validator: (text) {
+                    if (text == '' || text!.isEmpty) {
+                      return 'cannot be empty'.tr;
+                    } else if (text.length < 8) {
+                      return 'password too short'.tr;
+                    } else if (!text.contains(RegExp(r'[0-9]'))) {
+                      return 'password too weak'.tr;
+                    }
+                    return null;
+                  },
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      value.newIsVisible = !value.newIsVisible;
+                      value.update();
+                    },
+                    icon: Icon(value.newIsVisible
+                        ? Icons.remove_red_eye
+                        : Icons.remove_red_eye_outlined),
+                  ),
+                );
+              }),
               const SizedBox(
                 height: 20,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () async{
+                  await controller.fetchChangePasswordData(
+                    oldPassword: controller.oldPasswordController.text,
+                    newPassword: controller.passwordController.text,
+                    context: context,
+                  );
+                },
                 child: Container(
                   height: 60,
                   decoration: BoxDecoration(
@@ -128,7 +176,7 @@ class EditPasswordScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: Text(
-                      'next'.tr,
+                      'save'.tr,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 20,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/screen_size.dart';
 
 class AuctionItem extends StatelessWidget {
   final String? image;
@@ -19,14 +20,14 @@ class AuctionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 180,
-      height: 180,
+      width:ScreenSize.phoneSize(180, height: false,),
+      height: ScreenSize.phoneSize(180, height: false,),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            height: 180,
-            width: 180,
+            height: ScreenSize.phoneSize(180, height: false,),
+            width:ScreenSize.phoneSize(180, height: false,),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(
                 25,
@@ -49,19 +50,19 @@ class AuctionItem extends StatelessWidget {
               // ),
             ),
             child: SizedBox(
-              height: 190,
-              width: 190,
+              height: ScreenSize.phoneSize(190, height: false,),
+              width: ScreenSize.phoneSize(190, height: false,),
               child: Stack(
                 children: [
                   CustomNetworkImage(
                     url: image!,
-                    radius: 25,
+                    radius: 18,
                   ),
                   Align(
                     alignment: Alignment.bottomLeft,
                     child: Container(
-                      width: 72,
-                      height: 23,
+                      width:ScreenSize.phoneSize(72, height: false,),
+                      height: ScreenSize.phoneSize(23, height: false,),
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(3),
                       decoration: const BoxDecoration(
@@ -87,8 +88,8 @@ class AuctionItem extends StatelessWidget {
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Container(
-                      width: 72,
-                      height: 23,
+                      width: ScreenSize.phoneSize(72, height: false,),
+                      height:ScreenSize.phoneSize(23, height: false,),
                       margin: const EdgeInsets.all(5),
                       padding: const EdgeInsets.all(3),
                       decoration: const BoxDecoration(

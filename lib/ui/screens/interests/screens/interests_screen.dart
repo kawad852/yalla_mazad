@@ -8,6 +8,7 @@ import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../widgets/failure_widget.dart';
 import '../widgets/interest_item.dart';
 
 class InterestsScreen extends StatefulWidget {
@@ -26,7 +27,8 @@ class _InterestsScreenState extends State<InterestsScreen> {
       body: Stack(
         children: [
           Positioned(
-            right: -100,
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
             top: -50,
             child: Align(
               alignment: Alignment.topRight,
@@ -41,7 +43,12 @@ class _InterestsScreenState extends State<InterestsScreen> {
                     right: 130,
                     top: 80,
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(
+                          () => const PlansScreen(),
+                          binding: PlansBinding(),
+                        );
+                      },
                       icon: const Icon(
                         Icons.cancel_outlined,
                         color: MyColors.primary,
@@ -122,16 +129,17 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                         setState(() {
                                           if (!controller.selectedInterests
                                               .contains(snapshot
-                                                  .data?.data?[index].id)) {
+                                                  .data?.data?[index].id
+                                                  .toString())) {
                                             controller.selectedInterests.add(
-                                                snapshot.data?.data?[index]
-                                                        .id ??
-                                                    0);
+                                                snapshot.data?.data?[index].id
+                                                        .toString() ??
+                                                    '0');
                                           } else {
                                             controller.selectedInterests.remove(
-                                                snapshot.data?.data?[index]
-                                                        .id ??
-                                                    0);
+                                                snapshot.data?.data?[index].id
+                                                        .toString() ??
+                                                    '0');
                                           }
                                         });
                                       },
@@ -141,16 +149,17 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                                 '',
                                         isChosen: controller.selectedInterests
                                             .contains(
-                                                snapshot.data?.data?[index].id),
+                                          snapshot.data?.data?[index].id
+                                              .toString(),
+                                        ),
                                       ),
                                     ),
                                   ),
                                 );
                               } else if (snapshot.hasError) {
-                                ///TODO: failure widget
-                                return const Text('error');
+                                return const FailureWidget();
                               } else {
-                                return const Text('error');
+                                return const FailureWidget();
                               }
                           }
                         }),
@@ -158,11 +167,10 @@ class _InterestsScreenState extends State<InterestsScreen> {
                 ),
                 const Expanded(flex: 2, child: SizedBox()),
                 GestureDetector(
-                  onTap: () {
-                    Get.to(
-                      () => const PlansScreen(),
-                      binding: PlansBinding(),
-                    );
+                  onTap: () async {
+                    await controller.fetchAddCategoriesData(
+                        categories: controller.selectedInterests,
+                        context: context);
                   },
                   child: Container(
                     height: 60,

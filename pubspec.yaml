@@ -51,6 +51,7 @@ dependencies:
   flutter_overlay_loader: ^2.0.0
   fluttertoast: ^8.1.2
   image_picker: ^0.8.6
+  flutter_advanced_drawer: ^1.3.2
 
 
 
@@ -86,6 +87,10 @@ flutter:
     - assets/images/authentication/
     - assets/images/subscriptions/
     - assets/images/navigation_bar/
+    - assets/images/home/
+    - assets/images/authentication/reset_password/
+    - assets/images/authentication/phone_call.png
+    - assets/images/authentication/unlock.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

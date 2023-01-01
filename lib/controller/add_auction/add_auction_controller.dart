@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -25,6 +24,8 @@ class AddAuctionController extends GetxController {
       TextEditingController();
   final TextEditingController directSellPriceController =
       TextEditingController();
+  MapEntry<String, String> selectedCategory = const MapEntry('-1', '0');
+  final formKey = GlobalKey<FormState>();
 
   CategoriesModel? categoriesModel;
   late Future<CategoriesModel?> initializeCategoriesFuture;
@@ -39,7 +40,12 @@ class AddAuctionController extends GetxController {
     );
     if (pickedFile != null) {
       image = pickedFile.path;
-      log(image!);
+      // log(image!);
+      if (Get.locale == const Locale('en')) {
+        mainPictureController.text = '1 picture selected';
+      } else {
+        mainPictureController.text = ' صور واحدة مختارة ';
+      }
     }
   }
 
@@ -48,10 +54,20 @@ class AddAuctionController extends GetxController {
       maxWidth: 1800,
       maxHeight: 1800,
     );
+
+    int i = 0;
     for (var item in pickedFile) {
       if (item != null) {
+        i++;
+        // log(pickedFile.length.toString());
         images?.add(item.path);
+        // log(item.path);
       }
+    }
+    if (Get.locale == const Locale('en')) {
+      morePicturesController.text = '$i pictures selected';
+    } else {
+      morePicturesController.text = '$i صور مختارة ';
     }
   }
 
@@ -66,43 +82,73 @@ class AddAuctionController extends GetxController {
     return categoriesModel;
   }
 
+  List<File?>? getListOfFiles() {
+    List<File?> files = [];
+    if (image != null) {
+      // log('image !=null');
+      files.add(File(image!));
+    } else {
+      // log('image ==null');
+    }
+    if (images != null) {
+      // log('images !=null');
+      for (var item in images!) {
+        if (item != null) {
+          var file = File(item);
+          files.add(file);
+          // log(file.path);
+        }
+      }
+    } else {
+      // log('images ==null');
+    }
+    return files;
+  }
+
   AddAuctionModel? addAuctionModel;
   Future fetchAddAuctionData({
     required BuildContext context,
   }) async {
-    // if (formKey.currentState != null) {
-    //   if (formKey.currentState!.validate()) {
+    if (formKey.currentState != null) {
+      if (formKey.currentState!.validate()) {
     Loader.show(context);
     addAuctionModel = await AddAuctionApi().data(
-      file: File(image!),
+      file: getListOfFiles(),
       name: addressController.text,
       content: descriptionController.text,
       startPrice: auctionStartingPriceController.text,
       userId: MySharedPreferences.userId,
-      categoryId: 1,
+      categoryId: selectedCategory.value,
       buyNowPrice: directSellPriceController.text,
     );
     if (addAuctionModel == null) {
-      Fluttertoast.showToast(msg: AppConstants.failedMessage);
+      Fluttertoast.showToast(
+        msg: AppConstants.failedMessage,
+      );
       Loader.hide();
       return;
     }
     if (addAuctionModel!.code == 200) {
-      Get.dialog(AddedAuctionDialog());
+      Get.dialog(
+        AddedAuctionDialog(),
+      );
       addressController.clear();
       descriptionController.clear();
       auctionStartingPriceController.clear();
       directSellPriceController.clear();
       image = null;
-      images=[];
-      // Get.offAll(() => const BaseNavBar(), binding: NavBarBinding());
+      images = [];
     } else if (addAuctionModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+      Fluttertoast.showToast(
+        msg: AppConstants.failedMessage,
+      );
     } else {
-      Fluttertoast.showToast(msg: addAuctionModel!.msg!);
+      Fluttertoast.showToast(
+        msg: addAuctionModel!.msg!,
+      );
     }
     Loader.hide();
-    //   }
-    // }
+      }
+    }
   }
 }

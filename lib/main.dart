@@ -5,7 +5,7 @@ import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
 import 'package:yalla_mazad/translation/translation.dart';
-import 'package:yalla_mazad/ui/screens/auth/screens/authentication_screen.dart';
+import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/intro/screens/intro_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
@@ -34,7 +34,6 @@ class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
       return const CustomNavigationBar();
-      //return const BaseNavBar();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
@@ -46,7 +45,6 @@ class _MyAppState extends State<MyApp> {
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return HomeBinding();
-      //return NavBarBinding();
     } else if (!MySharedPreferences.isLogIn &&
         !MySharedPreferences.isPassedIntro) {
       return IntroductionBinding();
@@ -57,11 +55,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    // Get.to(() => const SignInScreen(), binding: RegistrationBinding());
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialBinding: _initialBinding(),
-      //initialBinding: HomeBinding(),
       translations: Translation(),
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
       supportedLocales: const [
@@ -69,8 +65,8 @@ class _MyAppState extends State<MyApp> {
         Locale('ar', 'JO'),
       ],
 
-      //locale: Locale('ar'),
-      locale: Locale(MySharedPreferences.language),
+      locale: const Locale('en'),
+      //locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),
