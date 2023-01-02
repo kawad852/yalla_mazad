@@ -7,7 +7,12 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/done_auction_controller.dart';
+import '../../../../model/firestore_bidding/firestore_bidding_model.dart';
 import '../../../../utils/shared_prefrences.dart';
+import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'bidding_item.dart';
 
 class DoneAuctionItem extends StatelessWidget {
   final List<String> images;
@@ -21,6 +26,21 @@ class DoneAuctionItem extends StatelessWidget {
     required this.id,
     Key? key,
   }) : super(key: key);
+
+  static final Query<FireStoreBiddingModel> query = FirebaseFirestore.instance
+      .collection('auctions')
+      .doc('7')
+      .collection('biddings')
+      .withConverter<FireStoreBiddingModel>(
+        fromFirestore: (snapshot, _) {
+          print(snapshot.data()!);
+          print('helloooo');
+          return FireStoreBiddingModel.fromJson(
+            snapshot.data()!,
+          );
+        },
+        toFirestore: (biddings, _) => biddings.toJson(),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -349,6 +369,50 @@ class DoneAuctionItem extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('auctions')
+                .doc('7')
+                .collection('biddings')
+                .orderBy('amount', descending: true)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text(
+                  'an error occured'.tr,
+                );
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return ListView(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    children: snapshot.data!.docs
+                        .asMap()
+                        .map(
+                          (key, value) => MapEntry(
+                            key,
+                            BiddingItem(
+                              name: value['name'],
+                              image: value['image'],
+                              amount: (value['amount']).toString(),
+                              order: (key + 1),
+                              isLast: key + 1 == snapshot.data!.docs.length,
+                            ),
+                          ),
+                        )
+                        .values
+                        .toList(),
+                  );
+              }
+            },
           ),
         ],
       ),

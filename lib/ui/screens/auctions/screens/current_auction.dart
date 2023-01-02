@@ -3,11 +3,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/auctions/current_auction_controller.dart';
 import 'package:yalla_mazad/model/advertisement_details/advertisement_details_model.dart';
+import 'package:yalla_mazad/ui/screens/auctions/screens/test.dart';
 import 'package:yalla_mazad/ui/screens/auctions/widgets/confirm_auction_dialog.dart';
 import 'package:yalla_mazad/ui/screens/auctions/widgets/current_auction_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
-
 import '../../../widgets/failure_widget.dart';
 
 class CurrentAuctionScreen extends StatefulWidget {
@@ -66,9 +66,10 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                     FloatingActionButtonLocation.centerFloat,
                 floatingActionButton: InkWell(
                   onTap: () {
-                    Get.dialog(
-                      ConfirmAuctionDialog(),
-                    );
+                    Get.to(()=>Test());
+                    // Get.dialog(
+                    //   ConfirmAuctionDialog(),
+                    // );
                   },
                   child: Container(
                     decoration: BoxDecoration(

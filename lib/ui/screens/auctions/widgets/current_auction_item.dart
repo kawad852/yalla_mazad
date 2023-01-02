@@ -7,7 +7,11 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/current_auction_controller.dart';
+import '../../../../model/firestore_bidding/firestore_bidding_model.dart';
 import '../../../../utils/shared_prefrences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'bidding_item.dart';
 
 class CurrentAuctionItem extends StatelessWidget {
   final List<String> images;
@@ -21,6 +25,18 @@ class CurrentAuctionItem extends StatelessWidget {
     required this.id,
     Key? key,
   }) : super(key: key);
+  static final Query<FireStoreBiddingModel> query = FirebaseFirestore.instance
+      .collection('auctions')
+      .doc('7')
+      .collection('biddings')
+      .withConverter<FireStoreBiddingModel>(
+        fromFirestore: (snapshot, _) {
+          return FireStoreBiddingModel.fromJson(
+            snapshot.data()!,
+          );
+        },
+        toFirestore: (biddings, _) => biddings.toJson(),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +127,7 @@ class CurrentAuctionItem extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: Get.height,
+            height: 620,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -349,6 +365,55 @@ class CurrentAuctionItem extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+          StreamBuilder<QuerySnapshot>(
+            stream: FirebaseFirestore.instance
+                .collection('auctions')
+                .doc('7')
+                .collection('biddings')
+                .orderBy('amount', descending: true)
+                .snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.hasError) {
+                return Text(
+                  'an error occured'.tr,
+                );
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                default:
+                  return ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 30,
+                    ),
+                    children: snapshot.data!.docs
+                        .asMap()
+                        .map(
+                          (key, value) => MapEntry(
+                            key,
+                            BiddingItem(
+                              name: value['name'],
+                              image: value['image'],
+                              amount: (value['amount']).toString(),
+                              order: (key + 1),
+                              isLast: key + 1 == snapshot.data!.docs.length,
+                            ),
+                          ),
+                        )
+                        .values
+                        .toList(),
+                  );
+              }
+            },
+          ),
+          const SizedBox(
+            height: 130,
           ),
         ],
       ),
