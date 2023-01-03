@@ -15,6 +15,7 @@ class SearchController extends GetxController {
   final model = Rxn<SearchAdvertisementModel>();
   final searchQuery = "".obs;
   Timer? _debounce;
+
   void toggleLoading({required bool status}) {
     isLoading.value = status;
   }

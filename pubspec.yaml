@@ -55,6 +55,7 @@ dependencies:
   flutterfire_ui: ^0.4.3+20
   firebase_ui_firestore: ^1.2.2
   firebase_database: ^10.0.9
+  infinite_scroll_pagination: ^3.2.0
 
 
 

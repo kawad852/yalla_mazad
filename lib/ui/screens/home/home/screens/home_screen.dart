@@ -18,6 +18,7 @@ import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -352,66 +353,63 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(
                         height: 247,
-                        child: FutureBuilder<PopularAdvertisementModel?>(
-                            future: controller.initializePopularAdsFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return ListView.separated(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30),
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            controller.selectedIndex = index;
-                                            CustomNavigationBarController
-                                                .find.tabController
-                                                .jumpToTab(3);
-                                            Future.delayed(
-                                                const Duration(
-                                                    milliseconds: 50), () {
-                                              if (TrendingAuctionController.find
-                                                  .pageController.hasClients) {
-                                                TrendingAuctionController
-                                                    .find.pageController
-                                                    .jumpToPage(controller
-                                                        .selectedIndex);
-                                              }
-                                            });
-                                          },
-                                          child: AuctionItem(
-                                            image: snapshot
-                                                .data?.data?[index].image,
-                                            name: snapshot
-                                                .data?.data?[index].name,
-                                            user: snapshot
-                                                .data?.data?[index].user?.name,
-                                            price:
-                                                '${snapshot.data?.data?[index].startPrice.toString()} JOD',
-                                          ),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 10,
-                                        );
-                                      },
-                                      itemCount:
-                                          snapshot.data?.data?.length ?? 0,
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
+                        child: PagedListView<int, PopularAdsList>.separated(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          pagingController: controller.trendingPagingController,
+                          builderDelegate:
+                              PagedChildBuilderDelegate<PopularAdsList>(
+                            newPageProgressIndicatorBuilder: (context) =>
+                                const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            firstPageProgressIndicatorBuilder: (context) =>
+                                const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            itemBuilder: (context, data, index) {
+                              return InkWell(
+                                child: AuctionItem(
+                                  image: data.image,
+                                  name: data.name,
+                                  user: data.user?.name,
+                                  price: '${data.startPrice.toString()} JOD',
+                                ),
+                                onTap: () {
+                                  controller.selectedIndex = index;
+                                  CustomNavigationBarController
+                                      .find.tabController
+                                      .jumpToTab(3);
+                                  Future.delayed(
+                                    const Duration(milliseconds: 500),
+                                    () {
+                                      if (TrendingAuctionController
+                                              .find.pageController.hasClients &&
+                                          TrendingAuctionController
+                                                  .find
+                                                  .pageController
+                                                  .positions
+                                                  .length <=
+                                              1) {
+                                        TrendingAuctionController
+                                            .find.pageController
+                                            .jumpToPage(
+                                                controller.selectedIndex);
+                                      }
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              width: 10,
+                            );
+                          },
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 35.0),
@@ -443,47 +441,57 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       SizedBox(
                         height: 247,
-                        child: FutureBuilder<AllAdvertisementsModel?>(
-                            future: controller.initializeAllAdsFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return ListView.separated(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30),
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        return AuctionItem(
-                                          image:
-                                              snapshot.data?.data?[index].image,
-                                          name:
-                                              snapshot.data?.data?[index].name,
-                                          user: snapshot
-                                              .data?.data?[index].user?.name,
-                                          price:
-                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 10,
-                                        );
-                                      },
-                                      itemCount:
-                                          snapshot.data?.data?.length ?? 0,
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
+                        child: PagedListView<int, AllAdsList>.separated(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          scrollDirection: Axis.horizontal,
+                          pagingController: controller.allAdsPagingController,
+                          builderDelegate:
+                              PagedChildBuilderDelegate<AllAdsList>(
+                            newPageProgressIndicatorBuilder: (context) =>
+                                const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            firstPageProgressIndicatorBuilder: (context) =>
+                                const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                            itemBuilder: (context, data, index) {
+                              return InkWell(
+                                child: AuctionItem(
+                                  image: data.image,
+                                  name: data.name,
+                                  user: data.user?.name,
+                                  price: '${data.startPrice.toString()} JOD',
+                                ),
+                                onTap: () {
+                                  controller.selectedIndex = index;
+                                  CustomNavigationBarController
+                                      .find.tabController
+                                      .jumpToTab(3);
+                                  Future.delayed(
+                                    const Duration(milliseconds: 50),
+                                    () {
+                                      if (TrendingAuctionController
+                                          .find.pageController.hasClients) {
+                                        TrendingAuctionController
+                                            .find.pageController
+                                            .jumpToPage(
+                                                controller.selectedIndex);
+                                      }
+                                    },
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              width: 10,
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),

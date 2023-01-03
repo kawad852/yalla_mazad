@@ -7,9 +7,9 @@ import 'dart:developer';
 import '../../utils/api_url.dart';
 
 class PopularAdsApi {
-  Future<PopularAdvertisementModel?> data() async {
+  Future<PopularAdvertisementModel?> data(int pageId) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllPopularAds}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllPopularAds}?page=$pageId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

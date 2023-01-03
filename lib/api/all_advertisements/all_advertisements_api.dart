@@ -7,9 +7,9 @@ import '../../model/all_advertisements/all_advertiements_model.dart';
 import '../../utils/api_url.dart';
 
 class ALlAdvertisementsApi {
-  Future<AllAdvertisementsModel?> data() async {
+  Future<AllAdvertisementsModel?> data(int pageId) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllAds}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllAds}/?page=$pageId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

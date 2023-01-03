@@ -2,7 +2,7 @@ class AllAdvertisementsModel {
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  List<AllAdsList>? data;
 
   AllAdvertisementsModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +11,9 @@ class AllAdvertisementsModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <AllAdsList>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(AllAdsList.fromJson(v));
       });
     }
   }
@@ -30,7 +30,7 @@ class AllAdvertisementsModel {
   }
 }
 
-class Data {
+class AllAdsList {
   int? id;
   String? name;
   String? content;
@@ -46,7 +46,7 @@ class Data {
   Category? category;
   List<Images>? images;
 
-  Data(
+  AllAdsList(
       {this.id,
       this.name,
       this.content,
@@ -62,7 +62,7 @@ class Data {
       this.category,
       this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  AllAdsList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     content = json['content'];
