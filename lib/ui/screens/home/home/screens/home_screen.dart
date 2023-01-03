@@ -383,7 +383,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .find.tabController
                                       .jumpToTab(3);
                                   Future.delayed(
-                                    const Duration(milliseconds: 500),
+                                    const Duration(milliseconds: 50),
                                     () {
                                       if (TrendingAuctionController
                                               .find.pageController.hasClients &&

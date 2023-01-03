@@ -8,6 +8,8 @@ import 'package:yalla_mazad/model/add_advertisement_to_favorites/add_advertiseme
 import 'package:yalla_mazad/model/advertisement_details/advertisement_details_model.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
+import '../../api/delete_advertisement_from_favorites/delete_advertisement_from_favorites_api.dart';
+import '../../model/delete_advertisement_from_favorites/delete_advertisement_from_favorites_model.dart';
 import '../../utils/app_constants.dart';
 
 class ComingAuctionController extends GetxController {
@@ -63,6 +65,41 @@ class ComingAuctionController extends GetxController {
     } else {
       Fluttertoast.showToast(
         msg: addAdvertisementToFavoritesModel!.msg!,
+      );
+    }
+    Loader.hide();
+  }
+
+  DeleteAdvertisementFromFavoritesModel? deleteAdvertisementFromFavoritesModel;
+
+  Future fetchDeleteFromFavoritesData({
+    required String adId,
+    required BuildContext context,
+  }) async {
+    Loader.show(context);
+    deleteAdvertisementFromFavoritesModel =
+        await DeleteAdvertisementFromFavoritesApi().data(
+      advertisementId: adId,
+      userId: MySharedPreferences.userId.toString(),
+    );
+    if (deleteAdvertisementFromFavoritesModel == null) {
+      Fluttertoast.showToast(
+        msg: AppConstants.failedMessage,
+      );
+      Loader.hide();
+      return;
+    }
+    if (deleteAdvertisementFromFavoritesModel!.code == 200) {
+      Fluttertoast.showToast(
+        msg: 'removed from favorites successfully'.tr,
+      );
+    } else if (deleteAdvertisementFromFavoritesModel!.code == 500) {
+      Fluttertoast.showToast(
+        msg: deleteAdvertisementFromFavoritesModel?.msg ?? 'already here'.tr,
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg: deleteAdvertisementFromFavoritesModel!.msg!,
       );
     }
     Loader.hide();

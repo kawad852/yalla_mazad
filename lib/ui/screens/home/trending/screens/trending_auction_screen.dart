@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/widgets/trending_auction_item.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
-import '../../../../../model/popular_advertisement/popular_advertisement_model.dart';
-import '../../../../widgets/failure_widget.dart';
+
 
 class TrendingAuctionScreen extends StatefulWidget {
   const TrendingAuctionScreen({Key? key}) : super(key: key);
@@ -50,8 +48,9 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
             ),
           ),
           SizedBox(
-              width: Get.width,
-              child: GetBuilder<TrendingAuctionController>(builder: (value) {
+            width: Get.width,
+            child: GetBuilder<TrendingAuctionController>(
+              builder: (value) {
                 return SizedBox(
                   width: Get.width,
                   child: PageView(
@@ -83,7 +82,9 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                     ),
                   ),
                 );
-              })),
+              },
+            ),
+          ),
 
           // FutureBuilder<PopularAdvertisementModel?>(
           //     future: controller.initializePopularAdsFuture,
