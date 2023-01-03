@@ -8,6 +8,7 @@ import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
+import '../../../auctions/screens/test.dart';
 import '../../../notifications/screens/notifications_screen.dart';
 
 class TrendingAuctionItem extends StatelessWidget {
@@ -58,8 +59,9 @@ class TrendingAuctionItem extends StatelessWidget {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          CustomNavigationBarController.find.tabController
-                              .jumpToTab(0);
+                          Get.to(() => Test());
+                          // CustomNavigationBarController.find.tabController
+                          //     .jumpToTab(0);
                         },
                         icon: const Icon(
                           Icons.arrow_back_ios,

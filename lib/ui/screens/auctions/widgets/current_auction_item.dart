@@ -38,6 +38,22 @@ class CurrentAuctionItem extends StatelessWidget {
         toFirestore: (biddings, _) => biddings.toJson(),
       );
 
+  static final Query<FireStoreBiddingModel> highestPrice = FirebaseFirestore
+      .instance
+      .collection('auctions')
+      .doc('7')
+      .collection('biddings')
+      .orderBy('amount', descending: true)
+      .limit(1)
+      .withConverter<FireStoreBiddingModel>(
+        fromFirestore: (snapshot, _) {
+          return FireStoreBiddingModel.fromJson(
+            snapshot.data()!,
+          );
+        },
+        toFirestore: (biddings, _) => biddings.toJson(),
+      );
+
   @override
   Widget build(BuildContext context) {
     final controller = CurrentAuctionController.find;
@@ -309,15 +325,24 @@ class CurrentAuctionItem extends StatelessWidget {
                               ),
                               color: MyColors.textFieldColor,
                             ),
-                            child: const Center(
-                              child: Text(
-                                '130 JOD',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: MyColors.red,
-                                  fontSize: 16,
-                                ),
-                              ),
+                            child: Center(
+                              child: StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('auctions')
+                                      .doc('7')
+                                      .collection('biddings')
+                                      .orderBy('amount', descending: true)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    return Text(
+                                      snapshot.data?.docs.first.get('amount'),
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: MyColors.red,
+                                        fontSize: 16,
+                                      ),
+                                    );
+                                  }),
                             ),
                           ),
                         ],
