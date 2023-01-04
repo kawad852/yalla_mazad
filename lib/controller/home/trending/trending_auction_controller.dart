@@ -13,15 +13,23 @@ class TrendingAuctionController extends GetxController {
   );
 
   late PagingController<int, PopularAdsList> trendingPagingController;
+  PopularAdvertisementModel? popularAdvertisementModel;
+
   List<PopularAdsList> popularAdsItems = [];
+
+  RxBool isLoading = true.obs;
+  bool isFinalPage = false;
 
   Future<void> fetchTrendingPage(int pageKey) async {
     try {
       popularAdvertisementModel = await PopularAdsApi().data(pageKey);
       final newItems = popularAdvertisementModel!.data;
       popularAdsItems.addAll(newItems?.toList() ?? []);
+      isLoading.value = false;
+      update();
       if (newItems!.isEmpty) {
         trendingPagingController.appendLastPage(newItems);
+        isFinalPage = true;
       } else {
         trendingPagingController.appendPage(newItems, pageKey + 1);
       }
@@ -36,10 +44,8 @@ class TrendingAuctionController extends GetxController {
       ..addPageRequestListener((pageKey) {
         fetchTrendingPage(pageKey);
       });
-
+    fetchTrendingPage(1);
+    update();
     super.onInit();
   }
-
-  PopularAdvertisementModel? popularAdvertisementModel;
-  late Future<PopularAdvertisementModel?> initializePopularAdsFuture;
 }

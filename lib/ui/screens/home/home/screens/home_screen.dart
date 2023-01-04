@@ -439,60 +439,60 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(
                         height: 15,
                       ),
-                      SizedBox(
-                        height: 247,
-                        child: PagedListView<int, AllAdsList>.separated(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                          ),
-                          scrollDirection: Axis.horizontal,
-                          pagingController: controller.allAdsPagingController,
-                          builderDelegate:
-                              PagedChildBuilderDelegate<AllAdsList>(
-                            newPageProgressIndicatorBuilder: (context) =>
-                                const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            firstPageProgressIndicatorBuilder: (context) =>
-                                const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                            itemBuilder: (context, data, index) {
-                              return InkWell(
-                                child: AuctionItem(
-                                  image: data.image,
-                                  name: data.name,
-                                  user: data.user?.name,
-                                  price: '${data.startPrice.toString()} JOD',
-                                ),
-                                onTap: () {
-                                  controller.selectedIndex = index;
-                                  CustomNavigationBarController
-                                      .find.tabController
-                                      .jumpToTab(3);
-                                  Future.delayed(
-                                    const Duration(milliseconds: 50),
-                                    () {
-                                      if (TrendingAuctionController
-                                          .find.pageController.hasClients) {
-                                        TrendingAuctionController
-                                            .find.pageController
-                                            .jumpToPage(
-                                                controller.selectedIndex);
-                                      }
-                                    },
-                                  );
-                                },
-                              );
-                            },
-                          ),
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              width: 10,
-                            );
-                          },
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 247,
+                      //   child: PagedListView<int, AllAdsList>.separated(
+                      //     padding: const EdgeInsets.symmetric(
+                      //       horizontal: 30,
+                      //     ),
+                      //     scrollDirection: Axis.horizontal,
+                      //     pagingController: controller.allAdsPagingController,
+                      //     builderDelegate:
+                      //         PagedChildBuilderDelegate<AllAdsList>(
+                      //       newPageProgressIndicatorBuilder: (context) =>
+                      //           const Center(
+                      //         child: CircularProgressIndicator(),
+                      //       ),
+                      //       firstPageProgressIndicatorBuilder: (context) =>
+                      //           const Center(
+                      //         child: CircularProgressIndicator(),
+                      //       ),
+                      //       itemBuilder: (context, data, index) {
+                      //         return InkWell(
+                      //           child: AuctionItem(
+                      //             image: data.image,
+                      //             name: data.name,
+                      //             user: data.user?.name,
+                      //             price: '${data.startPrice.toString()} JOD',
+                      //           ),
+                      //           onTap: () {
+                      //             controller.selectedIndex = index;
+                      //             CustomNavigationBarController
+                      //                 .find.tabController
+                      //                 .jumpToTab(3);
+                      //             Future.delayed(
+                      //               const Duration(milliseconds: 50),
+                      //               () {
+                      //                 if (TrendingAuctionController
+                      //                     .find.pageController.hasClients) {
+                      //                   TrendingAuctionController
+                      //                       .find.pageController
+                      //                       .jumpToPage(
+                      //                           controller.selectedIndex);
+                      //                 }
+                      //               },
+                      //             );
+                      //           },
+                      //         );
+                      //       },
+                      //     ),
+                      //     separatorBuilder: (context, index) {
+                      //       return const SizedBox(
+                      //         width: 10,
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
