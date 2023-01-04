@@ -8,13 +8,20 @@ import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/screens/notifications/screens/notifications_screen.dart';
+import 'package:yalla_mazad/utils/app_constants.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../../../../binding/auctions/coming_auction_binding.dart';
+import '../../../../../../binding/auctions/current_auction_binding.dart';
+import '../../../../../../binding/auctions/done_auction_binding.dart';
 import '../../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../../controller/home/trending/trending_auction_controller.dart';
 import '../../../../../../model/advertisement_by_category/advertisement_by_category_model.dart';
 import '../../../../../widgets/failure_widget.dart';
+import '../../../../auctions/screens/coming_auction.dart';
+import '../../../../auctions/screens/current_auction.dart';
+import '../../../../auctions/screens/done_auction.dart';
 import '../../../home/widgets/auction_item.dart';
 
 class AuctionsByCategoryScreen extends StatefulWidget {
@@ -263,6 +270,11 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                       scrollDirection: Axis.vertical,
                       pagingController: controller.allAdsPagingController,
                       builderDelegate: PagedChildBuilderDelegate<AllAdsList>(
+                        firstPageErrorIndicatorBuilder: (context) => Center(
+                          child: Text(
+                            AppConstants.failedMessage,
+                          ),
+                        ),
                         newPageProgressIndicatorBuilder: (context) =>
                             const Center(
                           child: CircularProgressIndicator(),
@@ -272,13 +284,50 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                           child: CircularProgressIndicator(),
                         ),
                         itemBuilder: (context, data, index) {
-                          return AllAuctionsItem(
-                            image: data.image,
-                            name: data.name,
-                            price: '${data.startPrice.toString()} JOD',
-                            details: data.content,
-                            userImage: data.user?.image,
-                            userName: data.user?.name,
+                          return InkWell(
+                            onTap: () {
+                              String startDate = data.startDate ?? '';
+                              String endDate = data.endDate ?? '';
+                              print(startDate);
+                              print(endDate);
+                              int startDifference = DateTime.parse(startDate)
+                                  .difference(DateTime.now())
+                                  .inSeconds;
+                              int endDifference = DateTime.now()
+                                  .difference(DateTime.parse(endDate))
+                                  .inSeconds;
+                              if (startDifference >= 1) {
+                                print('coming');
+                                Get.to(
+                                  () => const ComingAuctionScreen(),
+                                  binding: ComingAuctionBinding(),
+                                  arguments: data.id,
+                                );
+                              } else if (startDifference <= 0 &&
+                                  endDifference <= 0) {
+                                print('current');
+                                Get.to(
+                                  () => const CurrentAuctionScreen(),
+                                  binding: CurrentAuctionBinding(),
+                                  arguments: data.id,
+                                );
+                              } else if (endDifference >= 1) {
+                                print('done');
+                                Get.to(
+                                  () => const DoneAuctionScreen(),
+                                  binding: DoneAuctionBinding(),
+                                  arguments: data.id,
+                                );
+                              }
+                            },
+                            child: AllAuctionsItem(
+                              image: data.image,
+                              name: data.name,
+                              price: '${data.startPrice.toString()} JOD',
+                              details: data.content,
+                              userImage: data.user?.image,
+                              userName: data.user?.name,
+                            ),
                           );
                         },
                       ),
