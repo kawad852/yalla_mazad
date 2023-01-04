@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../../../model/firestore_bidding/firestore_bidding_model.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../../utils/colors.dart';
@@ -16,7 +13,9 @@ class Test extends StatelessWidget {
     return Scaffold(
       body: Container(
         height: 700,
-        padding: EdgeInsets.only(top: 150),
+        padding: const EdgeInsets.only(
+          top: 150,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

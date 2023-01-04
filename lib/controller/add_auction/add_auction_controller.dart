@@ -13,7 +13,6 @@ import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import '../../model/add_auction/add_auction_model.dart';
 import '../../ui/screens/add_auction/widgets/added_auction_dialog.dart';
 import '../../utils/app_constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AddAuctionController extends GetxController {
   static AddAuctionController get find => Get.find();

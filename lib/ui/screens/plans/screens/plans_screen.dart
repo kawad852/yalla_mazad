@@ -8,8 +8,6 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
-import 'package:yalla_mazad/utils/screen_size.dart';
-
 import '../../../widgets/failure_widget.dart';
 
 class PlansScreen extends StatefulWidget {

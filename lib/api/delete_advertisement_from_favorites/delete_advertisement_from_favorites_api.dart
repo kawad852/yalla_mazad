@@ -1,6 +1,5 @@
 import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/delete_advertisement_from_favorites/delete_advertisement_from_favorites_model.dart';
-import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import 'dart:convert';
 import 'dart:developer';

@@ -7,7 +7,6 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/current_auction_controller.dart';
-import '../../../../model/firestore_bidding/firestore_bidding_model.dart';
 import '../../../../utils/shared_prefrences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
