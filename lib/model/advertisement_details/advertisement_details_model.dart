@@ -27,6 +27,7 @@ class AdvertisementDetailsModel {
 
 class Data {
   int? id;
+  bool? isFavorite;
   String? name;
   String? content;
   int? startPrice;
@@ -43,6 +44,7 @@ class Data {
 
   Data(
       {this.id,
+        this.isFavorite,
       this.name,
       this.content,
       this.startPrice,
@@ -59,6 +61,7 @@ class Data {
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    isFavorite = json['is_favorite'];
     name = json['name'];
     content = json['content'];
     startPrice = json['start_price'];
@@ -83,6 +86,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
+    data['is_favorite']=isFavorite;
     data['name'] = name;
     data['content'] = content;
     data['start_price'] = startPrice;

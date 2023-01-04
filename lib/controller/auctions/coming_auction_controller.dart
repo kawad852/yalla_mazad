@@ -55,6 +55,7 @@ class ComingAuctionController extends GetxController {
       return;
     }
     if (addAdvertisementToFavoritesModel!.code == 200) {
+      advertisementDetailsModel?.data?.isFavorite = true;
       Fluttertoast.showToast(
         msg: 'added to favorites successfully'.tr,
       );
@@ -90,6 +91,7 @@ class ComingAuctionController extends GetxController {
       return;
     }
     if (deleteAdvertisementFromFavoritesModel!.code == 200) {
+      advertisementDetailsModel?.data?.isFavorite = false;
       Fluttertoast.showToast(
         msg: 'removed from favorites successfully'.tr,
       );

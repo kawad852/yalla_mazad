@@ -5,15 +5,16 @@ import 'dart:developer';
 
 import '../../model/all_advertisements/all_advertiements_model.dart';
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class ALlAdvertisementsApi {
   Future<AllAdvertisementsModel?> data(int pageId) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllAds}/?page=$pageId';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAllAds}?page=$pageId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: AllAdvertisementsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

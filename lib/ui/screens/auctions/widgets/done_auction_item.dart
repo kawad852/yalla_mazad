@@ -9,7 +9,6 @@ import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/done_auction_controller.dart';
 import '../../../../model/firestore_bidding/firestore_bidding_model.dart';
 import '../../../../utils/shared_prefrences.dart';
-import 'package:firebase_ui_firestore/firebase_ui_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'bidding_item.dart';
@@ -26,21 +25,6 @@ class DoneAuctionItem extends StatelessWidget {
     required this.id,
     Key? key,
   }) : super(key: key);
-
-  static final Query<FireStoreBiddingModel> query = FirebaseFirestore.instance
-      .collection('auctions')
-      .doc('7')
-      .collection('biddings')
-      .withConverter<FireStoreBiddingModel>(
-        fromFirestore: (snapshot, _) {
-          print(snapshot.data()!);
-          print('helloooo');
-          return FireStoreBiddingModel.fromJson(
-            snapshot.data()!,
-          );
-        },
-        toFirestore: (biddings, _) => biddings.toJson(),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +97,19 @@ class DoneAuctionItem extends StatelessWidget {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          controller.fetchAddToFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
+                          if (controller.advertisementDetailsModel?.data
+                                  ?.isFavorite ==
+                              true) {
+                            controller.fetchDeleteFromFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          } else {
+                            controller.fetchAddToFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          }
                         },
                         icon: Image.asset(
                           MyImages.favorite,
@@ -131,7 +124,7 @@ class DoneAuctionItem extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: Get.height,
+            height: 620,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -313,15 +306,25 @@ class DoneAuctionItem extends StatelessWidget {
                               ),
                               color: MyColors.textFieldColor,
                             ),
-                            child: const Center(
-                              child: Text(
-                                '130 JOD',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: MyColors.red,
-                                  fontSize: 16,
-                                ),
-                              ),
+                            child: Center(
+                              child: StreamBuilder<QuerySnapshot>(
+                                  stream: FirebaseFirestore.instance
+                                      .collection('auctions')
+                                      .doc('7')
+                                      .collection('biddings')
+                                      .orderBy('amount', descending: true)
+                                      .snapshots(),
+                                  builder: (context, snapshot) {
+                                    return Text(
+                                      snapshot.data?.docs.first.get('amount') ??
+                                          '',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: MyColors.red,
+                                        fontSize: 16,
+                                      ),
+                                    );
+                                  }),
                             ),
                           ),
                         ],
@@ -371,6 +374,7 @@ class DoneAuctionItem extends StatelessWidget {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
+            ///TODO: edit doc id
             stream: FirebaseFirestore.instance
                 .collection('auctions')
                 .doc('7')
@@ -391,6 +395,8 @@ class DoneAuctionItem extends StatelessWidget {
                   );
                 default:
                   return ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                     ),
@@ -414,6 +420,7 @@ class DoneAuctionItem extends StatelessWidget {
               }
             },
           ),
+          const SizedBox(height: 40,),
         ],
       ),
     );

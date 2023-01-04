@@ -25,34 +25,6 @@ class CurrentAuctionItem extends StatelessWidget {
     required this.id,
     Key? key,
   }) : super(key: key);
-  static final Query<FireStoreBiddingModel> query = FirebaseFirestore.instance
-      .collection('auctions')
-      .doc('7')
-      .collection('biddings')
-      .withConverter<FireStoreBiddingModel>(
-        fromFirestore: (snapshot, _) {
-          return FireStoreBiddingModel.fromJson(
-            snapshot.data()!,
-          );
-        },
-        toFirestore: (biddings, _) => biddings.toJson(),
-      );
-
-  static final Query<FireStoreBiddingModel> highestPrice = FirebaseFirestore
-      .instance
-      .collection('auctions')
-      .doc('7')
-      .collection('biddings')
-      .orderBy('amount', descending: true)
-      .limit(1)
-      .withConverter<FireStoreBiddingModel>(
-        fromFirestore: (snapshot, _) {
-          return FireStoreBiddingModel.fromJson(
-            snapshot.data()!,
-          );
-        },
-        toFirestore: (biddings, _) => biddings.toJson(),
-      );
 
   @override
   Widget build(BuildContext context) {
@@ -125,10 +97,19 @@ class CurrentAuctionItem extends StatelessWidget {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                          controller.fetchAddToFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
+                          if (controller.advertisementDetailsModel?.data
+                              ?.isFavorite ==
+                              true) {
+                            controller.fetchDeleteFromFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          } else {
+                            controller.fetchAddToFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          }
                         },
                         icon: Image.asset(
                           MyImages.favorite,
@@ -337,7 +318,7 @@ class CurrentAuctionItem extends StatelessWidget {
                                     return Text(
                                       snapshot.data?.docs.first.get('amount'),
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         color: MyColors.red,
                                         fontSize: 16,
                                       ),
@@ -392,6 +373,7 @@ class CurrentAuctionItem extends StatelessWidget {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
+            ///TODO: edit doc id
             stream: FirebaseFirestore.instance
                 .collection('auctions')
                 .doc('7')
@@ -437,9 +419,7 @@ class CurrentAuctionItem extends StatelessWidget {
               }
             },
           ),
-          const SizedBox(
-            height: 130,
-          ),
+          const SizedBox(height: 40,),
         ],
       ),
     );

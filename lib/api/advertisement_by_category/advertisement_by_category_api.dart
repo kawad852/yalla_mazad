@@ -5,15 +5,17 @@ import 'dart:convert';
 import 'dart:developer';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class AdvertisementByCategoryApi {
   Future<AdvertisementByCategoryModel?> data({required int categoryId}) async {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAdsByCategory}$categoryId';
       Uri uri = Uri.parse(url);
+      ///TODO: make sure from backend (ask)
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: AdvertisementByCategoryResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

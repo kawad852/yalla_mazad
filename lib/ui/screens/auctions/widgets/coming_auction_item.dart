@@ -31,15 +31,15 @@ class ComingAuctionItem extends StatelessWidget {
       .doc('7')
       .collection('biddings')
       .withConverter<FireStoreBiddingModel>(
-    fromFirestore: (snapshot, _) {
-      print(snapshot.data()!);
-      print('helloooo');
-      return FireStoreBiddingModel.fromJson(
-        snapshot.data()!,
+        fromFirestore: (snapshot, _) {
+          print(snapshot.data()!);
+          print('helloooo');
+          return FireStoreBiddingModel.fromJson(
+            snapshot.data()!,
+          );
+        },
+        toFirestore: (biddings, _) => biddings.toJson(),
       );
-    },
-    toFirestore: (biddings, _) => biddings.toJson(),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -112,11 +112,19 @@ class ComingAuctionItem extends StatelessWidget {
                     child: Center(
                       child: IconButton(
                         onPressed: () {
-                        ///TODO: add delete from favorites
-                          controller.fetchAddToFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
+                          if (controller.advertisementDetailsModel?.data
+                                  ?.isFavorite ==
+                              true) {
+                            controller.fetchDeleteFromFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          } else {
+                            controller.fetchAddToFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                          }
                         },
                         icon: Image.asset(
                           MyImages.favorite,
@@ -371,6 +379,7 @@ class ComingAuctionItem extends StatelessWidget {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
+            ///TODO: edit doc id
             stream: FirebaseFirestore.instance
                 .collection('auctions')
                 .doc('7')
@@ -391,6 +400,8 @@ class ComingAuctionItem extends StatelessWidget {
                   );
                 default:
                   return ListView(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     padding: const EdgeInsets.symmetric(
                       horizontal: 30,
                     ),
@@ -398,21 +409,24 @@ class ComingAuctionItem extends StatelessWidget {
                         .asMap()
                         .map(
                           (key, value) => MapEntry(
-                        key,
-                        BiddingItem(
-                          name: value['name'],
-                          image: value['image'],
-                          amount: (value['amount']).toString(),
-                          order: (key + 1),
-                          isLast: key + 1 == snapshot.data!.docs.length,
-                        ),
-                      ),
-                    )
+                            key,
+                            BiddingItem(
+                              name: value['name'],
+                              image: value['image'],
+                              amount: (value['amount']).toString(),
+                              order: (key + 1),
+                              isLast: key + 1 == snapshot.data!.docs.length,
+                            ),
+                          ),
+                        )
                         .values
                         .toList(),
                   );
               }
             },
+          ),
+          const SizedBox(
+            height: 40,
           ),
         ],
       ),
