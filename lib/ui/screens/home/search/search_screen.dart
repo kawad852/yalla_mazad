@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/controller/home/search/search_controller.dart';
+import 'package:yalla_mazad/model/search_advertisement/search_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
@@ -162,86 +164,146 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    Obx(
-                      () => controller.searchQuery.isEmpty
-                          ? const SizedBox(
-                              height: 100,
-                            )
-                          : controller.isLoading.value
-                              ? const SizedBox(
-                                  height: 100,
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                )
-                              : ListView.separated(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: 30,
-                                    top: 20,
-                                  ),
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(
-                                    height: 10,
-                                  ),
-                                  itemCount:
-                                      controller.model.value!.data!.length,
-                                  itemBuilder: (context, index) {
-                                    final data =
-                                        controller.model.value!.data![index];
-                                    return InkWell(
-                                      onTap: () {
-                                        String startDate = data.startDate ?? '';
-                                        String endDate = data.endDate ?? '';
-                                        print(startDate);
-                                        print(endDate);
-                                        int startDifference =
-                                            DateTime.parse(startDate)
-                                                .difference(DateTime.now())
-                                                .inSeconds;
-                                        int endDifference = DateTime.now()
-                                            .difference(DateTime.parse(endDate))
-                                            .inSeconds;
-                                        if (startDifference >= 1) {
-                                          print('coming');
-                                          Get.to(
-                                            () => const ComingAuctionScreen(),
-                                            binding: ComingAuctionBinding(),
-                                            arguments: data.id,
-                                          );
-                                        } else if (startDifference <= 0 &&
-                                            endDifference <= 0) {
-                                          print('current');
-                                          Get.to(
-                                            () => const CurrentAuctionScreen(),
-                                            binding: CurrentAuctionBinding(),
-                                            arguments: data.id,
-                                          );
-                                        } else if (endDifference >= 1) {
-                                          print('done');
-                                          Get.to(
-                                            () => const DoneAuctionScreen(),
-                                            binding: DoneAuctionBinding(),
-                                            arguments: data.id,
-                                          );
-                                        }
-                                      },
-                                      child: AllAuctionsItem(
-                                        image: data.image,
-                                        name: data.name,
-                                        details: data.content,
-                                        price: data.startPrice.toString(),
-                                        userImage: data.user?.image,
-                                        userName: data.user?.name,
-                                      ),
-                                    );
-                                  },
-                                ),
+                    PagedListView<int, SearchedAdList>.separated(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 30,
+                        top: 20,
+                      ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      pagingController: controller.searchPagingController,
+                      builderDelegate:
+                          PagedChildBuilderDelegate<SearchedAdList>(
+                              itemBuilder: (context, data, index) {
+                        return InkWell(
+                          onTap: () {
+                            String startDate = data.startDate ?? '';
+                            String endDate = data.endDate ?? '';
+                            print(startDate);
+                            print(endDate);
+                            int startDifference = DateTime.parse(startDate)
+                                .difference(DateTime.now())
+                                .inSeconds;
+                            int endDifference = DateTime.now()
+                                .difference(DateTime.parse(endDate))
+                                .inSeconds;
+                            if (startDifference >= 1) {
+                              print('coming');
+                              Get.to(
+                                () => const ComingAuctionScreen(),
+                                binding: ComingAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            } else if (startDifference <= 0 &&
+                                endDifference <= 0) {
+                              print('current');
+                              Get.to(
+                                () => const CurrentAuctionScreen(),
+                                binding: CurrentAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            } else if (endDifference >= 1) {
+                              print('done');
+                              Get.to(
+                                () => const DoneAuctionScreen(),
+                                binding: DoneAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            }
+                          },
+                          child: AllAuctionsItem(
+                            image: data.image,
+                            name: data.name,
+                            details: data.content,
+                            price: data.startPrice.toString(),
+                            userImage: data.user?.image,
+                            userName: data.user?.name,
+                          ),
+                        );
+                      }),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
                     ),
+                    // Obx(
+                    //   () => controller.searchQuery.isEmpty
+                    //       ? const SizedBox(
+                    //           height: 100,
+                    //         )
+                    //       : controller.isLoading.value
+                    //           ? const SizedBox(
+                    //               height: 100,
+                    //               child: Center(
+                    //                 child: CircularProgressIndicator(),
+                    //               ),
+                    //             )
+                    //           : ListView.separated(
+                    //               padding: const EdgeInsetsDirectional.only(
+                    //                 start: 30,
+                    //                 top: 20,
+                    //               ),
+                    //               physics: const NeverScrollableScrollPhysics(),
+                    //               shrinkWrap: true,
+                    //               separatorBuilder: (context, index) =>
+                    //                   const SizedBox(
+                    //                 height: 10,
+                    //               ),
+                    //               itemCount:
+                    //                   controller.model.value!.data!.length,
+                    //               itemBuilder: (context, index) {
+                    //                 final data =
+                    //                     controller.model.value!.data![index];
+                    //                 return InkWell(
+                    //                   onTap: () {
+                    //                     String startDate = data.startDate ?? '';
+                    //                     String endDate = data.endDate ?? '';
+                    //                     print(startDate);
+                    //                     print(endDate);
+                    //                     int startDifference =
+                    //                         DateTime.parse(startDate)
+                    //                             .difference(DateTime.now())
+                    //                             .inSeconds;
+                    //                     int endDifference = DateTime.now()
+                    //                         .difference(DateTime.parse(endDate))
+                    //                         .inSeconds;
+                    //                     if (startDifference >= 1) {
+                    //                       print('coming');
+                    //                       Get.to(
+                    //                         () => const ComingAuctionScreen(),
+                    //                         binding: ComingAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     } else if (startDifference <= 0 &&
+                    //                         endDifference <= 0) {
+                    //                       print('current');
+                    //                       Get.to(
+                    //                         () => const CurrentAuctionScreen(),
+                    //                         binding: CurrentAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     } else if (endDifference >= 1) {
+                    //                       print('done');
+                    //                       Get.to(
+                    //                         () => const DoneAuctionScreen(),
+                    //                         binding: DoneAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     }
+                    //                   },
+                    //                   child: AllAuctionsItem(
+                    //                     image: data.image,
+                    //                     name: data.name,
+                    //                     details: data.content,
+                    //                     price: data.startPrice.toString(),
+                    //                     userImage: data.user?.image,
+                    //                     userName: data.user?.name,
+                    //                   ),
+                    //                 );
+                    //               },
+                    //             ),
+                    // ),
                     const SizedBox(
                       height: 90,
                     ),

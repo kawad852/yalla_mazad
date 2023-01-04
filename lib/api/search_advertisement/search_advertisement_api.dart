@@ -7,9 +7,10 @@ import 'package:yalla_mazad/utils/api_url.dart';
 class SearchAdvertisementApi {
   Future<SearchAdvertisementModel?> data({
     required String name,
+    required int pageKey
   }) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.searchAdvertisement}';
+      String url = '${ApiUrl.mainUrl}${ApiUrl.searchAdvertisement}?page=$pageKey';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',

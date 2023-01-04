@@ -2,7 +2,7 @@ class SearchAdvertisementModel {
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  List<SearchedAdList>? data;
 
   SearchAdvertisementModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +11,9 @@ class SearchAdvertisementModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <SearchedAdList>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(SearchedAdList.fromJson(v));
       });
     }
   }
@@ -30,7 +30,7 @@ class SearchAdvertisementModel {
   }
 }
 
-class Data {
+class SearchedAdList {
   int? id;
   String? name;
   String? content;
@@ -46,7 +46,7 @@ class Data {
   Category? category;
   List<Images>? images;
 
-  Data(
+  SearchedAdList(
       {this.id,
       this.name,
       this.content,
@@ -62,7 +62,7 @@ class Data {
       this.category,
       this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  SearchedAdList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     content = json['content'];
