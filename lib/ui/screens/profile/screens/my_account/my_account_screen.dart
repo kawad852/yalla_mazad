@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
+import 'package:yalla_mazad/controller/profile/profile_controller.dart';
 import 'package:yalla_mazad/model/my_badges/my_badges_model.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_auctions_screen.dart';
@@ -161,31 +162,36 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                           const SizedBox(
                             width: 10,
                           ),
-                          InkWell(
-                            onTap: (){
-                              controller.pickImage();
-                            },
-                            child: Container(
-                              width: 114,
-                              height: 114,
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xffD3CFDC,
-                                ),
-                                shape: BoxShape.circle,
-                                border: Border.all(
+                          GetBuilder<MyAccountController>(builder: (value) {
+                            return InkWell(
+                              onTap: () {
+                                controller.pickImage(context);
+                                value.update();
+                                Get.put(ProfileController());
+                                ProfileController.find.update();
+                              },
+                              child: Container(
+                                width: 114,
+                                height: 114,
+                                decoration: BoxDecoration(
                                   color: const Color(
                                     0xffD3CFDC,
                                   ),
-                                  width: 8,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: const Color(
+                                      0xffD3CFDC,
+                                    ),
+                                    width: 8,
+                                  ),
+                                ),
+                                child: CustomNetworkImage(
+                                  url: MySharedPreferences.image,
+                                  radius: 100,
                                 ),
                               ),
-                              child: CustomNetworkImage(
-                                url: MySharedPreferences.image,
-                                radius: 100,
-                              ),
-                            ),
-                          ),
+                            );
+                          }),
                           const SizedBox(
                             width: 10,
                           ),

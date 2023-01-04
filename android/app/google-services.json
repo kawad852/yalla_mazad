@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "567364200295",
+    "firebase_url": "https://yalla-mazad-2c0c2-default-rtdb.firebaseio.com",
+    "project_id": "yalla-mazad-2c0c2",
+    "storage_bucket": "yalla-mazad-2c0c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567364200295:android:b6dcca8842f37aa2fb31c2",
+        "android_client_info": {
+          "package_name": "com.example.yalla_mazad"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "567364200295-84hijjg4l6lv4j2ec8q6c38582mc9pgq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2Hr22qEokMKOJr_0_FmSQmYv8soIuOF0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "567364200295-84hijjg4l6lv4j2ec8q6c38582mc9pgq.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "567364200295-e9i16o4b7jjvvt8av7b8t341ondk09c1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.yallaMazad"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

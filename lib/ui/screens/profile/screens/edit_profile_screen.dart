@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
 import 'package:yalla_mazad/controller/profile/profile_controller.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/account_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_password_screen.dart';
@@ -122,25 +123,36 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            width: 114,
-                            height: 114,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                0xffD3CFDC,
-                              ),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: const Color(
-                                  0xffD3CFDC,
+                          GetBuilder<ProfileController>(
+                            builder: (value) {
+                              return InkWell(
+                                onTap: (){
+                                  controller.pickImage(context);
+                                  value.update();
+                                  MyAccountController.find.update();
+                                },
+                                child: Container(
+                                  width: 114,
+                                  height: 114,
+                                  decoration: BoxDecoration(
+                                    color: const Color(
+                                      0xffD3CFDC,
+                                    ),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      color: const Color(
+                                        0xffD3CFDC,
+                                      ),
+                                      width: 8,
+                                    ),
+                                  ),
+                                  child: CustomNetworkImage(
+                                    url: MySharedPreferences.image,
+                                    radius: 100,
+                                  ),
                                 ),
-                                width: 8,
-                              ),
-                            ),
-                            child: CustomNetworkImage(
-                              url: MySharedPreferences.image,
-                              radius: 100,
-                            ),
+                              );
+                            }
                           ),
                           const SizedBox(
                             width: 10,

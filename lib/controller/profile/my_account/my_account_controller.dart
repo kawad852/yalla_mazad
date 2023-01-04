@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:yalla_mazad/api/my_badges/my_badges_api.dart';
 import 'package:yalla_mazad/model/auth/update_user_model.dart';
 import 'package:yalla_mazad/model/my_badges/my_badges_model.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../../api/auth/update_user_image_api.dart';
 import '../../../utils/app_constants.dart';
@@ -32,7 +33,7 @@ class MyAccountController extends GetxController {
   }
 
   String? image;
-  pickImage() async {
+  pickImage(context) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
       maxWidth: 1800,
@@ -40,7 +41,7 @@ class MyAccountController extends GetxController {
     );
     if (pickedFile != null) {
       image = pickedFile.path;
-      await fetchUpdateImageData(context: Get.context!);
+      await fetchUpdateImageData(context: context);
       // log(image!);
     }
   }
@@ -61,6 +62,8 @@ class MyAccountController extends GetxController {
       return;
     }
     if (updateUserModel!.code == 200) {
+      MySharedPreferences.image = updateUserModel?.user?.image ?? '';
+      update();
       Fluttertoast.showToast(
         msg: updateUserModel!.msg!,
       );
