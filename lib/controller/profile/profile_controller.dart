@@ -28,6 +28,7 @@ class ProfileController extends GetxController {
       // log(image!);
     }
   }
+
   UpdateUserModel? updateUserModel;
   Future fetchUpdateImageData({
     required BuildContext context,

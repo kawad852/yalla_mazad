@@ -62,10 +62,8 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                       itemBuilder: (context, index) {
                         return InkWell(
                           onTap: () {
-                            String startDate = controller
-                                    .myAdvertisementsModel
-                                    ?.data?[index]
-                                    .startDate ??
+                            String startDate = controller.myAdvertisementsModel
+                                    ?.data?[index].startDate ??
                                 '';
                             String endDate = controller.myAdvertisementsModel
                                     ?.data?[index].endDate ??
@@ -112,8 +110,8 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                 .myAdvertisementsModel?.data?[index].name,
                             details: controller
                                 .myAdvertisementsModel?.data?[index].content,
-                            price: controller.myAdvertisementsModel
-                                ?.data?[index].startPrice
+                            price: controller
+                                .myAdvertisementsModel?.data?[index].startPrice
                                 .toString(),
                             status: controller
                                 .myAdvertisementsModel?.data?[index].status,

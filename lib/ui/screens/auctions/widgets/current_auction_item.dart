@@ -97,7 +97,7 @@ class CurrentAuctionItem extends StatelessWidget {
                       child: IconButton(
                         onPressed: () {
                           if (controller.advertisementDetailsModel?.data
-                              ?.isFavorite ==
+                                  ?.isFavorite ==
                               true) {
                             controller.fetchDeleteFromFavoritesData(
                               adId: id,
@@ -418,7 +418,9 @@ class CurrentAuctionItem extends StatelessWidget {
               }
             },
           ),
-          const SizedBox(height: 40,),
+          const SizedBox(
+            height: 40,
+          ),
         ],
       ),
     );

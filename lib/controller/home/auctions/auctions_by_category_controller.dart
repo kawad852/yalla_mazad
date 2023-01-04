@@ -46,5 +46,5 @@ class AuctionsByCategoryController extends GetxController {
     return advertisementByCategoryModel;
   }
 
-   AllAdvertisementsModel? allAdvertisementsModel;
+  AllAdvertisementsModel? allAdvertisementsModel;
 }

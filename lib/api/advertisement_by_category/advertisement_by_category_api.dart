@@ -12,6 +12,7 @@ class AdvertisementByCategoryApi {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAdsByCategory}$categoryId';
       Uri uri = Uri.parse(url);
+
       ///TODO: make sure from backend (ask)
       var headers = {
         'Content-Type': 'application/json',

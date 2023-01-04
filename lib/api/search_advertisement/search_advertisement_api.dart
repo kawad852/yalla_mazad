@@ -5,18 +5,17 @@ import 'package:yalla_mazad/model/search_advertisement/search_advertisement_mode
 import 'package:yalla_mazad/utils/api_url.dart';
 
 class SearchAdvertisementApi {
-  Future<SearchAdvertisementModel?> data({
-    required String name,
-    required int pageKey
-  }) async {
+  Future<SearchAdvertisementModel?> data(
+      {required String name, required int pageKey}) async {
     try {
-      String url = '${ApiUrl.mainUrl}${ApiUrl.searchAdvertisement}?page=$pageKey';
+      String url =
+          '${ApiUrl.mainUrl}${ApiUrl.searchAdvertisement}?page=$pageKey';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
       };
       var body = jsonEncode({
-        "name": name,
+        "value": name,
       });
       log("Response:: searchAdvertisementResponse\nUrl:: $url\nheaders:: $headers\nbody:: $body");
       http.Response response =

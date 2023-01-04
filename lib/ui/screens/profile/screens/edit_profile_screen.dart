@@ -123,37 +123,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                           const SizedBox(
                             width: 10,
                           ),
-                          GetBuilder<ProfileController>(
-                            builder: (value) {
-                              return InkWell(
-                                onTap: (){
-                                  controller.pickImage(context);
-                                  value.update();
-                                  MyAccountController.find.update();
-                                },
-                                child: Container(
-                                  width: 114,
-                                  height: 114,
-                                  decoration: BoxDecoration(
+                          GetBuilder<ProfileController>(builder: (value) {
+                            return InkWell(
+                              onTap: () {
+                                controller.pickImage(context);
+                                value.update();
+                                MyAccountController.find.update();
+                              },
+                              child: Container(
+                                width: 114,
+                                height: 114,
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xffD3CFDC,
+                                  ),
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
                                     color: const Color(
                                       0xffD3CFDC,
                                     ),
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: const Color(
-                                        0xffD3CFDC,
-                                      ),
-                                      width: 8,
-                                    ),
-                                  ),
-                                  child: CustomNetworkImage(
-                                    url: MySharedPreferences.image,
-                                    radius: 100,
+                                    width: 8,
                                   ),
                                 ),
-                              );
-                            }
-                          ),
+                                child: CustomNetworkImage(
+                                  url: MySharedPreferences.image,
+                                  radius: 100,
+                                ),
+                              ),
+                            );
+                          }),
                           const SizedBox(
                             width: 10,
                           ),
