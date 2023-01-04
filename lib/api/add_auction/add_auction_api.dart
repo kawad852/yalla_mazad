@@ -65,7 +65,6 @@ class AddAuctionApi {
         var jsonData = jsonDecode(responseString);
         AddAuctionModel addAuctionModel = AddAuctionModel.fromJson(jsonData);
         log("AddAuctionStatusCode:: ${response.statusCode}  AddAuctionBody:: $jsonData");
-
         return addAuctionModel;
       } else {
         throw "add auction Error";

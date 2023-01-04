@@ -31,7 +31,6 @@ class AddAuctionController extends GetxController {
   late Future<CategoriesModel?> initializeCategoriesFuture;
 
   String? image;
-  List<String?>? images;
   pickImage() async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -44,11 +43,12 @@ class AddAuctionController extends GetxController {
       if (Get.locale == const Locale('en')) {
         mainPictureController.text = '1 picture selected';
       } else {
-        mainPictureController.text = ' صور واحدة مختارة ';
+        mainPictureController.text = ' صورة واحدة مختارة ';
       }
     }
   }
 
+  List<String?>? images;
   pickMultipleImages() async {
     List<XFile?>? pickedFile = await ImagePicker().pickMultiImage(
       maxWidth: 1800,

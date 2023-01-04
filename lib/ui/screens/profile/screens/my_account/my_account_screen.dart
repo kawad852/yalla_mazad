@@ -161,24 +161,29 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Container(
-                            width: 114,
-                            height: 114,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                0xffD3CFDC,
-                              ),
-                              shape: BoxShape.circle,
-                              border: Border.all(
+                          InkWell(
+                            onTap: (){
+                              controller.pickImage();
+                            },
+                            child: Container(
+                              width: 114,
+                              height: 114,
+                              decoration: BoxDecoration(
                                 color: const Color(
                                   0xffD3CFDC,
                                 ),
-                                width: 8,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(
+                                    0xffD3CFDC,
+                                  ),
+                                  width: 8,
+                                ),
                               ),
-                            ),
-                            child: CustomNetworkImage(
-                              url: MySharedPreferences.image,
-                              radius: 100,
+                              child: CustomNetworkImage(
+                                url: MySharedPreferences.image,
+                                radius: 100,
+                              ),
                             ),
                           ),
                           const SizedBox(
