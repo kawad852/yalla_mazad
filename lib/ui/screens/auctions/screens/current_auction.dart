@@ -65,8 +65,17 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                     FloatingActionButtonLocation.centerFloat,
                 floatingActionButton: InkWell(
                   onTap: () {
+                    var data = snapshot.data?.data;
                     Get.dialog(
-                      ConfirmAuctionDialog(),
+                      ConfirmAuctionDialog(
+                        id: data?.id ?? 0,
+
+                        ///TODO: make sure from backend
+                        currentPrice: data?.startPrice ?? 0,
+                        priceOne: data?.priceOne ?? 0,
+                        priceTwo: data?.priceTwo ?? 0,
+                        priceThree: data?.priceThree ?? 0,
+                      ),
                     );
                   },
                   child: Container(

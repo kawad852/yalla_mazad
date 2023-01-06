@@ -15,6 +15,9 @@ import '../../utils/app_constants.dart';
 class CurrentAuctionController extends GetxController {
   static CurrentAuctionController get find => Get.find();
 
+  int selectedBidItem = 0;
+  int selectedBidAmount = 0;
+
   AdvertisementDetailsModel? advertisementDetailsModel;
   late Future<AdvertisementDetailsModel?> initializeAdvertisementFuture;
 
