@@ -66,39 +66,41 @@ class SignInController extends GetxController {
     required String username,
     required BuildContext context,
   }) async {
-        Loader.show(context);
-        socialLogInModel = await SocialLoginApi().data(
-          username: username,
-          email: email,
-        );
-        if (socialLogInModel == null) {
-          Fluttertoast.showToast(msg: AppConstants.failedMessage);
-          Loader.hide();
-          return;
-        }
-        if (socialLogInModel!.code == 200) {
-          MySharedPreferences.accessToken = socialLogInModel!.data!.token!;
-          MySharedPreferences.email = socialLogInModel!.data!.user!.email!;
-          MySharedPreferences.name = socialLogInModel!.data!.user!.name!;
-          MySharedPreferences.userId = socialLogInModel!.data!.user!.id!;
-          // MySharedPreferences.image = socialLogInModel!.data!.user!.image!;
-          MySharedPreferences.isLogIn = true;
-          Get.offAll(
-            () => const CustomNavigationBar(),
-            binding: HomeBinding(),
-          );
-        } else if (socialLogInModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
-        } else {
-          Fluttertoast.showToast(msg: socialLogInModel!.msg!);
-        }
-        Loader.hide();
-
+    Loader.show(context);
+    socialLogInModel = await SocialLoginApi().data(
+      username: username,
+      email: email,
+    );
+    if (socialLogInModel == null) {
+      Fluttertoast.showToast(msg: AppConstants.failedMessage);
+      Loader.hide();
+      return;
+    }
+    if (socialLogInModel!.code == 200) {
+      MySharedPreferences.accessToken = socialLogInModel!.data!.token!;
+      MySharedPreferences.email = socialLogInModel!.data!.user!.email!;
+      MySharedPreferences.name = socialLogInModel!.data!.user!.name!;
+      MySharedPreferences.userId = socialLogInModel!.data!.user!.id!;
+      // MySharedPreferences.image = socialLogInModel!.data!.user!.image!;
+      MySharedPreferences.isLogIn = true;
+      Get.offAll(
+        () => const CustomNavigationBar(),
+        binding: HomeBinding(),
+      );
+    } else if (socialLogInModel!.code == 500) {
+      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+    } else {
+      Fluttertoast.showToast(msg: socialLogInModel!.msg!);
+    }
+    Loader.hide();
   }
 
-  Future signInWithGoogle(BuildContext context,) async {
+  Future signInWithGoogle(
+    BuildContext context,
+  ) async {
     try {
       Loader.show(context);
+      await GoogleSignIn().signOut();
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =
@@ -122,35 +124,24 @@ class SignInController extends GetxController {
           username: value.user!.displayName!,
           context: context,
         );
-
-          });
-      // }).catchError((onError) {
-      //   if (onError.toString() == AppConstants.differentCredentialMessage) {
-      //     log("FirebaseAuthException:: $onError");
-      //     fetchSocialLogInData(
-      //       email: onError.email!,
-      //       username: onError.displayName!,
-      //       context: context,
-      //     );
-      //   } else {
-      //     log("FirebaseAuthException:: $onError");
-      //     Loader.hide();
-      //     Fluttertoast.showToast(msg: "$onError");
-      //   }
-      // });
-    } on PlatformException catch (e) {
-      if (e.code == GoogleSignIn.kNetworkError) {
-        String errorMessage = "A network error (such as timeout, interrupted connection or unreachable host) has occurred.";
-        log("errrrorrrrrr    $errorMessage");
-      } else {
-        String errorMessage = "Something went wrong.";
-        log("Something errrrorrrrrr    $errorMessage");
-      }
+      }).catchError((onError) {
+        if (onError.toString() == AppConstants.differentCredentialMessage) {
+          log("FirebaseAuthException:: $onError");
+          fetchSocialLogInData(
+            email: onError.email!,
+            username: onError.displayName!,
+            context: context,
+          );
+        } else {
+          log("FirebaseAuthException:: $onError");
+          Loader.hide();
+          Fluttertoast.showToast(msg: "$onError");
+        }
+      });
+    } catch (e) {
+      log("FirebaseAuthException:: $e");
+      Loader.hide();
+      Fluttertoast.showToast(msg: "$e");
     }
-    // catch (e) {
-    //   log("FirebaseAuthException:: $e");
-    //   Loader.hide();
-    //   Fluttertoast.showToast(msg: "$e");
-    // }
   }
 }
