@@ -4,21 +4,20 @@ class CreateSubscriptionModel {
   String? msg;
   Data? data;
 
-  ///TODO: format
   CreateSubscriptionModel({this.status, this.code, this.msg, this.data});
 
   CreateSubscriptionModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     code = json['code'];
     msg = json['msg'];
-    data = json['data'] != null ?  Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['status'] = this.status;
-    data['code'] = this.code;
-    data['msg'] = this.msg;
+    data['status'] = status;
+    data['code'] = code;
+    data['msg'] = msg;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -39,20 +38,20 @@ class Data {
     id = json['id'];
     startDate = json['start_date'];
     endDate = json['end_date'];
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    plan = json['plan'] != null ? new Plan.fromJson(json['plan']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
+    plan = json['plan'] != null ? Plan.fromJson(json['plan']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['start_date'] = this.startDate;
-    data['end_date'] = this.endDate;
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['start_date'] = startDate;
+    data['end_date'] = endDate;
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    if (this.plan != null) {
-      data['plan'] = this.plan!.toJson();
+    if (plan != null) {
+      data['plan'] = plan!.toJson();
     }
     return data;
   }
@@ -77,20 +76,20 @@ class User {
     if (json['badges'] != null) {
       badges = <Badges>[];
       json['badges'].forEach((v) {
-        badges!.add(new Badges.fromJson(v));
+        badges!.add(Badges.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['image'] = this.image;
-    data['phone'] = this.phone;
-    if (this.badges != null) {
-      data['badges'] = this.badges!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['image'] = image;
+    data['phone'] = phone;
+    if (badges != null) {
+      data['badges'] = badges!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -110,10 +109,10 @@ class Badges {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['image'] = this.image;
-    data['user'] = this.user;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['image'] = image;
+    data['user'] = user;
     return data;
   }
 }
@@ -131,14 +130,14 @@ class Plan {
 
   Plan(
       {this.id,
-        this.name,
-        this.details,
-        this.price,
-        this.numberOfAuction,
-        this.time,
-        this.pointOne,
-        this.pointTwo,
-        this.pointThree});
+      this.name,
+      this.details,
+      this.price,
+      this.numberOfAuction,
+      this.time,
+      this.pointOne,
+      this.pointTwo,
+      this.pointThree});
 
   Plan.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -153,16 +152,16 @@ class Plan {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['details'] = this.details;
-    data['price'] = this.price;
-    data['number_of_auction'] = this.numberOfAuction;
-    data['time'] = this.time;
-    data['point_one'] = this.pointOne;
-    data['point_two'] = this.pointTwo;
-    data['point_three'] = this.pointThree;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['name'] = name;
+    data['details'] = details;
+    data['price'] = price;
+    data['number_of_auction'] = numberOfAuction;
+    data['time'] = time;
+    data['point_one'] = pointOne;
+    data['point_two'] = pointTwo;
+    data['point_three'] = pointThree;
     return data;
   }
 }

@@ -393,34 +393,36 @@ class DoneAuctionItem extends StatelessWidget {
                     child: CircularProgressIndicator(),
                   );
                 default:
-                  return ListView(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
-                    ),
-                    children: snapshot.data!.docs
-                        .asMap()
-                        .map(
-                          (key, value) => MapEntry(
-                            key,
-                            BiddingItem(
-                              name: value['name'],
-                              image: value['image'],
-                              amount: (value['amount']).toString(),
-                              order: (key + 1),
-                              isLast: key + 1 == snapshot.data!.docs.length,
-                            ),
+                  return SizedBox(
+                    height: 600,
+                    child: ListView(
+                      shrinkWrap: true,
+                      physics: const ClampingScrollPhysics(),
+                      padding: const EdgeInsets.only(
+                        left: 30,
+                        right: 30,
+                        bottom: 100,
+                      ),
+                      children: snapshot.data!.docs
+                          .asMap()
+                          .map(
+                            (key, value) => MapEntry(
+                          key,
+                          BiddingItem(
+                            name: value['name'] ?? "",
+                            image: value['image'] ?? "",
+                            amount: (value['amount']).toString(),
+                            order: (key + 1),
+                            isLast: key + 1 == snapshot.data!.docs.length,
                           ),
-                        )
-                        .values
-                        .toList(),
+                        ),
+                      )
+                          .values
+                          .toList(),
+                    ),
                   );
               }
             },
-          ),
-          const SizedBox(
-            height: 40,
           ),
         ],
       ),

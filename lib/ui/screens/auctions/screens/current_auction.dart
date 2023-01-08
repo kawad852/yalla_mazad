@@ -70,13 +70,12 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                       ConfirmAuctionDialog(
                         id: data?.id ?? 0,
                         currentPrice: data?.startPrice ?? 0,
-                        ///TODO; bring back
-                        priceThree: 10,
-                        priceTwo: 200,
-                        priceOne: 30,
-                        // priceOne: data?.priceOne ?? 0,
-                        // priceTwo: data?.priceTwo ?? 0,
-                        // priceThree: data?.priceThree ?? 0,
+                        // priceThree: 10,
+                        // priceTwo: 200,
+                        // priceOne: 30,
+                        priceOne: data?.priceOne ?? 0,
+                        priceTwo: data?.priceTwo ?? 0,
+                        priceThree: data?.priceThree ?? 0,
                       ),
                     );
                   },
