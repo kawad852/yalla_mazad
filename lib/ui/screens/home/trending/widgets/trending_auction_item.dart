@@ -34,7 +34,9 @@ class TrendingAuctionItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.only(top: 110),
+      padding: const EdgeInsets.only(
+        top: 80,
+      ),
       child: SizedBox(
         height: Get.height,
         child: Column(

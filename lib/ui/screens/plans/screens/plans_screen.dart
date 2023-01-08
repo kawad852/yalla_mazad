@@ -212,17 +212,25 @@ class _PlansScreenState extends State<PlansScreen> {
                                                             .data
                                                             ?.data?[index]
                                                             .price,
-                                                        name: snapshot.data
-                                                            ?.data?[index].name,
-                                                        details: snapshot
+                                                        pointOne: snapshot
                                                             .data
                                                             ?.data?[index]
-                                                            .details,
-                                                        numberOfAuctions:
-                                                            snapshot
-                                                                .data
-                                                                ?.data?[index]
-                                                                .numberOfAuction,
+                                                            .pointOne,
+                                                        pointTwo: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .pointTwo,
+                                                        pointThree: snapshot
+                                                            .data
+                                                            ?.data?[index]
+                                                            .pointThree,
+                                                        planId: snapshot.data
+                                                            ?.data?[index].id
+                                                            .toString(),
+                                                        time: snapshot.data
+                                                            ?.data?[index].time,
+                                                        function: controller
+                                                            .fetchCreateSubscriptionData,
                                                       ),
                                                     ),
                                                   ),

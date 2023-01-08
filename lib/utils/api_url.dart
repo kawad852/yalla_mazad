@@ -92,4 +92,10 @@ class ApiUrl {
 
   //get my notifications
   static const String fetchMyNotifications = "/api/v1/my-notifications";
+
+  //create subscription
+  static const String createSubscription = "/api/v1/subscription-create";
+
+  //create bid
+  static const String createBid = "/api/v1/bid-create";
 }

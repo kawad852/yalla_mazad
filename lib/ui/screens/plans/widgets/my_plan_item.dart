@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -5,30 +7,28 @@ import 'package:yalla_mazad/utils/colors.dart';
 import '../../../../controller/profile/my_subscription_controller.dart';
 import '../../../../utils/images.dart';
 
-class PlanItem extends StatelessWidget {
-  final String? price;
+class MyPlanItem extends StatelessWidget {
+  final String? endDate;
   final String? pointOne;
   final String? pointTwo;
   final String? pointThree;
-  final String? planId;
-  final int? time;
-  final Function function;
 
-  const PlanItem(
-      {required this.price,
+  const MyPlanItem(
+      {required this.endDate,
       required this.pointOne,
       required this.pointTwo,
       required this.pointThree,
-      required this.planId,
-      required this.time,
-      required this.function,
       Key? key})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    DateTime? dateTime = DateTime.tryParse(endDate ?? '');
+    final days = -1 * DateTime.now().difference(dateTime!).inDays;
+    log(endDate!);
+
     return Container(
-      height: 392,
+      height: 342,
       width: MediaQuery.of(context).size.width - 75,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -48,10 +48,9 @@ class PlanItem extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ///TODO:the order of subscription
-                  const Text(
-                    'الاشتراك الاول',
-                    style: TextStyle(
+                  Text(
+                    'current subscription'.tr,
+                    style: const TextStyle(
                       color: MyColors.red,
                       fontSize: 20,
                     ),
@@ -135,16 +134,16 @@ class PlanItem extends StatelessWidget {
                   Column(
                     children: [
                       Text(
-                        price.toString(),
+                        days.toString(),
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 45,
                         ),
                       ),
-                      const Text(
-                        'دينار اردني',
-                        style: TextStyle(
+                      Text(
+                        'day left'.tr,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 20,
                         ),
@@ -155,32 +154,6 @@ class PlanItem extends StatelessWidget {
               ),
             ),
           ),
-          planId != null
-              ? InkWell(
-                  onTap: () async {
-                    await function(planId:planId, time:time, context:context);
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: MyColors.red,
-                      borderRadius: BorderRadius.circular(
-                        25,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'subscribe now'.tr,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                  ),
-                )
-              : const SizedBox(),
         ],
       ),
     );

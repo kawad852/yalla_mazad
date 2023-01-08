@@ -30,72 +30,82 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        toolbarHeight: 35,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'trending auctions'.tr,
-          style: const TextStyle(
-            color: MyColors.primary,
-            fontSize: 18,
-          ),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(
+          50,
         ),
-        leadingWidth: 72,
-        leading: GestureDetector(
-          onTap: () {
-            CustomNavigationBarController.find.tabController.jumpToTab(0);
-          },
-          child: Container(
-            width: 35,
-            height: 35,
-            margin: const EdgeInsetsDirectional.only(start: 37),
-            decoration: BoxDecoration(
-              color: const Color(
-                0xffD3CFDC,
-              ),
-              borderRadius: BorderRadius.circular(
-                7,
-              ),
-            ),
-            child: const Center(
-              child: Icon(
-                Icons.arrow_back_ios,
+        child: Padding(
+          padding: const EdgeInsets.only(
+            top: 8.0,
+          ),
+          child: AppBar(
+            toolbarHeight: 35,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            centerTitle: true,
+            title: Text(
+              'trending auctions'.tr,
+              style: const TextStyle(
                 color: MyColors.primary,
-                size: 15,
+                fontSize: 18,
               ),
             ),
+            leadingWidth: 72,
+            leading: GestureDetector(
+              onTap: () {
+                CustomNavigationBarController.find.tabController.jumpToTab(0);
+              },
+              child: Container(
+                width: 35,
+                height: 35,
+                margin: const EdgeInsetsDirectional.only(start: 37),
+                decoration: BoxDecoration(
+                  color: const Color(
+                    0xffD3CFDC,
+                  ),
+                  borderRadius: BorderRadius.circular(
+                    7,
+                  ),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: MyColors.primary,
+                    size: 15,
+                  ),
+                ),
+              ),
+            ),
+            actions: [
+              GestureDetector(
+                onTap: () {
+                  Get.to(
+                    () => const NotificationsScreen(),
+                    binding: NotificationsBinding(),
+                  );
+                },
+                child: Container(
+                  width: 35,
+                  height: 35,
+                  margin: const EdgeInsetsDirectional.only(end: 37),
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(202, 195, 212, 0.3),
+                    borderRadius: BorderRadius.circular(
+                      7,
+                    ),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      MyImages.notification,
+                      width: 20,
+                      height: 20,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-        actions: [
-          GestureDetector(
-            onTap: () {
-              Get.to(
-                () => const NotificationsScreen(),
-                binding: NotificationsBinding(),
-              );
-            },
-            child: Container(
-              width: 35,
-              height: 35,
-              margin: const EdgeInsetsDirectional.only(end: 37),
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(202, 195, 212, 0.3),
-                borderRadius: BorderRadius.circular(
-                  7,
-                ),
-              ),
-              child: Center(
-                child: Image.asset(
-                  MyImages.notification,
-                  width: 20,
-                  height: 20,
-                ),
-              ),
-            ),
-          ),
-        ],
       ),
       body: Stack(
         children: [
