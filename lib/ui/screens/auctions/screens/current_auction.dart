@@ -55,7 +55,7 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
           case ConnectionState.done:
           default:
             if (snapshot.hasData) {
-              List<String> images = [snapshot.data?.data?.image ?? ''];
+              List<String> images = [];
               for (var item in snapshot.data!.data!.images!) {
                 images.add(item.image ?? '');
               }
@@ -69,12 +69,14 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                     Get.dialog(
                       ConfirmAuctionDialog(
                         id: data?.id ?? 0,
-
-                        ///TODO: make sure from backend
                         currentPrice: data?.startPrice ?? 0,
-                        priceOne: data?.priceOne ?? 0,
-                        priceTwo: data?.priceTwo ?? 0,
-                        priceThree: data?.priceThree ?? 0,
+                        ///TODO; bring back
+                        priceThree: 10,
+                        priceTwo: 200,
+                        priceOne: 30,
+                        // priceOne: data?.priceOne ?? 0,
+                        // priceTwo: data?.priceTwo ?? 0,
+                        // priceThree: data?.priceThree ?? 0,
                       ),
                     );
                   },

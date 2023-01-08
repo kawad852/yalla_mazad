@@ -149,6 +149,8 @@ class ConfirmAuctionDialog extends StatelessWidget {
                           onTap: () {
                             value.selectedBidItem = 1;
                             value.selectedBidAmount = priceOne;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
                             value.update();
                           },
                           child: AuctionBidItem(
@@ -160,6 +162,8 @@ class ConfirmAuctionDialog extends StatelessWidget {
                           onTap: () {
                             value.selectedBidItem = 2;
                             value.selectedBidAmount = priceTwo;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
                             value.update();
                           },
                           child: AuctionBidItem(
@@ -171,6 +175,8 @@ class ConfirmAuctionDialog extends StatelessWidget {
                           onTap: () {
                             value.selectedBidItem = 3;
                             value.selectedBidAmount = priceThree;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
                             value.update();
                           },
                           child: AuctionBidItem(
@@ -208,9 +214,10 @@ class ConfirmAuctionDialog extends StatelessWidget {
                     ),
                     child:
                         GetBuilder<CurrentAuctionController>(builder: (value) {
+                      value.totalPrice = currentPrice + value.selectedBidAmount;
                       return Center(
                         child: Text(
-                          '${currentPrice + value.selectedBidAmount} JOD',
+                          '${value.totalPrice} JOD',
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
@@ -231,14 +238,15 @@ class ConfirmAuctionDialog extends StatelessWidget {
               color: MyColors.primary,
               stateKey: _key,
               text: 'confirm'.tr,
-              onSubmitted: () {
+              onSubmitted: () async {
                 Future.delayed(
                   const Duration(seconds: 1),
-                  () {
+                  () async {
                     _key.currentState?.reset();
-
-                    ///TODO: edit
-                    Get.back();
+                    await controller.fetchCreateBidData(
+                        adId: id.toString(),
+                        totalPrice: controller.totalPrice.toString(),
+                        context: context);
                   },
                 );
               },

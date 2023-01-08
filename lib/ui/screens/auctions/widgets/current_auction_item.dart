@@ -29,6 +29,7 @@ class CurrentAuctionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = CurrentAuctionController.find;
     return SingleChildScrollView(
+      primary: true,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -315,7 +316,10 @@ class CurrentAuctionItem extends StatelessWidget {
                                       .snapshots(),
                                   builder: (context, snapshot) {
                                     return Text(
-                                      snapshot.data?.docs.first.get('amount'),
+                                      snapshot.data?.docs.first
+                                              .get('amount')
+                                              .toString() ??
+                                          "",
                                       textAlign: TextAlign.center,
                                       style: const TextStyle(
                                         color: MyColors.red,
@@ -394,9 +398,12 @@ class CurrentAuctionItem extends StatelessWidget {
                 default:
                   return ListView(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30,
+                    //primary: true,
+                    // physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                      left: 30,
+                      right: 30,
+                      bottom: 0,
                     ),
                     children: snapshot.data!.docs
                         .asMap()
@@ -404,10 +411,10 @@ class CurrentAuctionItem extends StatelessWidget {
                           (key, value) => MapEntry(
                             key,
                             BiddingItem(
-                              name: value['name'],
-                              image: value['image'],
-                              amount: (value['amount']).toString(),
-                              order: (key + 1),
+                              name: value['name'] ?? "",
+                              image: value['image'] ?? "",
+                              amount: (value['amount']).toString() ?? "",
+                              order: (key + 1) ?? 0,
                               isLast: key + 1 == snapshot.data!.docs.length,
                             ),
                           ),

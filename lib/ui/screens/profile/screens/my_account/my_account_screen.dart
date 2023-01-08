@@ -219,13 +219,6 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                                     fontSize: 14,
                                   ),
                                 ),
-                                // Text(
-                                //   'ahmad',
-                                //   style: TextStyle(
-                                //     color: MyColors.red,
-                                //     fontSize: 18,
-                                //   ),
-                                // ),
                               ],
                             ),
                           ),
