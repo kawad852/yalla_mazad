@@ -7,13 +7,16 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
+import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/call_us_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/terms_and_conditions_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
+import '../../binding/authentication/authentication_binding.dart';
 import '../../binding/drawer/call_us_binding.dart';
 import '../../binding/profile/profile_binding.dart';
 import '../../controller/home/custom_navigation_bar_controller.dart';
@@ -276,6 +279,45 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                   onTap: () {},
                   title: Text(
                     'who we are'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    MySharedPreferences.clearProfile();
+                    Get.deleteAll(
+                      force: true,
+                    );
+                    Get.offAll(
+                      () => const AuthenticationScreen(),
+                      binding: AuthenticationBinding(),
+                    );
+                  },
+                  title: Text(
+                    'log out'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    setState(() {
+                      if (MySharedPreferences.language == 'ar') {
+                        MySharedPreferences.language = 'en';
+                        Get.updateLocale(Locale(MySharedPreferences.language));
+                      } else {
+                        MySharedPreferences.language = 'ar';
+                        Get.updateLocale(Locale(MySharedPreferences.language));
+                      }
+                    });
+                  },
+                  title: Text(
+                    Get.locale == const Locale('ar') ? 'English' : 'العربية',
                     style: const TextStyle(
                       fontSize: 18,
                     ),

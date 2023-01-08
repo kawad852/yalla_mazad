@@ -7,6 +7,9 @@ class ApiUrl {
   //sign in
   static const String signIn = "/api/v1/login";
 
+  //social login
+  static const String socialLogin = "/api/v1/sociallogin";
+
   //register
   static const String register = "/api/v1/user-reg";
 

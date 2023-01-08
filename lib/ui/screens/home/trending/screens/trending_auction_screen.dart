@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/notifications/notifications_binding.dart';
+import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/widgets/trending_auction_item.dart';
+import 'package:yalla_mazad/ui/screens/notifications/screens/notifications_screen.dart';
+import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
 class TrendingAuctionScreen extends StatefulWidget {
@@ -26,6 +30,73 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        toolbarHeight: 35,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
+        title: Text(
+          'trending auctions'.tr,
+          style: const TextStyle(
+            color: MyColors.primary,
+            fontSize: 18,
+          ),
+        ),
+        leadingWidth: 72,
+        leading: GestureDetector(
+          onTap: () {
+            CustomNavigationBarController.find.tabController.jumpToTab(0);
+          },
+          child: Container(
+            width: 35,
+            height: 35,
+            margin: const EdgeInsetsDirectional.only(start: 37),
+            decoration: BoxDecoration(
+              color: const Color(
+                0xffD3CFDC,
+              ),
+              borderRadius: BorderRadius.circular(
+                7,
+              ),
+            ),
+            child: const Center(
+              child: Icon(
+                Icons.arrow_back_ios,
+                color: MyColors.primary,
+                size: 15,
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              Get.to(
+                () => const NotificationsScreen(),
+                binding: NotificationsBinding(),
+              );
+            },
+            child: Container(
+              width: 35,
+              height: 35,
+              margin: const EdgeInsetsDirectional.only(end: 37),
+              decoration: BoxDecoration(
+                color: const Color.fromRGBO(202, 195, 212, 0.3),
+                borderRadius: BorderRadius.circular(
+                  7,
+                ),
+              ),
+              child: Center(
+                child: Image.asset(
+                  MyImages.notification,
+                  width: 20,
+                  height: 20,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Positioned(

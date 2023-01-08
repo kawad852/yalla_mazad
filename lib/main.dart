@@ -66,9 +66,7 @@ class _MyAppState extends State<MyApp> {
         Locale('en', 'US'),
         Locale('ar', 'JO'),
       ],
-
-      locale: const Locale('en'),
-      //locale: Locale(MySharedPreferences.language),
+      locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),

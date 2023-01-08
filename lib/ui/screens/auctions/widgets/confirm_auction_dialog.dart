@@ -206,19 +206,18 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                       color: MyColors.primary,
                     ),
-                    child:  GetBuilder<CurrentAuctionController>(
-                      builder: (value) {
-                        return Center(
-                          child: Text(
-                            '${currentPrice+value.selectedBidAmount} JOD',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                    child:
+                        GetBuilder<CurrentAuctionController>(builder: (value) {
+                      return Center(
+                        child: Text(
+                          '${currentPrice + value.selectedBidAmount} JOD',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
                           ),
-                        );
-                      }
-                    ),
+                        ),
+                      );
+                    }),
                   ),
                 ],
               ),
