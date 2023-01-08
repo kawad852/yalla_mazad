@@ -158,7 +158,8 @@ class PlanItem extends StatelessWidget {
           planId != null
               ? InkWell(
                   onTap: () async {
-                    await function(planId:planId, time:time, context:context);
+                    await function(
+                        planId: planId, time: time, context: context);
                   },
                   child: Container(
                     width: double.infinity,

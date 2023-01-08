@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/create_bid/create_bid_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
-
 class CreateBidApi {
   Future<CreateBidModel?> data({
     required String? price,

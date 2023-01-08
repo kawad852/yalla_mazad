@@ -124,6 +124,6 @@ final Map<String, String> en = {
   'already here': 'Already here',
   'log out': 'Log out',
   'subscribe now': 'Subscribe now',
-  'current subscription':'Current subscription',
-  'day left':'Day left',
+  'current subscription': 'Current subscription',
+  'day left': 'Day left',
 };

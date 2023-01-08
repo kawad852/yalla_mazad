@@ -407,16 +407,16 @@ class DoneAuctionItem extends StatelessWidget {
                           .asMap()
                           .map(
                             (key, value) => MapEntry(
-                          key,
-                          BiddingItem(
-                            name: value['name'] ?? "",
-                            image: value['image'] ?? "",
-                            amount: (value['amount']).toString(),
-                            order: (key + 1),
-                            isLast: key + 1 == snapshot.data!.docs.length,
-                          ),
-                        ),
-                      )
+                              key,
+                              BiddingItem(
+                                name: value['name'] ?? "",
+                                image: value['image'] ?? "",
+                                amount: (value['amount']).toString(),
+                                order: (key + 1),
+                                isLast: key + 1 == snapshot.data!.docs.length,
+                              ),
+                            ),
+                          )
                           .values
                           .toList(),
                     ),
