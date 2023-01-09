@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -29,6 +31,7 @@ class HomeController extends GetxController {
     initializeSliderFuture = fetchAllSliders();
     trendingPagingController = PagingController(firstPageKey: 1)
       ..addPageRequestListener((pageKey) {
+        log('inside trend listener');
         fetchTrendingPage(pageKey);
       });
     allAdsPagingController = PagingController(firstPageKey: 1)
@@ -66,9 +69,9 @@ class HomeController extends GetxController {
     } catch (e) {
       trendingPagingController.error = e;
     }
+    update();
   }
 
-  ///TOdo: change into you may like
   AllAdvertisementsModel? allAdvertisementsModel;
   late PagingController<int, AllAdsList> allAdsPagingController;
   Future<void> fetchAllAdsPage(int pageKey) async {
@@ -83,13 +86,8 @@ class HomeController extends GetxController {
     } catch (e) {
       allAdsPagingController.error = e;
     }
+    update();
   }
-  // late Future<AllAdvertisementsModel?> initializeAllAdsFuture;
-  //
-  // Future<AllAdvertisementsModel?> fetchAllAds() async {
-  //   allAdvertisementsModel = await ALlAdvertisementsApi().data();
-  //   return allAdvertisementsModel;
-  // }
 
   AllTipsModel? allTipsModel;
   late Future<AllTipsModel?> initializeTipsFuture;
@@ -97,5 +95,14 @@ class HomeController extends GetxController {
   Future<AllTipsModel?> fetchAllTips() async {
     allTipsModel = await AllTipsApi().data();
     return allTipsModel;
+  }
+
+  @override
+  void dispose() {
+    trendingPagingController.removeListener(() {});
+    trendingPagingController.dispose();
+    allAdsPagingController.removeListener(() {});
+    allAdsPagingController.dispose();
+    super.dispose();
   }
 }
