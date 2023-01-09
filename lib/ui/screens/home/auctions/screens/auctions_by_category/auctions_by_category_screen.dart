@@ -148,8 +148,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             case ConnectionState.waiting:
                               return const SizedBox(
                                 height: 200,
-                                child: Center(
-                                    child: CircularProgressIndicator()),
+                                child:
+                                    Center(child: CircularProgressIndicator()),
                               );
                             case ConnectionState.done:
                             default:

@@ -1,6 +1,6 @@
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
@@ -93,31 +93,41 @@ class CurrentAuctionItem extends StatelessWidget {
                       7,
                     ),
                   ),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        if (controller.advertisementDetailsModel?.data
-                                ?.isFavorite ==
-                            true) {
-                          controller.fetchDeleteFromFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
-                        } else {
-                          controller.fetchAddToFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
-                        }
-
-                      },
-                      icon: Image.asset(
-                        MyImages.favorite,
-                        width: 20,
-                        height: 20,
+                  child: GetBuilder<CurrentAuctionController>(builder: (value) {
+                    return Center(
+                      child: InkWell(
+                        onTap: () async {
+                          if (controller.advertisementDetailsModel?.data
+                                  ?.isFavorite ==
+                              true) {
+                            await controller.fetchDeleteFromFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                            value.update();
+                          } else {
+                            await controller.fetchAddToFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                            value.update();
+                          }
+                        },
+                        child: controller
+                                .advertisementDetailsModel!.data!.isFavorite!
+                            ? SvgPicture.asset(
+                                MyImages.heartFilled,
+                                width: 20,
+                                height: 20,
+                              )
+                            : Image.asset(
+                                MyImages.favorite,
+                                width: 20,
+                                height: 20,
+                              ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ],
             ),
@@ -423,7 +433,7 @@ class CurrentAuctionItem extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 30,
                         right: 30,
-                        bottom: 100,
+                        bottom: 140,
                       ),
                       children: snapshot.data!.docs
                           .asMap()

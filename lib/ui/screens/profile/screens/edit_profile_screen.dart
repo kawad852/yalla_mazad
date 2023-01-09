@@ -171,13 +171,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                   fontSize: 14,
                                 ),
                               ),
-                              //   Text(
-                              //     'ahmad',
-                              //     style: TextStyle(
-                              //       color: MyColors.red,
-                              //       fontSize: 18,
-                              //     ),
-                              //   ),
                             ],
                           ),
                         ),

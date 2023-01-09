@@ -36,6 +36,12 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   @override
+  void dispose() {
+    Get.delete<SearchController>();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final controller = SearchController.find;
     return Scaffold(
@@ -178,8 +184,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           onTap: () {
                             String startDate = data.startDate ?? '';
                             String endDate = data.endDate ?? '';
-                           log(startDate);
-                           log(endDate);
+                            log(startDate);
+                            log(endDate);
                             int startDifference = DateTime.parse(startDate)
                                 .difference(DateTime.now())
                                 .inSeconds;

@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/auctions/coming_auction_controller.dart';
 import 'package:yalla_mazad/model/firestore_bidding/firestore_bidding_model.dart';
@@ -104,30 +105,41 @@ class ComingAuctionItem extends StatelessWidget {
                       7,
                     ),
                   ),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        if (controller
-                                .advertisementDetailsModel?.data?.isFavorite ==
-                            true) {
-                          controller.fetchDeleteFromFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
-                        } else {
-                          controller.fetchAddToFavoritesData(
-                            adId: id,
-                            context: context,
-                          );
-                        }
-                      },
-                      icon: Image.asset(
-                        MyImages.favorite,
-                        width: 20,
-                        height: 20,
+                  child: GetBuilder<ComingAuctionController>(builder: (value) {
+                    return Center(
+                      child: InkWell(
+                        onTap: () async {
+                          if (controller.advertisementDetailsModel?.data
+                              ?.isFavorite ==
+                              true) {
+                            await controller.fetchDeleteFromFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                            value.update();
+                          } else {
+                            await controller.fetchAddToFavoritesData(
+                              adId: id,
+                              context: context,
+                            );
+                            value.update();
+                          }
+                        },
+                        child: controller
+                            .advertisementDetailsModel!.data!.isFavorite!
+                            ? SvgPicture.asset(
+                          MyImages.heartFilled,
+                          width: 20,
+                          height: 20,
+                        )
+                            : Image.asset(
+                          MyImages.favorite,
+                          width: 20,
+                          height: 20,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  }),
                 ),
               ],
             ),
@@ -184,8 +196,9 @@ class ComingAuctionItem extends StatelessWidget {
                     : const SizedBox(),
                 images.isNotEmpty
                     ? const SizedBox(
-                  height: 50,
-                ):const SizedBox(),
+                        height: 50,
+                      )
+                    : const SizedBox(),
                 Padding(
                   padding: const EdgeInsetsDirectional.only(
                     start: 30,
@@ -375,6 +388,7 @@ class ComingAuctionItem extends StatelessWidget {
               ],
             ),
           ),
+
           ///TODO: edit doc id
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
@@ -404,7 +418,7 @@ class ComingAuctionItem extends StatelessWidget {
                       padding: const EdgeInsets.only(
                         left: 30,
                         right: 30,
-                        bottom: 100,
+                        bottom: 140,
                       ),
                       children: snapshot.data!.docs
                           .asMap()

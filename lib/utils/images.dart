@@ -82,4 +82,10 @@ class MyImages {
   static const String congrats = "${resetPassword}congrats.png";
 
   static const String phone = "${resetPassword}phone.png";
+
+  static const String heartFilled = "${_path}heart_filled.svg";
+
+  static const String clip = "${_path}clip.svg";
+
+  static const String eyeCrossed = "${_path}eye-crossed.svg";
 }

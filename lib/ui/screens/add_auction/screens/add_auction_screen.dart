@@ -29,6 +29,12 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
   }
 
   @override
+  void dispose() {
+    Get.delete<AddAuctionController>();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final controller = AddAuctionController.find;
     return Scaffold(
@@ -140,8 +146,11 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                             builder: (context, snapshot) {
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
+                                  return const SizedBox(
+                                    height: 100,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
                                   );
                                 case ConnectionState.done:
                                 default:
@@ -250,6 +259,26 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                           color: MyColors.textFieldColor,
                                           hint: 'main picture'.tr,
                                           readOnly: true,
+                                          suffixIcon: SizedBox(
+                                            width: 60,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 18,
+                                                ),
+                                                InkWell(
+                                                  child: SvgPicture.asset(
+                                                    MyImages.clip,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -267,6 +296,26 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                           color: MyColors.textFieldColor,
                                           hint: 'more pictures'.tr,
                                           readOnly: true,
+                                          suffixIcon: SizedBox(
+                                            width: 60,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 18,
+                                                ),
+                                                InkWell(
+                                                  child: SvgPicture.asset(
+                                                    MyImages.clip,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

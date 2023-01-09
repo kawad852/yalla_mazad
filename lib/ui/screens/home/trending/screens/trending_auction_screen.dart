@@ -24,7 +24,14 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
     super.initState();
   }
 
+
   late final TrendingAuctionController controller;
+
+  @override
+  void dispose() {
+    Get.delete<TrendingAuctionController>();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -169,16 +176,16 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                                         .itemList?[index].id
                                         .toString() ??
                                     '0',
-                                // startDate: DateTime.now().toString(),
-                                // endDate: DateTime.now()
-                                //     .add(Duration(days: 2))
-                                //     .toString(),
-                                startDate: value.trendingPagingController
-                                        .itemList?[index].startDate ??
-                                    '',
-                                endDate: value.trendingPagingController
-                                        .itemList?[index].endDate ??
-                                    '',
+                                startDate: DateTime.now().toString(),
+                                endDate: DateTime.now()
+                                    .add(Duration(days: 2))
+                                    .toString(),
+                                // startDate: value.trendingPagingController
+                                //         .itemList?[index].startDate ??
+                                //     '',
+                                // endDate: value.trendingPagingController
+                                //         .itemList?[index].endDate ??
+                                //     '',
                               ),
                             ),
                           ),

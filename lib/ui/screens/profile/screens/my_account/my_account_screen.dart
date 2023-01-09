@@ -33,6 +33,12 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   }
 
   @override
+  void dispose() {
+    Get.delete<MyAccountController>();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final controller = MyAccountController.find;
     return Scaffold(
@@ -230,72 +236,75 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                   ],
                 ),
               ),
-              SizedBox(
-                height: 80,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30,
-                      ),
-                      child: Text(
-                        'the badges'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 47,
-                      child: Center(
-                        child: FutureBuilder<MyBadgesModel?>(
-                            future: controller.initializeMyBadgesFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return ListView.separated(
-                                      scrollDirection: Axis.horizontal,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
+              FutureBuilder<MyBadgesModel?>(
+                  future: controller.initializeMyBadgesFuture,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      case ConnectionState.done:
+                      default:
+                        if (snapshot.hasData) {
+                          return snapshot.data!.data!.isNotEmpty
+                              ? SizedBox(
+                                  height: 80,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        child: Text(
+                                          'the badges'.tr,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 18,
+                                          ),
+                                        ),
                                       ),
-                                      itemCount:
-                                          snapshot.data?.data?.length ?? 0,
-                                      itemBuilder: (context, index) {
-                                        return BadgeItem(
-                                          image:
-                                              snapshot.data?.data?[index].image,
-                                          message: snapshot
-                                              .data?.data?[index].id
-                                              .toString(),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 10,
-                                        );
-                                      },
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                                      SizedBox(
+                                        height: 47,
+                                        child: Center(
+                                            child: ListView.separated(
+                                          scrollDirection: Axis.horizontal,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                          ),
+                                          itemCount:
+                                              snapshot.data?.data?.length ?? 0,
+                                          itemBuilder: (context, index) {
+                                            return BadgeItem(
+                                              image: snapshot
+                                                  .data?.data?[index].image,
+                                              message: snapshot
+                                                  .data?.data?[index].id
+                                                  .toString(),
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return const SizedBox(
+                                              width: 10,
+                                            );
+                                          },
+                                        )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : const SizedBox();
+                        } else if (snapshot.hasError) {
+                          return const FailureWidget();
+                        } else {
+                          return const FailureWidget();
+                        }
+                    }
+                  }),
               const SizedBox(
                 height: 10,
               ),

@@ -14,7 +14,7 @@ class AllTipsApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        'x-localization':MySharedPreferences.language,
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: allTipsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

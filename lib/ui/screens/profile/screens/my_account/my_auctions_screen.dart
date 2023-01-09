@@ -73,8 +73,8 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                             String endDate = controller.myAdvertisementsModel
                                     ?.data?[index].endDate ??
                                 '';
-                           log(startDate);
-                           log(endDate);
+                            log(startDate);
+                            log(endDate);
                             int startDifference = DateTime.parse(startDate)
                                 .difference(DateTime.now())
                                 .inSeconds;

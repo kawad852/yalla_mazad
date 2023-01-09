@@ -12,12 +12,10 @@ class AdvertisementByCategoryApi {
     try {
       String url = '${ApiUrl.mainUrl}${ApiUrl.fetchAdsByCategory}$categoryId';
       Uri uri = Uri.parse(url);
-
-      ///TODO: make sure from backend (ask)
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
-        'x-localization':MySharedPreferences.language,
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: AdvertisementByCategoryResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

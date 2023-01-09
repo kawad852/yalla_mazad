@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/authentication/reset_password/reset_password_new_password_controller.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -140,17 +141,46 @@ class _ResetPasswordNewPasswordScreenState
                                   return null;
                                 },
                                 hint: 'password'.tr,
-
-                                ///TODO: edit eye icon
-                                suffixIcon: IconButton(
-                                  icon: Icon(value.visible
-                                      ? Icons.remove_red_eye_outlined
-                                      : Icons.remove_red_eye),
-                                  onPressed: () {
-                                    value.visible = !value.visible;
-                                    value.update();
-                                  },
+                                suffixIcon: SizedBox(
+                                  width: 60,
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 18,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          value.visible = !value.visible;
+                                          value.update();
+                                        },
+                                        child: value.visible
+                                            ? const Icon(
+                                                Icons.remove_red_eye_outlined,
+                                                color: MyColors.primary,
+                                              )
+                                            : SvgPicture.asset(
+                                                MyImages.eyeCrossed,
+                                                width: 20,
+                                                height: 20,
+                                                color: MyColors.primary,
+                                              ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                    ],
+                                  ),
                                 ),
+
+                                // suffixIcon: IconButton(
+                                //   icon: Icon(value.visible
+                                //       ? Icons.remove_red_eye_outlined
+                                //       : Icons.remove_red_eye),
+                                //   onPressed: () {
+                                //     value.visible = !value.visible;
+                                //     value.update();
+                                //   },
+                                // ),
                               );
                             }),
                             Padding(
@@ -183,15 +213,45 @@ class _ResetPasswordNewPasswordScreenState
                                   return null;
                                 },
                                 hint: 'confirm password'.tr,
-                                suffixIcon: IconButton(
-                                  icon: Icon(value.visible
-                                      ? Icons.remove_red_eye_outlined
-                                      : Icons.remove_red_eye),
-                                  onPressed: () {
-                                    value.visible = !value.visible;
-                                    value.update();
-                                  },
+                                suffixIcon: SizedBox(
+                                  width: 60,
+                                  child: Row(
+                                    children: [
+                                      const SizedBox(
+                                        width: 18,
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          value.visible = !value.visible;
+                                          value.update();
+                                        },
+                                        child: value.visible
+                                            ? const Icon(
+                                                Icons.remove_red_eye_outlined,
+                                                color: MyColors.primary,
+                                              )
+                                            : SvgPicture.asset(
+                                                MyImages.eyeCrossed,
+                                                width: 20,
+                                                height: 20,
+                                                color: MyColors.primary,
+                                              ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                    ],
+                                  ),
                                 ),
+                                // suffixIcon: IconButton(
+                                //   icon: Icon(value.visible
+                                //       ? Icons.remove_red_eye_outlined
+                                //       : Icons.remove_red_eye),
+                                //   onPressed: () {
+                                //     value.visible = !value.visible;
+                                //     value.update();
+                                //   },
+                                // ),
                               );
                             }),
                             const SizedBox(

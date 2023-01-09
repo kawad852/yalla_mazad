@@ -15,7 +15,7 @@ class SearchAdvertisementApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        'x-localization':MySharedPreferences.language,
+        'x-localization': MySharedPreferences.language,
       };
       var body = jsonEncode({
         "value": name,

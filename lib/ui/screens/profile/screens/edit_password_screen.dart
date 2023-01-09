@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import '../../../../controller/profile/edit_password_controller.dart';
+import '../../../../utils/images.dart';
 
 class EditPasswordScreen extends StatelessWidget {
   EditPasswordScreen({Key? key}) : super(key: key);
@@ -56,15 +58,44 @@ class EditPasswordScreen extends StatelessWidget {
                     }
                     return null;
                   },
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      value.oldIsVisible = !value.oldIsVisible;
-                      value.update();
-                    },
-                    icon: Icon(value.oldIsVisible
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
+                  suffixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            value.oldIsVisible = !value.oldIsVisible;
+                            value.update();
+                          },
+                          child: value.oldIsVisible
+                              ? const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: MyColors.primary,
+                                )
+                              : SvgPicture.asset(
+                                  MyImages.eyeCrossed,
+                                  width: 20,
+                                  height: 20,
+                                ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
                   ),
+                  // suffixIcon: IconButton(
+                  //   onPressed: () {
+                  //     value.oldIsVisible = !value.oldIsVisible;
+                  //     value.update();
+                  //   },
+                  //   icon: Icon(value.oldIsVisible
+                  //       ? Icons.remove_red_eye
+                  //       : Icons.remove_red_eye_outlined),
+                  // ),
                 );
               }),
               const SizedBox(
@@ -100,15 +131,44 @@ class EditPasswordScreen extends StatelessWidget {
                     }
                     return null;
                   },
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      value.newIsVisible = !value.newIsVisible;
-                      value.update();
-                    },
-                    icon: Icon(value.newIsVisible
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
+                  suffixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            value.newIsVisible = !value.newIsVisible;
+                            value.update();
+                          },
+                          child: value.newIsVisible
+                              ? const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: MyColors.primary,
+                                )
+                              : SvgPicture.asset(
+                                  MyImages.eyeCrossed,
+                                  width: 20,
+                                  height: 20,
+                                ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
                   ),
+                  // suffixIcon: IconButton(
+                  //   onPressed: () {
+                  //     value.newIsVisible = !value.newIsVisible;
+                  //     value.update();
+                  //   },
+                  //   icon: Icon(value.newIsVisible
+                  //       ? Icons.remove_red_eye
+                  //       : Icons.remove_red_eye_outlined),
+                  // ),
                 );
               }),
               const SizedBox(
@@ -144,14 +204,34 @@ class EditPasswordScreen extends StatelessWidget {
                     }
                     return null;
                   },
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      value.newIsVisible = !value.newIsVisible;
-                      value.update();
-                    },
-                    icon: Icon(value.newIsVisible
-                        ? Icons.remove_red_eye
-                        : Icons.remove_red_eye_outlined),
+                  suffixIcon: SizedBox(
+                    width: 60,
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 18,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            value.newIsVisible = !value.newIsVisible;
+                            value.update();
+                          },
+                          child: value.newIsVisible
+                              ? const Icon(
+                                  Icons.remove_red_eye_outlined,
+                                  color: MyColors.primary,
+                                )
+                              : SvgPicture.asset(
+                                  MyImages.eyeCrossed,
+                                  width: 20,
+                                  height: 20,
+                                ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 );
               }),

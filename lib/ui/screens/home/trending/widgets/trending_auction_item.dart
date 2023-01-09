@@ -48,8 +48,8 @@ class TrendingAuctionItem extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                 log(startDate);
-                 log(endDate);
+                  log(startDate);
+                  log(endDate);
                   int startDifference = DateTime.parse(startDate)
                       .difference(DateTime.now())
                       .inSeconds;

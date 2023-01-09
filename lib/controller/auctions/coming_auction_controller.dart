@@ -61,10 +61,9 @@ class ComingAuctionController extends GetxController {
         msg: 'added to favorites successfully'.tr,
       );
       bool test = Get.isRegistered<MyFavoritesController>();
-      if(test){
+      if (test) {
         MyFavoritesController.find.onInit();
-      }
-      else{
+      } else {
         Get.put(MyFavoritesController());
         MyFavoritesController.find.onInit();
       }
@@ -105,10 +104,9 @@ class ComingAuctionController extends GetxController {
         msg: 'removed from favorites successfully'.tr,
       );
       bool test = Get.isRegistered<MyFavoritesController>();
-      if(test){
+      if (test) {
         MyFavoritesController.find.onInit();
-      }
-      else{
+      } else {
         Get.put(MyFavoritesController());
         MyFavoritesController.find.onInit();
       }
