@@ -42,8 +42,8 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
             child: SafeArea(
               bottom: false,

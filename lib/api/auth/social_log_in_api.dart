@@ -4,8 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/auth/social_log_in_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
-import '../../model/auth/sign_in_model.dart';
-
 class SocialLoginApi {
   Future<SocialLogInModel?> data({
     required String email,

@@ -162,9 +162,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     Container(
                       width: 35,
                       height: 35,
-                      padding: const EdgeInsets.only(
-                        left: 3,
-                        right: 3,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
                       ),
                       decoration: BoxDecoration(
                         color: const Color(

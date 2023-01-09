@@ -36,9 +36,10 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
         ),
         child: Padding(
           padding: const EdgeInsets.only(
-            top: 8.0,
+            top: 45,
           ),
           child: AppBar(
+            primary: false,
             toolbarHeight: 35,
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -58,6 +59,9 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
               child: Container(
                 width: 35,
                 height: 35,
+                padding: const EdgeInsetsDirectional.only(
+                  start: 3,
+                ),
                 margin: const EdgeInsetsDirectional.only(start: 37),
                 decoration: BoxDecoration(
                   color: const Color(

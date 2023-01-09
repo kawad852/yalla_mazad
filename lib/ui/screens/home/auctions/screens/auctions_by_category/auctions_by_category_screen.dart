@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -65,75 +67,72 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 45,
-                    left: 20,
-                    right: 20,
+                    left: 35,
+                    right: 35,
                   ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 35,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                            right: 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 35,
+                        height: 35,
+                        padding: const EdgeInsetsDirectional.only(
+                          start: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xffD3CFDC,
                           ),
-                          decoration: BoxDecoration(
-                            color: const Color(
-                              0xffD3CFDC,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                Get.back();
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                color: MyColors.primary,
-                                size: 15,
-                              ),
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: MyColors.primary,
+                              size: 15,
                             ),
                           ),
                         ),
-                        Text(
-                          HomeController.find.category.key,
-                          style: const TextStyle(
-                            color: MyColors.primary,
-                            fontSize: 18,
+                      ),
+                      Text(
+                        HomeController.find.category.key,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(202, 195, 212, 0.3),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
                         ),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(202, 195, 212, 0.3),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
-                          ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                Get.to(
-                                  () => const NotificationsScreen(),
-                                  binding: NotificationsBinding(),
-                                );
-                              },
-                              icon: Image.asset(
-                                MyImages.notification,
-                                width: 20,
-                                height: 20,
-                              ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const NotificationsScreen(),
+                                binding: NotificationsBinding(),
+                              );
+                            },
+                            icon: Image.asset(
+                              MyImages.notification,
+                              width: 20,
+                              height: 20,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Column(
@@ -142,98 +141,129 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            MyImages.justice,
-                            width: 20,
-                            height: 20,
-                          ),
-                          const SizedBox(
-                            width: 4,
-                          ),
-                          Text(
-                            'trending auctions'.tr,
-                            style: const TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    SizedBox(
-                      height: 247,
-                      child: FutureBuilder<AdvertisementByCategoryModel?>(
-                          future: controller.initializeAdsByCategoryFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
-                                  return ListView.separated(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 30),
-                                    scrollDirection: Axis.horizontal,
-                                    itemBuilder: (context, index) {
-                                      return InkWell(
-                                        onTap: () {
-                                          Get.back();
+                    FutureBuilder<AdvertisementByCategoryModel?>(
+                        future: controller.initializeAdsByCategoryFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return const SizedBox(
+                                height: 200,
+                                child: Center(
+                                    child: CircularProgressIndicator()),
+                              );
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                return snapshot.data!.data!.isNotEmpty
+                                    ? SizedBox(
+                                        height: 287,
+                                        child: Column(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 35.0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Image.asset(
+                                                    MyImages.justice,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 4,
+                                                  ),
+                                                  Text(
+                                                    'trending auctions'.tr,
+                                                    style: const TextStyle(
+                                                      color: MyColors.primary,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            const SizedBox(
+                                              height: 15,
+                                            ),
+                                            SizedBox(
+                                              height: 247,
+                                              child: ListView.separated(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 30),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemBuilder: (context, index) {
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      Get.back();
 
-                                          ///TODO: find a way for the change in index
-                                          HomeController.find.selectedIndex =
-                                              index;
-                                          CustomNavigationBarController
-                                              .find.tabController
-                                              .jumpToTab(3);
-                                          Future.delayed(
-                                              const Duration(seconds: 2), () {
-                                            TrendingAuctionController
-                                                .find.pageController
-                                                .jumpToPage(HomeController
-                                                    .find.selectedIndex);
-                                          });
-                                        },
-                                        child: AuctionItem(
-                                          image:
-                                              snapshot.data?.data?[index].image,
-                                          name:
-                                              snapshot.data?.data?[index].name,
-                                          user: snapshot
-                                              .data?.data?[index].user?.name,
-                                          price:
-                                              '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                                      ///TODO: find a way for the change in index
+                                                      HomeController.find
+                                                              .selectedIndex =
+                                                          index;
+                                                      CustomNavigationBarController
+                                                          .find.tabController
+                                                          .jumpToTab(3);
+                                                      Future.delayed(
+                                                          const Duration(
+                                                              seconds: 2), () {
+                                                        TrendingAuctionController
+                                                            .find.pageController
+                                                            .jumpToPage(
+                                                                HomeController
+                                                                    .find
+                                                                    .selectedIndex);
+                                                      });
+                                                    },
+                                                    child: AuctionItem(
+                                                      image: snapshot.data
+                                                          ?.data?[index].image,
+                                                      name: snapshot.data
+                                                          ?.data?[index].name,
+                                                      user: snapshot
+                                                          .data
+                                                          ?.data?[index]
+                                                          .user
+                                                          ?.name,
+                                                      price:
+                                                          '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                                    ),
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) {
+                                                  return const SizedBox(
+                                                    width: 10,
+                                                  );
+                                                },
+                                                itemCount: snapshot
+                                                        .data?.data?.length ??
+                                                    0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) {
-                                      return const SizedBox(
-                                        width: 10,
-                                      );
-                                    },
-                                    itemCount: snapshot.data?.data?.length ?? 0,
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
-                                } else {
-                                  return const FailureWidget();
-                                }
-                            }
-                          }),
-                    ),
+                                      )
+                                    : const SizedBox();
+                              } else if (snapshot.hasError) {
+                                return const FailureWidget();
+                              } else {
+                                return const FailureWidget();
+                              }
+                          }
+                        }),
                     Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 35.0),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 35.0,
+                      ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -288,8 +318,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             onTap: () {
                               String startDate = data.startDate ?? '';
                               String endDate = data.endDate ?? '';
-                              print(startDate);
-                              print(endDate);
+                              log(startDate);
+                              log(endDate);
                               int startDifference = DateTime.parse(startDate)
                                   .difference(DateTime.now())
                                   .inSeconds;
@@ -297,7 +327,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                   .difference(DateTime.parse(endDate))
                                   .inSeconds;
                               if (startDifference >= 1) {
-                                print('coming');
+                                log('coming');
                                 Get.to(
                                   () => const ComingAuctionScreen(),
                                   binding: ComingAuctionBinding(),
@@ -305,14 +335,14 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                 );
                               } else if (startDifference <= 0 &&
                                   endDifference <= 0) {
-                                print('current');
+                                log('current');
                                 Get.to(
                                   () => const CurrentAuctionScreen(),
                                   binding: CurrentAuctionBinding(),
                                   arguments: data.id,
                                 );
                               } else if (endDifference >= 1) {
-                                print('done');
+                                log('done');
                                 Get.to(
                                   () => const DoneAuctionScreen(),
                                   binding: DoneAuctionBinding(),

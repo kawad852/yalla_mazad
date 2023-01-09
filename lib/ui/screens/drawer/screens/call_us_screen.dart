@@ -41,8 +41,8 @@ class _CallUsScreenState extends State<CallUsScreen> {
           Padding(
             padding: const EdgeInsets.only(
               top: 55,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
             child: SizedBox(
               width: Get.width,

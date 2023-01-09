@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/auctions/coming_auction_binding.dart';
@@ -7,12 +9,7 @@ import 'package:yalla_mazad/ui/screens/auctions/screens/coming_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/done_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
-
-import '../../../../../binding/notifications/notifications_binding.dart';
-import '../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../utils/colors.dart';
-import '../../../../../utils/images.dart';
-import '../../../notifications/screens/notifications_screen.dart';
 
 class TrendingAuctionItem extends StatelessWidget {
   final String image;
@@ -35,7 +32,7 @@ class TrendingAuctionItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       padding: const EdgeInsets.only(
-        top: 80,
+        top: 90,
       ),
       child: SizedBox(
         height: Get.height,
@@ -51,8 +48,8 @@ class TrendingAuctionItem extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  print(startDate);
-                  print(endDate);
+                 log(startDate);
+                 log(endDate);
                   int startDifference = DateTime.parse(startDate)
                       .difference(DateTime.now())
                       .inSeconds;
@@ -60,21 +57,21 @@ class TrendingAuctionItem extends StatelessWidget {
                       .difference(DateTime.parse(endDate))
                       .inSeconds;
                   if (startDifference >= 1) {
-                    print('coming');
+                    log('coming');
                     Get.to(
                       () => const ComingAuctionScreen(),
                       binding: ComingAuctionBinding(),
                       arguments: id,
                     );
                   } else if (startDifference <= 0 && endDifference <= 0) {
-                    print('current');
+                    log('current');
                     Get.to(
                       () => const CurrentAuctionScreen(),
                       binding: CurrentAuctionBinding(),
                       arguments: id,
                     );
                   } else if (endDifference >= 1) {
-                    print('done');
+                    log('done');
                     Get.to(
                       () => const DoneAuctionScreen(),
                       binding: DoneAuctionBinding(),

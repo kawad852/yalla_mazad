@@ -50,39 +50,36 @@ class _PlansScreenState extends State<PlansScreen> {
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 45,
-                    left: 20,
-                    right: 20,
+                    left: 35,
+                    right: 35,
                   ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Get.to(
-                              () => const CustomNavigationBar(),
-                              binding: HomeBinding(),
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.cancel_outlined,
-                            color: MyColors.primary,
-                            size: 25,
-                          ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Get.to(
+                            () => const CustomNavigationBar(),
+                            binding: HomeBinding(),
+                          );
+                        },
+                        icon: const Icon(
+                          Icons.cancel_outlined,
+                          color: MyColors.primary,
+                          size: 25,
                         ),
-                        Text(
-                          'subscriptions'.tr,
-                          style: const TextStyle(
-                            color: MyColors.primary,
-                            fontSize: 18,
-                          ),
+                      ),
+                      Text(
+                        'subscriptions'.tr,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 18,
                         ),
-                        const SizedBox(
-                          width: 50,
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(
+                        width: 50,
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(

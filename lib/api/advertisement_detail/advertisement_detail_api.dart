@@ -15,6 +15,7 @@ class AdvertisementDetailsApi {
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization':MySharedPreferences.language,
       };
       log("Response:: AdvertisementDetailsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

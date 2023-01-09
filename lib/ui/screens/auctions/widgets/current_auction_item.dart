@@ -1,3 +1,4 @@
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,90 +38,88 @@ class CurrentAuctionItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(
-                      right: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
                     ),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 15,
-                        ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: MyColors.primary,
+                        size: 15,
                       ),
                     ),
                   ),
-                  Text(
-                    'current auction'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                ),
+                Text(
+                  'current auction'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(
+                      202,
+                      195,
+                      212,
+                      0.3,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
                   ),
-                  Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(
-                        202,
-                        195,
-                        212,
-                        0.3,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          if (controller.advertisementDetailsModel?.data
-                                  ?.isFavorite ==
-                              true) {
-                            controller.fetchDeleteFromFavoritesData(
-                              adId: id,
-                              context: context,
-                            );
-                          } else {
-                            controller.fetchAddToFavoritesData(
-                              adId: id,
-                              context: context,
-                            );
-                          }
-                        },
-                        icon: Image.asset(
-                          MyImages.favorite,
-                          width: 20,
-                          height: 20,
-                        ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        if (controller.advertisementDetailsModel?.data
+                                ?.isFavorite ==
+                            true) {
+                          controller.fetchDeleteFromFavoritesData(
+                            adId: id,
+                            context: context,
+                          );
+                        } else {
+                          controller.fetchAddToFavoritesData(
+                            adId: id,
+                            context: context,
+                          );
+                        }
+
+                      },
+                      icon: Image.asset(
+                        MyImages.favorite,
+                        width: 20,
+                        height: 20,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -131,49 +130,53 @@ class CurrentAuctionItem extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                CarouselSlider(
-                  items: List.generate(
-                    images.length,
-                    (index) => Container(
-                      height: 333,
-                      width: ScreenSize.phoneSize(
-                        346,
-                        height: false,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          25,
-                        ),
-                        border: Border.all(
-                          color: const Color.fromRGBO(
-                            228,
-                            225,
-                            232,
-                            1,
+                images.isNotEmpty
+                    ? CarouselSlider(
+                        items: List.generate(
+                          images.length,
+                          (index) => Container(
+                            height: 333,
+                            width: ScreenSize.phoneSize(
+                              346,
+                              height: false,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ),
+                              border: Border.all(
+                                color: const Color.fromRGBO(
+                                  228,
+                                  225,
+                                  232,
+                                  1,
+                                ),
+                                width: 4,
+                                strokeAlign: StrokeAlign.inside,
+                              ),
+                            ),
+                            child: CustomNetworkImage(
+                              radius: 20,
+                              url: images[index],
+                            ),
                           ),
-                          width: 4,
-                          strokeAlign: StrokeAlign.inside,
                         ),
-                      ),
-                      child: CustomNetworkImage(
-                        radius: 20,
-                        url: images[index],
-                      ),
-                    ),
-                  ),
-                  options: CarouselOptions(
-                    height: 333,
-                    viewportFraction: 0.8,
-                    enlargeCenterPage: true,
-                    initialPage: 0,
-                    autoPlay: false,
-                    enlargeFactor: 0.3,
-                    enableInfiniteScroll: false,
-                  ),
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
+                        options: CarouselOptions(
+                          height: 333,
+                          viewportFraction: 0.8,
+                          enlargeCenterPage: true,
+                          initialPage: 0,
+                          autoPlay: false,
+                          enlargeFactor: 0.3,
+                          enableInfiniteScroll: false,
+                        ),
+                      )
+                    : const SizedBox(),
+                images.isNotEmpty
+                    ? const SizedBox(
+                        height: 50,
+                      )
+                    : const SizedBox(),
                 Padding(
                   padding: const EdgeInsetsDirectional.only(
                     start: 30,
@@ -308,25 +311,38 @@ class CurrentAuctionItem extends StatelessWidget {
                             ),
                             child: Center(
                               child: StreamBuilder<QuerySnapshot>(
-                                  stream: FirebaseFirestore.instance
-                                      .collection('auctions')
-                                      .doc('7')
-                                      .collection('biddings')
-                                      .orderBy('amount', descending: true)
-                                      .snapshots(),
-                                  builder: (context, snapshot) {
+                                stream: FirebaseFirestore.instance
+                                    .collection('auctions')
+                                    .doc('7')
+                                    .collection('biddings')
+                                    .orderBy('amount', descending: true)
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasError) {
                                     return Text(
-                                      snapshot.data?.docs.first
-                                              .get('amount')
-                                              .toString() ??
-                                          "",
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: MyColors.red,
-                                        fontSize: 16,
-                                      ),
+                                      'an error occured'.tr,
                                     );
-                                  }),
+                                  }
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                      return const Center();
+                                    default:
+                                      return Text(
+                                        snapshot.data!.docs.isNotEmpty
+                                            ? snapshot.data?.docs.first
+                                                    .get('amount')
+                                                    .toString() ??
+                                                ""
+                                            : " ",
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          color: MyColors.red,
+                                          fontSize: 16,
+                                        ),
+                                      );
+                                  }
+                                },
+                              ),
                             ),
                           ),
                         ],
@@ -392,8 +408,11 @@ class CurrentAuctionItem extends StatelessWidget {
               }
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const SizedBox(
+                    height: 200,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 default:
                   return SizedBox(

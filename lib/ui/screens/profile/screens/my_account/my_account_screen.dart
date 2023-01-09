@@ -59,79 +59,78 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
                     ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          CustomNavigationBarController.find.tabController
-                              .jumpToTab(0);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 20,
-                        ),
+                    borderRadius: BorderRadius.circular(
+                      7,
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        CustomNavigationBarController.find.tabController
+                            .jumpToTab(0);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: MyColors.primary,
+                        size: 15,
                       ),
                     ),
                   ),
-                  Text(
-                    'my account'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
+                ),
+                Text(
+                  'my account'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
+                  ),
+                ),
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsets.only(right: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
+                    ).withOpacity(
+                      0.6,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
                   ),
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ).withOpacity(
-                        0.6,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          Get.to(
-                            () => const EditProfileScreen(),
-                            binding: ProfileBinding(),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.settings,
-                          color: MyColors.primary,
-                          size: 20,
-                        ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.to(
+                          () => const EditProfileScreen(),
+                          binding: ProfileBinding(),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.settings,
+                        color: MyColors.primary,
+                        size: 20,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Column(

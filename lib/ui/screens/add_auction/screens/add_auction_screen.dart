@@ -67,51 +67,50 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 45,
-                        left: 20,
-                        right: 20,
+                        left: 35,
+                        right: 35,
                       ),
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 35,
-                              height: 35,
-                              padding: const EdgeInsets.only(right: 2),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xffD3CFDC,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  7,
-                                ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 35,
+                            height: 35,
+                            padding: const EdgeInsetsDirectional.only(
+                              start: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffD3CFDC,
                               ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: MyColors.primary,
-                                    size: 20,
-                                  ),
-                                ),
+                              borderRadius: BorderRadius.circular(
+                                7,
                               ),
                             ),
-                            Text(
-                              'add auction'.tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 18,
+                            child: Center(
+                              child: IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back_ios,
+                                  color: MyColors.primary,
+                                  size: 15,
+                                ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 50,
+                          ),
+                          Text(
+                            'add auction'.tr,
+                            style: const TextStyle(
+                              color: MyColors.primary,
+                              fontSize: 18,
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(

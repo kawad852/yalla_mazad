@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class PopularAdsApi {
   Future<PopularAdvertisementModel?> data(int pageId) async {
@@ -13,7 +14,7 @@ class PopularAdsApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization':MySharedPreferences.language,
       };
       log("Response:: PopularAdsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

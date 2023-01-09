@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/search_advertisement/search_advertisement_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
+import '../../utils/shared_prefrences.dart';
+
 class SearchAdvertisementApi {
   Future<SearchAdvertisementModel?> data(
       {required String name, required int pageKey}) async {
@@ -13,6 +15,7 @@ class SearchAdvertisementApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'x-localization':MySharedPreferences.language,
       };
       var body = jsonEncode({
         "value": name,

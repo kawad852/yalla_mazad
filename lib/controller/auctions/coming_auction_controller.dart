@@ -11,6 +11,7 @@ import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import '../../api/delete_advertisement_from_favorites/delete_advertisement_from_favorites_api.dart';
 import '../../model/delete_advertisement_from_favorites/delete_advertisement_from_favorites_model.dart';
 import '../../utils/app_constants.dart';
+import '../profile/my_account/my_favorites_controller.dart';
 
 class ComingAuctionController extends GetxController {
   static ComingAuctionController get find => Get.find();
@@ -59,6 +60,14 @@ class ComingAuctionController extends GetxController {
       Fluttertoast.showToast(
         msg: 'added to favorites successfully'.tr,
       );
+      bool test = Get.isRegistered<MyFavoritesController>();
+      if(test){
+        MyFavoritesController.find.onInit();
+      }
+      else{
+        Get.put(MyFavoritesController());
+        MyFavoritesController.find.onInit();
+      }
     } else if (addAdvertisementToFavoritesModel!.code == 500) {
       Fluttertoast.showToast(
         msg: addAdvertisementToFavoritesModel?.msg ?? 'already here'.tr,
@@ -95,6 +104,14 @@ class ComingAuctionController extends GetxController {
       Fluttertoast.showToast(
         msg: 'removed from favorites successfully'.tr,
       );
+      bool test = Get.isRegistered<MyFavoritesController>();
+      if(test){
+        MyFavoritesController.find.onInit();
+      }
+      else{
+        Get.put(MyFavoritesController());
+        MyFavoritesController.find.onInit();
+      }
     } else if (deleteAdvertisementFromFavoritesModel!.code == 500) {
       Fluttertoast.showToast(
         msg: deleteAdvertisementFromFavoritesModel?.msg ?? 'already here'.tr,

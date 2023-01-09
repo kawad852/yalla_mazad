@@ -31,8 +31,6 @@ class ComingAuctionItem extends StatelessWidget {
       .collection('biddings')
       .withConverter<FireStoreBiddingModel>(
         fromFirestore: (snapshot, _) {
-          print(snapshot.data()!);
-          print('helloooo');
           return FireStoreBiddingModel.fromJson(
             snapshot.data()!,
           );
@@ -51,90 +49,87 @@ class ComingAuctionItem extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(
-                      right: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
                     ),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 15,
-                        ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: MyColors.primary,
+                        size: 15,
                       ),
                     ),
                   ),
-                  Text(
-                    'coming auction'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
+                ),
+                Text(
+                  'coming auction'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Container(
+                  width: 35,
+                  height: 35,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(
+                      202,
+                      195,
+                      212,
+                      0.3,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
                   ),
-                  Container(
-                    width: 35,
-                    height: 35,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(
-                        202,
-                        195,
-                        212,
-                        0.3,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          if (controller.advertisementDetailsModel?.data
-                                  ?.isFavorite ==
-                              true) {
-                            controller.fetchDeleteFromFavoritesData(
-                              adId: id,
-                              context: context,
-                            );
-                          } else {
-                            controller.fetchAddToFavoritesData(
-                              adId: id,
-                              context: context,
-                            );
-                          }
-                        },
-                        icon: Image.asset(
-                          MyImages.favorite,
-                          width: 20,
-                          height: 20,
-                        ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        if (controller
+                                .advertisementDetailsModel?.data?.isFavorite ==
+                            true) {
+                          controller.fetchDeleteFromFavoritesData(
+                            adId: id,
+                            context: context,
+                          );
+                        } else {
+                          controller.fetchAddToFavoritesData(
+                            adId: id,
+                            context: context,
+                          );
+                        }
+                      },
+                      icon: Image.asset(
+                        MyImages.favorite,
+                        width: 20,
+                        height: 20,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           SizedBox(
@@ -145,49 +140,52 @@ class ComingAuctionItem extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                CarouselSlider(
-                  items: List.generate(
-                    images.length,
-                    (index) => Container(
-                      height: 333,
-                      width: ScreenSize.phoneSize(
-                        346,
-                        height: false,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          25,
-                        ),
-                        border: Border.all(
-                          color: const Color.fromRGBO(
-                            228,
-                            225,
-                            232,
-                            1,
+                images.isNotEmpty
+                    ? CarouselSlider(
+                        items: List.generate(
+                          images.length,
+                          (index) => Container(
+                            height: 333,
+                            width: ScreenSize.phoneSize(
+                              346,
+                              height: false,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(
+                                25,
+                              ),
+                              border: Border.all(
+                                color: const Color.fromRGBO(
+                                  228,
+                                  225,
+                                  232,
+                                  1,
+                                ),
+                                width: 4,
+                                strokeAlign: StrokeAlign.inside,
+                              ),
+                            ),
+                            child: CustomNetworkImage(
+                              radius: 20,
+                              url: images[index],
+                            ),
                           ),
-                          width: 4,
-                          strokeAlign: StrokeAlign.inside,
                         ),
-                      ),
-                      child: CustomNetworkImage(
-                        radius: 20,
-                        url: images[index],
-                      ),
-                    ),
-                  ),
-                  options: CarouselOptions(
-                    height: 333,
-                    viewportFraction: 0.8,
-                    enlargeCenterPage: true,
-                    initialPage: 0,
-                    autoPlay: false,
-                    enlargeFactor: 0.3,
-                    enableInfiniteScroll: false,
-                  ),
-                ),
-                const SizedBox(
+                        options: CarouselOptions(
+                          height: 333,
+                          viewportFraction: 0.8,
+                          enlargeCenterPage: true,
+                          initialPage: 0,
+                          autoPlay: false,
+                          enlargeFactor: 0.3,
+                          enableInfiniteScroll: false,
+                        ),
+                      )
+                    : const SizedBox(),
+                images.isNotEmpty
+                    ? const SizedBox(
                   height: 50,
-                ),
+                ):const SizedBox(),
                 Padding(
                   padding: const EdgeInsetsDirectional.only(
                     start: 30,
@@ -377,8 +375,8 @@ class ComingAuctionItem extends StatelessWidget {
               ],
             ),
           ),
+          ///TODO: edit doc id
           StreamBuilder<QuerySnapshot>(
-            ///TODO: edit doc id
             stream: FirebaseFirestore.instance
                 .collection('auctions')
                 .doc('7')

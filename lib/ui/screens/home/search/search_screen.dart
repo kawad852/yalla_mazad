@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -66,76 +68,73 @@ class _SearchScreenState extends State<SearchScreen> {
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 45,
-                    left: 20,
-                    right: 20,
+                    left: 35,
+                    right: 35,
                   ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 35,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                            right: 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 35,
+                        height: 35,
+                        padding: const EdgeInsetsDirectional.only(
+                          start: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xffD3CFDC,
                           ),
-                          decoration: BoxDecoration(
-                            color: const Color(
-                              0xffD3CFDC,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                CustomNavigationBarController.find.tabController
-                                    .jumpToTab(0);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                color: MyColors.primary,
-                                size: 15,
-                              ),
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              CustomNavigationBarController.find.tabController
+                                  .jumpToTab(0);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: MyColors.primary,
+                              size: 15,
                             ),
                           ),
                         ),
-                        Text(
-                          'search'.tr,
-                          style: const TextStyle(
-                            color: MyColors.primary,
-                            fontSize: 18,
+                      ),
+                      Text(
+                        'search'.tr,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(202, 195, 212, 0.3),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
                         ),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(202, 195, 212, 0.3),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
-                          ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                Get.to(
-                                  () => const NotificationsScreen(),
-                                  binding: NotificationsBinding(),
-                                );
-                              },
-                              icon: Image.asset(
-                                MyImages.notification,
-                                width: 25,
-                                height: 25,
-                              ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const NotificationsScreen(),
+                                binding: NotificationsBinding(),
+                              );
+                            },
+                            icon: Image.asset(
+                              MyImages.notification,
+                              width: 25,
+                              height: 25,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Column(
@@ -179,8 +178,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           onTap: () {
                             String startDate = data.startDate ?? '';
                             String endDate = data.endDate ?? '';
-                            print(startDate);
-                            print(endDate);
+                           log(startDate);
+                           log(endDate);
                             int startDifference = DateTime.parse(startDate)
                                 .difference(DateTime.now())
                                 .inSeconds;
@@ -188,7 +187,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 .difference(DateTime.parse(endDate))
                                 .inSeconds;
                             if (startDifference >= 1) {
-                              print('coming');
+                              log('coming');
                               Get.to(
                                 () => const ComingAuctionScreen(),
                                 binding: ComingAuctionBinding(),
@@ -196,14 +195,14 @@ class _SearchScreenState extends State<SearchScreen> {
                               );
                             } else if (startDifference <= 0 &&
                                 endDifference <= 0) {
-                              print('current');
+                              log('current');
                               Get.to(
                                 () => const CurrentAuctionScreen(),
                                 binding: CurrentAuctionBinding(),
                                 arguments: data.id,
                               );
                             } else if (endDifference >= 1) {
-                              print('done');
+                              log('done');
                               Get.to(
                                 () => const DoneAuctionScreen(),
                                 binding: DoneAuctionBinding(),

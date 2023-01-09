@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
@@ -45,8 +47,11 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
-                  return const Center(
-                    child: CircularProgressIndicator(),
+                  return const SizedBox(
+                    height: 50,
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 case ConnectionState.done:
                 default:
@@ -68,8 +73,8 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                             String endDate = controller.myAdvertisementsModel
                                     ?.data?[index].endDate ??
                                 '';
-                            print(startDate);
-                            print(endDate);
+                           log(startDate);
+                           log(endDate);
                             int startDifference = DateTime.parse(startDate)
                                 .difference(DateTime.now())
                                 .inSeconds;
@@ -77,7 +82,7 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                 .difference(DateTime.parse(endDate))
                                 .inSeconds;
                             if (startDifference >= 1) {
-                              print('coming');
+                              log('coming');
                               Get.to(
                                 () => const ComingAuctionScreen(),
                                 binding: ComingAuctionBinding(),
@@ -86,7 +91,7 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                               );
                             } else if (startDifference <= 0 &&
                                 endDifference <= 0) {
-                              print('current');
+                              log('current');
                               Get.to(
                                 () => const CurrentAuctionScreen(),
                                 binding: CurrentAuctionBinding(),
@@ -94,7 +99,7 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                     .myAdvertisementsModel?.data?[index].id,
                               );
                             } else if (endDifference >= 1) {
-                              print('done');
+                              log('done');
                               Get.to(
                                 () => const DoneAuctionScreen(),
                                 binding: DoneAuctionBinding(),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
-import '../../../../controller/profile/my_subscription_controller.dart';
 import '../../../../utils/images.dart';
 
 class MyPlanItem extends StatelessWidget {

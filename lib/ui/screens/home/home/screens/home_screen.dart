@@ -59,14 +59,10 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    top: 40,
-                    left: 20,
-                    right: 20,
+                    top: 45,
+                    left: 35,
+                    right: 35,
                   ),
-                  // child: Directionality(
-                  // textDirection: Get.locale == const Locale('ar')
-                  //     ? TextDirection.rtl
-                  //     : TextDirection.ltr,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

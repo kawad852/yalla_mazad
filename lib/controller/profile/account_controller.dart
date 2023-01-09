@@ -28,7 +28,6 @@ class AccountController extends GetxController {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
         Loader.show(context);
-        // OverLayLoader.showLoading(context);
         updateUserModel = await UpdateUserApi().data(
           phone: phone,
         );
@@ -38,8 +37,10 @@ class AccountController extends GetxController {
           return;
         }
         if (updateUserModel!.code == 200) {
-          MySharedPreferences.phone =
-              updateUserModel!.user!.phone!.substring(4);
+          if (updateUserModel!.user!.phone!.length > 4) {
+            MySharedPreferences.phone =
+                updateUserModel!.user!.phone!.substring(4);
+          }
           Fluttertoast.showToast(msg: updateUserModel!.msg!);
         } else if (updateUserModel!.code == 500) {
           Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
