@@ -4,10 +4,13 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yalla_mazad/binding/drawer/about_us_binding.dart';
+import 'package:yalla_mazad/binding/drawer/privacy_policy_binding.dart';
 import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/about_us_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/call_us_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/terms_and_conditions_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
@@ -21,6 +24,7 @@ import '../../binding/drawer/call_us_binding.dart';
 import '../../binding/profile/profile_binding.dart';
 import '../../controller/home/custom_navigation_bar_controller.dart';
 import '../../utils/colors.dart';
+import '../screens/drawer/screens/privacy_policy_screen.dart';
 import '../screens/profile/screens/edit_profile_screen.dart';
 import '../screens/profile/screens/my_account/my_account_screen.dart';
 
@@ -245,10 +249,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
                   onTap: () {
-                    ///TODO: make sure of the navigation
                     Get.to(
-                      () => const TermsAndConditionsScreen(),
-                      binding: TermsAndConditionsBinding(),
+                      () => const PrivacyPolicyScreen(),
+                      binding: PrivacyPolicyBinding(),
                     );
                   },
                   title: Text(
@@ -275,7 +278,12 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
                 ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(
+                          () => const AboutUsScreen(),
+                      binding: AboutUsBinding(),
+                    );
+                  },
                   title: Text(
                     'who we are'.tr,
                     style: const TextStyle(

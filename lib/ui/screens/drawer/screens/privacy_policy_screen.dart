@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/controller/drawer/terms_and_conditions_controller.dart';
+import 'package:yalla_mazad/controller/drawer/privacy_policy_controller.dart';
 import 'package:yalla_mazad/model/page/page_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../../../widgets/failure_widget.dart';
 
-class TermsAndConditionsScreen extends StatefulWidget {
-  const TermsAndConditionsScreen({Key? key}) : super(key: key);
+class PrivacyPolicyScreen extends StatefulWidget {
+  const PrivacyPolicyScreen({Key? key}) : super(key: key);
 
   @override
-  State<TermsAndConditionsScreen> createState() =>
-      _TermsAndConditionsScreenState();
+  State<PrivacyPolicyScreen> createState() =>
+      _PrivacyPolicyScreenState();
 }
 
-class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
-  final controller = TermsAndConditionsController.find;
+class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
+  final controller = PrivacyPolicyController.find;
 
   @override
   Widget build(BuildContext context) {

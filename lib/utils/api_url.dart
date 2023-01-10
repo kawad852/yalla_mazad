@@ -98,4 +98,7 @@ class ApiUrl {
 
   //create bid
   static const String createBid = "/api/v1/bid-create";
+
+  //fetch page
+  static const String fetchPage = '/api/v1/page/';
 }
