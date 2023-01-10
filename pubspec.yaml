@@ -61,6 +61,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.6
   firebase_messaging:
   flutter_local_notifications:
+  connectivity_plus: ^3.0.2
 
 
 
