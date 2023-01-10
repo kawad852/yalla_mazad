@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:slide_to_act/slide_to_act.dart';
+import 'package:yalla_mazad/controller/auctions/current_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
 
 import '../../../../utils/colors.dart';
@@ -10,10 +11,23 @@ import '../../../widgets/custom_slide_button.dart';
 
 class ConfirmAuctionDialog extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
-  ConfirmAuctionDialog({Key? key}) : super(key: key);
+  final int id;
+  final int priceOne;
+  final int priceTwo;
+  final int priceThree;
+  final int currentPrice;
+  ConfirmAuctionDialog({
+    Key? key,
+    required this.id,
+    required this.currentPrice,
+    required this.priceOne,
+    required this.priceTwo,
+    required this.priceThree,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = CurrentAuctionController.find;
     return Dialog(
       backgroundColor: Colors.transparent,
       child: Container(
@@ -86,10 +100,10 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                       color: MyColors.textFieldColor,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        '130 JOD',
-                        style: TextStyle(
+                        '$currentPrice JOD',
+                        style: const TextStyle(
                           color: MyColors.red,
                           fontSize: 16,
                         ),
@@ -127,27 +141,52 @@ class ConfirmAuctionDialog extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: const [
-                      AuctionBidItem(
-                        content: '5 JOD',
-                        isChosen: true,
-                      ),
-                      AuctionBidItem(
-                        content: '10 JOD',
-                        isChosen: false,
-                      ),
-                      AuctionBidItem(
-                        content: '20 JOD',
-                        isChosen: false,
-                      ),
-                      AuctionBidItem(
-                        content: '50 JOD',
-                        isChosen: false,
-                      ),
-                    ],
-                  ),
+                  GetBuilder<CurrentAuctionController>(builder: (value) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            value.selectedBidItem = 1;
+                            value.selectedBidAmount = priceOne;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
+                            value.update();
+                          },
+                          child: AuctionBidItem(
+                            content: '$priceOne JOD',
+                            isChosen: controller.selectedBidItem == 1,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            value.selectedBidItem = 2;
+                            value.selectedBidAmount = priceTwo;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
+                            value.update();
+                          },
+                          child: AuctionBidItem(
+                            content: '$priceTwo JOD',
+                            isChosen: controller.selectedBidItem == 2,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            value.selectedBidItem = 3;
+                            value.selectedBidAmount = priceThree;
+                            value.totalPrice =
+                                currentPrice + value.selectedBidAmount;
+                            value.update();
+                          },
+                          child: AuctionBidItem(
+                            content: '$priceThree JOD',
+                            isChosen: controller.selectedBidItem == 3,
+                          ),
+                        ),
+                      ],
+                    );
+                  }),
                 ],
               ),
             ),
@@ -173,15 +212,19 @@ class ConfirmAuctionDialog extends StatelessWidget {
                       ),
                       color: MyColors.primary,
                     ),
-                    child: const Center(
-                      child: Text(
-                        '135 JOD',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
+                    child:
+                        GetBuilder<CurrentAuctionController>(builder: (value) {
+                      value.totalPrice = currentPrice + value.selectedBidAmount;
+                      return Center(
+                        child: Text(
+                          '${value.totalPrice} JOD',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    }),
                   ),
                 ],
               ),
@@ -195,14 +238,15 @@ class ConfirmAuctionDialog extends StatelessWidget {
               color: MyColors.primary,
               stateKey: _key,
               text: 'confirm'.tr,
-              onSubmitted: () {
+              onSubmitted: () async {
                 Future.delayed(
                   const Duration(seconds: 1),
-                  () {
+                  () async {
                     _key.currentState?.reset();
-
-                    ///TODO: edit
-                    Get.back();
+                    await controller.fetchCreateBidData(
+                        adId: id.toString(),
+                        totalPrice: controller.totalPrice.toString(),
+                        context: context);
                   },
                 );
               },

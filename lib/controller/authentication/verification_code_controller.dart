@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/api/auth/resend_otp_api.dart';
 import 'package:yalla_mazad/model/auth/opt_check_model.dart';
 import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
-
 import '../../binding/interests/interests_binding.dart';
 import '../../ui/screens/interests/screens/interests_screen.dart';
 import '../../utils/app_constants.dart';
@@ -58,7 +57,7 @@ class VerificationCodeController extends GetxController {
     //   if (formKey.currentState!.validate()) {
     //     Loader.show(context);
     // code =   '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
-    //optCheckModel = await OptCheckApi().data(phone: phone, code: code);
+    // optCheckModel = await OptCheckApi().data(phone: phone, code: code);
     //     if (optCheckModel == null) {
     //       Fluttertoast.showToast(msg: AppConstants.failedMessage);
     //       Loader.hide();

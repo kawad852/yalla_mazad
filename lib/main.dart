@@ -11,6 +11,7 @@ import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import 'package:yalla_mazad/utils/material_theme.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +21,7 @@ Future<void> main() async {
   }
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -64,9 +66,7 @@ class _MyAppState extends State<MyApp> {
         Locale('en', 'US'),
         Locale('ar', 'JO'),
       ],
-
-      locale: const Locale('en'),
-      //locale: Locale(MySharedPreferences.language),
+      locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: _toggleScreen(),

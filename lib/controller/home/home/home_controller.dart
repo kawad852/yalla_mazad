@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/api/all_tips/all_tips_api.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
 import 'package:yalla_mazad/api/popular_advertisement/popular_advertisement_api.dart';
@@ -26,8 +29,15 @@ class HomeController extends GetxController {
   void onInit() {
     initializeCategoriesFuture = fetchAllCategories();
     initializeSliderFuture = fetchAllSliders();
-    initializePopularAdsFuture = fetchAllPopularAds();
-    initializeAllAdsFuture = fetchAllAds();
+    trendingPagingController = PagingController(firstPageKey: 1)
+      ..addPageRequestListener((pageKey) {
+        log('inside trend listener');
+        fetchTrendingPage(pageKey);
+      });
+    allAdsPagingController = PagingController(firstPageKey: 1)
+      ..addPageRequestListener((pageKey) {
+        fetchAllAdsPage(pageKey);
+      });
     initializeTipsFuture = fetchAllTips();
     super.onInit();
   }
@@ -46,22 +56,38 @@ class HomeController extends GetxController {
   }
 
   PopularAdvertisementModel? popularAdvertisementModel;
-  late Future<PopularAdvertisementModel?> initializePopularAdsFuture;
-
-  Future<PopularAdvertisementModel?> fetchAllPopularAds() async {
-    popularAdvertisementModel = await PopularAdsApi().data();
-    return popularAdvertisementModel;
+  late PagingController<int, PopularAdsList> trendingPagingController;
+  Future<void> fetchTrendingPage(int pageKey) async {
+    try {
+      popularAdvertisementModel = await PopularAdsApi().data(pageKey);
+      final newItems = popularAdvertisementModel!.data;
+      if (newItems!.isEmpty) {
+        trendingPagingController.appendLastPage(newItems);
+      } else {
+        trendingPagingController.appendPage(newItems, pageKey + 1);
+      }
+    } catch (e) {
+      trendingPagingController.error = e;
+    }
+    update();
   }
 
-  ///TOdo: change into you may like
   AllAdvertisementsModel? allAdvertisementsModel;
-  late Future<AllAdvertisementsModel?> initializeAllAdsFuture;
-
-  Future<AllAdvertisementsModel?> fetchAllAds() async {
-    allAdvertisementsModel = await ALlAdvertisementsApi().data();
-    return allAdvertisementsModel;
+  late PagingController<int, AllAdsList> allAdsPagingController;
+  Future<void> fetchAllAdsPage(int pageKey) async {
+    try {
+      allAdvertisementsModel = await ALlAdvertisementsApi().data(pageKey);
+      final newItems = allAdvertisementsModel!.data;
+      if (newItems!.isEmpty) {
+        allAdsPagingController.appendLastPage(newItems);
+      } else {
+        allAdsPagingController.appendPage(newItems, pageKey + 1);
+      }
+    } catch (e) {
+      allAdsPagingController.error = e;
+    }
+    update();
   }
-
 
   AllTipsModel? allTipsModel;
   late Future<AllTipsModel?> initializeTipsFuture;
@@ -69,5 +95,14 @@ class HomeController extends GetxController {
   Future<AllTipsModel?> fetchAllTips() async {
     allTipsModel = await AllTipsApi().data();
     return allTipsModel;
+  }
+
+  @override
+  void dispose() {
+    trendingPagingController.removeListener(() {});
+    trendingPagingController.dispose();
+    allAdsPagingController.removeListener(() {});
+    allAdsPagingController.dispose();
+    super.dispose();
   }
 }

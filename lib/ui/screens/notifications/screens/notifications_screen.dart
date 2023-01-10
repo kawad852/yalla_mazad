@@ -21,54 +21,51 @@ class NotificationsScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(
-                      right: 4,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
                     ),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          Get.back();
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 15,
-                        ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.back();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: MyColors.primary,
+                        size: 15,
                       ),
                     ),
                   ),
-                  Text(
-                    'notifications'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
-                    ),
+                ),
+                Text(
+                  'notifications'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
                   ),
-                  const SizedBox(
-                    width: 35,
-                    height: 35,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  width: 35,
+                  height: 35,
+                ),
+              ],
             ),
           ),
           const SizedBox(

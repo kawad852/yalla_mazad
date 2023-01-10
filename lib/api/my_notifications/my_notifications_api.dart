@@ -4,7 +4,6 @@ import 'package:yalla_mazad/model/my_notifications/my_notifications_model.dart';
 import 'dart:convert';
 import 'dart:developer';
 
-
 import '../../utils/api_url.dart';
 import '../../utils/shared_prefrences.dart';
 
@@ -16,6 +15,7 @@ class MyNotificationsApi {
       var headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization': MySharedPreferences.language,
       };
       log("Response::MyNotificationsResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

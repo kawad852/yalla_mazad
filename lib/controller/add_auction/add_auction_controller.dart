@@ -31,7 +31,6 @@ class AddAuctionController extends GetxController {
   late Future<CategoriesModel?> initializeCategoriesFuture;
 
   String? image;
-  List<String?>? images;
   pickImage() async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -44,11 +43,12 @@ class AddAuctionController extends GetxController {
       if (Get.locale == const Locale('en')) {
         mainPictureController.text = '1 picture selected';
       } else {
-        mainPictureController.text = ' صور واحدة مختارة ';
+        mainPictureController.text = ' صورة واحدة مختارة ';
       }
     }
   }
 
+  List<String?>? images;
   pickMultipleImages() async {
     List<XFile?>? pickedFile = await ImagePicker().pickMultiImage(
       maxWidth: 1800,
@@ -111,43 +111,43 @@ class AddAuctionController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-    Loader.show(context);
-    addAuctionModel = await AddAuctionApi().data(
-      file: getListOfFiles(),
-      name: addressController.text,
-      content: descriptionController.text,
-      startPrice: auctionStartingPriceController.text,
-      userId: MySharedPreferences.userId,
-      categoryId: selectedCategory.value,
-      buyNowPrice: directSellPriceController.text,
-    );
-    if (addAuctionModel == null) {
-      Fluttertoast.showToast(
-        msg: AppConstants.failedMessage,
-      );
-      Loader.hide();
-      return;
-    }
-    if (addAuctionModel!.code == 200) {
-      Get.dialog(
-        AddedAuctionDialog(),
-      );
-      addressController.clear();
-      descriptionController.clear();
-      auctionStartingPriceController.clear();
-      directSellPriceController.clear();
-      image = null;
-      images = [];
-    } else if (addAuctionModel!.code == 500) {
-      Fluttertoast.showToast(
-        msg: AppConstants.failedMessage,
-      );
-    } else {
-      Fluttertoast.showToast(
-        msg: addAuctionModel!.msg!,
-      );
-    }
-    Loader.hide();
+        Loader.show(context);
+        addAuctionModel = await AddAuctionApi().data(
+          file: getListOfFiles(),
+          name: addressController.text,
+          content: descriptionController.text,
+          startPrice: auctionStartingPriceController.text,
+          userId: MySharedPreferences.userId,
+          categoryId: selectedCategory.value,
+          buyNowPrice: directSellPriceController.text,
+        );
+        if (addAuctionModel == null) {
+          Fluttertoast.showToast(
+            msg: AppConstants.failedMessage,
+          );
+          Loader.hide();
+          return;
+        }
+        if (addAuctionModel!.code == 200) {
+          Get.dialog(
+            AddedAuctionDialog(),
+          );
+          addressController.clear();
+          descriptionController.clear();
+          auctionStartingPriceController.clear();
+          directSellPriceController.clear();
+          image = null;
+          images = [];
+        } else if (addAuctionModel!.code == 500) {
+          Fluttertoast.showToast(
+            msg: AppConstants.failedMessage,
+          );
+        } else {
+          Fluttertoast.showToast(
+            msg: addAuctionModel!.msg!,
+          );
+        }
+        Loader.hide();
       }
     }
   }

@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
+import 'package:yalla_mazad/controller/profile/profile_controller.dart';
 import 'package:yalla_mazad/model/my_badges/my_badges_model.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_auctions_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_favorites_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/widgets/badge_item.dart';
+import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -29,6 +31,12 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   void initState() {
     Get.put(MyAccountController());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<MyAccountController>();
+    super.dispose();
   }
 
   @override
@@ -58,79 +66,78 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
-            child: Directionality(
-              textDirection: TextDirection.rtl,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsetsDirectional.only(
+                    start: 3,
+                  ),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
                     ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          CustomNavigationBarController.find.tabController
-                              .jumpToTab(0);
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios,
-                          color: MyColors.primary,
-                          size: 20,
-                        ),
+                    borderRadius: BorderRadius.circular(
+                      7,
+                    ),
+                  ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        CustomNavigationBarController.find.tabController
+                            .jumpToTab(0);
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back_ios,
+                        color: MyColors.primary,
+                        size: 15,
                       ),
                     ),
                   ),
-                  Text(
-                    'my account'.tr,
-                    style: const TextStyle(
-                      color: MyColors.primary,
-                      fontSize: 18,
+                ),
+                Text(
+                  'my account'.tr,
+                  style: const TextStyle(
+                    color: MyColors.primary,
+                    fontSize: 18,
+                  ),
+                ),
+                Container(
+                  width: 35,
+                  height: 35,
+                  padding: const EdgeInsets.only(right: 2),
+                  decoration: BoxDecoration(
+                    color: const Color(
+                      0xffD3CFDC,
+                    ).withOpacity(
+                      0.6,
+                    ),
+                    borderRadius: BorderRadius.circular(
+                      7,
                     ),
                   ),
-                  Container(
-                    width: 35,
-                    height: 35,
-                    padding: const EdgeInsets.only(right: 2),
-                    decoration: BoxDecoration(
-                      color: const Color(
-                        0xffD3CFDC,
-                      ).withOpacity(
-                        0.6,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        7,
-                      ),
-                    ),
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          Get.to(
-                            () => const EditProfileScreen(),
-                            binding: ProfileBinding(),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.settings,
-                          color: MyColors.primary,
-                          size: 20,
-                        ),
+                  child: Center(
+                    child: IconButton(
+                      onPressed: () {
+                        Get.to(
+                          () => const EditProfileScreen(),
+                          binding: ProfileBinding(),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.settings,
+                        color: MyColors.primary,
+                        size: 20,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
           Column(
@@ -140,159 +147,197 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: ScreenSize.phoneSize(
-                    0,
-                    height: false,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 40,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 114,
-                            height: 114,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                0xffD3CFDC,
-                              ),
-                              shape: BoxShape.circle,
-                              border: Border.all(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GetBuilder<MyAccountController>(
+                        builder: (value) {
+                          return InkWell(
+                            onTap: () {
+                              controller.pickImage(context);
+                              value.update();
+                              Get.put(ProfileController());
+                              ProfileController.find.update();
+                            },
+                            child: Container(
+                              width: 114,
+                              height: 114,
+                              decoration: BoxDecoration(
                                 color: const Color(
                                   0xffD3CFDC,
                                 ),
-                                width: 8,
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: const Color(
+                                    0xffD3CFDC,
+                                  ),
+                                  width: 8,
+                                ),
+                              ),
+                              child: CustomNetworkImage(
+                                url: MySharedPreferences.image,
+                                radius: 100,
                               ),
                             ),
-                            child: CustomNetworkImage(
-                              url: MySharedPreferences.image,
-                              radius: 100,
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.phoneSize(
+                          170,
+                          height: false,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              MySharedPreferences.name,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 18,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: ScreenSize.phoneSize(
-                              170,
-                              height: false,
+                            Text(
+                              '@${MySharedPreferences.userId}',
+                              textDirection: TextDirection.ltr,
+                              style: const TextStyle(
+                                color: MyColors.greyPrimary,
+                                fontSize: 14,
+                              ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  MySharedPreferences.name,
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+              FutureBuilder<MyBadgesModel?>(
+                  future: controller.initializeMyBadgesFuture,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return SizedBox(
+                          height: 80,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                ),
+                                child: Text(
+                                  'the badges'.tr,
                                   style: const TextStyle(
                                     color: MyColors.primary,
                                     fontSize: 18,
                                   ),
                                 ),
-                                Text(
-                                  '@${MySharedPreferences.userId}',
-                                  textDirection: TextDirection.ltr,
-                                  style: const TextStyle(
-                                    color: MyColors.greyPrimary,
-                                    fontSize: 14,
+                              ),
+                              SizedBox(
+                                height: 47,
+                                child: Center(
+                                    child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
                                   ),
-                                ),
-                                // Text(
-                                //   'ahmad',
-                                //   style: TextStyle(
-                                //     color: MyColors.red,
-                                //     fontSize: 18,
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 80,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30,
-                      ),
-                      child: Text(
-                        'the badges'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 47,
-                      child: Center(
-                        child: FutureBuilder<MyBadgesModel?>(
-                            future: controller.initializeMyBadgesFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return ListView.separated(
-                                      scrollDirection: Axis.horizontal,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 10,
-                                      ),
-                                      itemCount:
-                                          snapshot.data?.data?.length ?? 0,
-                                      itemBuilder: (context, index) {
-                                        return BadgeItem(
-                                          image:
-                                              snapshot.data?.data?[index].image,
-                                          message: snapshot
-                                              .data?.data?[index].id
-                                              .toString(),
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 10,
-                                        );
-                                      },
+                                  itemCount: 8,
+                                  itemBuilder: (context, index) {
+                                    return const CustomShimmerLoading(
+                                      radius: 15,
+                                      width: 47,
+                                      height: 47,
                                     );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return const SizedBox(
+                                      width: 10,
+                                    );
+                                  },
+                                )),
+                              ),
+                            ],
+                          ),
+                        );
+                      case ConnectionState.done:
+                      default:
+                        if (snapshot.hasData) {
+                          return snapshot.data!.data!.isNotEmpty
+                              ? SizedBox(
+                                  height: 80,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        child: Text(
+                                          'the badges'.tr,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 47,
+                                        child: Center(
+                                            child: ListView.separated(
+                                          scrollDirection: Axis.horizontal,
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 10,
+                                          ),
+                                          itemCount:
+                                              snapshot.data?.data?.length ?? 0,
+                                          itemBuilder: (context, index) {
+                                            return BadgeItem(
+                                              image: snapshot
+                                                  .data?.data?[index].image,
+                                              message: snapshot
+                                                  .data?.data?[index].id
+                                                  .toString(),
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return const SizedBox(
+                                              width: 10,
+                                            );
+                                          },
+                                        )),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : const SizedBox();
+                        } else if (snapshot.hasError) {
+                          return const FailureWidget();
+                        } else {
+                          return const FailureWidget();
+                        }
+                    }
+                  }),
               const SizedBox(
                 height: 10,
               ),

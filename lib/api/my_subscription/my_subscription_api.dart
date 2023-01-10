@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:yalla_mazad/model/my_subscription/my_subscription_model.dart';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class MySubscriptionApi {
   Future<MySubscriptionModel?> data({required int userId}) async {
@@ -14,6 +15,7 @@ class MySubscriptionApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: MySubscriptionResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

@@ -36,8 +36,22 @@ class Data {
   String? details;
   String? price;
   int? numberOfAuction;
+  int? time;
+  String? pointOne;
+  String? pointTwo;
+  String? pointThree;
 
-  Data({this.id, this.name, this.details, this.price, this.numberOfAuction});
+  Data({
+    this.id,
+    this.name,
+    this.details,
+    this.price,
+    this.numberOfAuction,
+    this.time,
+    this.pointOne,
+    this.pointThree,
+    this.pointTwo,
+  });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -45,6 +59,10 @@ class Data {
     details = json['details'];
     price = json['price'];
     numberOfAuction = json['number_of_auction'];
+    time = json['time'];
+    pointOne = json['point_one'];
+    pointTwo = json['point_two'];
+    pointThree = json['point_three'];
   }
 
   Map<String, dynamic> toJson() {
@@ -54,6 +72,10 @@ class Data {
     data['details'] = details;
     data['price'] = price;
     data['number_of_auction'] = numberOfAuction;
+    data['time'] = time;
+    data['point_one'] = pointOne;
+    data['point_two'] = pointTwo;
+    data['point_three'] = pointThree;
     return data;
   }
 }

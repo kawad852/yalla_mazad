@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class AdvertisementByCategoryApi {
   Future<AdvertisementByCategoryModel?> data({required int categoryId}) async {
@@ -13,7 +14,8 @@ class AdvertisementByCategoryApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: AdvertisementByCategoryResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

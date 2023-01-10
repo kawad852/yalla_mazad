@@ -5,17 +5,20 @@ import 'dart:convert';
 import 'dart:developer';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class DeleteAdvertisementFromFavoritesApi {
-  Future<DeleteAdvertisementFromFavoritesModel?> data(
-      {required int deleteId}) async {
+  Future<DeleteAdvertisementFromFavoritesModel?> data({
+    required String userId,
+    required String advertisementId,
+  }) async {
     try {
       String url =
-          '${ApiUrl.mainUrl}${ApiUrl.deleteAdvertisementFromFavorites}$deleteId';
+          '${ApiUrl.mainUrl}${ApiUrl.deleteAdvertisementFromFavorites}$advertisementId/$userId';
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: DeleteAdvertisementFromFavoritesResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

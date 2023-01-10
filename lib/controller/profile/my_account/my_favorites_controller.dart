@@ -16,6 +16,7 @@ class MyFavoritesController extends GetxController {
 
   Future<MyFavoritesModel?> fetchMyFav() async {
     myFavoritesModel = await MyFavoritesApi().data();
+    update();
     return myFavoritesModel;
   }
 }

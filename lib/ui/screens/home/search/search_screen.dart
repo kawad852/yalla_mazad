@@ -1,14 +1,24 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/controller/home/search/search_controller.dart';
+import 'package:yalla_mazad/model/search_advertisement/search_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 
+import '../../../../binding/auctions/coming_auction_binding.dart';
+import '../../../../binding/auctions/current_auction_binding.dart';
+import '../../../../binding/auctions/done_auction_binding.dart';
 import '../../../../binding/notifications/notifications_binding.dart';
 import '../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../auctions/screens/coming_auction.dart';
+import '../../auctions/screens/current_auction.dart';
+import '../../auctions/screens/done_auction.dart';
 import '../../notifications/screens/notifications_screen.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -23,6 +33,12 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     Get.put(SearchController());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<SearchController>();
+    super.dispose();
   }
 
   @override
@@ -58,76 +74,73 @@ class _SearchScreenState extends State<SearchScreen> {
                 Padding(
                   padding: const EdgeInsets.only(
                     top: 45,
-                    left: 20,
-                    right: 20,
+                    left: 35,
+                    right: 35,
                   ),
-                  child: Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          width: 35,
-                          height: 35,
-                          padding: const EdgeInsets.only(
-                            right: 4,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 35,
+                        height: 35,
+                        padding: const EdgeInsetsDirectional.only(
+                          start: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xffD3CFDC,
                           ),
-                          decoration: BoxDecoration(
-                            color: const Color(
-                              0xffD3CFDC,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                CustomNavigationBarController.find.tabController
-                                    .jumpToTab(0);
-                              },
-                              icon: const Icon(
-                                Icons.arrow_back_ios,
-                                color: MyColors.primary,
-                                size: 15,
-                              ),
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              CustomNavigationBarController.find.tabController
+                                  .jumpToTab(0);
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: MyColors.primary,
+                              size: 15,
                             ),
                           ),
                         ),
-                        Text(
-                          'search'.tr,
-                          style: const TextStyle(
-                            color: MyColors.primary,
-                            fontSize: 18,
+                      ),
+                      Text(
+                        'search'.tr,
+                        style: const TextStyle(
+                          color: MyColors.primary,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Container(
+                        width: 35,
+                        height: 35,
+                        decoration: BoxDecoration(
+                          color: const Color.fromRGBO(202, 195, 212, 0.3),
+                          borderRadius: BorderRadius.circular(
+                            7,
                           ),
                         ),
-                        Container(
-                          width: 35,
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(202, 195, 212, 0.3),
-                            borderRadius: BorderRadius.circular(
-                              7,
-                            ),
-                          ),
-                          child: Center(
-                            child: IconButton(
-                              onPressed: () {
-                                Get.to(
-                                  () => const NotificationsScreen(),
-                                  binding: NotificationsBinding(),
-                                );
-                              },
-                              icon: Image.asset(
-                                MyImages.notification,
-                                width: 25,
-                                height: 25,
-                              ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const NotificationsScreen(),
+                                binding: NotificationsBinding(),
+                              );
+                            },
+                            icon: Image.asset(
+                              MyImages.notification,
+                              width: 25,
+                              height: 25,
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
                 Column(
@@ -156,48 +169,146 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                       ),
                     ),
-                    // const SizedBox(
-                    //   height: 10,
-                    // ),
-                    Obx(
-                      () => controller.searchQuery.isEmpty
-                          ? const SizedBox(
-                              height: 100,
-                            )
-                          : controller.isLoading.value
-                              ? const SizedBox(
-                                  height: 100,
-                                  child: Center(
-                                    child: CircularProgressIndicator(),
-                                  ),
-                                )
-                              : ListView.separated(
-                                  padding: const EdgeInsetsDirectional.only(
-                                    start: 30,
-                                    top: 20,
-                                  ),
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(
-                                    height: 10,
-                                  ),
-                                  itemCount:
-                                      controller.model.value!.data!.length,
-                                  itemBuilder: (context, index) {
-                                    final data =
-                                        controller.model.value!.data![index];
-                                    return AllAuctionsItem(
-                                      image: data.image,
-                                      name: data.name,
-                                      details: data.content,
-                                      price: data.startPrice.toString(),
-                                      userImage: data.user?.image,
-                                      userName: data.user?.name,
-                                    );
-                                  },
-                                ),
+                    PagedListView<int, SearchedAdList>.separated(
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 30,
+                        top: 20,
+                      ),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      pagingController: controller.searchPagingController,
+                      builderDelegate:
+                          PagedChildBuilderDelegate<SearchedAdList>(
+                              itemBuilder: (context, data, index) {
+                        return InkWell(
+                          onTap: () {
+                            String startDate = data.startDate ?? '';
+                            String endDate = data.endDate ?? '';
+                            log(startDate);
+                            log(endDate);
+                            int startDifference = DateTime.parse(startDate)
+                                .difference(DateTime.now())
+                                .inSeconds;
+                            int endDifference = DateTime.now()
+                                .difference(DateTime.parse(endDate))
+                                .inSeconds;
+                            if (startDifference >= 1) {
+                              log('coming');
+                              Get.to(
+                                () => const ComingAuctionScreen(),
+                                binding: ComingAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            } else if (startDifference <= 0 &&
+                                endDifference <= 0) {
+                              log('current');
+                              Get.to(
+                                () => const CurrentAuctionScreen(),
+                                binding: CurrentAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            } else if (endDifference >= 1) {
+                              log('done');
+                              Get.to(
+                                () => const DoneAuctionScreen(),
+                                binding: DoneAuctionBinding(),
+                                arguments: data.id,
+                              );
+                            }
+                          },
+                          child: AllAuctionsItem(
+                            image: data.image,
+                            name: data.name,
+                            details: data.content,
+                            price: data.startPrice.toString(),
+                            userImage: data.user?.image,
+                            userName: data.user?.name,
+                          ),
+                        );
+                      }),
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(
+                          height: 10,
+                        );
+                      },
                     ),
+                    // Obx(
+                    //   () => controller.searchQuery.isEmpty
+                    //       ? const SizedBox(
+                    //           height: 100,
+                    //         )
+                    //       : controller.isLoading.value
+                    //           ? const SizedBox(
+                    //               height: 100,
+                    //               child: Center(
+                    //                 child: CircularProgressIndicator(),
+                    //               ),
+                    //             )
+                    //           : ListView.separated(
+                    //               padding: const EdgeInsetsDirectional.only(
+                    //                 start: 30,
+                    //                 top: 20,
+                    //               ),
+                    //               physics: const NeverScrollableScrollPhysics(),
+                    //               shrinkWrap: true,
+                    //               separatorBuilder: (context, index) =>
+                    //                   const SizedBox(
+                    //                 height: 10,
+                    //               ),
+                    //               itemCount:
+                    //                   controller.model.value!.data!.length,
+                    //               itemBuilder: (context, index) {
+                    //                 final data =
+                    //                     controller.model.value!.data![index];
+                    //                 return InkWell(
+                    //                   onTap: () {
+                    //                     String startDate = data.startDate ?? '';
+                    //                     String endDate = data.endDate ?? '';
+                    //                     print(startDate);
+                    //                     print(endDate);
+                    //                     int startDifference =
+                    //                         DateTime.parse(startDate)
+                    //                             .difference(DateTime.now())
+                    //                             .inSeconds;
+                    //                     int endDifference = DateTime.now()
+                    //                         .difference(DateTime.parse(endDate))
+                    //                         .inSeconds;
+                    //                     if (startDifference >= 1) {
+                    //                       print('coming');
+                    //                       Get.to(
+                    //                         () => const ComingAuctionScreen(),
+                    //                         binding: ComingAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     } else if (startDifference <= 0 &&
+                    //                         endDifference <= 0) {
+                    //                       print('current');
+                    //                       Get.to(
+                    //                         () => const CurrentAuctionScreen(),
+                    //                         binding: CurrentAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     } else if (endDifference >= 1) {
+                    //                       print('done');
+                    //                       Get.to(
+                    //                         () => const DoneAuctionScreen(),
+                    //                         binding: DoneAuctionBinding(),
+                    //                         arguments: data.id,
+                    //                       );
+                    //                     }
+                    //                   },
+                    //                   child: AllAuctionsItem(
+                    //                     image: data.image,
+                    //                     name: data.name,
+                    //                     details: data.content,
+                    //                     price: data.startPrice.toString(),
+                    //                     userImage: data.user?.image,
+                    //                     userName: data.user?.name,
+                    //                   ),
+                    //                 );
+                    //               },
+                    //             ),
+                    // ),
                     const SizedBox(
                       height: 90,
                     ),

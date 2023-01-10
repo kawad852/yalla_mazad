@@ -67,7 +67,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           width: 18,
                         ),
                         Image.asset(
-                         MyImages.phoneField,
+                          MyImages.phoneField,
                           width: 20,
                           height: 20,
                         ),
@@ -222,11 +222,18 @@ class _SignInScreenState extends State<SignInScreen> {
                         MyImages.appleSignIn,
                       ),
                     ),
-                    SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: Image.asset(
-                        MyImages.googleSignIn,
+                    InkWell(
+                      onTap: () async {
+                        await controller.signInWithGoogle(
+                          context,
+                        );
+                      },
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Image.asset(
+                          MyImages.googleSignIn,
+                        ),
                       ),
                     ),
                     SizedBox(

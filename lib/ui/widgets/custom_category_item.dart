@@ -50,12 +50,6 @@ class CustomCategoryItem extends StatelessWidget {
                 // height: 40,
               ),
             ),
-            // child: const Center(
-            //   child: Icon(
-            //     Icons.account_box_outlined,
-            //     color: MyColors.primary,
-            //   ),
-            // ),
           ),
           Text(
             name ?? '',

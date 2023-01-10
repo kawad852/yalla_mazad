@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:yalla_mazad/model/introduction/introduction_model.dart';
 
 import '../../utils/api_url.dart';
+import '../../utils/shared_prefrences.dart';
 
 class IntroductionApi {
   Future<IntroductionModel?> data() async {
@@ -14,7 +15,7 @@ class IntroductionApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
-        // 'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
+        'x-localization': MySharedPreferences.language,
       };
       log("Response:: IntroductionResponse\nUrl:: $url\nheaders:: $headers\n");
       http.Response response = await http.get(uri, headers: headers);

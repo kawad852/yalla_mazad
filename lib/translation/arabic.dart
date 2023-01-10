@@ -117,7 +117,10 @@ final Map<String, String> ar = {
   'coming auction': 'مزاد قادم',
   'done auction': 'مزاد منتهي',
   'auction is over': 'انتهى المزاد',
-  'added to favorites successfully':'تمت الإضافة إلى المفضلة بنجاح',
-  'already here':'موجود مسبقا',
-
+  'added to favorites successfully': 'تمت الإضافة إلى المفضلة بنجاح',
+  'already here': 'موجود مسبقا',
+  'log out': 'تسجيل الخروج',
+  'subscribe now': 'اشترك الان',
+  'current subscription': 'الإشتراك الحالي',
+  'day left': 'يوم متبقي',
 };

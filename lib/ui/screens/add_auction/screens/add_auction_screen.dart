@@ -11,6 +11,7 @@ import 'package:yalla_mazad/ui/widgets/failure_widget.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../../utils/screen_size.dart';
+import '../../../widgets/custom_shimmer_loading.dart';
 import '../../../widgets/custom_slide_button.dart';
 
 class AddAuctionScreen extends StatefulWidget {
@@ -26,6 +27,12 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
   void initState() {
     Get.put(AddAuctionController());
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    Get.delete<AddAuctionController>();
+    super.dispose();
   }
 
   @override
@@ -67,51 +74,50 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 45,
-                        left: 20,
-                        right: 20,
+                        left: 35,
+                        right: 35,
                       ),
-                      child: Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 35,
-                              height: 35,
-                              padding: const EdgeInsets.only(right: 2),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xffD3CFDC,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  7,
-                                ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            width: 35,
+                            height: 35,
+                            padding: const EdgeInsetsDirectional.only(
+                              start: 3,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffD3CFDC,
                               ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: MyColors.primary,
-                                    size: 20,
-                                  ),
-                                ),
+                              borderRadius: BorderRadius.circular(
+                                7,
                               ),
                             ),
-                            Text(
-                              'add auction'.tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 18,
+                            child: Center(
+                              child: IconButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_back_ios,
+                                  color: MyColors.primary,
+                                  size: 15,
+                                ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 50,
+                          ),
+                          Text(
+                            'add auction'.tr,
+                            style: const TextStyle(
+                              color: MyColors.primary,
+                              fontSize: 18,
                             ),
-                          ],
-                        ),
+                          ),
+                          const SizedBox(
+                            width: 50,
+                          ),
+                        ],
                       ),
                     ),
                     Expanded(
@@ -141,8 +147,34 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                             builder: (context, snapshot) {
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
+                                  return SizedBox(
+                                    height: 100,
+                                    child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: const [
+                                            CustomShimmerLoading(
+                                              radius: 15,
+                                              width: 60,
+                                              height: 60,
+                                            ),
+                                            Expanded(
+                                              child: SizedBox(),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                    ),
                                   );
                                 case ConnectionState.done:
                                 default:
@@ -151,7 +183,8 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                       height: 100,
                                       child: ListView.separated(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 30),
+                                          horizontal: 30,
+                                        ),
                                         scrollDirection: Axis.horizontal,
                                         itemCount: controller.categoriesModel
                                                 ?.data?.length ??
@@ -251,6 +284,26 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                           color: MyColors.textFieldColor,
                                           hint: 'main picture'.tr,
                                           readOnly: true,
+                                          suffixIcon: SizedBox(
+                                            width: 60,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 18,
+                                                ),
+                                                InkWell(
+                                                  child: SvgPicture.asset(
+                                                    MyImages.clip,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -268,6 +321,26 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                           color: MyColors.textFieldColor,
                                           hint: 'more pictures'.tr,
                                           readOnly: true,
+                                          suffixIcon: SizedBox(
+                                            width: 60,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 18,
+                                                ),
+                                                InkWell(
+                                                  child: SvgPicture.asset(
+                                                    MyImages.clip,
+                                                    width: 20,
+                                                    height: 20,
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),

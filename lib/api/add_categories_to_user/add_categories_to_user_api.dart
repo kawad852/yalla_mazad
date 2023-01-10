@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:yalla_mazad/model/add_categories_to_user/add_categories_to_user_model.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
+import '../../utils/shared_prefrences.dart';
+
 class AddCategoriesToUserApi {
   Future<AddCategoriesToUserModel?> data({
     required String userId,
@@ -14,6 +16,7 @@ class AddCategoriesToUserApi {
       Uri uri = Uri.parse(url);
       var headers = {
         'Content-Type': 'application/json',
+        'x-localization': MySharedPreferences.language,
       };
       var body = jsonEncode({
         "user_id": userId,

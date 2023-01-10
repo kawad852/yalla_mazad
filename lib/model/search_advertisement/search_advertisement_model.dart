@@ -2,7 +2,7 @@ class SearchAdvertisementModel {
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  List<SearchedAdList>? data;
 
   SearchAdvertisementModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +11,9 @@ class SearchAdvertisementModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <SearchedAdList>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(SearchedAdList.fromJson(v));
       });
     }
   }
@@ -30,7 +30,7 @@ class SearchAdvertisementModel {
   }
 }
 
-class Data {
+class SearchedAdList {
   int? id;
   String? name;
   String? content;
@@ -41,12 +41,15 @@ class Data {
   int? buyNowPrice;
   int? views;
   int? numberOfBids;
+  int? priceOne;
+  int? priceTwo;
+  int? priceThree;
   String? image;
   User? user;
   Category? category;
   List<Images>? images;
 
-  Data(
+  SearchedAdList(
       {this.id,
       this.name,
       this.content,
@@ -57,12 +60,15 @@ class Data {
       this.buyNowPrice,
       this.views,
       this.numberOfBids,
+      this.priceOne,
+      this.priceTwo,
+      this.priceThree,
       this.image,
       this.user,
       this.category,
       this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  SearchedAdList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     content = json['content'];
@@ -73,6 +79,9 @@ class Data {
     buyNowPrice = json['buy_now_price'];
     views = json['views'];
     numberOfBids = json['number_of_bids'];
+    priceOne = json['price_one'];
+    priceTwo = json['price_two'];
+    priceThree = json['price_three'];
     image = json['image'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     category =
@@ -97,6 +106,9 @@ class Data {
     data['buy_now_price'] = buyNowPrice;
     data['views'] = views;
     data['number_of_bids'] = numberOfBids;
+    data['price_one'] = priceOne;
+    data['price_two'] = priceTwo;
+    data['price_three'] = priceThree;
     data['image'] = image;
     if (user != null) {
       data['user'] = user!.toJson();

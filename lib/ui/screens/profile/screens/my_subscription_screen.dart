@@ -6,7 +6,9 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../../widgets/custom_shimmer_loading.dart';
 import '../../../widgets/failure_widget.dart';
+import '../../plans/widgets/my_plan_item.dart';
 
 class MySubscriptionScreen extends StatefulWidget {
   const MySubscriptionScreen({Key? key}) : super(key: key);
@@ -29,40 +31,46 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
             children: [
               Expanded(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.only(top: 20),
+                  padding: const EdgeInsets.only(
+                    top: 20,
+                  ),
                   child: Column(
                     children: [
                       FutureBuilder(
-                          future: controller.initializeMySubscriptionFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
-                                  if (snapshot.data!.data!.isNotEmpty) {
-                                    return PlanItem(
-                                      price:
-                                          snapshot.data?.data?[0].plan?.price,
-                                      name: snapshot.data?.data?[0].plan?.name,
-                                      details:
-                                          snapshot.data?.data?[0].plan?.details,
-                                      numberOfAuctions: snapshot
-                                          .data?.data?[0].plan?.numberOfAuction,
-                                    );
-                                  } else {
-                                    return const SizedBox();
-                                  }
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
+                        future: controller.initializeMySubscriptionFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return CustomShimmerLoading(
+                                radius: 25,
+                                height: 342,
+                                width: MediaQuery.of(context).size.width - 75,
+                              );
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                if (snapshot.data!.data!.isNotEmpty) {
+                                  final data = snapshot.data?.data;
+                                  final length =
+                                      snapshot.data?.data?.length ?? 0;
+                                  return MyPlanItem(
+                                    endDate: data?[length - 1].endDate,
+                                    pointOne: data?[length - 1].plan?.pointOne,
+                                    pointTwo: data?[length - 1].plan?.pointTwo,
+                                    pointThree:
+                                        data?[length - 1].plan?.pointThree,
+                                  );
                                 } else {
-                                  return const FailureWidget();
+                                  return const SizedBox();
                                 }
-                            }
-                          }),
+                              } else if (snapshot.hasError) {
+                                return const FailureWidget();
+                              } else {
+                                return const FailureWidget();
+                              }
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
@@ -96,62 +104,89 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                         height: 30,
                       ),
                       FutureBuilder(
-                          future: controller.initializePlansFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
-                                  return CarouselSlider(
-                                    items: List.generate(
-                                        snapshot.data?.data?.length ?? 0,
-                                        (index) => Opacity(
-                                            opacity:
-                                                controller.pageIndex == index
-                                                    ? 1
-                                                    : 0.5,
-                                            child: PlanItem(
-                                              price: snapshot
-                                                  .data?.data?[index].price,
-                                              name: snapshot
-                                                  .data?.data?[index].name,
-                                              details: snapshot
-                                                  .data?.data?[index].details,
-                                              numberOfAuctions: snapshot
-                                                  .data
-                                                  ?.data?[index]
-                                                  .numberOfAuction,
-                                            ))),
-                                    options: CarouselOptions(
-                                      onPageChanged: (index, x) {
-                                        setState(() {
-                                          controller.pageIndex = index;
-                                        });
-                                      },
-                                      //aspectRatio: 3/3,
-                                      enableInfiniteScroll: false,
+                        future: controller.initializePlansFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return CarouselSlider(
+                                items: List.generate(
+                                  3,
+                                  (index) => Opacity(
+                                    opacity:
+                                        controller.pageIndex == index ? 1 : 0.5,
+                                    child: CustomShimmerLoading(
+                                      radius: 25,
                                       height: 392,
-                                      viewportFraction: 0.8,
-                                      enlargeCenterPage: true,
-                                      initialPage: 0,
-                                      autoPlay: false,
-                                      enlargeFactor: 0.2,
-                                      autoPlayInterval: const Duration(
-                                        milliseconds: 1000,
+                                      width: MediaQuery.of(context).size.width -
+                                          75,
+                                    ),
+                                  ),
+                                ),
+                                options: CarouselOptions(
+                                  enableInfiniteScroll: false,
+                                  height: 392,
+                                  viewportFraction: 0.8,
+                                  enlargeCenterPage: true,
+                                  initialPage: 0,
+                                  autoPlay: false,
+                                  enlargeFactor: 0.2,
+                                  autoPlayInterval: const Duration(
+                                    milliseconds: 1000,
+                                  ),
+                                ),
+                              );
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                final data = snapshot.data?.data;
+                                return CarouselSlider(
+                                  items: List.generate(
+                                    snapshot.data?.data?.length ?? 0,
+                                    (index) => Opacity(
+                                      opacity: controller.pageIndex == index
+                                          ? 1
+                                          : 0.5,
+                                      child: PlanItem(
+                                        price: data?[index].price,
+                                        pointOne: data?[index].pointOne,
+                                        pointTwo: data?[index].pointTwo,
+                                        pointThree: data?[index].pointThree,
+                                        time: data?[index].time,
+                                        planId: data?[index].id.toString(),
+                                        function: controller
+                                            .fetchCreateSubscriptionData,
                                       ),
                                     ),
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
-                                } else {
-                                  return const FailureWidget();
-                                }
-                            }
-                          }),
+                                  ),
+                                  options: CarouselOptions(
+                                    onPageChanged: (index, x) {
+                                      setState(
+                                        () {
+                                          controller.pageIndex = index;
+                                        },
+                                      );
+                                    },
+                                    //aspectRatio: 3/3,
+                                    enableInfiniteScroll: false,
+                                    height: 392,
+                                    viewportFraction: 0.8,
+                                    enlargeCenterPage: true,
+                                    initialPage: 0,
+                                    autoPlay: false,
+                                    enlargeFactor: 0.2,
+                                    autoPlayInterval: const Duration(
+                                      milliseconds: 1000,
+                                    ),
+                                  ),
+                                );
+                              } else if (snapshot.hasError) {
+                                return const FailureWidget();
+                              } else {
+                                return const FailureWidget();
+                              }
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: 60,
                       ),

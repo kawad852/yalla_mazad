@@ -2,7 +2,7 @@ class AllAdvertisementsModel {
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  List<AllAdsList>? data;
 
   AllAdvertisementsModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +11,9 @@ class AllAdvertisementsModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <AllAdsList>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(AllAdsList.fromJson(v));
       });
     }
   }
@@ -30,8 +30,9 @@ class AllAdvertisementsModel {
   }
 }
 
-class Data {
+class AllAdsList {
   int? id;
+  bool? isFavorite;
   String? name;
   String? content;
   int? startPrice;
@@ -41,13 +42,17 @@ class Data {
   int? buyNowPrice;
   int? views;
   int? numberOfBids;
+  int? priceOne;
+  int? priceTwo;
+  int? priceThree;
   String? image;
   User? user;
   Category? category;
   List<Images>? images;
 
-  Data(
+  AllAdsList(
       {this.id,
+      this.isFavorite,
       this.name,
       this.content,
       this.startPrice,
@@ -57,13 +62,17 @@ class Data {
       this.buyNowPrice,
       this.views,
       this.numberOfBids,
+      this.priceOne,
+      this.priceTwo,
+      this.priceThree,
       this.image,
       this.user,
       this.category,
       this.images});
 
-  Data.fromJson(Map<String, dynamic> json) {
+  AllAdsList.fromJson(Map<String, dynamic> json) {
     id = json['id'];
+    isFavorite = json['is_favorite'];
     name = json['name'];
     content = json['content'];
     startPrice = json['start_price'];
@@ -73,6 +82,9 @@ class Data {
     buyNowPrice = json['buy_now_price'];
     views = json['views'];
     numberOfBids = json['number_of_bids'];
+    priceOne = json['price_one'];
+    priceTwo = json['price_two'];
+    priceThree = json['price_three'];
     image = json['image'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
     category =
@@ -88,6 +100,7 @@ class Data {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['id'] = id;
+    data['is_favorite'] = isFavorite;
     data['name'] = name;
     data['content'] = content;
     data['start_price'] = startPrice;
@@ -97,6 +110,9 @@ class Data {
     data['buy_now_price'] = buyNowPrice;
     data['views'] = views;
     data['number_of_bids'] = numberOfBids;
+    data['price_one'] = priceOne;
+    data['price_two'] = priceTwo;
+    data['price_three'] = priceThree;
     data['image'] = image;
     if (user != null) {
       data['user'] = user!.toJson();

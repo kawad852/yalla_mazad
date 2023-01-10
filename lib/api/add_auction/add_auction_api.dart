@@ -7,6 +7,7 @@ import 'package:yalla_mazad/utils/api_url.dart';
 import 'package:path/path.dart';
 
 import '../../model/add_auction/add_auction_model.dart';
+import '../../utils/shared_prefrences.dart';
 
 class AddAuctionApi {
   Future<AddAuctionModel?> data({
@@ -39,6 +40,7 @@ class AddAuctionApi {
       var request = http.MultipartRequest('POST', uri);
       var headers = {
         'Content-Type': 'application/json',
+        'x-localization': MySharedPreferences.language,
       };
       request.headers.addAll(headers);
       for (var item in multipartFiles) {
@@ -65,7 +67,6 @@ class AddAuctionApi {
         var jsonData = jsonDecode(responseString);
         AddAuctionModel addAuctionModel = AddAuctionModel.fromJson(jsonData);
         log("AddAuctionStatusCode:: ${response.statusCode}  AddAuctionBody:: $jsonData");
-
         return addAuctionModel;
       } else {
         throw "add auction Error";

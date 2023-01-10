@@ -7,6 +7,9 @@ class ApiUrl {
   //sign in
   static const String signIn = "/api/v1/login";
 
+  //social login
+  static const String socialLogin = "/api/v1/sociallogin";
+
   //register
   static const String register = "/api/v1/user-reg";
 
@@ -38,7 +41,7 @@ class ApiUrl {
   static const String addAuction = "/api/v1/advertisement-create";
 
   //get popular ads
-  static const String fetchAllPopularAds = "/api/v1/popular-advertisements";
+  static const String fetchAllPopularAds = "/api/v1/popular-advertisements/";
 
   //get my subscription
   static const String fetchMySubscription = "/api/v1/my-subscriptions/";
@@ -89,4 +92,13 @@ class ApiUrl {
 
   //get my notifications
   static const String fetchMyNotifications = "/api/v1/my-notifications";
+
+  //create subscription
+  static const String createSubscription = "/api/v1/subscription-create";
+
+  //create bid
+  static const String createBid = "/api/v1/bid-create";
+
+  //fetch page
+  static const String fetchPage = '/api/v1/page/';
 }

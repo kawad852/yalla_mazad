@@ -7,7 +7,6 @@ import 'package:yalla_mazad/ui/screens/auctions/widgets/confirm_auction_dialog.d
 import 'package:yalla_mazad/ui/screens/auctions/widgets/current_auction_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
-
 import '../../../widgets/failure_widget.dart';
 
 class CurrentAuctionScreen extends StatefulWidget {
@@ -56,7 +55,7 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
           case ConnectionState.done:
           default:
             if (snapshot.hasData) {
-              List<String> images = [snapshot.data?.data?.image ?? ''];
+              List<String> images = [];
               for (var item in snapshot.data!.data!.images!) {
                 images.add(item.image ?? '');
               }
@@ -66,8 +65,18 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                     FloatingActionButtonLocation.centerFloat,
                 floatingActionButton: InkWell(
                   onTap: () {
+                    var data = snapshot.data?.data;
                     Get.dialog(
-                      ConfirmAuctionDialog(),
+                      ConfirmAuctionDialog(
+                        id: data?.id ?? 0,
+                        currentPrice: data?.startPrice ?? 0,
+                        // priceThree: 10,
+                        // priceTwo: 200,
+                        // priceOne: 30,
+                        priceOne: data?.priceOne ?? 0,
+                        priceTwo: data?.priceTwo ?? 0,
+                        priceThree: data?.priceThree ?? 0,
+                      ),
                     );
                   },
                   child: Container(

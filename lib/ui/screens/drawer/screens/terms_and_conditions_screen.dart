@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/drawer/terms_and_conditions_controller.dart';
+import 'package:yalla_mazad/model/page/page_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
-import 'package:yalla_mazad/utils/screen_size.dart';
+import 'package:flutter_html/flutter_html.dart';
+import '../../../widgets/failure_widget.dart';
 
 class TermsAndConditionsScreen extends StatefulWidget {
   const TermsAndConditionsScreen({Key? key}) : super(key: key);
@@ -16,6 +18,7 @@ class TermsAndConditionsScreen extends StatefulWidget {
 
 class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
   final controller = TermsAndConditionsController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,137 +45,47 @@ class _TermsAndConditionsScreenState extends State<TermsAndConditionsScreen> {
           Padding(
             padding: const EdgeInsets.only(
               top: 45,
-              left: 20,
-              right: 20,
+              left: 35,
+              right: 35,
             ),
             child: SafeArea(
               bottom: false,
               child: SizedBox(
                 width: Get.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'service conditions'.tr,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        color: MyColors.primary,
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        GetBuilder<TermsAndConditionsController>(builder: (v) {
-                          return Checkbox(
-                            activeColor: MyColors.primary,
-                            value: v.isCheckedFirst,
-                            onChanged: (value) {
-                              v.isCheckedFirst = !v.isCheckedFirst;
-                              v.update();
-                            },
-                          );
-                        }),
-                        Expanded(
-                          child: Text(
-                            'I agree to the terms and conditions'.tr,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: MyColors.primary,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        GetBuilder<TermsAndConditionsController>(builder: (v) {
-                          return Checkbox(
-                            activeColor: MyColors.primary,
-                            value: v.isCheckedSecond,
-                            onChanged: (value) {
-                              v.isCheckedSecond = !v.isCheckedSecond;
-                              v.update();
-                            },
-                          );
-                        }),
-                        Expanded(
-                          child: Text(
-                            'I agree to the privacy policy'.tr,
-                            style: const TextStyle(
-                              fontSize: 14,
-                              color: MyColors.primary,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          onPressed: () {},
-                          child: Container(
-                            width: ScreenSize.phoneSize(
-                              160,
-                              height: false,
-                            ),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                8,
-                              ),
-                              border: Border.all(
-                                color: MyColors.primary,
-                                width: 1,
-                              ),
-                              color: Colors.white,
-                            ),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  'decline'.tr,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 18,
-                                  ),
+                child: FutureBuilder<PageModel?>(
+                  future: controller.initializePageFuture,
+                  builder: (context, snapshot) {
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      case ConnectionState.done:
+                      default:
+                        if (snapshot.hasData) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                snapshot.data?.data?.title ?? '',
+                                style: const TextStyle(
+                                  fontSize: 28,
+                                  color: MyColors.primary,
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: Container(
-                            width: ScreenSize.phoneSize(
-                              160,
-                              height: false,
-                            ),
-                            height: 40,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                8,
+                              Html(
+                                data: """${snapshot.data?.data?.content}""",
                               ),
-                              color: MyColors.primary,
-                            ),
-                            child: Center(
-                              child: FittedBox(
-                                child: Text(
-                                  'accept'.tr,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
+                            ],
+                          );
+                        } else if (snapshot.hasError) {
+                          return const FailureWidget();
+                        } else {
+                          return const FailureWidget();
+                        }
+                    }
+                  },
                 ),
               ),
             ),

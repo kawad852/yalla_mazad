@@ -4,20 +4,27 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:yalla_mazad/binding/drawer/about_us_binding.dart';
+import 'package:yalla_mazad/binding/drawer/privacy_policy_binding.dart';
 import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
+import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/about_us_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/call_us_screen.dart';
 import 'package:yalla_mazad/ui/screens/drawer/screens/terms_and_conditions_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/search/search_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/screens/trending_auction_screen.dart';
 import 'package:yalla_mazad/utils/images.dart';
+import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
+import '../../binding/authentication/authentication_binding.dart';
 import '../../binding/drawer/call_us_binding.dart';
 import '../../binding/profile/profile_binding.dart';
 import '../../controller/home/custom_navigation_bar_controller.dart';
 import '../../utils/colors.dart';
+import '../screens/drawer/screens/privacy_policy_screen.dart';
 import '../screens/profile/screens/edit_profile_screen.dart';
 import '../screens/profile/screens/my_account/my_account_screen.dart';
 
@@ -137,7 +144,11 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
             spreadRadius: 30,
           ),
         ],
-        borderRadius: const BorderRadius.all(Radius.circular(25)),
+        borderRadius: const BorderRadius.all(
+          Radius.circular(
+            25,
+          ),
+        ),
       ),
       drawer: SafeArea(
         child: ListTileTheme(
@@ -155,9 +166,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     Container(
                       width: 35,
                       height: 35,
-                      padding: const EdgeInsets.only(
-                        left: 3,
-                        right: 3,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
                       ),
                       decoration: BoxDecoration(
                         color: const Color(
@@ -175,7 +185,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                           icon: const Icon(
                             Icons.arrow_back_ios,
                             color: MyColors.primary,
-                            size: 20,
+                            size: 15,
                           ),
                         ),
                       ),
@@ -239,10 +249,9 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
                   onTap: () {
-                    ///TODO: make sure of the navigation
                     Get.to(
-                      () => const TermsAndConditionsScreen(),
-                      binding: TermsAndConditionsBinding(),
+                      () => const PrivacyPolicyScreen(),
+                      binding: PrivacyPolicyBinding(),
                     );
                   },
                   title: Text(
@@ -269,13 +278,63 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                 ),
                 ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(
+                          () => const AboutUsScreen(),
+                      binding: AboutUsBinding(),
+                    );
+                  },
                   title: Text(
                     'who we are'.tr,
                     style: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
+                ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    setState(() {
+                      if (MySharedPreferences.language == 'ar') {
+                        MySharedPreferences.language = 'en';
+                        Get.updateLocale(Locale(MySharedPreferences.language));
+                      } else {
+                        MySharedPreferences.language = 'ar';
+                        Get.updateLocale(Locale(MySharedPreferences.language));
+                      }
+                    });
+                  },
+                  title: Text(
+                    Get.locale == const Locale('ar') ? 'English' : 'العربية',
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    MySharedPreferences.clearProfile();
+                    Get.deleteAll(
+                      force: true,
+                    );
+                    Get.offAll(
+                      () => const AuthenticationScreen(),
+                      binding: AuthenticationBinding(),
+                    );
+                  },
+                  title: Text(
+                    'log out'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const Expanded(
+                  child: SizedBox(),
                 ),
               ],
             ),

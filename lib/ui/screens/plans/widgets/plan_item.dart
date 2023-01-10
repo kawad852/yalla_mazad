@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
-
 import '../../../../utils/images.dart';
 
 class PlanItem extends StatelessWidget {
   final String? price;
-  final String? details;
-  final String? name;
-  final int? numberOfAuctions;
+  final String? pointOne;
+  final String? pointTwo;
+  final String? pointThree;
+  final String? planId;
+  final int? time;
+  final Function function;
+
   const PlanItem(
       {required this.price,
-      required this.name,
-      required this.details,
-      required this.numberOfAuctions,
+      required this.pointOne,
+      required this.pointTwo,
+      required this.pointThree,
+      required this.planId,
+      required this.time,
+      required this.function,
       Key? key})
       : super(key: key);
 
@@ -40,9 +46,13 @@ class PlanItem extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  ///TODO:the order of subscription
                   const Text(
                     'الاشتراك الاول',
-                    style: TextStyle(color: MyColors.red, fontSize: 20),
+                    style: TextStyle(
+                      color: MyColors.red,
+                      fontSize: 20,
+                    ),
                   ),
                   Column(
                     children: [
@@ -60,7 +70,7 @@ class PlanItem extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            'subscriptions'.tr,
+                            pointOne!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -85,7 +95,7 @@ class PlanItem extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            name!,
+                            pointTwo!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -110,7 +120,7 @@ class PlanItem extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            details!,
+                            pointThree!,
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -143,25 +153,33 @@ class PlanItem extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              color: MyColors.red,
-              borderRadius: BorderRadius.circular(
-                25,
-              ),
-            ),
-            child: const Center(
-              child: Text(
-                'اشترك الان',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
+          planId != null
+              ? InkWell(
+                  onTap: () async {
+                    await function(
+                        planId: planId, time: time, context: context);
+                  },
+                  child: Container(
+                    width: double.infinity,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      color: MyColors.red,
+                      borderRadius: BorderRadius.circular(
+                        25,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'subscribe now'.tr,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ),
+                )
+              : const SizedBox(),
         ],
       ),
     );
