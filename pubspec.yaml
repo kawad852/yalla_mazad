@@ -59,6 +59,9 @@ dependencies:
   google_sign_in: ^5.4.2
   firebase_auth: ^4.2.5
   flutter_html: ^3.0.0-alpha.6
+  firebase_messaging:
+  flutter_local_notifications:
+
 
 
 
