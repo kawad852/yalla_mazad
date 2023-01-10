@@ -6,6 +6,7 @@ import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/controller/plans/plans_controller.dart';
 import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
+import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import '../../../widgets/failure_widget.dart';
@@ -186,9 +187,39 @@ class _PlansScreenState extends State<PlansScreen> {
                                         builder: (context, snapshot) {
                                           switch (snapshot.connectionState) {
                                             case ConnectionState.waiting:
-                                              return const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
+                                              return CarouselSlider(
+                                                items: List.generate(
+                                                  3,
+                                                  (index) => Opacity(
+                                                    opacity:
+                                                        controller.pageIndex ==
+                                                                index
+                                                            ? 1
+                                                            : 0.5,
+                                                    child: CustomShimmerLoading(
+                                                      radius: 25,
+                                                      height: 392,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width -
+                                                              75,
+                                                    ),
+                                                  ),
+                                                ),
+                                                options: CarouselOptions(
+                                                  enableInfiniteScroll: false,
+                                                  height: 392,
+                                                  viewportFraction: 0.8,
+                                                  enlargeCenterPage: true,
+                                                  initialPage: 0,
+                                                  autoPlay: false,
+                                                  enlargeFactor: 0.2,
+                                                  autoPlayInterval:
+                                                      const Duration(
+                                                    milliseconds: 1000,
+                                                  ),
+                                                ),
                                               );
                                             case ConnectionState.done:
                                             default:

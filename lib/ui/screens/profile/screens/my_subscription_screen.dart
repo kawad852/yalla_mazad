@@ -6,6 +6,7 @@ import 'package:yalla_mazad/ui/screens/plans/widgets/plan_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
+import '../../../widgets/custom_shimmer_loading.dart';
 import '../../../widgets/failure_widget.dart';
 import '../../plans/widgets/my_plan_item.dart';
 
@@ -40,8 +41,10 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                         builder: (context, snapshot) {
                           switch (snapshot.connectionState) {
                             case ConnectionState.waiting:
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                              return CustomShimmerLoading(
+                                radius: 25,
+                                height: 342,
+                                width: MediaQuery.of(context).size.width - 75,
                               );
                             case ConnectionState.done:
                             default:
@@ -101,64 +104,89 @@ class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
                         height: 30,
                       ),
                       FutureBuilder(
-                          future: controller.initializePlansFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return const Center(
-                                  child: CircularProgressIndicator(),
-                                );
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
-                                  final data = snapshot.data?.data;
-                                  return CarouselSlider(
-                                    items: List.generate(
-                                      snapshot.data?.data?.length ?? 0,
-                                      (index) => Opacity(
-                                        opacity: controller.pageIndex == index
-                                            ? 1
-                                            : 0.5,
-                                        child: PlanItem(
-                                          price: data?[index].price,
-                                          pointOne: data?[index].pointOne,
-                                          pointTwo: data?[index].pointTwo,
-                                          pointThree: data?[index].pointThree,
-                                          time: data?[index].time,
-                                          planId: data?[index].id.toString(),
-                                          function: controller
-                                              .fetchCreateSubscriptionData,
-                                        ),
-                                      ),
-                                    ),
-                                    options: CarouselOptions(
-                                      onPageChanged: (index, x) {
-                                        setState(
-                                          () {
-                                            controller.pageIndex = index;
-                                          },
-                                        );
-                                      },
-                                      //aspectRatio: 3/3,
-                                      enableInfiniteScroll: false,
+                        future: controller.initializePlansFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return CarouselSlider(
+                                items: List.generate(
+                                  3,
+                                  (index) => Opacity(
+                                    opacity:
+                                        controller.pageIndex == index ? 1 : 0.5,
+                                    child: CustomShimmerLoading(
+                                      radius: 25,
                                       height: 392,
-                                      viewportFraction: 0.8,
-                                      enlargeCenterPage: true,
-                                      initialPage: 0,
-                                      autoPlay: false,
-                                      enlargeFactor: 0.2,
-                                      autoPlayInterval: const Duration(
-                                        milliseconds: 1000,
+                                      width: MediaQuery.of(context).size.width -
+                                          75,
+                                    ),
+                                  ),
+                                ),
+                                options: CarouselOptions(
+                                  enableInfiniteScroll: false,
+                                  height: 392,
+                                  viewportFraction: 0.8,
+                                  enlargeCenterPage: true,
+                                  initialPage: 0,
+                                  autoPlay: false,
+                                  enlargeFactor: 0.2,
+                                  autoPlayInterval: const Duration(
+                                    milliseconds: 1000,
+                                  ),
+                                ),
+                              );
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                final data = snapshot.data?.data;
+                                return CarouselSlider(
+                                  items: List.generate(
+                                    snapshot.data?.data?.length ?? 0,
+                                    (index) => Opacity(
+                                      opacity: controller.pageIndex == index
+                                          ? 1
+                                          : 0.5,
+                                      child: PlanItem(
+                                        price: data?[index].price,
+                                        pointOne: data?[index].pointOne,
+                                        pointTwo: data?[index].pointTwo,
+                                        pointThree: data?[index].pointThree,
+                                        time: data?[index].time,
+                                        planId: data?[index].id.toString(),
+                                        function: controller
+                                            .fetchCreateSubscriptionData,
                                       ),
                                     ),
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
-                                } else {
-                                  return const FailureWidget();
-                                }
-                            }
-                          }),
+                                  ),
+                                  options: CarouselOptions(
+                                    onPageChanged: (index, x) {
+                                      setState(
+                                        () {
+                                          controller.pageIndex = index;
+                                        },
+                                      );
+                                    },
+                                    //aspectRatio: 3/3,
+                                    enableInfiniteScroll: false,
+                                    height: 392,
+                                    viewportFraction: 0.8,
+                                    enlargeCenterPage: true,
+                                    initialPage: 0,
+                                    autoPlay: false,
+                                    enlargeFactor: 0.2,
+                                    autoPlayInterval: const Duration(
+                                      milliseconds: 1000,
+                                    ),
+                                  ),
+                                );
+                              } else if (snapshot.hasError) {
+                                return const FailureWidget();
+                              } else {
+                                return const FailureWidget();
+                              }
+                          }
+                        },
+                      ),
                       const SizedBox(
                         height: 60,
                       ),

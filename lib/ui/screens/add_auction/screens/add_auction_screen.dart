@@ -11,6 +11,7 @@ import 'package:yalla_mazad/ui/widgets/failure_widget.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
 import '../../../../utils/screen_size.dart';
+import '../../../widgets/custom_shimmer_loading.dart';
 import '../../../widgets/custom_slide_button.dart';
 
 class AddAuctionScreen extends StatefulWidget {
@@ -146,10 +147,33 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                             builder: (context, snapshot) {
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
-                                  return const SizedBox(
+                                  return SizedBox(
                                     height: 100,
-                                    child: Center(
-                                      child: CircularProgressIndicator(),
+                                    child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30,
+                                      ),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: 5,
+                                      itemBuilder: (context, index) {
+                                        return Column(
+                                          children: const [
+                                            CustomShimmerLoading(
+                                              radius: 15,
+                                              width: 60,
+                                              height: 60,
+                                            ),
+                                            Expanded(
+                                              child: SizedBox(),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
                                     ),
                                   );
                                 case ConnectionState.done:
@@ -159,7 +183,8 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                       height: 100,
                                       child: ListView.separated(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 30),
+                                          horizontal: 30,
+                                        ),
                                         scrollDirection: Axis.horizontal,
                                         itemCount: controller.categoriesModel
                                                 ?.data?.length ??

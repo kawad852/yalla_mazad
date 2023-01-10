@@ -20,6 +20,8 @@ import '../../../../../../binding/auctions/done_auction_binding.dart';
 import '../../../../../../controller/home/custom_navigation_bar_controller.dart';
 import '../../../../../../controller/home/trending/trending_auction_controller.dart';
 import '../../../../../../model/advertisement_by_category/advertisement_by_category_model.dart';
+import '../../../../../../utils/screen_size.dart';
+import '../../../../../widgets/custom_shimmer_loading.dart';
 import '../../../../../widgets/failure_widget.dart';
 import '../../../../auctions/screens/coming_auction.dart';
 import '../../../../auctions/screens/current_auction.dart';
@@ -146,10 +148,79 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                         builder: (context, snapshot) {
                           switch (snapshot.connectionState) {
                             case ConnectionState.waiting:
-                              return const SizedBox(
-                                height: 200,
-                                child:
-                                    Center(child: CircularProgressIndicator()),
+                              return SizedBox(
+                                height: 287,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 35.0,
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Image.asset(
+                                            MyImages.justice,
+                                            width: 20,
+                                            height: 20,
+                                          ),
+                                          const SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            'trending auctions'.tr,
+                                            style: const TextStyle(
+                                              color: MyColors.primary,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    SizedBox(
+                                      height: 247,
+                                      child: ListView.separated(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        scrollDirection: Axis.horizontal,
+                                        itemBuilder: (context, index) {
+                                          return Column(
+                                            children: [
+                                              CustomShimmerLoading(
+                                                radius: 25,
+                                                height: ScreenSize.phoneSize(
+                                                  180,
+                                                  height: false,
+                                                ),
+                                                width: ScreenSize.phoneSize(
+                                                  180,
+                                                  height: false,
+                                                ),
+                                              ),
+                                              const Expanded(
+                                                child: SizedBox(),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return const SizedBox(
+                                            width: 10,
+                                          );
+                                        },
+                                        itemCount: 4,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               );
                             case ConnectionState.done:
                             default:
@@ -162,7 +233,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                             Padding(
                                               padding:
                                                   const EdgeInsets.symmetric(
-                                                      horizontal: 35.0),
+                                                horizontal: 35.0,
+                                              ),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.start,

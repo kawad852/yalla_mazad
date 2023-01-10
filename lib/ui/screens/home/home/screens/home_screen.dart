@@ -333,7 +333,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       horizontal: 30,
                                     ),
                                     scrollDirection: Axis.horizontal,
-                                    itemCount: 5,
+                                    itemCount: 6,
                                     itemBuilder: (context, index) {
                                       return const CustomShimmerLoading(
                                         radius: 15,

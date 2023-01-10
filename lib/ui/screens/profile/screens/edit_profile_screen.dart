@@ -107,75 +107,72 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   const SizedBox(
                     height: 40,
                   ),
-                  Directionality(
-                    textDirection: TextDirection.rtl,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        GetBuilder<ProfileController>(builder: (value) {
-                          return InkWell(
-                            onTap: () {
-                              controller.pickImage(context);
-                              value.update();
-                              MyAccountController.find.update();
-                            },
-                            child: Container(
-                              width: 114,
-                              height: 114,
-                              decoration: BoxDecoration(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GetBuilder<ProfileController>(builder: (value) {
+                        return InkWell(
+                          onTap: () {
+                            controller.pickImage(context);
+                            value.update();
+                            MyAccountController.find.update();
+                          },
+                          child: Container(
+                            width: 114,
+                            height: 114,
+                            decoration: BoxDecoration(
+                              color: const Color(
+                                0xffD3CFDC,
+                              ),
+                              shape: BoxShape.circle,
+                              border: Border.all(
                                 color: const Color(
                                   0xffD3CFDC,
                                 ),
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: const Color(
-                                    0xffD3CFDC,
-                                  ),
-                                  width: 8,
-                                ),
-                              ),
-                              child: CustomNetworkImage(
-                                url: MySharedPreferences.image,
-                                radius: 100,
+                                width: 8,
                               ),
                             ),
-                          );
-                        }),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        SizedBox(
-                          width: ScreenSize.phoneSize(
-                            170,
-                            height: false,
+                            child: CustomNetworkImage(
+                              url: MySharedPreferences.image,
+                              radius: 100,
+                            ),
                           ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                MySharedPreferences.name,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 18,
-                                ),
-                              ),
-                              Text(
-                                '@${MySharedPreferences.userId}',
-                                textDirection: TextDirection.ltr,
-                                style: const TextStyle(
-                                  color: MyColors.greyPrimary,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
-                          ),
+                        );
+                      }),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.phoneSize(
+                          170,
+                          height: false,
                         ),
-                      ],
-                    ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              MySharedPreferences.name,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              '@${MySharedPreferences.userId}',
+                              textDirection: TextDirection.ltr,
+                              style: const TextStyle(
+                                color: MyColors.greyPrimary,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 30,

@@ -8,6 +8,7 @@ import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart'
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_auctions_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/my_account/my_favorites_screen.dart';
 import 'package:yalla_mazad/ui/screens/profile/widgets/badge_item.dart';
+import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
@@ -146,103 +147,135 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               const SizedBox(
                 height: 50,
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  right: ScreenSize.phoneSize(
-                    0,
-                    height: false,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(
+                    height: 40,
                   ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Directionality(
-                      textDirection: TextDirection.rtl,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          GetBuilder<MyAccountController>(builder: (value) {
-                            return InkWell(
-                              onTap: () {
-                                controller.pickImage(context);
-                                value.update();
-                                Get.put(ProfileController());
-                                ProfileController.find.update();
-                              },
-                              child: Container(
-                                width: 114,
-                                height: 114,
-                                decoration: BoxDecoration(
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      GetBuilder<MyAccountController>(
+                        builder: (value) {
+                          return InkWell(
+                            onTap: () {
+                              controller.pickImage(context);
+                              value.update();
+                              Get.put(ProfileController());
+                              ProfileController.find.update();
+                            },
+                            child: Container(
+                              width: 114,
+                              height: 114,
+                              decoration: BoxDecoration(
+                                color: const Color(
+                                  0xffD3CFDC,
+                                ),
+                                shape: BoxShape.circle,
+                                border: Border.all(
                                   color: const Color(
                                     0xffD3CFDC,
                                   ),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: const Color(
-                                      0xffD3CFDC,
-                                    ),
-                                    width: 8,
-                                  ),
-                                ),
-                                child: CustomNetworkImage(
-                                  url: MySharedPreferences.image,
-                                  radius: 100,
+                                  width: 8,
                                 ),
                               ),
-                            );
-                          }),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          SizedBox(
-                            width: ScreenSize.phoneSize(
-                              170,
-                              height: false,
+                              child: CustomNetworkImage(
+                                url: MySharedPreferences.image,
+                                radius: 100,
+                              ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  MySharedPreferences.name,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  '@${MySharedPreferences.userId}',
-                                  textDirection: TextDirection.ltr,
-                                  style: const TextStyle(
-                                    color: MyColors.greyPrimary,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                  ],
-                ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      SizedBox(
+                        width: ScreenSize.phoneSize(
+                          170,
+                          height: false,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              MySharedPreferences.name,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              '@${MySharedPreferences.userId}',
+                              textDirection: TextDirection.ltr,
+                              style: const TextStyle(
+                                color: MyColors.greyPrimary,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                ],
               ),
               FutureBuilder<MyBadgesModel?>(
                   future: controller.initializeMyBadgesFuture,
                   builder: (context, snapshot) {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                        return SizedBox(
+                          height: 80,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 30,
+                                ),
+                                child: Text(
+                                  'the badges'.tr,
+                                  style: const TextStyle(
+                                    color: MyColors.primary,
+                                    fontSize: 18,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 47,
+                                child: Center(
+                                    child: ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                  ),
+                                  itemCount: 8,
+                                  itemBuilder: (context, index) {
+                                    return const CustomShimmerLoading(
+                                      radius: 15,
+                                      width: 47,
+                                      height: 47,
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) {
+                                    return const SizedBox(
+                                      width: 10,
+                                    );
+                                  },
+                                )),
+                              ),
+                            ],
+                          ),
                         );
                       case ConnectionState.done:
                       default:
