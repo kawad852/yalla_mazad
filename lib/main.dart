@@ -33,7 +33,7 @@ Future<void> _onBackgroundMessage(RemoteMessage message) async {
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
+  //FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
   if (MySharedPreferences.language.isEmpty) {
     MySharedPreferences.language = Get.deviceLocale!.languageCode;
@@ -75,34 +75,34 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((value) async {
-      MySharedPreferences.deviceToken = value!;
-      log("deviceToken:: $value");
-      if (MySharedPreferences.accessToken.isNotEmpty) {
-        DeviceTokenService().updateDeviceToken(value);
-      }
-    });
-
-    Connectivity().onConnectivityChanged.listen((status) {
-      log("internetStatus:: $status");
-      if (status == ConnectivityResult.none) {
-        setState(() {
-          internetConnection = false;
-        });
-      } else {
-        setState(() {
-          internetConnection = true;
-        });
-      }
-    });
-
-    LocalNotificationsService().initialize();
-
-    FirebaseMessaging.instance.requestPermission();
-
-    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
-    FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
-    FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
+    // FirebaseMessaging.instance.getToken().then((value) async {
+    //   MySharedPreferences.deviceToken = value!;
+    //   log("deviceToken:: $value");
+    //   if (MySharedPreferences.accessToken.isNotEmpty) {
+    //     DeviceTokenService().updateDeviceToken(value);
+    //   }
+    // });
+    //
+    // Connectivity().onConnectivityChanged.listen((status) {
+    //   log("internetStatus:: $status");
+    //   if (status == ConnectivityResult.none) {
+    //     setState(() {
+    //       internetConnection = false;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       internetConnection = true;
+    //     });
+    //   }
+    // });
+    //
+    // LocalNotificationsService().initialize();
+    //
+    // FirebaseMessaging.instance.requestPermission();
+    //
+    // FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
+    // FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
+    // FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
 
     super.initState();
   }

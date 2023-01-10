@@ -17,7 +17,7 @@ class InternetScreen extends StatelessWidget {
                 'MyImages.internet',
                 height: 250,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 50,),
               Text(
                 'no_internet',
                 textAlign: TextAlign.center,

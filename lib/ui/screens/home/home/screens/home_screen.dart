@@ -15,11 +15,14 @@ import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import '../../../../../binding/notifications/notifications_binding.dart';
+import '../../../../../controller/home/view_auctions/view_auction_controller.dart';
 import '../../../../../utils/screen_size.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../../view_auctions/screens/view_auction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -574,7 +577,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (value) {
                             return SizedBox(
                               height: 247,
-                              child: PagedListView<int, AllAdsList>.separated(
+                              child:
+                                  PagedListView<int, PopularAdsList>.separated(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 30,
                                 ),
@@ -582,7 +586,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 pagingController:
                                     controller.allAdsPagingController,
                                 builderDelegate:
-                                    PagedChildBuilderDelegate<AllAdsList>(
+                                    PagedChildBuilderDelegate<PopularAdsList>(
                                   newPageProgressIndicatorBuilder: (context) =>
                                       Column(
                                     children: [
@@ -640,21 +644,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                             '${data.startPrice.toString()} JOD',
                                       ),
                                       onTap: () {
-                                        controller.selectedIndex = index;
-                                        CustomNavigationBarController
-                                            .find.tabController
-                                            .jumpToTab(3);
                                         Future.delayed(
-                                          const Duration(milliseconds: 50),
+                                          const Duration(
+                                            milliseconds: 50,
+                                          ),
                                           () {
-                                            if (TrendingAuctionController.find
-                                                .pageController.hasClients) {
-                                              TrendingAuctionController
-                                                  .find.pageController
-                                                  .jumpToPage(
-                                                      controller.selectedIndex);
-                                            }
+                                            ViewAuctionController
+                                                .find.pageController
+                                                .jumpToPage(index);
                                           },
+                                        );
+                                        Get.to(
+                                          () => const ViewAuctionScreen(),
+                                          arguments: controller
+                                              .allAdsPagingController.itemList!,
                                         );
                                       },
                                     );

@@ -73,7 +73,7 @@ class HomeController extends GetxController {
   }
 
   AllAdvertisementsModel? allAdvertisementsModel;
-  late PagingController<int, AllAdsList> allAdsPagingController;
+  late PagingController<int, PopularAdsList> allAdsPagingController;
   Future<void> fetchAllAdsPage(int pageKey) async {
     try {
       allAdvertisementsModel = await ALlAdvertisementsApi().data(pageKey);

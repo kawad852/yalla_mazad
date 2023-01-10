@@ -1,8 +1,10 @@
+import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
+
 class AllAdvertisementsModel {
   bool? status;
   int? code;
   String? msg;
-  List<AllAdsList>? data;
+  List<PopularAdsList>? data;
 
   AllAdvertisementsModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +13,9 @@ class AllAdvertisementsModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <AllAdsList>[];
+      data = <PopularAdsList>[];
       json['data'].forEach((v) {
-        data!.add(AllAdsList.fromJson(v));
+        data!.add(PopularAdsList.fromJson(v));
       });
     }
   }
