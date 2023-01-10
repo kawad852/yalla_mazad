@@ -54,12 +54,6 @@ class AuctionItem extends StatelessWidget {
                 width: 7,
                 strokeAlign: StrokeAlign.inside,
               ),
-              // image: DecorationImage(
-              //   image: CustomNetworkImage(
-              //     image!,
-              //   ).,
-              //   fit: BoxFit.cover,
-              // ),
             ),
             child: SizedBox(
               height: ScreenSize.phoneSize(

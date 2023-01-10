@@ -11,9 +11,11 @@ import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_mo
 import 'package:yalla_mazad/ui/screens/home/auctions/screens/auctions_by_category/auctions_by_category_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
+import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import '../../../../../binding/notifications/notifications_binding.dart';
+import '../../../../../utils/screen_size.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
@@ -142,39 +144,140 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 5,
                         ),
                         FutureBuilder(
-                            future: controller.initializeSliderFuture,
+                          future: controller.initializeSliderFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return CarouselSlider(
+                                  items: List.generate(
+                                    2,
+                                    (index) => Container(
+                                      margin: const EdgeInsets.symmetric(
+                                          horizontal: 30),
+                                      height: 190,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(
+                                          25,
+                                        ),
+                                      ),
+                                      child: const CustomShimmerLoading(
+                                        radius: 25,
+                                        height: 190,
+                                      ),
+                                    ),
+                                  ),
+                                  options: CarouselOptions(
+                                    viewportFraction: 1,
+                                    reverse: true,
+                                    autoPlay: true,
+                                  ),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return CarouselSlider(
+                                    items: List.generate(
+                                      controller.sliderModel?.data?.length ?? 0,
+                                      (index) => Container(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        height: 190,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: CustomNetworkImage(
+                                          url: controller.sliderModel
+                                                  ?.data?[index].image ??
+                                              '',
+                                          radius: 25,
+                                        ),
+                                      ),
+                                    ),
+                                    options: CarouselOptions(
+                                      viewportFraction: 1,
+                                      reverse: true,
+                                      autoPlay: true,
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return const FailureWidget();
+                                } else {
+                                  return const FailureWidget();
+                                }
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        FutureBuilder(
+                            future: controller.initializeTipsFuture,
                             builder: (context, snapshot) {
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
+                                  return CarouselSlider(
+                                    items: List.generate(
+                                      2,
+                                      (index) => Container(
+                                        margin: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        height: 67,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                          color: MyColors.primary,
+                                        ),
+                                        child: const CustomShimmerLoading(
+                                          radius: 25,
+                                          height: 67,
+                                        ),
+                                      ),
+                                    ),
+                                    options: CarouselOptions(
+                                      viewportFraction: 1,
+                                      height: 67,
+                                      reverse: true,
+                                      autoPlay: true,
+                                    ),
                                   );
                                 case ConnectionState.done:
                                 default:
                                   if (snapshot.hasData) {
                                     return CarouselSlider(
                                       items: List.generate(
-                                        controller.sliderModel?.data?.length ??
+                                        controller.allTipsModel?.data?.length ??
                                             0,
                                         (index) => Container(
                                           margin: const EdgeInsets.symmetric(
-                                              horizontal: 30),
-                                          height: 190,
+                                            horizontal: 30,
+                                          ),
+                                          height: 67,
                                           decoration: BoxDecoration(
                                             borderRadius: BorderRadius.circular(
                                               25,
                                             ),
+                                            color: MyColors.primary,
                                           ),
-                                          child: CustomNetworkImage(
-                                            url: controller.sliderModel
-                                                    ?.data?[index].image ??
-                                                '',
-                                            radius: 25,
+                                          child: Center(
+                                            child: Text(
+                                              snapshot.data?.data?[index]
+                                                      .note ??
+                                                  '',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
                                       options: CarouselOptions(
                                         viewportFraction: 1,
+                                        height: 67,
                                         reverse: true,
                                         autoPlay: true,
                                       ),
@@ -186,66 +289,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                   }
                               }
                             }),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 0.0),
-                          child: FutureBuilder(
-                              future: controller.initializeTipsFuture,
-                              builder: (context, snapshot) {
-                                switch (snapshot.connectionState) {
-                                  case ConnectionState.waiting:
-                                    return const Center(
-                                      child: CircularProgressIndicator(),
-                                    );
-                                  case ConnectionState.done:
-                                  default:
-                                    if (snapshot.hasData) {
-                                      return CarouselSlider(
-                                        items: List.generate(
-                                          controller
-                                                  .allTipsModel?.data?.length ??
-                                              0,
-                                          (index) => Container(
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 30,
-                                            ),
-                                            height: 67,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                              color: MyColors.primary,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                snapshot.data?.data?[index]
-                                                        .note ??
-                                                    '',
-                                                style: const TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        options: CarouselOptions(
-                                          viewportFraction: 1,
-                                          height: 67,
-                                          reverse: true,
-                                          autoPlay: true,
-                                        ),
-                                      );
-                                    } else if (snapshot.hasError) {
-                                      return const FailureWidget();
-                                    } else {
-                                      return const FailureWidget();
-                                    }
-                                }
-                              }),
-                        ),
                         const SizedBox(
                           height: 15,
                         ),
@@ -279,65 +322,86 @@ class _HomeScreenState extends State<HomeScreen> {
                           height: 10,
                         ),
                         FutureBuilder(
-                            future: controller.initializeCategoriesFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                      child: CircularProgressIndicator());
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return SizedBox(
-                                      height: 100,
-                                      child: ListView.separated(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                        ),
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: controller.categoriesModel
-                                                ?.data?.length ??
-                                            0,
-                                        itemBuilder: (context, index) {
-                                          return InkWell(
-                                            onTap: () {
-                                              controller.category = MapEntry(
-                                                  controller.categoriesModel
-                                                          ?.data?[index].name ??
-                                                      '',
-                                                  controller.categoriesModel
-                                                          ?.data?[index].id ??
-                                                      0);
-                                              Get.to(
-                                                  () =>
-                                                      const AuctionsByCategoryScreen(),
-                                                  binding:
-                                                      AuctionsByCategoryBinding());
-                                            },
-                                            child: CustomCategoryItem(
-                                              url: controller.categoriesModel
-                                                      ?.data?[index].image ??
-                                                  '',
-                                              name: controller.categoriesModel
-                                                      ?.data?[index].name ??
-                                                  '',
-                                            ),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const SizedBox(
-                                            width: 10,
-                                          );
-                                        },
+                          future: controller.initializeCategoriesFuture,
+                          builder: (context, snapshot) {
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return SizedBox(
+                                  height: 60,
+                                  child: ListView.separated(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 30,
+                                    ),
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: 5,
+                                    itemBuilder: (context, index) {
+                                      return const CustomShimmerLoading(
+                                        radius: 15,
+                                        width: 60,
+                                        height: 60,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) {
+                                      return const SizedBox(
+                                        width: 10,
+                                      );
+                                    },
+                                  ),
+                                );
+                              case ConnectionState.done:
+                              default:
+                                if (snapshot.hasData) {
+                                  return SizedBox(
+                                    height: 100,
+                                    child: ListView.separated(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 30,
                                       ),
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: controller
+                                              .categoriesModel?.data?.length ??
+                                          0,
+                                      itemBuilder: (context, index) {
+                                        return InkWell(
+                                          onTap: () {
+                                            controller.category = MapEntry(
+                                                controller.categoriesModel
+                                                        ?.data?[index].name ??
+                                                    '',
+                                                controller.categoriesModel
+                                                        ?.data?[index].id ??
+                                                    0);
+                                            Get.to(
+                                                () =>
+                                                    const AuctionsByCategoryScreen(),
+                                                binding:
+                                                    AuctionsByCategoryBinding());
+                                          },
+                                          child: CustomCategoryItem(
+                                            url: controller.categoriesModel
+                                                    ?.data?[index].image ??
+                                                '',
+                                            name: controller.categoriesModel
+                                                    ?.data?[index].name ??
+                                                '',
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return const FailureWidget();
+                                } else {
+                                  return const FailureWidget();
+                                }
+                            }
+                          },
+                        ),
                         const SizedBox(
                           height: 15,
                         ),
@@ -384,12 +448,51 @@ class _HomeScreenState extends State<HomeScreen> {
                               builderDelegate:
                                   PagedChildBuilderDelegate<PopularAdsList>(
                                 newPageProgressIndicatorBuilder: (context) =>
-                                    const Center(
-                                  child: CircularProgressIndicator(),
+                                    Column(
+                                  children: [
+                                    CustomShimmerLoading(
+                                      radius: 25,
+                                      height: ScreenSize.phoneSize(
+                                        180,
+                                        height: false,
+                                      ),
+                                      width: ScreenSize.phoneSize(
+                                        180,
+                                        height: false,
+                                      ),
+                                    ),
+                                    const Expanded(
+                                      child: SizedBox(),
+                                    ),
+                                  ],
                                 ),
                                 firstPageProgressIndicatorBuilder: (context) =>
-                                    const Center(
-                                  child: CircularProgressIndicator(),
+                                    Row(
+                                  children: List.generate(
+                                    4,
+                                    (index) => Row(
+                                      children: [
+                                        Column(
+                                          children: [
+                                            CustomShimmerLoading(
+                                              radius: 25,
+                                              height: ScreenSize.phoneSize(
+                                                180,
+                                                height: false,
+                                              ),
+                                              width: ScreenSize.phoneSize(
+                                                180,
+                                                height: false,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                                 itemBuilder: (context, data, index) {
                                   return InkWell(
@@ -481,12 +584,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                 builderDelegate:
                                     PagedChildBuilderDelegate<AllAdsList>(
                                   newPageProgressIndicatorBuilder: (context) =>
-                                      const Center(
-                                    child: CircularProgressIndicator(),
+                                      Column(
+                                    children: [
+                                      CustomShimmerLoading(
+                                        radius: 25,
+                                        height: ScreenSize.phoneSize(
+                                          180,
+                                          height: false,
+                                        ),
+                                        width: ScreenSize.phoneSize(
+                                          180,
+                                          height: false,
+                                        ),
+                                      ),
+                                      const Expanded(
+                                        child: SizedBox(),
+                                      ),
+                                    ],
                                   ),
                                   firstPageProgressIndicatorBuilder:
-                                      (context) => const Center(
-                                    child: CircularProgressIndicator(),
+                                      (context) => Row(
+                                    children: List.generate(
+                                      4,
+                                      (index) => Row(
+                                        children: [
+                                          Column(
+                                            children: [
+                                              CustomShimmerLoading(
+                                                radius: 25,
+                                                height: ScreenSize.phoneSize(
+                                                  180,
+                                                  height: false,
+                                                ),
+                                                width: ScreenSize.phoneSize(
+                                                  180,
+                                                  height: false,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(
+                                            width: 10,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   itemBuilder: (context, data, index) {
                                     return InkWell(

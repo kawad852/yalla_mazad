@@ -181,7 +181,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                           icon: const Icon(
                             Icons.arrow_back_ios,
                             color: MyColors.primary,
-                            size: 20,
+                            size: 15,
                           ),
                         ),
                       ),
@@ -283,24 +283,8 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                     ),
                   ),
                 ),
-                ListTile(
-                  visualDensity: const VisualDensity(vertical: -4),
-                  onTap: () {
-                    MySharedPreferences.clearProfile();
-                    Get.deleteAll(
-                      force: true,
-                    );
-                    Get.offAll(
-                      () => const AuthenticationScreen(),
-                      binding: AuthenticationBinding(),
-                    );
-                  },
-                  title: Text(
-                    'log out'.tr,
-                    style: const TextStyle(
-                      fontSize: 18,
-                    ),
-                  ),
+                const Expanded(
+                  child: SizedBox(),
                 ),
                 ListTile(
                   visualDensity: const VisualDensity(vertical: -4),
@@ -321,6 +305,28 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                       fontSize: 18,
                     ),
                   ),
+                ),
+                ListTile(
+                  visualDensity: const VisualDensity(vertical: -4),
+                  onTap: () {
+                    MySharedPreferences.clearProfile();
+                    Get.deleteAll(
+                      force: true,
+                    );
+                    Get.offAll(
+                      () => const AuthenticationScreen(),
+                      binding: AuthenticationBinding(),
+                    );
+                  },
+                  title: Text(
+                    'log out'.tr,
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                const Expanded(
+                  child: SizedBox(),
                 ),
               ],
             ),
