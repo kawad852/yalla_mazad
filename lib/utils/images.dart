@@ -88,4 +88,8 @@ class MyImages {
   static const String clip = "${_path}clip.svg";
 
   static const String eyeCrossed = "${_path}eye-crossed.svg";
+
+  static const String noInternet = "${_path}no_internet.svg";
+
+  static const String noSearchResults = "${_path}no_search_results.png";
 }

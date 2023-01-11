@@ -126,4 +126,10 @@ final Map<String, String> en = {
   'subscribe now': 'Subscribe now',
   'current subscription': 'Current subscription',
   'day left': 'Day left',
+  'unfortunately, no search results are currently available':
+      'Unfortunately, no search results are currently available',
+  'you have no internet connection': 'You have no internet connection',
+  'make sure your phone is connected to the Internet and try again':
+      'Make sure your phone is connected to the Internet and try again',
+  'retry': 'Retry',
 };

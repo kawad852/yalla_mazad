@@ -38,7 +38,8 @@ Future<void> main() async {
   if (MySharedPreferences.language.isEmpty) {
     MySharedPreferences.language = Get.deviceLocale!.languageCode;
   }
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -56,7 +57,8 @@ class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
       return const CustomNavigationBar();
-    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
     } else {
       return const AuthenticationScreen();
@@ -66,7 +68,8 @@ class _MyAppState extends State<MyApp> {
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return HomeBinding();
-    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
       return IntroductionBinding();
     } else {
       return AuthenticationBinding();
@@ -82,20 +85,20 @@ class _MyAppState extends State<MyApp> {
     //     DeviceTokenService().updateDeviceToken(value);
     //   }
     // });
-    //
-    // Connectivity().onConnectivityChanged.listen((status) {
-    //   log("internetStatus:: $status");
-    //   if (status == ConnectivityResult.none) {
-    //     setState(() {
-    //       internetConnection = false;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       internetConnection = true;
-    //     });
-    //   }
-    // });
-    //
+
+    Connectivity().onConnectivityChanged.listen((status) {
+      log("internetStatus:: $status");
+      if (status == ConnectivityResult.none) {
+        setState(() {
+          internetConnection = false;
+        });
+      } else {
+        setState(() {
+          internetConnection = true;
+        });
+      }
+    });
+
     // LocalNotificationsService().initialize();
     //
     // FirebaseMessaging.instance.requestPermission();
@@ -122,7 +125,6 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: internetConnection ? _toggleScreen() : const InternetScreen(),
-      //home:CustomNavigationBar(),
     );
   }
 }

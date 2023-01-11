@@ -123,4 +123,10 @@ final Map<String, String> ar = {
   'subscribe now': 'اشترك الان',
   'current subscription': 'الإشتراك الحالي',
   'day left': 'يوم متبقي',
+  'unfortunately, no search results are currently available':
+      'للأسف، لا يتوفر حاليا نتائج للبحث',
+  'you have no internet connection': 'لا يوجد لديك اتصال بالانترنت',
+  'make sure your phone is connected to the Internet and try again':
+      'تأكد من اتصال هاتفك بالانترنت و أعد المحاولة مرة أخرى',
+  'retry': 'إعادة المحاولة',
 };

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:yalla_mazad/utils/images.dart';
+
+import '../../utils/colors.dart';
 
 class InternetScreen extends StatelessWidget {
   const InternetScreen({Key? key}) : super(key: key);
@@ -6,26 +11,99 @@ class InternetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(30.0),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset(
-                'MyImages.internet',
-                height: 250,
+      body: Stack(
+        children: [
+          Positioned(
+            right: Get.locale == const Locale('ar') ? -100 : null,
+            left: Get.locale == const Locale('en') ? -100 : null,
+            top: -50,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: Stack(
+                children: [
+                  SvgPicture.asset(
+                    MyImages.circleBackground,
+                    width: 300,
+                    height: 350,
+                    color: MyColors.textFieldColor,
+                  ),
+                ],
               ),
-              const SizedBox(height: 50,),
-              Text(
-                'no_internet',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 20),
-              ),
-            ],
+            ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.all(
+              30.0,
+            ),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    MyImages.noInternet,
+                    height: 250,
+                  ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                  Text(
+                    'you have no internet connection'.tr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Color(
+                        0xff333333,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'make sure your phone is connected to the Internet and try again'
+                        .tr,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      color: Color(
+                        0xff333333,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+
+                    },
+                    child: Container(
+                      width: 170,
+                      height: 57,
+                      decoration: BoxDecoration(
+                        color: MyColors.primary,
+                        borderRadius: BorderRadius.circular(
+                          25,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'retry'.tr,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

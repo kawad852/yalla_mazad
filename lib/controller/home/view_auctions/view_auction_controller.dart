@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 
-import '../../../api/popular_advertisement/popular_advertisement_api.dart';
 import '../../../model/popular_advertisement/popular_advertisement_model.dart';
 
 class ViewAuctionController extends GetxController {

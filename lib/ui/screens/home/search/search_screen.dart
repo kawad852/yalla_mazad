@@ -179,7 +179,36 @@ class _SearchScreenState extends State<SearchScreen> {
                       pagingController: controller.searchPagingController,
                       builderDelegate:
                           PagedChildBuilderDelegate<SearchedAdList>(
-                              itemBuilder: (context, data, index) {
+                              noItemsFoundIndicatorBuilder: (context) {
+                        return SizedBox(
+                          height: 400,
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                              end: 30,
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  MyImages.noSearchResults,
+                                  height: 320,
+                                ),
+                                Text(
+                                  'unfortunately, no search results are currently available'
+                                      .tr,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(
+                                      0xff333333,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      }, itemBuilder: (context, data, index) {
                         return InkWell(
                           onTap: () {
                             String startDate = data.startDate ?? '';
