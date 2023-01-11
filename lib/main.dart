@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
@@ -32,7 +33,8 @@ Future<void> _onBackgroundMessage(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   //FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
   if (MySharedPreferences.language.isEmpty) {
@@ -40,7 +42,14 @@ Future<void> main() async {
   }
   await SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  await Firebase.initializeApp();
+  try {
+    log('try');
+    await Firebase.initializeApp();
+    log('could');
+    FlutterNativeSplash.remove();
+  } catch (e) {
+    log('could not');
+  }
   runApp(const MyApp());
 }
 

@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/api/add_auction/add_auction_api.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
+import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
 import 'package:yalla_mazad/model/categories/categories_model.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
@@ -138,6 +139,13 @@ class AddAuctionController extends GetxController {
           directSellPriceController.clear();
           image = null;
           images = [];
+          bool test = Get.isRegistered<MyAuctionsController>();
+          if (test) {
+            MyAuctionsController.find.onInit();
+          } else {
+            Get.put(MyAuctionsController());
+            MyAuctionsController.find.onInit();
+          }
         } else if (addAuctionModel!.code == 500) {
           Fluttertoast.showToast(
             msg: AppConstants.failedMessage,

@@ -56,79 +56,83 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                 case ConnectionState.done:
                 default:
                   if (snapshot.hasData) {
-                    return ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      padding: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      itemCount:
-                          controller.myAdvertisementsModel?.data?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                          onTap: () {
-                            String startDate = controller.myAdvertisementsModel
-                                    ?.data?[index].startDate ??
-                                '';
-                            String endDate = controller.myAdvertisementsModel
-                                    ?.data?[index].endDate ??
-                                '';
-                            log(startDate);
-                            log(endDate);
-                            int startDifference = DateTime.parse(startDate)
-                                .difference(DateTime.now())
-                                .inSeconds;
-                            int endDifference = DateTime.now()
-                                .difference(DateTime.parse(endDate))
-                                .inSeconds;
-                            if (startDifference >= 1) {
-                              log('coming');
-                              Get.to(
-                                () => const ComingAuctionScreen(),
-                                binding: ComingAuctionBinding(),
-                                arguments: controller
-                                    .myAdvertisementsModel?.data?[index].id,
-                              );
-                            } else if (startDifference <= 0 &&
-                                endDifference <= 0) {
-                              log('current');
-                              Get.to(
-                                () => const CurrentAuctionScreen(),
-                                binding: CurrentAuctionBinding(),
-                                arguments: controller
-                                    .myAdvertisementsModel?.data?[index].id,
-                              );
-                            } else if (endDifference >= 1) {
-                              log('done');
-                              Get.to(
-                                () => const DoneAuctionScreen(),
-                                binding: DoneAuctionBinding(),
-                                arguments: controller
-                                    .myAdvertisementsModel?.data?[index].id,
-                              );
-                            }
-                          },
-                          child: MyAuctionItem(
-                            image: controller
-                                .myAdvertisementsModel?.data?[index].image,
-                            name: controller
-                                .myAdvertisementsModel?.data?[index].name,
-                            details: controller
-                                .myAdvertisementsModel?.data?[index].content,
-                            price: controller
-                                .myAdvertisementsModel?.data?[index].startPrice
-                                .toString(),
-                            status: controller
-                                .myAdvertisementsModel?.data?[index].status,
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) {
-                        return const SizedBox(
-                          height: 10,
-                        );
-                      },
-                    );
+                    return GetBuilder<MyAuctionsController>(builder: (value) {
+                      return ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.only(
+                          top: 10,
+                        ),
+                        itemCount:
+                            controller.myAdvertisementsModel?.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              String startDate = controller
+                                      .myAdvertisementsModel
+                                      ?.data?[index]
+                                      .startDate ??
+                                  '';
+                              String endDate = controller.myAdvertisementsModel
+                                      ?.data?[index].endDate ??
+                                  '';
+                              log(startDate);
+                              log(endDate);
+                              int startDifference = DateTime.parse(startDate)
+                                  .difference(DateTime.now())
+                                  .inSeconds;
+                              int endDifference = DateTime.now()
+                                  .difference(DateTime.parse(endDate))
+                                  .inSeconds;
+                              if (startDifference >= 1) {
+                                log('coming');
+                                Get.to(
+                                  () => const ComingAuctionScreen(),
+                                  binding: ComingAuctionBinding(),
+                                  arguments: controller
+                                      .myAdvertisementsModel?.data?[index].id,
+                                );
+                              } else if (startDifference <= 0 &&
+                                  endDifference <= 0) {
+                                log('current');
+                                Get.to(
+                                  () => const CurrentAuctionScreen(),
+                                  binding: CurrentAuctionBinding(),
+                                  arguments: controller
+                                      .myAdvertisementsModel?.data?[index].id,
+                                );
+                              } else if (endDifference >= 1) {
+                                log('done');
+                                Get.to(
+                                  () => const DoneAuctionScreen(),
+                                  binding: DoneAuctionBinding(),
+                                  arguments: controller
+                                      .myAdvertisementsModel?.data?[index].id,
+                                );
+                              }
+                            },
+                            child: MyAuctionItem(
+                              image: controller
+                                  .myAdvertisementsModel?.data?[index].image,
+                              name: controller
+                                  .myAdvertisementsModel?.data?[index].name,
+                              details: controller
+                                  .myAdvertisementsModel?.data?[index].content,
+                              price: controller.myAdvertisementsModel
+                                  ?.data?[index].startPrice
+                                  .toString(),
+                              status: controller
+                                  .myAdvertisementsModel?.data?[index].status,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const SizedBox(
+                            height: 10,
+                          );
+                        },
+                      );
+                    });
                   } else if (snapshot.hasError) {
                     return const FailureWidget();
                   } else {
