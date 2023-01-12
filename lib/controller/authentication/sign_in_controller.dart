@@ -99,7 +99,10 @@ class SignInController extends GetxController {
   ) async {
     try {
       Loader.show(context);
-      await GoogleSignIn().signOut();
+      if (GoogleSignIn().currentUser == null) {
+        await GoogleSignIn().signOut();
+      }
+
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =
