@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.17"
+  emailjs:
+    dependency: "direct main"
+    description:
+      name: emailjs
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.0"
   fake_async:
     dependency: transitive
     description:
@@ -693,6 +700,34 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.3"
+  pay:
+    dependency: "direct main"
+    description:
+      name: pay
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
+  pay_android:
+    dependency: transitive
+    description:
+      name: pay_android
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.8"
+  pay_ios:
+    dependency: transitive
+    description:
+      name: pay_ios
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7"
+  pay_platform_interface:
+    dependency: transitive
+    description:
+      name: pay_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   pedantic:
     dependency: transitive
     description:
@@ -993,5 +1028,5 @@ packages:
     source: hosted
     version: "3.1.1"
 sdks:
-  dart: ">=2.18.0 <3.0.0"
+  dart: ">=2.18.2 <3.0.0"
   flutter: ">=3.3.0"

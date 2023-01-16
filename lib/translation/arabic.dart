@@ -129,4 +129,5 @@ final Map<String, String> ar = {
   'make sure your phone is connected to the Internet and try again':
       'تأكد من اتصال هاتفك بالانترنت و أعد المحاولة مرة أخرى',
   'retry': 'إعادة المحاولة',
+  'your message': 'رسالتك',
 };

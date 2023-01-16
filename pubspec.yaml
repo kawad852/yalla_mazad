@@ -65,6 +65,8 @@ dependencies:
   path: ^1.8.2
   firebase_core: ^2.4.1
   cloud_firestore: ^4.3.1
+  emailjs: ^1.1.0
+  pay: ^1.0.11
 
 
 

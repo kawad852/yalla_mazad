@@ -195,7 +195,39 @@ class _CallUsScreenState extends State<CallUsScreen> {
                         ],
                       ),
                     ),
-                    hint: 'email'.tr,
+                    hint: 'your message'.tr,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      await controller.sendEmailJS(
+                        controller.nameController.text,
+                        controller.emailController.text,
+                        controller.messageController.text,
+                        context,
+                      );
+                    },
+                    child: Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: MyColors.primary,
+                        borderRadius: BorderRadius.circular(
+                          25,
+                        ),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'send'.tr,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),

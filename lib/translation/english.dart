@@ -132,4 +132,5 @@ final Map<String, String> en = {
   'make sure your phone is connected to the Internet and try again':
       'Make sure your phone is connected to the Internet and try again',
   'retry': 'Retry',
+  'your message':'your message',
 };
