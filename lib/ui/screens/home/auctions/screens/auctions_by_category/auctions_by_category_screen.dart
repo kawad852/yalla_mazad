@@ -7,8 +7,9 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/binding/notifications/notifications_binding.dart';
 import 'package:yalla_mazad/controller/home/auctions/auctions_by_category_controller.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
-import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
+import 'package:yalla_mazad/controller/home/view_auctions/view_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/all_auctions_item.dart';
+import 'package:yalla_mazad/ui/screens/home/view_auctions/screens/view_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/notifications/screens/notifications_screen.dart';
 import 'package:yalla_mazad/utils/app_constants.dart';
 import 'package:yalla_mazad/utils/colors.dart';
@@ -17,9 +18,8 @@ import 'package:yalla_mazad/utils/images.dart';
 import '../../../../../../binding/auctions/coming_auction_binding.dart';
 import '../../../../../../binding/auctions/current_auction_binding.dart';
 import '../../../../../../binding/auctions/done_auction_binding.dart';
-import '../../../../../../controller/home/custom_navigation_bar_controller.dart';
-import '../../../../../../controller/home/trending/trending_auction_controller.dart';
 import '../../../../../../model/advertisement_by_category/advertisement_by_category_model.dart';
+import '../../../../../../model/popular_advertisement/popular_advertisement_model.dart';
 import '../../../../../../utils/screen_size.dart';
 import '../../../../../widgets/custom_shimmer_loading.dart';
 import '../../../../../widgets/failure_widget.dart';
@@ -275,25 +275,24 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                                 itemBuilder: (context, index) {
                                                   return InkWell(
                                                     onTap: () {
-                                                      Get.back();
-
-                                                      ///TODO: find a way for the change in index
-                                                      HomeController.find
-                                                              .selectedIndex =
-                                                          index;
-                                                      CustomNavigationBarController
-                                                          .find.tabController
-                                                          .jumpToTab(3);
                                                       Future.delayed(
-                                                          const Duration(
-                                                              seconds: 2), () {
-                                                        TrendingAuctionController
-                                                            .find.pageController
-                                                            .jumpToPage(
-                                                                HomeController
-                                                                    .find
-                                                                    .selectedIndex);
-                                                      });
+                                                        const Duration(
+                                                          milliseconds: 50,
+                                                        ),
+                                                        () {
+                                                          ViewAuctionController
+                                                              .find
+                                                              .pageController
+                                                              .jumpToPage(
+                                                                  index);
+                                                        },
+                                                      );
+                                                      Get.to(
+                                                        () =>
+                                                            const ViewAuctionScreen(),
+                                                        arguments: snapshot
+                                                            .data!.data!,
+                                                      );
                                                     },
                                                     child: AuctionItem(
                                                       image: snapshot.data
@@ -362,7 +361,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    PagedListView<int, AllAdsList>.separated(
+                    PagedListView<int, PopularAdsList>.separated(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsetsDirectional.only(
@@ -371,7 +370,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                       ),
                       scrollDirection: Axis.vertical,
                       pagingController: controller.allAdsPagingController,
-                      builderDelegate: PagedChildBuilderDelegate<AllAdsList>(
+                      builderDelegate: PagedChildBuilderDelegate<PopularAdsList>(
                         firstPageErrorIndicatorBuilder: (context) => Center(
                           child: Text(
                             AppConstants.failedMessage,

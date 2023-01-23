@@ -1,8 +1,10 @@
+import '../popular_advertisement/popular_advertisement_model.dart';
+
 class AdvertisementByCategoryModel {
   bool? status;
   int? code;
   String? msg;
-  List<Data>? data;
+  List<PopularAdsList>? data;
 
   AdvertisementByCategoryModel({this.status, this.code, this.msg, this.data});
 
@@ -11,9 +13,9 @@ class AdvertisementByCategoryModel {
     code = json['code'];
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <Data>[];
+      data = <PopularAdsList>[];
       json['data'].forEach((v) {
-        data!.add(Data.fromJson(v));
+        data!.add(PopularAdsList.fromJson(v));
       });
     }
   }

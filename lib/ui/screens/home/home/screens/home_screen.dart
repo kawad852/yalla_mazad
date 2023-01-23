@@ -6,7 +6,6 @@ import 'package:yalla_mazad/binding/home/auctions_by_category_binding.dart';
 import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/controller/home/trending/trending_auction_controller.dart';
-import 'package:yalla_mazad/model/all_advertisements/all_advertiements_model.dart';
 import 'package:yalla_mazad/model/popular_advertisement/popular_advertisement_model.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/screens/auctions_by_category/auctions_by_category_screen.dart';
 import 'package:yalla_mazad/ui/screens/home/home/widgets/auction_item.dart';
@@ -15,11 +14,14 @@ import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import '../../../../../binding/notifications/notifications_binding.dart';
+import '../../../../../controller/home/view_auctions/view_auction_controller.dart';
 import '../../../../../utils/screen_size.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+
+import '../../view_auctions/screens/view_auction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -143,78 +145,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 5,
                         ),
-                        FutureBuilder(
-                          future: controller.initializeSliderFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return CarouselSlider(
-                                  items: List.generate(
-                                    2,
-                                    (index) => Container(
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 30),
-                                      height: 190,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                          25,
-                                        ),
-                                      ),
-                                      child: const CustomShimmerLoading(
-                                        radius: 25,
-                                        height: 190,
-                                      ),
-                                    ),
-                                  ),
-                                  options: CarouselOptions(
-                                    viewportFraction: 1,
-                                    reverse: true,
-                                    autoPlay: true,
-                                  ),
-                                );
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
-                                  return CarouselSlider(
-                                    items: List.generate(
-                                      controller.sliderModel?.data?.length ?? 0,
-                                      (index) => Container(
-                                        margin: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                        ),
-                                        height: 190,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            25,
-                                          ),
-                                        ),
-                                        child: CustomNetworkImage(
-                                          url: controller.sliderModel
-                                                  ?.data?[index].image ??
-                                              '',
-                                          radius: 25,
-                                        ),
-                                      ),
-                                    ),
-                                    options: CarouselOptions(
-                                      viewportFraction: 1,
-                                      reverse: true,
-                                      autoPlay: true,
-                                    ),
-                                  );
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
-                                } else {
-                                  return const FailureWidget();
-                                }
-                            }
-                          },
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        FutureBuilder(
-                            future: controller.initializeTipsFuture,
+                        GetBuilder<HomeController>(builder: (value) {
+                          return FutureBuilder(
+                            future: controller.initializeSliderFuture,
                             builder: (context, snapshot) {
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
@@ -223,24 +156,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                       2,
                                       (index) => Container(
                                         margin: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                        ),
-                                        height: 67,
+                                            horizontal: 30),
+                                        height: 190,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                             25,
                                           ),
-                                          color: MyColors.primary,
                                         ),
                                         child: const CustomShimmerLoading(
                                           radius: 25,
-                                          height: 67,
+                                          height: 190,
                                         ),
                                       ),
                                     ),
                                     options: CarouselOptions(
                                       viewportFraction: 1,
-                                      height: 67,
                                       reverse: true,
                                       autoPlay: true,
                                     ),
@@ -250,8 +180,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                   if (snapshot.hasData) {
                                     return CarouselSlider(
                                       items: List.generate(
-                                        controller.allTipsModel?.data?.length ??
+                                        controller.sliderModel?.data?.length ??
                                             0,
+                                        (index) => Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 30,
+                                          ),
+                                          height: 190,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              25,
+                                            ),
+                                          ),
+                                          child: CustomNetworkImage(
+                                            url: controller.sliderModel
+                                                    ?.data?[index].image ??
+                                                '',
+                                            radius: 25,
+                                          ),
+                                        ),
+                                      ),
+                                      options: CarouselOptions(
+                                        viewportFraction: 1,
+                                        reverse: true,
+                                        autoPlay: true,
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return const FailureWidget();
+                                  } else {
+                                    return const FailureWidget();
+                                  }
+                              }
+                            },
+                          );
+                        }),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        GetBuilder<HomeController>(builder: (value) {
+                          return FutureBuilder(
+                              future: controller.initializeTipsFuture,
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.waiting:
+                                    return CarouselSlider(
+                                      items: List.generate(
+                                        2,
                                         (index) => Container(
                                           margin: const EdgeInsets.symmetric(
                                             horizontal: 30,
@@ -263,15 +238,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                             color: MyColors.primary,
                                           ),
-                                          child: Center(
-                                            child: Text(
-                                              snapshot.data?.data?[index]
-                                                      .note ??
-                                                  '',
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
+                                          child: const CustomShimmerLoading(
+                                            radius: 25,
+                                            height: 67,
                                           ),
                                         ),
                                       ),
@@ -282,13 +251,53 @@ class _HomeScreenState extends State<HomeScreen> {
                                         autoPlay: true,
                                       ),
                                     );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            }),
+                                  case ConnectionState.done:
+                                  default:
+                                    if (snapshot.hasData) {
+                                      return CarouselSlider(
+                                        items: List.generate(
+                                          controller
+                                                  .allTipsModel?.data?.length ??
+                                              0,
+                                          (index) => Container(
+                                            margin: const EdgeInsets.symmetric(
+                                              horizontal: 30,
+                                            ),
+                                            height: 67,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                25,
+                                              ),
+                                              color: MyColors.primary,
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                snapshot.data?.data?[index]
+                                                        .note ??
+                                                    '',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        options: CarouselOptions(
+                                          viewportFraction: 1,
+                                          height: 67,
+                                          reverse: true,
+                                          autoPlay: true,
+                                        ),
+                                      );
+                                    } else if (snapshot.hasError) {
+                                      return const FailureWidget();
+                                    } else {
+                                      return const FailureWidget();
+                                    }
+                                }
+                              });
+                        }),
                         const SizedBox(
                           height: 15,
                         ),
@@ -321,70 +330,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        FutureBuilder(
-                          future: controller.initializeCategoriesFuture,
-                          builder: (context, snapshot) {
-                            switch (snapshot.connectionState) {
-                              case ConnectionState.waiting:
-                                return SizedBox(
-                                  height: 60,
-                                  child: ListView.separated(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 30,
-                                    ),
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: 6,
-                                    itemBuilder: (context, index) {
-                                      return const CustomShimmerLoading(
-                                        radius: 15,
-                                        width: 60,
-                                        height: 60,
-                                      );
-                                    },
-                                    separatorBuilder: (context, index) {
-                                      return const SizedBox(
-                                        width: 10,
-                                      );
-                                    },
-                                  ),
-                                );
-                              case ConnectionState.done:
-                              default:
-                                if (snapshot.hasData) {
+                        GetBuilder<HomeController>(builder: (value) {
+                          return FutureBuilder(
+                            future: controller.initializeCategoriesFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
                                   return SizedBox(
-                                    height: 100,
+                                    height: 60,
                                     child: ListView.separated(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 30,
                                       ),
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: controller
-                                              .categoriesModel?.data?.length ??
-                                          0,
+                                      itemCount: 6,
                                       itemBuilder: (context, index) {
-                                        return InkWell(
-                                          onTap: () {
-                                            controller.category = MapEntry(
-                                                controller.categoriesModel
-                                                        ?.data?[index].name ??
-                                                    '',
-                                                controller.categoriesModel
-                                                        ?.data?[index].id ??
-                                                    0);
-                                            Get.to(
-                                                () =>
-                                                    const AuctionsByCategoryScreen(),
-                                                binding:
-                                                    AuctionsByCategoryBinding());
-                                          },
-                                          child: CustomCategoryItem(
-                                            url: controller.categoriesModel
-                                                    ?.data?[index].image ??
-                                                '',
-                                            name: controller.categoriesModel
-                                                    ?.data?[index].name ??
-                                                '',
-                                          ),
+                                        return const CustomShimmerLoading(
+                                          radius: 15,
+                                          width: 60,
+                                          height: 60,
                                         );
                                       },
                                       separatorBuilder: (context, index) {
@@ -394,14 +358,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                       },
                                     ),
                                   );
-                                } else if (snapshot.hasError) {
-                                  return const FailureWidget();
-                                } else {
-                                  return const FailureWidget();
-                                }
-                            }
-                          },
-                        ),
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return SizedBox(
+                                      height: 100,
+                                      child: ListView.separated(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        scrollDirection: Axis.horizontal,
+                                        itemCount: controller.categoriesModel
+                                                ?.data?.length ??
+                                            0,
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              controller.category = MapEntry(
+                                                  controller.categoriesModel
+                                                          ?.data?[index].name ??
+                                                      '',
+                                                  controller.categoriesModel
+                                                          ?.data?[index].id ??
+                                                      0);
+                                              Get.to(
+                                                  () =>
+                                                      const AuctionsByCategoryScreen(),
+                                                  binding:
+                                                      AuctionsByCategoryBinding());
+                                            },
+                                            child: CustomCategoryItem(
+                                              url: controller.categoriesModel
+                                                      ?.data?[index].image ??
+                                                  '',
+                                              name: controller.categoriesModel
+                                                      ?.data?[index].name ??
+                                                  '',
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return const SizedBox(
+                                            width: 10,
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return const FailureWidget();
+                                  } else {
+                                    return const FailureWidget();
+                                  }
+                              }
+                            },
+                          );
+                        }),
                         const SizedBox(
                           height: 15,
                         ),
@@ -574,7 +585,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (value) {
                             return SizedBox(
                               height: 247,
-                              child: PagedListView<int, AllAdsList>.separated(
+                              child:
+                                  PagedListView<int, PopularAdsList>.separated(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 30,
                                 ),
@@ -582,7 +594,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 pagingController:
                                     controller.allAdsPagingController,
                                 builderDelegate:
-                                    PagedChildBuilderDelegate<AllAdsList>(
+                                    PagedChildBuilderDelegate<PopularAdsList>(
                                   newPageProgressIndicatorBuilder: (context) =>
                                       Column(
                                     children: [
@@ -640,21 +652,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                             '${data.startPrice.toString()} JOD',
                                       ),
                                       onTap: () {
-                                        controller.selectedIndex = index;
-                                        CustomNavigationBarController
-                                            .find.tabController
-                                            .jumpToTab(3);
                                         Future.delayed(
-                                          const Duration(milliseconds: 50),
+                                          const Duration(
+                                            milliseconds: 100,
+                                          ),
                                           () {
-                                            if (TrendingAuctionController.find
-                                                .pageController.hasClients) {
-                                              TrendingAuctionController
-                                                  .find.pageController
-                                                  .jumpToPage(
-                                                      controller.selectedIndex);
-                                            }
+                                            ViewAuctionController
+                                                .find.pageController
+                                                .jumpToPage(index);
                                           },
+                                        );
+                                        Get.to(
+                                          () => const ViewAuctionScreen(),
+                                          arguments: controller
+                                              .allAdsPagingController.itemList!,
                                         );
                                       },
                                     );

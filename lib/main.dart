@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
@@ -32,14 +33,23 @@ Future<void> _onBackgroundMessage(RemoteMessage message) async {
 }
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  //FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
   if (MySharedPreferences.language.isEmpty) {
     MySharedPreferences.language = Get.deviceLocale!.languageCode;
   }
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  await Firebase.initializeApp();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  try {
+    log('try');
+    await Firebase.initializeApp();
+    log('could');
+    FlutterNativeSplash.remove();
+  } catch (e) {
+    log('could not');
+  }
   runApp(const MyApp());
 }
 
@@ -56,7 +66,8 @@ class _MyAppState extends State<MyApp> {
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
       return const CustomNavigationBar();
-    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
       return IntroScreen();
     } else {
       return const AuthenticationScreen();
@@ -66,7 +77,8 @@ class _MyAppState extends State<MyApp> {
   Bindings? _initialBinding() {
     if (MySharedPreferences.isLogIn) {
       return HomeBinding();
-    } else if (!MySharedPreferences.isLogIn && !MySharedPreferences.isPassedIntro) {
+    } else if (!MySharedPreferences.isLogIn &&
+        !MySharedPreferences.isPassedIntro) {
       return IntroductionBinding();
     } else {
       return AuthenticationBinding();
@@ -75,13 +87,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    FirebaseMessaging.instance.getToken().then((value) async {
-      MySharedPreferences.deviceToken = value!;
-      log("deviceToken:: $value");
-      if (MySharedPreferences.accessToken.isNotEmpty) {
-        DeviceTokenService().updateDeviceToken(value);
-      }
-    });
+    // FirebaseMessaging.instance.getToken().then((value) async {
+    //   MySharedPreferences.deviceToken = value!;
+    //   log("deviceToken:: $value");
+    //   if (MySharedPreferences.accessToken.isNotEmpty) {
+    //     DeviceTokenService().updateDeviceToken(value);
+    //   }
+    // });
 
     Connectivity().onConnectivityChanged.listen((status) {
       log("internetStatus:: $status");
@@ -96,13 +108,13 @@ class _MyAppState extends State<MyApp> {
       }
     });
 
-    LocalNotificationsService().initialize();
-
-    FirebaseMessaging.instance.requestPermission();
-
-    FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
-    FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
-    FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
+    // LocalNotificationsService().initialize();
+    //
+    // FirebaseMessaging.instance.requestPermission();
+    //
+    // FirebaseMessaging.instance.getInitialMessage().then(CloudMessagingService().terminated);
+    // FirebaseMessaging.onMessage.listen(CloudMessagingService().foreground);
+    // FirebaseMessaging.onMessageOpenedApp.listen(CloudMessagingService().background);
 
     super.initState();
   }
@@ -122,7 +134,6 @@ class _MyAppState extends State<MyApp> {
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
       home: internetConnection ? _toggleScreen() : const InternetScreen(),
-      //home:CustomNavigationBar(),
     );
   }
 }
