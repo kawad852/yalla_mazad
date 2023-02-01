@@ -10,9 +10,16 @@
         		<key>CFBundleURLSchemes</key>
         		<array>
         			<string>com.googleusercontent.apps.567364200295-e9i16o4b7jjvvt8av7b8t341ondk09c1</string>
+        			 <string>fb492910369445969</string>
         		</array>
         	</dict>
         </array>
+        <key>FacebookAppID</key>
+        <string>492910369445969</string>
+        <key>FacebookClientToken</key>
+        <string>9fc76e1f3508e6c1a8ca9a403071d362</string>
+        <key>FacebookDisplayName</key>
+        <string>Yalla-Mazad</string>
 	    <key>NSPhotoLibraryUsageDescription</key>
         <string>Need to upload image</string>
         <key>NSCameraUsageDescription</key>

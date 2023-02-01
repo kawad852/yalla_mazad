@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Yallamazad</string>
+    <string name="facebook_app_id">492910369445969</string>
+    <string name="fb_login_protocol_scheme">fb492910369445969</string>
+    <string name="facebook_client_token">9fc76e1f3508e6c1a8ca9a403071d362</string>
+</resources>
+

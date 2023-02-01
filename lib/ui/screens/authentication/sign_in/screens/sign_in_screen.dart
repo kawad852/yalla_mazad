@@ -1,14 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/reset_password/reset_password_phone_number_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_in_controller.dart';
+import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../reset_password/reset_password_phone_number_screen.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -19,7 +22,9 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final controller = SignInController.find;
-
+  Map<String, dynamic>? _userData;
+  AccessToken? _accessToken;
+  bool? _checking = true;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -236,11 +241,16 @@ class _SignInScreenState extends State<SignInScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: Image.asset(
-                        MyImages.facebookSignIn,
+                    InkWell(
+                      onTap: () async {
+                        _login();
+                      },
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: Image.asset(
+                          MyImages.facebookSignIn,
+                        ),
                       ),
                     ),
                   ],
@@ -285,4 +295,55 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
+
+  _ifUserIsLoggedIn() async {
+    final accessToken = await FacebookAuth.instance.accessToken;
+
+    setState(() {
+      _checking = false;
+    });
+
+    if (accessToken != null) {
+      final userData = await FacebookAuth.instance.getUserData();
+      _accessToken = accessToken;
+      setState(() {
+        _userData = userData;
+      });
+    } else {
+      _login();
+    }
+  }
+
+  _login() async {
+    final LoginResult loginResult = await FacebookAuth.instance
+        .login(permissions: ["email", "public_profile"]);
+
+    if (loginResult.status == LoginStatus.success) {
+      final OAuthCredential credential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      final userObj =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      print("Facebook Data with Credentials -> ${userObj.user.toString()}");
+
+      final email = userObj.user?.providerData[0].email;
+
+      final displayName = userObj.user?.providerData[0].displayName;
+
+      _accessToken = loginResult.accessToken;
+      final userInfo = await FacebookAuth.instance.getUserData();
+      _userData = userInfo;
+      controller.fetchSocialLogInData(
+          email: email ?? '', username: displayName ?? "", context: context);
+    } else {
+      print('ResultStatus: ${loginResult.status}');
+      print('Message: ${loginResult.message}');
+    }
+  }
+
+  // _logOut() async {
+  //   await FacebookAuth.instance.logOut();
+  //   _accessToken = null;
+  //   _userData = null;
+  // }
 }
