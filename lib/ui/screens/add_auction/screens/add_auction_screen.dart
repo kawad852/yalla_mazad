@@ -64,7 +64,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
           ),
           SingleChildScrollView(
             child: SizedBox(
-              height: Get.height * 1.3,
+              height: Get.height * 1.6,
               child: Form(
                 key: controller.formKey,
                 child: Column(
@@ -409,7 +409,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 60,
+                                      height: 70,
                                     ),
                                   ],
                                 ),

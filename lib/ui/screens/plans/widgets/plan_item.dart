@@ -157,8 +157,53 @@ class PlanItem extends StatelessWidget {
           planId != null
               ? InkWell(
                   onTap: () async {
-                    await function(
-                        planId: planId, time: time, context: context);
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            color: Colors.white,
+                            height: 200,
+                            child: Column(
+                              children: [
+                                ApplePayButton(
+                                  paymentConfigurationAsset:
+                                      'default_payment_profile_apple_pay.json',
+                                  paymentItems: [
+                                    PaymentItem(
+                                      label: 'Total',
+                                      amount: price.toString(),
+                                      status: PaymentItemStatus.final_price,
+                                    )
+                                  ],
+                                  style: ApplePayButtonStyle.black,
+                                  type: ApplePayButtonType.buy,
+                                  margin: const EdgeInsets.only(top: 15.0),
+                                  onPaymentResult: onApplePayResult,
+                                  loadingIndicator: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                                GooglePayButton(
+                                  paymentConfigurationAsset:
+                                      'default_payment_profile_google_pay.json',
+                                  paymentItems: [
+                                    PaymentItem(
+                                      label: 'Total',
+                                      amount: price.toString(),
+                                      status: PaymentItemStatus.final_price,
+                                    )
+                                  ],
+                                  type: GooglePayButtonType.pay,
+                                  margin: const EdgeInsets.only(top: 15.0),
+                                  onPaymentResult: onGooglePayResult,
+                                  loadingIndicator: const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        });
                   },
                   child: Container(
                     width: double.infinity,
@@ -181,50 +226,26 @@ class PlanItem extends StatelessWidget {
                   ),
                 )
               : const SizedBox(),
-          ApplePayButton(
-            paymentConfigurationAsset: 'default_payment_profile_apple_pay.json',
-            paymentItems: [
-              PaymentItem(
-                label: 'Total',
-                amount: price.toString(),
-                status: PaymentItemStatus.final_price,
-              )
-            ],
-            style: ApplePayButtonStyle.black,
-            type: ApplePayButtonType.buy,
-            margin: const EdgeInsets.only(top: 15.0),
-            onPaymentResult: onApplePayResult,
-            loadingIndicator: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
-          GooglePayButton(
-            paymentConfigurationAsset:
-                'default_payment_profile_google_pay.json',
-            paymentItems: [
-              PaymentItem(
-                label: 'Total',
-                amount: price.toString(),
-                status: PaymentItemStatus.final_price,
-              )
-            ],
-            type: GooglePayButtonType.pay,
-            margin: const EdgeInsets.only(top: 15.0),
-            onPaymentResult: onGooglePayResult,
-            loadingIndicator: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
         ],
       ),
     );
   }
 
-  void onApplePayResult(paymentResult) {
+  void onApplePayResult(paymentResult) async {
     // Send the resulting Apple Pay token to your server / PSP
+    await function(
+      planId: planId,
+      time: time,
+      context: Get.context,
+    );
   }
 
-  void onGooglePayResult(paymentResult) {
+  void onGooglePayResult(paymentResult) async {
     // Send the resulting Google Pay token to your server / PSP
+    await function(
+      planId: planId,
+      time: time,
+      context: Get.context,
+    );
   }
 }

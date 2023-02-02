@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -44,7 +45,22 @@ Future<void> main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   try {
     log('try');
-    await Firebase.initializeApp();
+    if (!kIsWeb) {
+      await Firebase.initializeApp();
+    } else {
+      Firebase.initializeApp(
+        options: const FirebaseOptions(
+          apiKey: "AIzaSyB2Hr22qEokMKOJr_0_FmSQmYv8soIuOF0",
+          authDomain: "yalla-mazad-2c0c2.firebaseapp.com",
+          databaseURL: "https://yalla-mazad-2c0c2-default-rtdb.firebaseio.com",
+          projectId: "yalla-mazad-2c0c2",
+          storageBucket: "yalla-mazad-2c0c2.appspot.com",
+          messagingSenderId: "567364200295",
+          appId: "1:567364200295:web:cc5caa7b71a1e3c5fb31c2",
+          measurementId: "G-G1RH70W4WK",
+        ),
+      );
+    }
     log('could');
     FlutterNativeSplash.remove();
   } catch (e) {
