@@ -18,6 +18,9 @@ class TrendingAuctionItem extends StatelessWidget {
   final String id;
   final String startDate;
   final String endDate;
+  final int priceOne;
+  final int priceTwo;
+  final int priceThree;
   const TrendingAuctionItem({
     required this.name,
     required this.image,
@@ -25,6 +28,9 @@ class TrendingAuctionItem extends StatelessWidget {
     required this.id,
     required this.startDate,
     required this.endDate,
+    required this.priceOne,
+    required this.priceTwo,
+    required this.priceThree,
     Key? key,
   }) : super(key: key);
 
@@ -68,7 +74,12 @@ class TrendingAuctionItem extends StatelessWidget {
                     Get.to(
                       () => const CurrentAuctionScreen(),
                       binding: CurrentAuctionBinding(),
-                      arguments: id,
+                      arguments: [
+                        id,
+                        priceOne,
+                        priceTwo,
+                        priceThree,
+                      ],
                     );
                   } else if (endDifference >= 1) {
                     log('done');
@@ -114,7 +125,12 @@ class TrendingAuctionItem extends StatelessWidget {
                   Get.to(
                     () => const CurrentAuctionScreen(),
                     binding: CurrentAuctionBinding(),
-                    arguments: id,
+                    arguments: [
+                      id,
+                      priceOne,
+                      priceTwo,
+                      priceThree,
+                    ],
                   );
                 } else if (endDifference >= 1) {
                   Get.to(

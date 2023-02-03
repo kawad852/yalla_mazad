@@ -69,7 +69,7 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                     Get.dialog(
                       ConfirmAuctionDialog(
                         id: data?.id ?? 0,
-                        currentPrice: data?.startPrice ?? 0,
+                        // currentPrice: data?.startPrice ?? 0,
                         // priceThree: 10,
                         // priceTwo: 200,
                         // priceOne: 30,

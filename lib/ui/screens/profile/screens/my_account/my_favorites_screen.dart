@@ -97,8 +97,16 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
                                 Get.to(
                                   () => const CurrentAuctionScreen(),
                                   binding: CurrentAuctionBinding(),
-                                  arguments:
-                                      value.myFavoritesModel?.data?[index].id,
+                                  arguments: [
+                                    controller
+                                        .myFavoritesModel?.data?[index].id,
+                                    controller.myFavoritesModel?.data?[index]
+                                        .priceOne,
+                                    controller.myFavoritesModel?.data?[index]
+                                        .priceTwo,
+                                    controller.myFavoritesModel?.data?[index]
+                                        .priceThree
+                                  ],
                                 );
                               } else if (endDifference >= 1) {
                                 log('done');

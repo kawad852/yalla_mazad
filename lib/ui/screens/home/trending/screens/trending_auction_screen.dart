@@ -175,16 +175,21 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                                         .itemList?[index].id
                                         .toString() ??
                                     '0',
-                                // startDate: DateTime.now().toString(),
-                                // endDate: DateTime.now()
-                                //     .add(Duration(days: 2))
-                                //     .toString(),
                                 startDate: value.trendingPagingController
                                         .itemList?[index].startDate ??
                                     '',
                                 endDate: value.trendingPagingController
                                         .itemList?[index].endDate ??
                                     '',
+                                priceOne: value.trendingPagingController
+                                        .itemList?[index].priceOne ??
+                                    0,
+                                priceTwo: value.trendingPagingController
+                                        .itemList?[index].priceTwo ??
+                                    0,
+                                priceThree: value.trendingPagingController
+                                        .itemList?[index].priceThree ??
+                                    0,
                               ),
                             ),
                           ),

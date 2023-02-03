@@ -40,6 +40,7 @@ class AddAuctionApi {
       var request = http.MultipartRequest('POST', uri);
       var headers = {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
         'x-localization': MySharedPreferences.language,
       };
       request.headers.addAll(headers);
@@ -49,6 +50,7 @@ class AddAuctionApi {
           request.files.add(item);
         }
       }
+
       // log(request.files.length.toString());
       request.fields['name'] = name!;
       request.fields['content'] = content!;
@@ -59,7 +61,7 @@ class AddAuctionApi {
       request.fields['category_id'] = categoryId!;
 
       var response = await request.send();
-      log("Response:: AddAuctionResponse\nUrl:: $url\nheaders:: $headers\n");
+      log("Response:: AddAuctionResponse\nUrl:: $url\nheaders:: $headers\n body::: ${request.fields}\n ${request.files.toList()}");
 
       if (response.statusCode == 200) {
         var responseData = await response.stream.toBytes();
@@ -69,6 +71,10 @@ class AddAuctionApi {
         log("AddAuctionStatusCode:: ${response.statusCode}  AddAuctionBody:: $jsonData");
         return addAuctionModel;
       } else {
+        var responseData = await response.stream.toBytes();
+        var responseString = String.fromCharCodes(responseData);
+        var jsonData = jsonDecode(json.encode(responseString));
+        log("AddAuctionStatusCode:: ${response.statusCode}  AddAuctionBody:: $jsonData");
         throw "add auction Error";
       }
     } catch (e) {

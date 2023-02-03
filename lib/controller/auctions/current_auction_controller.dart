@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,16 +24,41 @@ class CurrentAuctionController extends GetxController {
   int selectedBidItem = 0;
   int selectedBidAmount = 0;
   int totalPrice = 0;
+  int priceOne = 0;
+  int priceTwo = 0;
+  int priceThree = 0;
+  RxString currentPrice = "0".obs;
 
   AdvertisementDetailsModel? advertisementDetailsModel;
   late Future<AdvertisementDetailsModel?> initializeAdvertisementFuture;
 
   @override
-  void onInit() {
-    String id = Get.arguments;
+  void onInit() async {
+    String id = Get.arguments[0].toString();
     initializeAdvertisementFuture = fetchAuctionDetails(
       addId: id,
     );
+    priceOne = Get.arguments[1];
+    priceTwo = Get.arguments[2];
+    priceThree = Get.arguments[3];
+    selectedBidAmount = priceOne;
+    selectedBidItem =1;
+    var items = FirebaseFirestore.instance
+        .collection('auctions')
+        .doc(id)
+        .collection('biddings')
+        .orderBy('amount', descending: true)
+        .snapshots();
+    items.listen((snapshot) {
+      currentPrice = snapshot.docs.isNotEmpty
+          ? snapshot.docs.first.get('amount').toString().obs
+          : "0".obs;
+      totalPrice = int.parse(currentPrice.value) + selectedBidAmount;
+      update();
+      log(totalPrice.toString());
+    });
+
+
     super.onInit();
   }
 
@@ -147,6 +175,7 @@ class CurrentAuctionController extends GetxController {
       return;
     }
     if (createBidModel!.code == 200) {
+      Get.back();
       Fluttertoast.showToast(msg: createBidModel!.msg!);
     } else if (createBidModel!.code == 500) {
       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);

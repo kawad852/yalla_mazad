@@ -184,6 +184,10 @@ class PlanItem extends StatelessWidget {
                                   ),
                                 ),
                                 GooglePayButton(
+                                  childOnError: Text('error'),
+                                  onError: (value){
+
+                                  },
                                   paymentConfigurationAsset:
                                       'default_payment_profile_google_pay.json',
                                   paymentItems: [

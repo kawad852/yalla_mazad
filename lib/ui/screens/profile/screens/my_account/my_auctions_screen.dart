@@ -98,8 +98,16 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                 Get.to(
                                   () => const CurrentAuctionScreen(),
                                   binding: CurrentAuctionBinding(),
-                                  arguments: controller
-                                      .myAdvertisementsModel?.data?[index].id,
+                                  arguments: [
+                                    controller
+                                        .myAdvertisementsModel?.data?[index].id,
+                                    controller.myAdvertisementsModel
+                                        ?.data?[index].priceOne,
+                                    controller.myAdvertisementsModel
+                                        ?.data?[index].priceTwo,
+                                    controller.myAdvertisementsModel
+                                        ?.data?[index].priceThree
+                                  ],
                                 );
                               } else if (endDifference >= 1) {
                                 log('done');

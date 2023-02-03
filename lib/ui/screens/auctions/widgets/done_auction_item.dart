@@ -322,7 +322,7 @@ class DoneAuctionItem extends StatelessWidget {
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('auctions')
-                                    .doc('7')
+                                    .doc(id)
                                     .collection('biddings')
                                     .orderBy('amount', descending: true)
                                     .snapshots(),
@@ -401,10 +401,9 @@ class DoneAuctionItem extends StatelessWidget {
             ),
           ),
           StreamBuilder<QuerySnapshot>(
-            ///TODO: edit doc id
             stream: FirebaseFirestore.instance
                 .collection('auctions')
-                .doc('7')
+                .doc(id)
                 .collection('biddings')
                 .orderBy('amount', descending: true)
                 .snapshots(),

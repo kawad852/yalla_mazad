@@ -160,12 +160,11 @@ class _ViewAuctionScreenState extends State<ViewAuctionScreen> {
                         name: list[index].name ?? '',
                         user: list[index].user?.name ?? '',
                         id: list[index].id.toString(),
-                        // startDate: DateTime.now().toString(),
-                        // endDate: DateTime.now()
-                        //     .add(Duration(days: 2))
-                        //     .toString(),
                         startDate: list[index].startDate ?? '',
                         endDate: list[index].endDate ?? '',
+                        priceOne: list[index].priceOne ?? 0,
+                        priceTwo: list[index].priceTwo ?? 0,
+                        priceThree: list[index].priceThree ?? 0,
                       ),
                     ),
                   ),

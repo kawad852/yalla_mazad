@@ -234,7 +234,12 @@ class _SearchScreenState extends State<SearchScreen> {
                               Get.to(
                                 () => const CurrentAuctionScreen(),
                                 binding: CurrentAuctionBinding(),
-                                arguments: data.id,
+                                arguments: [
+                                  data.id,
+                                  data.priceOne,
+                                  data.priceTwo,
+                                  data.priceThree
+                                ],
                               );
                             } else if (endDifference >= 1) {
                               log('done');

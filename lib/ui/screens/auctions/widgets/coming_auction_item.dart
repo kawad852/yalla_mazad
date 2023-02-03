@@ -389,11 +389,10 @@ class ComingAuctionItem extends StatelessWidget {
             ),
           ),
 
-          ///TODO: edit doc id
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('auctions')
-                .doc('7')
+                .doc(id)
                 .collection('biddings')
                 .orderBy('amount', descending: true)
                 .snapshots(),
