@@ -137,6 +137,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             ),
                             child: CustomNetworkImage(
                               url: MySharedPreferences.image,
+                              defaultUrl: MyImages.noProfile,
                               radius: 100,
                             ),
                           ),

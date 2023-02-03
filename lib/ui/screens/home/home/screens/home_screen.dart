@@ -196,6 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             url: controller.sliderModel
                                                     ?.data?[index].image ??
                                                 '',
+                                            defaultUrl: MyImages.logo,
                                             radius: 25,
                                           ),
                                         ),

@@ -25,7 +25,7 @@ class _InterestItemState extends State<InterestItem> {
           17,
         ),
         border: Border.all(
-          strokeAlign: StrokeAlign.inside,
+          strokeAlign: BorderSide.strokeAlignInside,
           width: 1,
           color: const Color(
             0xff2D0050,

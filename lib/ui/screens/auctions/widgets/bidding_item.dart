@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
+import '../../../../utils/images.dart';
+
 class BiddingItem extends StatelessWidget {
   final int order;
   final String name;
@@ -60,6 +62,7 @@ class BiddingItem extends StatelessWidget {
           ),
           CustomNetworkImage(
             url: image,
+            defaultUrl: MyImages.noProfile,
             radius: 20,
             width: 52,
             height: 52,

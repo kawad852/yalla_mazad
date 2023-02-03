@@ -57,12 +57,13 @@ class AllAuctionsItem extends StatelessWidget {
                   1,
                 ),
                 width: 7,
-                strokeAlign: StrokeAlign.inside,
+                strokeAlign: BorderSide.strokeAlignInside,
               ),
             ),
             child: CustomNetworkImage(
               url: image!,
-              radius: 18,
+              defaultUrl: MyImages.logo,
+              radius: 18
             ),
           ),
           const SizedBox(
@@ -204,6 +205,7 @@ class AllAuctionsItem extends StatelessWidget {
                       child: CustomNetworkImage(
                         radius: 6,
                         url: userImage!,
+                        defaultUrl: MyImages.noProfile,
                       ),
                     ),
                     SizedBox(

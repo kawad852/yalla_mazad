@@ -43,11 +43,12 @@ class MyAuctionItem extends StatelessWidget {
                   1,
                 ),
                 width: 7,
-                strokeAlign: StrokeAlign.inside,
+                strokeAlign: BorderSide.strokeAlignInside,
               ),
             ),
             child: CustomNetworkImage(
               url: image!,
+              defaultUrl: MyImages.logo,
               radius: 18,
             ),
           ),

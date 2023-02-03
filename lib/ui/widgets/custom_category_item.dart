@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
+import '../../utils/images.dart';
 import 'custom_network_image.dart';
 
 class CustomCategoryItem extends StatelessWidget {
@@ -42,6 +43,7 @@ class CustomCategoryItem extends StatelessWidget {
             child: Center(
               child: CustomNetworkImage(
                 url: '$url',
+                defaultUrl: MyImages.logo,
                 radius: 15,
                 margin: const EdgeInsets.all(
                   5,

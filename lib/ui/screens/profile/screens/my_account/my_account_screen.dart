@@ -185,6 +185,7 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
                               ),
                               child: CustomNetworkImage(
                                 url: MySharedPreferences.image,
+                                defaultUrl: MyImages.noProfile,
                                 radius: 100,
                               ),
                             ),

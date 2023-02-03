@@ -385,10 +385,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                     ),
                                     CustomSlideButton(
                                       borderRadius: 25,
-                                      height: ScreenSize.phoneSize(
-                                        60,
-                                        height: true,
-                                      ),
+                                      height: 70,
                                       color: MyColors.primary,
                                       stateKey: _key,
                                       text: 'send advertisement'.tr,

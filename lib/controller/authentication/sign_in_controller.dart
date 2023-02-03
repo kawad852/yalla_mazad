@@ -80,7 +80,7 @@ class SignInController extends GetxController {
       MySharedPreferences.email = socialLogInModel!.data!.user!.email!;
       MySharedPreferences.name = socialLogInModel!.data!.user!.name!;
       MySharedPreferences.userId = socialLogInModel!.data!.user!.id!;
-      // MySharedPreferences.image = socialLogInModel!.data!.user!.image!;
+      //MySharedPreferences.image = socialLogInModel!.data!.user!.image!;
       MySharedPreferences.isLogIn = true;
       Get.offAll(
         () => const CustomNavigationBar(),

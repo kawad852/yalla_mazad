@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
+import '../../../../utils/images.dart';
+
 class BadgeItem extends StatelessWidget {
   final String? image;
   final String? message;
@@ -40,6 +42,7 @@ class BadgeItem extends StatelessWidget {
         child: CustomNetworkImage(
           radius: 15,
           url: image!,
+          defaultUrl: MyImages.logo,
         ),
       ),
     );

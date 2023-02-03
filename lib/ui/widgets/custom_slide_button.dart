@@ -37,19 +37,19 @@ class CustomSlideButton extends StatelessWidget {
         fontSize: 17,
       ),
       sliderButtonIcon: RotatedBox(
-        quarterTurns: 2,
-        child: Image.asset(
-          MyImages.doubleArrow,
-          width: ScreenSize.phoneSize(
-            18,
-            height: true,
-          ),
-          height: ScreenSize.phoneSize(
-            18,
-            height: false,
+          quarterTurns: 2,
+          child: Image.asset(
+            MyImages.doubleArrow,
+            width: ScreenSize.phoneSize(
+              18,
+              height: true,
+            ),
+            height: ScreenSize.phoneSize(
+              18,
+              height: false,
+            ),
           ),
         ),
-      ),
       key: stateKey,
       onSubmit: onSubmitted,
     );

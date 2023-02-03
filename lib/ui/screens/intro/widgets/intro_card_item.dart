@@ -28,7 +28,7 @@ class IntroCardItem extends StatelessWidget {
             1,
           ),
           width: 7,
-          strokeAlign: StrokeAlign.outside,
+          strokeAlign: BorderSide.strokeAlignInside,
         ),
         image: DecorationImage(
           image: AssetImage(

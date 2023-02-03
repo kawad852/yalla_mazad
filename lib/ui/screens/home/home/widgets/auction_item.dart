@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/images.dart';
 import '../../../../../utils/screen_size.dart';
 
 class AuctionItem extends StatelessWidget {
@@ -52,7 +53,7 @@ class AuctionItem extends StatelessWidget {
                   1,
                 ),
                 width: 7,
-                strokeAlign: StrokeAlign.inside,
+                strokeAlign: BorderSide.strokeAlignInside,
               ),
             ),
             child: SizedBox(
@@ -68,6 +69,7 @@ class AuctionItem extends StatelessWidget {
                 children: [
                   CustomNetworkImage(
                     url: image!,
+                    defaultUrl: MyImages.logo,
                     radius: 18,
                   ),
                   Align(

@@ -2,10 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 import 'package:yalla_mazad/utils/colors.dart';
-import 'package:yalla_mazad/utils/images.dart';
 
 class CustomNetworkImage extends StatelessWidget {
   final String url;
+  final String defaultUrl;
   final double radius;
   final double? width;
   final double? height;
@@ -15,6 +15,7 @@ class CustomNetworkImage extends StatelessWidget {
   const CustomNetworkImage({
     Key? key,
     required this.url,
+    required this.defaultUrl,
     required this.radius,
     this.width,
     this.height,
@@ -45,8 +46,8 @@ class CustomNetworkImage extends StatelessWidget {
         decoration: BoxDecoration(
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
-          image: const DecorationImage(
-            image: AssetImage(MyImages.logo),
+          image:  DecorationImage(
+            image: AssetImage(defaultUrl),
             fit: BoxFit.contain,
             alignment: Alignment.center,
           ),
@@ -60,8 +61,8 @@ class CustomNetworkImage extends StatelessWidget {
         decoration: BoxDecoration(
           color: MyColors.greyED0,
           borderRadius: BorderRadius.circular(radius),
-          image: const DecorationImage(
-            image: AssetImage(MyImages.logo),
+          image:  DecorationImage(
+            image: AssetImage(defaultUrl),
             fit: BoxFit.contain,
             alignment: Alignment.center,
           ),

@@ -10,6 +10,7 @@ import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/done_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import '../../../../../utils/colors.dart';
+import '../../../../../utils/images.dart';
 
 class TrendingAuctionItem extends StatelessWidget {
   final String image;
@@ -100,6 +101,7 @@ class TrendingAuctionItem extends StatelessWidget {
                   child: CustomNetworkImage(
                     radius: 25,
                     url: image,
+                    defaultUrl: MyImages.logo,
                   ),
                 ),
               ),

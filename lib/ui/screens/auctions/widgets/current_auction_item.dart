@@ -162,12 +162,13 @@ class CurrentAuctionItem extends StatelessWidget {
                                   1,
                                 ),
                                 width: 4,
-                                strokeAlign: StrokeAlign.inside,
+                                strokeAlign: BorderSide.strokeAlignInside,
                               ),
                             ),
                             child: CustomNetworkImage(
                               radius: 20,
                               url: images[index],
+                              defaultUrl: MyImages.logo,
                             ),
                           ),
                         ),
@@ -214,6 +215,7 @@ class CurrentAuctionItem extends StatelessWidget {
                         ),
                         child: CustomNetworkImage(
                           url: MySharedPreferences.image,
+                          defaultUrl: MyImages.noProfile,
                           radius: 100,
                         ),
                       ),

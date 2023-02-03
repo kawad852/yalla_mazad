@@ -21,7 +21,7 @@ class AuctionBidItem extends StatelessWidget {
           17,
         ),
         border: Border.all(
-          strokeAlign: StrokeAlign.inside,
+          strokeAlign: BorderSide.strokeAlignInside,
           width: 1,
           color: const Color(
             0xff2D0050,
