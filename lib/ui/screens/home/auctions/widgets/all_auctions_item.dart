@@ -1,15 +1,17 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../../widgets/custom_network_image.dart';
 
-class AllAuctionsItem extends StatelessWidget {
+class AllAuctionsItem extends StatefulWidget {
   final String? image;
   final String? name;
   final String? details;
-  final String? price;
+  final int? id;
   final String? userImage;
   final String? userName;
 
@@ -18,12 +20,33 @@ class AllAuctionsItem extends StatelessWidget {
       {required this.image,
       required this.name,
       required this.details,
-      required this.price,
+      required this.id,
       required this.userImage,
       required this.userName,
       Key? key})
       : super(key: key);
 
+  @override
+  State<AllAuctionsItem> createState() => _AllAuctionsItemState();
+}
+
+class _AllAuctionsItemState extends State<AllAuctionsItem> {
+  RxDouble highestPrice = 0.0.obs;
+  @override
+  void initState() {
+    var items = FirebaseFirestore.instance
+        .collection('auctions')
+        .doc(widget.id.toString())
+        .collection('biddings')
+        .orderBy('amount', descending: true)
+        .snapshots();
+    items.listen((snapshot) {
+     var currentPrice = snapshot.docs.isNotEmpty
+          ? snapshot.docs.first.get('amount').toString().obs
+          : "0.0".obs;
+      highestPrice.value = double.parse(currentPrice.value);
+    });    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -35,8 +58,6 @@ class AllAuctionsItem extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            // height: 140,
-            // width: 140,
             height: ScreenSize.phoneSize(
               120,
               height: true,
@@ -61,7 +82,7 @@ class AllAuctionsItem extends StatelessWidget {
               ),
             ),
             child: CustomNetworkImage(
-              url: image!,
+              url: widget.image!,
               defaultUrl: MyImages.logo,
               radius: 18
             ),
@@ -75,14 +96,14 @@ class AllAuctionsItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name!,
+                  widget.name!,
                   style: const TextStyle(
                     color: MyColors.primary,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  details!,
+                  widget.details!,
                   maxLines: 3,
                   style: const TextStyle(
                     color: MyColors.primary,
@@ -174,11 +195,13 @@ class AllAuctionsItem extends StatelessWidget {
                           const SizedBox(
                             width: 4,
                           ),
-                          Text(
-                            price!,
-                            style: const TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 12,
+                          Obx(()=>
+                             Text(
+                             '${highestPrice.value.toString()} JOD',
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],
@@ -204,7 +227,7 @@ class AllAuctionsItem extends StatelessWidget {
                       ),
                       child: CustomNetworkImage(
                         radius: 6,
-                        url: userImage!,
+                        url: widget.userImage!,
                         defaultUrl: MyImages.noProfile,
                       ),
                     ),
@@ -217,7 +240,7 @@ class AllAuctionsItem extends StatelessWidget {
                     Flexible(
                       child: FittedBox(
                         child: Text(
-                          userName!,
+                          widget.userName!,
                           style: const TextStyle(
                             color: MyColors.primary,
                             fontSize: 12,

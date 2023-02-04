@@ -512,8 +512,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       image: data.image,
                                       name: data.name,
                                       user: data.user?.name,
-                                      price:
-                                          '${data.startPrice.toString()} JOD',
+                                      id:
+                                          data.id,
                                     ),
                                     onTap: () {
                                       controller.selectedIndex = index;
@@ -649,8 +649,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         image: data.image,
                                         name: data.name,
                                         user: data.user?.name,
-                                        price:
-                                            '${data.startPrice.toString()} JOD',
+                                        id:
+                                            data.id,
                                       ),
                                       onTap: () {
                                         Future.delayed(

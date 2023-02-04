@@ -304,8 +304,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                                           ?.data?[index]
                                                           .user
                                                           ?.name,
-                                                      price:
-                                                          '${snapshot.data?.data?[index].startPrice.toString()} JOD',
+                                                      id:
+                                                          snapshot.data?.data?[index].id,
                                                     ),
                                                   );
                                                 },
@@ -429,7 +429,7 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                             child: AllAuctionsItem(
                               image: data.image,
                               name: data.name,
-                              price: '${data.startPrice.toString()} JOD',
+                              id: data.id,
                               details: data.content,
                               userImage: data.user?.image,
                               userName: data.user?.name,

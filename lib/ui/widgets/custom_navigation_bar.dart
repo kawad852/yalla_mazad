@@ -135,7 +135,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
       rtlOpening: Get.locale == const Locale('ar') ? true : false,
-      disabledGestures: true,
+      disabledGestures: false,
       childDecoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

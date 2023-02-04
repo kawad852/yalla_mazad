@@ -254,7 +254,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             image: data.image,
                             name: data.name,
                             details: data.content,
-                            price: data.startPrice.toString(),
+                            id: data.id,
                             userImage: data.user?.image,
                             userName: data.user?.name,
                           ),

@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/auctions/current_auction_controller.dart';
-import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
+import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_bid_item.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
