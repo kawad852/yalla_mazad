@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/screen_size.dart';
@@ -79,10 +78,7 @@ class AddedAuctionDialog extends StatelessWidget {
             ),
             CustomSlideButton(
               borderRadius: 25,
-              height: ScreenSize.phoneSize(
-                60,
-                height: true,
-              ),
+              height: 67,
               color: MyColors.primary,
               stateKey: _key,
               text: 'my account'.tr,

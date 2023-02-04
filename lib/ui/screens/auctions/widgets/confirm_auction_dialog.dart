@@ -1,9 +1,7 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/controller/auctions/current_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/auctions/widgets/auction_item.dart';
 
@@ -273,10 +271,7 @@ class _ConfirmAuctionDialogState extends State<ConfirmAuctionDialog> {
               ),
               CustomSlideButton(
                 borderRadius: 25,
-                height: ScreenSize.phoneSize(
-                  60,
-                  height: true,
-                ),
+                height: 67,
                 color: MyColors.primary,
                 stateKey: _key,
                 text: 'confirm'.tr,

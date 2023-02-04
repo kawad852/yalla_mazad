@@ -9,7 +9,6 @@ import 'package:yalla_mazad/ui/widgets/custom_slide_button.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../../widgets/failure_widget.dart';
@@ -261,10 +260,7 @@ class IntroScreen extends StatelessWidget {
             ),
             child: CustomSlideButton(
               borderRadius: 25,
-              height: ScreenSize.phoneSize(
-                60,
-                height: true,
-              ),
+              height: 67,
               color: MyColors.primary,
               stateKey: _key,
               text: 'yalla mazad'.tr,

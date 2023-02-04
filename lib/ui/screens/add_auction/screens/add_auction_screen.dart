@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:slide_to_act/slide_to_act.dart';
 import 'package:yalla_mazad/controller/add_auction/add_auction_controller.dart';
 import 'package:yalla_mazad/ui/widgets/custom_category_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
@@ -10,7 +9,6 @@ import 'package:yalla_mazad/ui/widgets/failure_widget.dart';
 
 import '../../../../utils/colors.dart';
 import '../../../../utils/images.dart';
-import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_shimmer_loading.dart';
 import '../../../widgets/custom_slide_button.dart';
 
@@ -385,7 +383,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                     ),
                                     CustomSlideButton(
                                       borderRadius: 25,
-                                      height: 70,
+                                      height: 67,
                                       color: MyColors.primary,
                                       stateKey: _key,
                                       text: 'send advertisement'.tr,
