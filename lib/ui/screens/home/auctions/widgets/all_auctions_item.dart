@@ -1,6 +1,8 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/ui/widgets/custom_countdown_timer.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
@@ -14,8 +16,9 @@ class AllAuctionsItem extends StatefulWidget {
   final int? id;
   final String? userImage;
   final String? userName;
+  final String? startDate;
+  final String? endDate;
 
-  ///TODO: add time left
   const AllAuctionsItem(
       {required this.image,
       required this.name,
@@ -23,6 +26,8 @@ class AllAuctionsItem extends StatefulWidget {
       required this.id,
       required this.userImage,
       required this.userName,
+      required this.startDate,
+      required this.endDate,
       Key? key})
       : super(key: key);
 
@@ -31,7 +36,9 @@ class AllAuctionsItem extends StatefulWidget {
 }
 
 class _AllAuctionsItemState extends State<AllAuctionsItem> {
-  RxDouble highestPrice = 0.0.obs;
+  RxInt highestPrice = 0.obs;
+  var seconds = 0;
+  RxBool isDone = false.obs;
 
   @override
   void initState() {
@@ -44,9 +51,15 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
     items.listen((snapshot) {
       var currentPrice = snapshot.docs.isNotEmpty
           ? snapshot.docs.first.get('amount').toString().obs
-          : "0.0".obs;
-      highestPrice.value = double.parse(currentPrice.value);
+          : "0".obs;
+      highestPrice.value = int.parse(currentPrice.value);
     });
+    seconds = DateTime.parse(widget.endDate ?? '')
+        .difference(DateTime.now())
+        .inSeconds;
+    if (seconds == 0) {
+      isDone.value = true;
+    }
     super.initState();
   }
 
@@ -145,13 +158,25 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
                           const SizedBox(
                             width: 4,
                           ),
-                          const Flexible(
+                          Flexible(
                             child: FittedBox(
-                              child: Text(
-                                '1:23:02:00',
-                                style: TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 12,
+                              child: Obx(
+                                    () => isDone.value
+                                    ? Text(
+                                  'done auction'.tr,
+                                  style: const TextStyle(
+                                    color: MyColors.primary,
+                                  ),
+                                )
+                                    : CountDownTimer(
+                                  secondsRemaining: seconds,
+                                  whenTimeExpires: () {
+                                    setState(
+                                          () {
+                                        isDone.value = true;
+                                      },
+                                    );
+                                  },
                                 ),
                               ),
                             ),

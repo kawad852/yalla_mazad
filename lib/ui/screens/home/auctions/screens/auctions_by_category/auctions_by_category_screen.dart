@@ -270,7 +270,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                               child: ListView.separated(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        horizontal: 30),
+                                                  horizontal: 30,
+                                                ),
                                                 scrollDirection:
                                                     Axis.horizontal,
                                                 itemBuilder: (context, index) {
@@ -307,6 +308,14 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                                           ?.name,
                                                       id: snapshot.data
                                                           ?.data?[index].id,
+                                                      startDate: snapshot
+                                                          .data
+                                                          ?.data?[index]
+                                                          .startDate,
+                                                      endDate: snapshot
+                                                          .data
+                                                          ?.data?[index]
+                                                          .endDate,
                                                     ),
                                                   );
                                                 },
@@ -435,6 +444,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                               details: data.content,
                               userImage: data.user?.image,
                               userName: data.user?.name,
+                              startDate: data.startDate,
+                              endDate: data.endDate,
                             ),
                           );
                         },

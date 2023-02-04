@@ -6,18 +6,23 @@ import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../../utils/screen_size.dart';
+import '../../../../widgets/custom_countdown_timer.dart';
 
 class AuctionItem extends StatefulWidget {
   final String? image;
   final String? name;
   final String? user;
   final int? id;
+  final String? startDate;
+  final String? endDate;
 
   const AuctionItem(
       {required this.image,
       required this.name,
       required this.user,
       required this.id,
+      required this.startDate,
+      required this.endDate,
       Key? key})
       : super(key: key);
 
@@ -26,7 +31,9 @@ class AuctionItem extends StatefulWidget {
 }
 
 class _AuctionItemState extends State<AuctionItem> {
-  RxDouble highestPrice = 0.0.obs;
+  RxInt highestPrice = 0.obs;
+  var seconds = 0;
+  RxBool isDone = false.obs;
 
   @override
   void initState() {
@@ -39,9 +46,15 @@ class _AuctionItemState extends State<AuctionItem> {
     items.listen((snapshot) {
       var currentPrice = snapshot.docs.isNotEmpty
           ? snapshot.docs.first.get('amount').toString().obs
-          : "0.0".obs;
-      highestPrice.value = double.parse(currentPrice.value);
+          : "0".obs;
+      highestPrice.value = int.parse(currentPrice.value);
     });
+    seconds = DateTime.parse(widget.endDate ?? '')
+        .difference(DateTime.now())
+        .inSeconds;
+    if (seconds == 0) {
+      isDone.value = true;
+    }
     super.initState();
   }
 
@@ -157,12 +170,24 @@ class _AuctionItemState extends State<AuctionItem> {
                       ),
                       child: Center(
                         child: FittedBox(
-                          child: Text(
-                            //TODO: edit timer
-                            '0',
-                            style: const TextStyle(
-                              color: MyColors.primary,
-                            ),
+                          child: Obx(
+                            () => isDone.value
+                                ? Text(
+                                    'done auction'.tr,
+                                    style: const TextStyle(
+                                      color: MyColors.primary,
+                                    ),
+                                  )
+                                : CountDownTimer(
+                                    secondsRemaining: seconds,
+                                    whenTimeExpires: () {
+                                      setState(
+                                        () {
+                                          isDone.value = true;
+                                        },
+                                      );
+                                    },
+                                  ),
                           ),
                         ),
                       ),

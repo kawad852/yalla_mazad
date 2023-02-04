@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -296,24 +298,6 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  _ifUserIsLoggedIn() async {
-    final accessToken = await FacebookAuth.instance.accessToken;
-
-    setState(() {
-      _checking = false;
-    });
-
-    if (accessToken != null) {
-      final userData = await FacebookAuth.instance.getUserData();
-      _accessToken = accessToken;
-      setState(() {
-        _userData = userData;
-      });
-    } else {
-      _login();
-    }
-  }
-
   _login() async {
     final LoginResult loginResult = await FacebookAuth.instance
         .login(permissions: ["email", "public_profile"]);
@@ -324,7 +308,7 @@ class _SignInScreenState extends State<SignInScreen> {
       final userObj =
           await FirebaseAuth.instance.signInWithCredential(credential);
 
-      print("Facebook Data with Credentials -> ${userObj.user.toString()}");
+      log("Facebook Data with Credentials -> ${userObj.user.toString()}");
 
       final email = userObj.user?.providerData[0].email;
 
@@ -336,8 +320,8 @@ class _SignInScreenState extends State<SignInScreen> {
       controller.fetchSocialLogInData(
           email: email ?? '', username: displayName ?? "", context: context);
     } else {
-      print('ResultStatus: ${loginResult.status}');
-      print('Message: ${loginResult.message}');
+      log('ResultStatus: ${loginResult.status}');
+      log('Message: ${loginResult.message}');
     }
   }
 

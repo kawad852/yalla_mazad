@@ -514,6 +514,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       name: data.name,
                                       user: data.user?.name,
                                       id: data.id,
+                                      startDate: data.startDate,
+                                      endDate: data.endDate,
                                     ),
                                     onTap: () {
                                       controller.selectedIndex = index;
@@ -650,6 +652,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         name: data.name,
                                         user: data.user?.name,
                                         id: data.id,
+                                        startDate: data.startDate,
+                                        endDate:  data.endDate,
                                       ),
                                       onTap: () {
                                         Future.delayed(
