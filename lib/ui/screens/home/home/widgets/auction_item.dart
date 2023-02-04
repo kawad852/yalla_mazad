@@ -12,6 +12,7 @@ class AuctionItem extends StatefulWidget {
   final String? name;
   final String? user;
   final int? id;
+
   const AuctionItem(
       {required this.image,
       required this.name,
@@ -26,6 +27,7 @@ class AuctionItem extends StatefulWidget {
 
 class _AuctionItemState extends State<AuctionItem> {
   RxDouble highestPrice = 0.0.obs;
+
   @override
   void initState() {
     var items = FirebaseFirestore.instance
@@ -39,8 +41,10 @@ class _AuctionItemState extends State<AuctionItem> {
           ? snapshot.docs.first.get('amount').toString().obs
           : "0.0".obs;
       highestPrice.value = double.parse(currentPrice.value);
-    });    super.initState();
+    });
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -118,8 +122,8 @@ class _AuctionItemState extends State<AuctionItem> {
                       ),
                       child: Center(
                         child: FittedBox(
-                          child: Obx(()=>
-                           Text(
+                          child: Obx(
+                            () => Text(
                               '${highestPrice.value} JOD',
                               style: const TextStyle(
                                 color: Colors.white,
@@ -155,7 +159,7 @@ class _AuctionItemState extends State<AuctionItem> {
                         child: FittedBox(
                           child: Text(
                             //TODO: edit timer
-                          '0',
+                            '0',
                             style: const TextStyle(
                               color: MyColors.primary,
                             ),

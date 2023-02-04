@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../../utils/images.dart';
 
-
 /// Slider call to action component
 class SlideAction extends StatefulWidget {
   /// The size of the sliding icon
@@ -88,6 +87,7 @@ class SlideAction extends StatefulWidget {
     this.textStyle,
     this.sliderButtonIcon,
   }) : super(key: key);
+
   @override
   SlideActionState createState() => SlideActionState();
 }
@@ -99,6 +99,7 @@ class SlideActionState extends State<SlideAction>
   final GlobalKey _sliderKey = GlobalKey();
   double _dx = 0;
   double _maxDx = 0;
+
   double get _progress => _dx == 0 ? 0 : _dx / _maxDx;
   double _endDx = 0;
   double _dz = 1;
@@ -130,115 +131,120 @@ class SlideActionState extends State<SlideAction>
             borderRadius: BorderRadius.circular(widget.borderRadius),
             child: submitted
                 ? Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.rotationY(widget.reversed ? pi : 0),
-              child: Center(
-                child: Stack(
-                  clipBehavior: Clip.antiAlias,
-                  children: <Widget>[
-                    widget.submittedIcon ??
-                        Icon(
-                          Icons.done,
-                          color: widget.innerColor ??
-                              Theme.of(context).primaryIconTheme.color,
-                        ),
-                    Positioned.fill(
-                      right: 0,
-                      child: Transform(
-                        transform: Matrix4.rotationY(
-                            _checkAnimationDx * (pi / 2)),
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          color: widget.outerColor ??
-                              Theme.of(context).colorScheme.secondary,
-                        ),
+                    alignment: Alignment.center,
+                    transform: Matrix4.rotationY(widget.reversed ? pi : 0),
+                    child: Center(
+                      child: Stack(
+                        clipBehavior: Clip.antiAlias,
+                        children: <Widget>[
+                          widget.submittedIcon ??
+                              Icon(
+                                Icons.done,
+                                color: widget.innerColor ??
+                                    Theme.of(context).primaryIconTheme.color,
+                              ),
+                          Positioned.fill(
+                            right: 0,
+                            child: Transform(
+                              transform: Matrix4.rotationY(
+                                  _checkAnimationDx * (pi / 2)),
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                color: widget.outerColor ??
+                                    Theme.of(context).colorScheme.secondary,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            )
+                  )
                 : Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: <Widget>[
-                Opacity(
-                  opacity: 1 - 1 * _progress,
-                  child: Transform(
                     alignment: Alignment.center,
-                    transform:
-                    Matrix4.rotationY(widget.reversed ? pi : 0),
-                    child: widget.child ??
-                        Text(
-                          widget.text ?? 'Slide to act',
-                          textAlign: TextAlign.center,
-                          style: widget.textStyle ??
-                              TextStyle(
-                                color: widget.innerColor ??
-                                    Theme.of(context)
-                                        .primaryIconTheme
-                                        .color,
-                                fontSize: 24,
+                    clipBehavior: Clip.none,
+                    children: <Widget>[
+                      Opacity(
+                        opacity: 1 - 1 * _progress,
+                        child: Transform(
+                          alignment: Alignment.center,
+                          transform:
+                              Matrix4.rotationY(widget.reversed ? pi : 0),
+                          child: widget.child ??
+                              Text(
+                                widget.text ?? 'Slide to act',
+                                textAlign: TextAlign.center,
+                                style: widget.textStyle ??
+                                    TextStyle(
+                                      color: widget.innerColor ??
+                                          Theme.of(context)
+                                              .primaryIconTheme
+                                              .color,
+                                      fontSize: 24,
+                                    ),
                               ),
                         ),
-                  ),
-                ),
-                Positioned(
-                  left: widget.sliderButtonYOffset,
-                  child: Transform.scale(
-                    scale: _dz,
-                    origin: Offset(_dx, 0),
-                    child: Transform.translate(
-                      offset: Offset(_dx, 0),
-                      child: Container(
-                        key: _sliderKey,
-                        child: GestureDetector(
-                          onHorizontalDragUpdate: onHorizontalDragUpdate,
-                          onHorizontalDragEnd: (details) async {
-                            _endDx = _dx;
-                            if (_progress <= 0.8 ||
-                                widget.onSubmit == null) {
-                              _cancelAnimation();
-                            } else {
-                              await _resizeAnimation();
+                      ),
+                      Positioned(
+                        left: widget.sliderButtonYOffset,
+                        child: Transform.scale(
+                          scale: _dz,
+                          origin: Offset(_dx, 0),
+                          child: Transform.translate(
+                            offset: Offset(_dx, 0),
+                            child: Container(
+                              key: _sliderKey,
+                              child: GestureDetector(
+                                onHorizontalDragUpdate: onHorizontalDragUpdate,
+                                onHorizontalDragEnd: (details) async {
+                                  _endDx = _dx;
+                                  if (_progress <= 0.8 ||
+                                      widget.onSubmit == null) {
+                                    _cancelAnimation();
+                                  } else {
+                                    await _resizeAnimation();
 
-                              await _shrinkAnimation();
+                                    await _shrinkAnimation();
 
-                              await _checkAnimation();
+                                    await _checkAnimation();
 
-                              widget.onSubmit!();
-                            }
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0),
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: Material(
-                                borderRadius: BorderRadius.circular(
-                                   22,),
-                                color: widget.innerColor ??
-                                    Theme.of(context)
-                                        .primaryIconTheme
-                                        .color,
-                                child: Container(
-                                  padding: EdgeInsets.all(
-                                      widget.sliderButtonIconPadding),
-                                  child: Transform.rotate(
-                                    angle: widget.sliderRotate
-                                        ? -pi * _progress
-                                        : 0,
-                                    child: Center(
-                                      child: widget.sliderButtonIcon ??
-                                          Icon(
-                                            Icons.arrow_forward,
-                                            size:
-                                            widget.sliderButtonIconSize,
-                                            color: widget.outerColor ??
-                                                Theme.of(context)
-                                                    .colorScheme.secondary,
+                                    widget.onSubmit!();
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(
+                                        22,
+                                      ),
+                                      color: widget.innerColor ??
+                                          Theme.of(context)
+                                              .primaryIconTheme
+                                              .color,
+                                      child: Container(
+                                        padding: EdgeInsets.all(
+                                            widget.sliderButtonIconPadding),
+                                        child: Transform.rotate(
+                                          angle: widget.sliderRotate
+                                              ? -pi * _progress
+                                              : 0,
+                                          child: Center(
+                                            child: widget.sliderButtonIcon ??
+                                                Icon(
+                                                  Icons.arrow_forward,
+                                                  size: widget
+                                                      .sliderButtonIconSize,
+                                                  color: widget.outerColor ??
+                                                      Theme.of(context)
+                                                          .colorScheme
+                                                          .secondary,
+                                                ),
                                           ),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -247,11 +253,8 @@ class SlideActionState extends State<SlideAction>
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
@@ -389,12 +392,12 @@ class SlideActionState extends State<SlideAction>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final RenderBox containerBox =
-      _containerKey.currentContext?.findRenderObject() as RenderBox;
+          _containerKey.currentContext?.findRenderObject() as RenderBox;
       _containerWidth = containerBox.size.width;
       _initialContainerWidth = _containerWidth;
 
       final RenderBox sliderBox =
-      _sliderKey.currentContext!.findRenderObject() as RenderBox;
+          _sliderKey.currentContext!.findRenderObject() as RenderBox;
       final sliderWidth = sliderBox.size.width;
 
       _maxDx = _containerWidth! -
@@ -413,10 +416,6 @@ class SlideActionState extends State<SlideAction>
     super.dispose();
   }
 }
-
-
-
-
 
 class CustomSlideButton extends StatelessWidget {
   final double borderRadius;
@@ -451,13 +450,13 @@ class CustomSlideButton extends StatelessWidget {
         fontSize: 17,
       ),
       sliderButtonIcon: RotatedBox(
-          quarterTurns: 2,
-          child: Image.asset(
-            MyImages.doubleArrow,
-            width: 18,
-            height: 18,
-          ),
+        quarterTurns: 2,
+        child: Image.asset(
+          MyImages.doubleArrow,
+          width: 18,
+          height: 18,
         ),
+      ),
       key: stateKey,
       onSubmit: onSubmitted,
     );

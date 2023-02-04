@@ -7,6 +7,7 @@ import '../../../widgets/custom_slide_button.dart';
 
 class ConfirmDirectBuyDialog extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
+
   ConfirmDirectBuyDialog({Key? key}) : super(key: key);
 
   @override

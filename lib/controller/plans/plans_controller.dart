@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -8,7 +9,6 @@ import '../../model/create_subscription/create_subscription_model.dart';
 import '../../model/plans/plans_model.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/shared_prefrences.dart';
-import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 
 class PlansController extends GetxController {
   static PlansController get find => Get.find();
@@ -28,6 +28,7 @@ class PlansController extends GetxController {
   }
 
   CreateSubscriptionModel? createSubscriptionModel;
+
   Future fetchCreateSubscriptionData({
     required String planId,
     required int time,

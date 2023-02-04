@@ -4,11 +4,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:yalla_mazad/api/add_auction/add_auction_api.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
 import 'package:yalla_mazad/model/categories/categories_model.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../model/add_auction/add_auction_model.dart';
@@ -32,6 +32,7 @@ class AddAuctionController extends GetxController {
   late Future<CategoriesModel?> initializeCategoriesFuture;
 
   String? image;
+
   pickImage() async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -50,6 +51,7 @@ class AddAuctionController extends GetxController {
   }
 
   List<String?>? images;
+
   pickMultipleImages() async {
     List<XFile?>? pickedFile = await ImagePicker().pickMultiImage(
       maxWidth: 1800,
@@ -107,6 +109,7 @@ class AddAuctionController extends GetxController {
   }
 
   AddAuctionModel? addAuctionModel;
+
   Future fetchAddAuctionData({
     required BuildContext context,
   }) async {

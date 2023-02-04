@@ -9,6 +9,7 @@ import 'package:yalla_mazad/ui/screens/auctions/screens/coming_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/screens/done_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
+
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 
@@ -22,6 +23,7 @@ class TrendingAuctionItem extends StatelessWidget {
   final int priceOne;
   final int priceTwo;
   final int priceThree;
+
   const TrendingAuctionItem({
     required this.name,
     required this.image,

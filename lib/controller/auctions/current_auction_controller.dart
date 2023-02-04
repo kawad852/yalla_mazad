@@ -42,7 +42,7 @@ class CurrentAuctionController extends GetxController {
     priceTwo = Get.arguments[2];
     priceThree = Get.arguments[3];
     selectedBidAmount = priceOne;
-    selectedBidItem =1;
+    selectedBidItem = 1;
     var items = FirebaseFirestore.instance
         .collection('auctions')
         .doc(id)
@@ -57,7 +57,6 @@ class CurrentAuctionController extends GetxController {
       update();
       log(totalPrice.toString());
     });
-
 
     super.onInit();
   }
@@ -116,6 +115,7 @@ class CurrentAuctionController extends GetxController {
   }
 
   DeleteAdvertisementFromFavoritesModel? deleteAdvertisementFromFavoritesModel;
+
   Future fetchDeleteFromFavoritesData({
     required String adId,
     required BuildContext context,
@@ -158,6 +158,7 @@ class CurrentAuctionController extends GetxController {
   }
 
   CreateBidModel? createBidModel;
+
   Future fetchCreateBidData({
     required String totalPrice,
     required String adId,

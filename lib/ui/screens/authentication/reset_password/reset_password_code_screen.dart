@@ -18,6 +18,7 @@ class ResetPasswordCodeScreen extends StatefulWidget {
 
 class _ResetPasswordCodeScreenState extends State<ResetPasswordCodeScreen> {
   final controller = ResetPasswordCodeController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

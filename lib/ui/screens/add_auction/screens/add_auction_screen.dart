@@ -21,6 +21,7 @@ class AddAuctionScreen extends StatefulWidget {
 
 class _AddAuctionScreenState extends State<AddAuctionScreen> {
   final GlobalKey<SlideActionState> _key = GlobalKey();
+
   @override
   void initState() {
     Get.put(AddAuctionController());

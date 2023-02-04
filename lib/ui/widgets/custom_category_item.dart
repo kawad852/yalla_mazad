@@ -8,6 +8,7 @@ class CustomCategoryItem extends StatelessWidget {
   final String? url;
   final String? name;
   final bool isChecked;
+
   const CustomCategoryItem({
     required this.url,
     required this.name,

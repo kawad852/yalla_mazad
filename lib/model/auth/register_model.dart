@@ -12,6 +12,7 @@ class RegisterModel {
     msg = json['msg'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
+
   bool? status;
   int? code;
   String? msg;
@@ -39,6 +40,7 @@ class Data {
     token = json['token'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
+
   String? token;
   User? user;
 
@@ -59,6 +61,7 @@ class User {
   String? image;
   String? phone;
   List<Badge?>? badges;
+
   User({
     this.id,
     this.name,
@@ -80,6 +83,7 @@ class User {
       });
     }
   }
+
   // if (json['badges'] != null) {
   //   badges = <Badge?>[];
   //   json['badges'].forEach((v) {
@@ -110,6 +114,7 @@ class Badge {
     id = json['id'];
     image = json['image'];
   }
+
   int? id;
   String? image;
 

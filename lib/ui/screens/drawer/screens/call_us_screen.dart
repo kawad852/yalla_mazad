@@ -15,6 +15,7 @@ class CallUsScreen extends StatefulWidget {
 
 class _CallUsScreenState extends State<CallUsScreen> {
   final controller = CallUsController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

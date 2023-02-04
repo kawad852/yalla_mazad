@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/binding/home/auctions_by_category_binding.dart';
 import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
@@ -13,14 +14,13 @@ import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/ui/widgets/custom_shimmer_loading.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+
 import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../../controller/home/view_auctions/view_auction_controller.dart';
 import '../../../../../utils/screen_size.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
 import '../../../notifications/screens/notifications_screen.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-
 import '../../view_auctions/screens/view_auction_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -32,6 +32,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final controller = HomeController.find;
+
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -512,8 +513,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       image: data.image,
                                       name: data.name,
                                       user: data.user?.name,
-                                      id:
-                                          data.id,
+                                      id: data.id,
                                     ),
                                     onTap: () {
                                       controller.selectedIndex = index;
@@ -649,8 +649,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         image: data.image,
                                         name: data.name,
                                         user: data.user?.name,
-                                        id:
-                                            data.id,
+                                        id: data.id,
                                       ),
                                       onTap: () {
                                         Future.delayed(

@@ -12,6 +12,7 @@ class SearchController extends GetxController {
   final searchQuery = "".obs;
   Timer? _debounce;
   late PagingController<int, SearchedAdList> searchPagingController;
+
   Future<void> fetchSearchPage(int pageKey, String query) async {
     try {
       final model =
@@ -56,19 +57,19 @@ class SearchController extends GetxController {
     searchPagingController.dispose();
     super.onClose();
   }
-  // Future fetchSearch({required String query}) async {
-  //   toggleLoading(status: true);
-  //   model.value = await SearchAdvertisementApi().data(name: query);
-  //   if (model.value != null) {
-  //     if (model.value!.code == 200) {
-  //       toggleLoading(status: false);
-  //     } else {
-  //       toggleLoading(status: false);
-  //       Fluttertoast.showToast(msg: model.value!.msg!);
-  //     }
-  //   } else {
-  //     toggleLoading(status: false);
-  //     Fluttertoast.showToast(msg: AppConstants.failedMessage);
-  //   }
-  // }
+// Future fetchSearch({required String query}) async {
+//   toggleLoading(status: true);
+//   model.value = await SearchAdvertisementApi().data(name: query);
+//   if (model.value != null) {
+//     if (model.value!.code == 200) {
+//       toggleLoading(status: false);
+//     } else {
+//       toggleLoading(status: false);
+//       Fluttertoast.showToast(msg: model.value!.msg!);
+//     }
+//   } else {
+//     toggleLoading(status: false);
+//     Fluttertoast.showToast(msg: AppConstants.failedMessage);
+//   }
+// }
 }

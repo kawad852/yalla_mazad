@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/notifications/notifications_controller.dart';
 import 'package:yalla_mazad/model/my_notifications/my_notifications_model.dart';
 import 'package:yalla_mazad/ui/screens/notifications/widgets/notification_item.dart';
 
 import '../../../../utils/colors.dart';
-
-import 'package:get/get.dart';
-
 import '../../../widgets/failure_widget.dart';
 
 class NotificationsScreen extends StatelessWidget {

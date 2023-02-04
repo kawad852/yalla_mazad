@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pay/pay.dart';
 import 'package:yalla_mazad/utils/colors.dart';
+
 import '../../../../utils/images.dart';
 
 class PlanItem extends StatelessWidget {
@@ -185,9 +186,7 @@ class PlanItem extends StatelessWidget {
                                 ),
                                 GooglePayButton(
                                   childOnError: Text('error'),
-                                  onError: (value){
-
-                                  },
+                                  onError: (value) {},
                                   paymentConfigurationAsset:
                                       'default_payment_profile_google_pay.json',
                                   paymentItems: [

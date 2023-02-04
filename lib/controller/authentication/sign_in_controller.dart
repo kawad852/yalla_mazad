@@ -5,15 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:yalla_mazad/api/auth/social_log_in_api.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/model/auth/social_log_in_model.dart';
 import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
+
 import '../../api/auth/sign_in_api.dart';
 import '../../model/auth/sign_in_model.dart';
 import '../../utils/app_constants.dart';
 import '../../utils/shared_prefrences.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class SignInController extends GetxController {
   static SignInController get find => Get.find();
@@ -60,6 +61,7 @@ class SignInController extends GetxController {
   }
 
   SocialLogInModel? socialLogInModel;
+
   Future fetchSocialLogInData({
     required String email,
     required String username,

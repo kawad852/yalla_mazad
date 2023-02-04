@@ -10,6 +10,7 @@ class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
 
   final controller = SignUpController.find;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

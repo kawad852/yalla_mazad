@@ -57,6 +57,7 @@ class HomeController extends GetxController {
 
   PopularAdvertisementModel? popularAdvertisementModel;
   late PagingController<int, PopularAdsList> trendingPagingController;
+
   Future<void> fetchTrendingPage(int pageKey) async {
     try {
       popularAdvertisementModel = await PopularAdsApi().data(pageKey);
@@ -74,6 +75,7 @@ class HomeController extends GetxController {
 
   AllAdvertisementsModel? allAdvertisementsModel;
   late PagingController<int, PopularAdsList> allAdsPagingController;
+
   Future<void> fetchAllAdsPage(int pageKey) async {
     try {
       allAdvertisementsModel = await ALlAdvertisementsApi().data(pageKey);

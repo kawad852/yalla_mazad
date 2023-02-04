@@ -10,16 +10,14 @@ class ViewAuctionController extends GetxController {
     initialPage: HomeController.find.selectedIndex,
   );
 
-
   List<PopularAdsList> popularAdsItems = [];
 
   RxBool isLoading = true.obs;
   bool isFinalPage = false;
 
-
   @override
   void onInit() {
-   popularAdsItems = Get.arguments;
+    popularAdsItems = Get.arguments;
     super.onInit();
   }
 }

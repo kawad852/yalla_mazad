@@ -94,6 +94,4 @@ class MyImages {
   static const String noSearchResults = "${_path}no_search_results.png";
 
   static const String noProfile = "${_path}profile_image.jpg";
-
-
 }

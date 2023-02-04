@@ -1,12 +1,13 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:http/http.dart' as http;
+import 'package:path/path.dart';
 import 'package:yalla_mazad/utils/api_url.dart';
 
 import '../../model/auth/update_user_model.dart';
 import '../../utils/shared_prefrences.dart';
-import 'package:path/path.dart';
 
 class UpdateUserImageApi {
   Future<UpdateUserModel?> data({

@@ -17,6 +17,7 @@ class AuthenticationScreen extends StatefulWidget {
 
 class _AuthenticationScreenState extends State<AuthenticationScreen> {
   final controller = AuthenticationController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

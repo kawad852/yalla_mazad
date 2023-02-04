@@ -9,7 +9,9 @@ class PrivacyPolicyController extends GetxController {
   late Future<PageModel?> initializePageFuture;
 
   Future<PageModel?> fetchPage() async {
-    pageModel = await PageApi().data(id: 3,);
+    pageModel = await PageApi().data(
+      id: 3,
+    );
     return pageModel;
   }
 

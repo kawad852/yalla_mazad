@@ -18,6 +18,7 @@ class VerificationCodeScreen extends StatefulWidget {
 
 class _VerificationCodeScreenState extends State<VerificationCodeScreen> {
   final controller = VerificationCodeController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

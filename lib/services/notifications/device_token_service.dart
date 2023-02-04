@@ -18,7 +18,8 @@ class DeviceTokenService {
         'device_token': token,
       });
       log("Response:: updateDeviceTokenResponse\nUrl:: $url\nheaders:: $headers");
-      http.Response response = await http.post(uri, body: body, headers: headers);
+      http.Response response =
+          await http.post(uri, body: body, headers: headers);
       log("updateDeviceTokenStatusCode:: ${response.statusCode} updateTokenBody:: ${response.body}");
     } catch (e) {
       log("deviceTokenError:: $e");

@@ -43,6 +43,7 @@ class MySubscriptionController extends GetxController {
   }
 
   CreateSubscriptionModel? createSubscriptionModel;
+
   Future fetchCreateSubscriptionData({
     required String planId,
     required int time,

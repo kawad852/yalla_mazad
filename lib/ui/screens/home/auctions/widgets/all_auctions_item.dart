@@ -32,6 +32,7 @@ class AllAuctionsItem extends StatefulWidget {
 
 class _AllAuctionsItemState extends State<AllAuctionsItem> {
   RxDouble highestPrice = 0.0.obs;
+
   @override
   void initState() {
     var items = FirebaseFirestore.instance
@@ -41,12 +42,14 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
         .orderBy('amount', descending: true)
         .snapshots();
     items.listen((snapshot) {
-     var currentPrice = snapshot.docs.isNotEmpty
+      var currentPrice = snapshot.docs.isNotEmpty
           ? snapshot.docs.first.get('amount').toString().obs
           : "0.0".obs;
       highestPrice.value = double.parse(currentPrice.value);
-    });    super.initState();
+    });
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -82,10 +85,7 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
               ),
             ),
             child: CustomNetworkImage(
-              url: widget.image!,
-              defaultUrl: MyImages.logo,
-              radius: 18
-            ),
+                url: widget.image!, defaultUrl: MyImages.logo, radius: 18),
           ),
           const SizedBox(
             width: 10,
@@ -195,9 +195,9 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
                           const SizedBox(
                             width: 4,
                           ),
-                          Obx(()=>
-                             Text(
-                             '${highestPrice.value.toString()} JOD',
+                          Obx(
+                            () => Text(
+                              '${highestPrice.value.toString()} JOD',
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 12,

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/home/custom_navigation_bar_controller.dart';
+
 import '../../../../utils/colors.dart';
 import '../../../../utils/screen_size.dart';
 import '../../../widgets/custom_slide_button.dart';
 
 class AddedAuctionDialog extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
+
   AddedAuctionDialog({Key? key}) : super(key: key);
 
   @override

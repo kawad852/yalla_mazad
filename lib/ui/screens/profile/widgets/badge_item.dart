@@ -7,6 +7,7 @@ import '../../../../utils/images.dart';
 class BadgeItem extends StatelessWidget {
   final String? image;
   final String? message;
+
   const BadgeItem({required this.message, required this.image, Key? key})
       : super(key: key);
 

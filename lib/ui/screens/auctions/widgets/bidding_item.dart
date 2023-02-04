@@ -10,6 +10,7 @@ class BiddingItem extends StatelessWidget {
   final String image;
   final String amount;
   final bool isLast;
+
   const BiddingItem({
     required this.name,
     required this.image,

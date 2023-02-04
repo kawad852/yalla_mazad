@@ -80,6 +80,7 @@ class DoneAuctionController extends GetxController {
   }
 
   DeleteAdvertisementFromFavoritesModel? deleteAdvertisementFromFavoritesModel;
+
   Future fetchDeleteFromFavoritesData({
     required String adId,
     required BuildContext context,

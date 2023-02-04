@@ -16,6 +16,7 @@ class ProfileController extends GetxController {
   final PageController pageController = PageController(initialPage: 0);
   int currentIndex = 0;
   String? image;
+
   pickImage(context) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -30,6 +31,7 @@ class ProfileController extends GetxController {
   }
 
   UpdateUserModel? updateUserModel;
+
   Future fetchUpdateImageData({
     required BuildContext context,
   }) async {

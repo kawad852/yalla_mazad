@@ -20,6 +20,7 @@ class ResetPasswordNewPasswordScreen extends StatefulWidget {
 class _ResetPasswordNewPasswordScreenState
     extends State<ResetPasswordNewPasswordScreen> {
   final controller = ResetPasswordNewPasswordController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

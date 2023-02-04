@@ -6,7 +6,8 @@ import 'package:yalla_mazad/main.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 
 class LocalNotificationsService {
-  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  final FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
 
   void initialize() {
     const initializationSettings = InitializationSettings(

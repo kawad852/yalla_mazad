@@ -12,6 +12,7 @@ class SignInModel {
     msg = json['msg'];
     data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
+
   bool? status;
   int? code;
   String? msg;
@@ -39,6 +40,7 @@ class Data {
     token = json['token'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
+
   String? token;
   User? user;
 
@@ -74,6 +76,7 @@ class User {
       });
     }
   }
+
   int? id;
   String? name;
   String? email;
@@ -105,6 +108,7 @@ class Badge {
     id = json['id'];
     image = json['image'];
   }
+
   int? id;
   String? image;
 

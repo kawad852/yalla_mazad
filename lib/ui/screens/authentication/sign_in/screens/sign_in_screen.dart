@@ -1,17 +1,16 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/reset_password/reset_password_phone_number_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_in_controller.dart';
-import 'package:yalla_mazad/ui/screens/home/home/screens/home_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../reset_password/reset_password_phone_number_screen.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -25,6 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
   Map<String, dynamic>? _userData;
   AccessToken? _accessToken;
   bool? _checking = true;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -341,9 +341,9 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 
-  // _logOut() async {
-  //   await FacebookAuth.instance.logOut();
-  //   _accessToken = null;
-  //   _userData = null;
-  // }
+// _logOut() async {
+//   await FacebookAuth.instance.logOut();
+//   _accessToken = null;
+//   _userData = null;
+// }
 }

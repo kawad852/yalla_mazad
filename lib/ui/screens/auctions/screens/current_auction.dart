@@ -7,6 +7,7 @@ import 'package:yalla_mazad/ui/screens/auctions/widgets/confirm_auction_dialog.d
 import 'package:yalla_mazad/ui/screens/auctions/widgets/current_auction_item.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
+
 import '../../../widgets/failure_widget.dart';
 
 class CurrentAuctionScreen extends StatefulWidget {

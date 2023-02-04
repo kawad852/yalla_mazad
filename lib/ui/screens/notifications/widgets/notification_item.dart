@@ -5,6 +5,7 @@ class NotificationItem extends StatelessWidget {
   final String? user;
   final String? content;
   final String? date;
+
   const NotificationItem({
     required this.user,
     required this.content,

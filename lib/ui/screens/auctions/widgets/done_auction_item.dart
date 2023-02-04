@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -9,8 +10,6 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/done_auction_controller.dart';
 import '../../../../utils/shared_prefrences.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import 'bidding_item.dart';
 
 class DoneAuctionItem extends StatelessWidget {
@@ -18,6 +17,7 @@ class DoneAuctionItem extends StatelessWidget {
   final String name;
   final String description;
   final String id;
+
   const DoneAuctionItem({
     required this.name,
     required this.images,

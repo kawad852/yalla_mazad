@@ -4,6 +4,7 @@ class IntroCardItem extends StatelessWidget {
   final double? width;
   final double? height;
   final String? image;
+
   const IntroCardItem(
       {required this.height,
       required this.width,

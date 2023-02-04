@@ -1,10 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_favorites_controller.dart';
 import 'package:yalla_mazad/model/my_favorites/my_favorites_model.dart';
-
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../../../binding/auctions/coming_auction_binding.dart';
@@ -15,7 +14,6 @@ import '../../../auctions/screens/coming_auction.dart';
 import '../../../auctions/screens/current_auction.dart';
 import '../../../auctions/screens/done_auction.dart';
 import '../../widgets/my_auction_item.dart';
-import 'package:get/get.dart';
 
 class MyFavoritesScreen extends StatefulWidget {
   const MyFavoritesScreen({Key? key}) : super(key: key);

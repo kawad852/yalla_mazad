@@ -19,6 +19,7 @@ class MySubscriptionScreen extends StatefulWidget {
 
 class _MySubscriptionScreenState extends State<MySubscriptionScreen> {
   final controller = MySubscriptionController.find;
+
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -38,6 +38,7 @@ class AuctionsByCategoryScreen extends StatefulWidget {
 
 class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
   final controller = AuctionsByCategoryController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -304,8 +305,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                                           ?.data?[index]
                                                           .user
                                                           ?.name,
-                                                      id:
-                                                          snapshot.data?.data?[index].id,
+                                                      id: snapshot.data
+                                                          ?.data?[index].id,
                                                     ),
                                                   );
                                                 },
@@ -370,7 +371,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                       ),
                       scrollDirection: Axis.vertical,
                       pagingController: controller.allAdsPagingController,
-                      builderDelegate: PagedChildBuilderDelegate<PopularAdsList>(
+                      builderDelegate:
+                          PagedChildBuilderDelegate<PopularAdsList>(
                         firstPageErrorIndicatorBuilder: (context) => Center(
                           child: Text(
                             AppConstants.failedMessage,

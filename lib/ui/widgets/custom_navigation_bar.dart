@@ -280,7 +280,7 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                   visualDensity: const VisualDensity(vertical: -4),
                   onTap: () {
                     Get.to(
-                          () => const AboutUsScreen(),
+                      () => const AboutUsScreen(),
                       binding: AboutUsBinding(),
                     );
                   },

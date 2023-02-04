@@ -76,9 +76,7 @@ class InternetScreen extends StatelessWidget {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: () {
-
-                    },
+                    onTap: () {},
                     child: Container(
                       width: 170,
                       height: 57,

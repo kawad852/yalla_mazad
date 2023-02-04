@@ -59,13 +59,15 @@ class ApiUrl {
   static const String fetchAdDetails = "/api/v1/advertisement/";
 
   //get ads by category
-  static const String fetchAdsByCategory = "/api/v1/advertisement/get-advertisements/";
+  static const String fetchAdsByCategory =
+      "/api/v1/advertisement/get-advertisements/";
 
   //add advertisement to favorites
   static const String addAdvertisementToFavorites = "/api/v1/favorite-create";
 
   //delete advertisement from favorites
-  static const String deleteAdvertisementFromFavorites = "/api/v1/favorite/delete/";
+  static const String deleteAdvertisementFromFavorites =
+      "/api/v1/favorite/delete/";
 
   //search advertisement
   static const String searchAdvertisement = "/api/v1/advertisements/search";

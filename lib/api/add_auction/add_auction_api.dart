@@ -1,10 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:http/http.dart' as http;
-import 'package:yalla_mazad/utils/api_url.dart';
 
+import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
+import 'package:yalla_mazad/utils/api_url.dart';
 
 import '../../model/add_auction/add_auction_model.dart';
 import '../../utils/shared_prefrences.dart';

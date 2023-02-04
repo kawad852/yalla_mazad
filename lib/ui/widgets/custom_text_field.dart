@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextInputAction? textInputAction;
   final String obscureChar;
+
   const CustomTextField({
     required this.controller,
     required this.color,

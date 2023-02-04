@@ -11,6 +11,7 @@ class AccountScreen extends StatelessWidget {
   AccountScreen({Key? key}) : super(key: key);
 
   final controller = AccountController.find;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

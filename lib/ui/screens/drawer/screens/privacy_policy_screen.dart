@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/drawer/privacy_policy_controller.dart';
 import 'package:yalla_mazad/model/page/page_model.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
-import 'package:flutter_html/flutter_html.dart';
+
 import '../../../widgets/failure_widget.dart';
 
 class PrivacyPolicyScreen extends StatefulWidget {
   const PrivacyPolicyScreen({Key? key}) : super(key: key);
 
   @override
-  State<PrivacyPolicyScreen> createState() =>
-      _PrivacyPolicyScreenState();
+  State<PrivacyPolicyScreen> createState() => _PrivacyPolicyScreenState();
 }
 
 class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {

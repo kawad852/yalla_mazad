@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/controller/introduction/introduction_controller.dart';
@@ -16,6 +16,7 @@ import '../../authentication/screens/authentication_screen.dart';
 
 class IntroScreen extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
+
   IntroScreen({Key? key}) : super(key: key);
 
   @override

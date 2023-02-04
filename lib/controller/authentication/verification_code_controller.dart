@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/api/auth/resend_otp_api.dart';
 import 'package:yalla_mazad/model/auth/opt_check_model.dart';
 import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
+
 import '../../binding/interests/interests_binding.dart';
 import '../../ui/screens/interests/screens/interests_screen.dart';
 import '../../utils/app_constants.dart';
@@ -21,6 +22,7 @@ class VerificationCodeController extends GetxController {
     (index) => TextEditingController(),
     growable: false,
   );
+
   @override
   void onInit() {
     startTimer();
@@ -36,6 +38,7 @@ class VerificationCodeController extends GetxController {
     seconds: 1,
   );
   int remaining = 59;
+
   startTimer() {
     timer = Timer.periodic(duration, (timer) {
       if (remaining == 0) {

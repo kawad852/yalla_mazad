@@ -10,6 +10,7 @@ class OptCheckModel {
     code = json['code'];
     msg = json['msg'];
   }
+
   bool? status;
   int? code;
   String? msg;

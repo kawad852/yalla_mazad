@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:yalla_mazad/api/advertisement_by_category/advertisement_by_category_api.dart';
-
 import 'package:yalla_mazad/model/advertisement_by_category/advertisement_by_category_model.dart';
 
 import '../../../api/all_advertisements/all_advertisements_api.dart';
@@ -26,6 +25,7 @@ class AuctionsByCategoryController extends GetxController {
   }
 
   late PagingController<int, PopularAdsList> allAdsPagingController;
+
   Future<void> fetchAllAdsPage(int pageKey) async {
     try {
       allAdvertisementsModel = await ALlAdvertisementsApi().data(pageKey);

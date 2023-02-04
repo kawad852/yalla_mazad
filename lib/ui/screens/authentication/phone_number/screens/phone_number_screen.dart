@@ -18,6 +18,7 @@ class PhoneNumberScreen extends StatefulWidget {
 
 class _PhoneNumberScreenState extends State<PhoneNumberScreen> {
   final controller = PhoneNumberController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -33,6 +33,7 @@ class MyAccountController extends GetxController {
   }
 
   String? image;
+
   pickImage(context) async {
     XFile? pickedFile = await ImagePicker().pickImage(
       source: ImageSource.gallery,
@@ -47,6 +48,7 @@ class MyAccountController extends GetxController {
   }
 
   UpdateUserModel? updateUserModel;
+
   Future fetchUpdateImageData({
     required BuildContext context,
   }) async {

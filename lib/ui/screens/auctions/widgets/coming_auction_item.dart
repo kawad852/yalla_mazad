@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -11,13 +12,13 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../utils/shared_prefrences.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ComingAuctionItem extends StatelessWidget {
   final List<String> images;
   final String name;
   final String description;
   final String id;
+
   const ComingAuctionItem({
     required this.name,
     required this.images,
@@ -110,7 +111,7 @@ class ComingAuctionItem extends StatelessWidget {
                       child: InkWell(
                         onTap: () async {
                           if (controller.advertisementDetailsModel?.data
-                              ?.isFavorite ==
+                                  ?.isFavorite ==
                               true) {
                             await controller.fetchDeleteFromFavoritesData(
                               adId: id,
@@ -126,17 +127,17 @@ class ComingAuctionItem extends StatelessWidget {
                           }
                         },
                         child: controller
-                            .advertisementDetailsModel!.data!.isFavorite!
+                                .advertisementDetailsModel!.data!.isFavorite!
                             ? SvgPicture.asset(
-                          MyImages.heartFilled,
-                          width: 20,
-                          height: 20,
-                        )
+                                MyImages.heartFilled,
+                                width: 20,
+                                height: 20,
+                              )
                             : Image.asset(
-                          MyImages.favorite,
-                          width: 20,
-                          height: 20,
-                        ),
+                                MyImages.favorite,
+                                width: 20,
+                                height: 20,
+                              ),
                       ),
                     );
                   }),
@@ -390,7 +391,6 @@ class ComingAuctionItem extends StatelessWidget {
               ],
             ),
           ),
-
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('auctions')

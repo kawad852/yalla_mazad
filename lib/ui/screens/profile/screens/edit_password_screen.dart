@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
+
 import '../../../../controller/profile/edit_password_controller.dart';
 import '../../../../utils/images.dart';
 
@@ -10,6 +11,7 @@ class EditPasswordScreen extends StatelessWidget {
   EditPasswordScreen({Key? key}) : super(key: key);
 
   final controller = EditPasswordController.find;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
