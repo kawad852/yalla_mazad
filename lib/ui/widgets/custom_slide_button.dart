@@ -389,7 +389,7 @@ class SlideActionState extends State<SlideAction>
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final RenderBox containerBox =
-      _containerKey.currentContext!.findRenderObject() as RenderBox;
+      _containerKey.currentContext?.findRenderObject() as RenderBox;
       _containerWidth = containerBox.size.width;
       _initialContainerWidth = _containerWidth;
 
