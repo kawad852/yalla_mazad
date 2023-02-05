@@ -42,7 +42,6 @@ class AddAuctionController extends GetxController {
     );
     if (pickedFile != null) {
       image = pickedFile.path;
-      // log(image!);
       if (Get.locale == const Locale('en')) {
         mainPictureController.text = '1 picture selected';
       } else {
@@ -63,9 +62,7 @@ class AddAuctionController extends GetxController {
     for (var item in pickedFile) {
       if (item != null) {
         i++;
-        // log(pickedFile.length.toString());
         images?.add(item.path);
-        // log(item.path);
       }
     }
     if (Get.locale == const Locale('en')) {
@@ -89,22 +86,17 @@ class AddAuctionController extends GetxController {
   List<File?>? getListOfFiles() {
     List<File?> files = [];
     if (image != null) {
-      // log('image !=null');
       files.add(File(image!));
     } else {
-      // log('image ==null');
     }
     if (images != null) {
-      // log('images !=null');
       for (var item in images!) {
         if (item != null) {
           var file = File(item);
           files.add(file);
-          // log(file.path);
         }
       }
     } else {
-      // log('images ==null');
     }
     return files;
   }

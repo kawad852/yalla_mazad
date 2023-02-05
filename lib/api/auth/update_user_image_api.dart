@@ -18,8 +18,12 @@ class UpdateUserImageApi {
       if (file != null) {
         var stream = http.ByteStream(file.openRead());
         var length = await file.length();
-        multipartFile = http.MultipartFile("image", stream, length,
-            filename: basename(file.path));
+        multipartFile = http.MultipartFile(
+          "image",
+          stream,
+          length,
+          filename: basename(file.path),
+        );
       }
       String url = '${ApiUrl.mainUrl}${ApiUrl.updateUser}';
       Uri uri = Uri.parse(url);

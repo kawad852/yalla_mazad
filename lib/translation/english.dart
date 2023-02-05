@@ -134,4 +134,5 @@ final Map<String, String> en = {
   'retry': 'Retry',
   'your message': 'your message',
   'your auction': 'your auction',
+  'notifications':'notifications',
 };

@@ -113,7 +113,8 @@ class _InterestsScreenState extends State<InterestsScreen> {
                           switch (snapshot.connectionState) {
                             case ConnectionState.waiting:
                               return const Center(
-                                  child: CircularProgressIndicator());
+                                child: CircularProgressIndicator(),
+                              );
                             case ConnectionState.done:
                             default:
                               if (snapshot.hasData) {

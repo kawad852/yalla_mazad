@@ -131,4 +131,5 @@ final Map<String, String> ar = {
   'retry': 'إعادة المحاولة',
   'your message': 'رسالتك',
   'your auction': 'مزايدتك',
+  'notifications':'الإشعارات',
 };

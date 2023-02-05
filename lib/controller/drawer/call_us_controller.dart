@@ -19,6 +19,7 @@ class CallUsController extends GetxController {
         color: MyColors.primary,
       ),
     );
+    ///TODO: edit email
     Map<String, dynamic> templateParams = {
       'from_name': name,
       'from_email': email,

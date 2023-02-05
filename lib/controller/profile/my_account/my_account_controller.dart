@@ -44,7 +44,6 @@ class MyAccountController extends GetxController {
     if (pickedFile != null) {
       image = pickedFile.path;
       await fetchUpdateImageData(context: context);
-      // log(image!);
     }
   }
 

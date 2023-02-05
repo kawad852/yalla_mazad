@@ -103,6 +103,7 @@ class VerificationCodeController extends GetxController {
       return;
     }
     if (resendOtpModel!.code == 200) {
+      ///TODO make sure
       // Get.to(() => const InterestsScreen(), binding: InterestsBinding());
     } else if (resendOtpModel!.code == 500) {
       Fluttertoast.showToast(

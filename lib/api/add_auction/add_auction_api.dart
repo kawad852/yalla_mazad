@@ -25,13 +25,11 @@ class AddAuctionApi {
       if (file != null) {
         for (var item in file) {
           if (item != null) {
-            // log('paath::::::    ${item.path}');
             var stream = http.ByteStream(item.openRead());
             var length = await item.length();
             multipartFile = http.MultipartFile("images[]", stream, length,
                 filename: basename(item.path));
             multipartFiles.add(multipartFile);
-            // request.files.add(multipartFile);
           }
         }
       }
@@ -46,12 +44,10 @@ class AddAuctionApi {
       request.headers.addAll(headers);
       for (var item in multipartFiles) {
         if (item != null) {
-          // log('added:::::   ${item.filename}');
           request.files.add(item);
         }
       }
 
-      // log(request.files.length.toString());
       request.fields['name'] = name!;
       request.fields['content'] = content!;
       request.fields['start_price'] = startPrice!;

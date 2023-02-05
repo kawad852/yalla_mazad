@@ -388,12 +388,18 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                           ),
                         ),
                         newPageProgressIndicatorBuilder: (context) =>
-                            const Center(
-                          child: CircularProgressIndicator(),
+                            const SizedBox(
+                          height: 50,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                         firstPageProgressIndicatorBuilder: (context) =>
-                            const Center(
-                          child: CircularProgressIndicator(),
+                            const SizedBox(
+                          height: 50,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
                         ),
                         itemBuilder: (context, data, index) {
                           return InkWell(
@@ -456,62 +462,6 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                         );
                       },
                     ),
-                    // FutureBuilder<AllAdvertisementsModel?>(
-                    //   future: controller.initializeAllAdsFuture,
-                    //   builder: (context, snapshot) {
-                    //     switch (snapshot.connectionState) {
-                    //       case ConnectionState.waiting:
-                    //         return const Center(
-                    //             child: CircularProgressIndicator());
-                    //       case ConnectionState.done:
-                    //       default:
-                    //         if (snapshot.hasData) {
-                    //           return Column(
-                    //             children: [
-                    //               ListView.separated(
-                    //                 shrinkWrap: true,
-                    //                 physics:
-                    //                     const NeverScrollableScrollPhysics(),
-                    //                 padding: const EdgeInsetsDirectional.only(
-                    //                   start: 30,
-                    //                   top: 20,
-                    //                 ),
-                    //                 scrollDirection: Axis.vertical,
-                    //                 itemBuilder: (context, index) {
-                    //                   return AllAuctionsItem(
-                    //                     image:
-                    //                         snapshot.data?.data?[index].image,
-                    //                     name: snapshot.data?.data?[index].name,
-                    //                     price:
-                    //                         '${snapshot.data?.data?[index].startPrice.toString()} JOD',
-                    //                     details:
-                    //                         snapshot.data?.data?[index].content,
-                    //                     userImage: snapshot
-                    //                         .data?.data?[index].user?.image,
-                    //                     userName: snapshot
-                    //                         .data?.data?[index].user?.name,
-                    //                   );
-                    //                 },
-                    //                 separatorBuilder: (context, index) {
-                    //                   return const SizedBox(
-                    //                     height: 10,
-                    //                   );
-                    //                 },
-                    //                 itemCount: snapshot.data?.data?.length ?? 0,
-                    //               ),
-                    //               const SizedBox(
-                    //                 height: 30,
-                    //               ),
-                    //             ],
-                    //           );
-                    //         } else if (snapshot.hasError) {
-                    //           return const FailureWidget();
-                    //         } else {
-                    //           return const FailureWidget();
-                    //         }
-                    //     }
-                    //   },
-                    // ),
                   ],
                 ),
               ],
