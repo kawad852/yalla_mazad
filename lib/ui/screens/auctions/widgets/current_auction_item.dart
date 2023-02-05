@@ -1,8 +1,13 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/auctions/done_auction_binding.dart';
+import 'package:yalla_mazad/ui/screens/auctions/screens/done_auction.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
@@ -10,21 +15,70 @@ import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/current_auction_controller.dart';
 import '../../../../utils/shared_prefrences.dart';
+import '../../../widgets/custom_countdown_timer.dart';
 import 'bidding_item.dart';
 
-class CurrentAuctionItem extends StatelessWidget {
+class CurrentAuctionItem extends StatefulWidget {
   final List<String> images;
   final String name;
   final String description;
   final String id;
+  final String startDate;
+  final String endDate;
 
   const CurrentAuctionItem({
     required this.name,
     required this.images,
     required this.description,
     required this.id,
+    required this.startDate,
+    required this.endDate,
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<CurrentAuctionItem> createState() => _CurrentAuctionItemState();
+}
+
+class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
+  var seconds = 0;
+
+  ///0 means coming, 1 current, 2 done
+  RxInt status = 0.obs;
+  var secondsToStart = 0;
+
+  @override
+  void initState() {
+    secondsToStart = DateTime.parse(widget.startDate)
+        .difference(DateTime.now())
+        .inSeconds;
+    seconds = DateTime.parse(widget.endDate)
+        .difference(DateTime.now())
+        .inSeconds;
+    if (secondsToStart > 0) {
+      status.value = 0;
+      RxInt remaining = secondsToStart.obs;
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (remaining.value == 0) {
+          timer.cancel();
+          status.value = 1;
+          log('timer for coming is done and status is: ${status.value}');
+        } else {
+          remaining.value--;
+          log('timer for coming is moving and remaining is is: $remaining');
+        }
+        setState(() {});
+      });
+    } else if (seconds == 0) {
+      status.value = 2;
+    } else if (secondsToStart <= 0 && seconds > 0) {
+      status.value = 1;
+    }
+    log('seconds: $seconds');
+    log('secondsToStart: $secondsToStart');
+    log('status: ${status.value}');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,13 +155,13 @@ class CurrentAuctionItem extends StatelessWidget {
                                   ?.isFavorite ==
                               true) {
                             await controller.fetchDeleteFromFavoritesData(
-                              adId: id,
+                              adId: widget.id,
                               context: context,
                             );
                             value.update();
                           } else {
                             await controller.fetchAddToFavoritesData(
-                              adId: id,
+                              adId: widget.id,
                               context: context,
                             );
                             value.update();
@@ -140,10 +194,10 @@ class CurrentAuctionItem extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                images.isNotEmpty
+                widget.images.isNotEmpty
                     ? CarouselSlider(
                         items: List.generate(
-                          images.length,
+                          widget.images.length,
                           (index) => Container(
                             height: 333,
                             width: ScreenSize.phoneSize(
@@ -167,7 +221,7 @@ class CurrentAuctionItem extends StatelessWidget {
                             ),
                             child: CustomNetworkImage(
                               radius: 20,
-                              url: images[index],
+                              url: widget.images[index],
                               defaultUrl: MyImages.logo,
                             ),
                           ),
@@ -183,7 +237,7 @@ class CurrentAuctionItem extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
-                images.isNotEmpty
+                widget.images.isNotEmpty
                     ? const SizedBox(
                         height: 50,
                       )
@@ -260,7 +314,7 @@ class CurrentAuctionItem extends StatelessWidget {
                     start: 50,
                   ),
                   child: Text(
-                    name,
+                    widget.name,
                     style: const TextStyle(
                       color: MyColors.primary,
                       fontSize: 16,
@@ -276,7 +330,7 @@ class CurrentAuctionItem extends StatelessWidget {
                       start: 50,
                     ),
                     child: Text(
-                      description,
+                      widget.description,
                       style: const TextStyle(
                         color: Color(
                           0xff333333,
@@ -325,7 +379,7 @@ class CurrentAuctionItem extends StatelessWidget {
                               child: StreamBuilder<QuerySnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection('auctions')
-                                    .doc(id)
+                                    .doc(widget.id)
                                     .collection('biddings')
                                     .orderBy('amount', descending: true)
                                     .snapshots(),
@@ -384,16 +438,23 @@ class CurrentAuctionItem extends StatelessWidget {
                               ),
                               color: MyColors.textFieldColor,
                             ),
-                            child: const Center(
-                              child: Text(
-                                '130 JOD',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: MyColors.red,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
+                            child: Center(
+                                child: CountDownTimer(
+                              secondsRemaining: seconds,
+                              whenTimeExpires: () {
+                                setState(
+                                  () {
+                                    status.value = 2;
+                                  },
+                                );
+                                log('timer for current is done and status is: ${status.value}');
+                                Get.off(
+                                  const DoneAuctionScreen(),
+                                  binding: DoneAuctionBinding(),
+                                  arguments: widget.id,
+                                );
+                              },
+                            ),),
                           ),
                         ],
                       ),
@@ -406,7 +467,7 @@ class CurrentAuctionItem extends StatelessWidget {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('auctions')
-                .doc(id)
+                .doc(widget.id)
                 .collection('biddings')
                 .orderBy('amount', descending: true)
                 .snapshots(),

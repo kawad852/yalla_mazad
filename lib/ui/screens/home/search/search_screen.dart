@@ -257,7 +257,6 @@ class _SearchScreenState extends State<SearchScreen> {
                             id: data.id,
                             userImage: data.user?.image,
                             userName: data.user?.name,
-
                             startDate: data.startDate,
                             endDate: data.endDate,
                           ),

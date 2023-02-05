@@ -52,7 +52,7 @@ final Map<String, String> en = {
   'main picture': 'Main picture',
   'more pictures': 'More pictures',
   'auction starting price': 'Auction starting price',
-  'direct sell price': 'Direct sell price',
+  'direct sell price': 'Direct buy price',
   'my account': 'My account',
   'sent': 'sent',
   'congratulations, your ad has been successfully submitted. The Yalla Mazad team will contact you as soon as possible':
@@ -78,7 +78,7 @@ final Map<String, String> en = {
   'you may also like': 'You may also like',
   'what do you want to search for?': 'What do you want to search for?',
   'search': 'Search',
-  'direct sell': 'Direct Sell',
+  'direct sell': 'Direct Buy',
   'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
       'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly',
   'menu': 'Menu',

@@ -117,6 +117,13 @@ class _ComingAuctionScreenState extends State<ComingAuctionScreen> {
                       name: snapshot.data?.data?.name ?? '',
                       description: snapshot.data?.data?.content ?? '',
                       id: snapshot.data?.data?.id.toString() ?? '0',
+                      buyNowPrice:
+                          snapshot.data?.data?.buyNowPrice.toString() ?? '',
+                      startDate: snapshot.data?.data?.startDate ?? '',
+                      endDate: snapshot.data?.data?.endDate ?? '',
+                      priceOne: snapshot.data?.data?.priceOne ?? 0,
+                      priceTwo: snapshot.data?.data?.priceTwo ?? 0,
+                      priceThree: snapshot.data?.data?.priceThree ?? 0,
                     ),
                   ],
                 ),

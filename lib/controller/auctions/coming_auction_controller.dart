@@ -21,7 +21,7 @@ class ComingAuctionController extends GetxController {
 
   @override
   void onInit() {
-    String id = Get.arguments;
+    String id = Get.arguments.toString();
     initializeAdvertisementFuture = fetchAuctionDetails(
       addId: id,
     );

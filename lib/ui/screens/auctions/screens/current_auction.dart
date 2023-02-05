@@ -127,6 +127,8 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                       name: snapshot.data?.data?.name ?? '',
                       description: snapshot.data?.data?.content ?? '',
                       id: snapshot.data?.data?.id.toString() ?? '0',
+                      startDate: snapshot.data?.data?.startDate ?? '',
+                      endDate: snapshot.data?.data?.endDate ?? '',
                     ),
                   ],
                 ),

@@ -50,7 +50,7 @@ final Map<String, String> ar = {
   'main picture': 'الصورة الرئيسية',
   'more pictures': 'المزيد من الصور',
   'auction starting price': 'سعر بداية المزاد',
-  'direct sell price': 'سعر الشراء المباشر',
+  'direct sell price': 'سعر البيع المباشر',
   'my account': 'حسابي',
   'sent': 'تم الإرسال',
   'congratulations, your ad has been successfully submitted. The Yalla Mazad team will contact you as soon as possible':
@@ -75,7 +75,7 @@ final Map<String, String> ar = {
   'you may also like': 'قد يعجبك أيضا',
   'what do you want to search for?': 'عن ماذا تود البحث ؟',
   'search': 'البحث',
-  'direct sell': 'شراء مباشر',
+  'direct sell': 'البيع المباشر',
   'Do you want to buy the product directly without accessing the auction? Upon confirmation of the order, the Yalla Mazad team will contact you directly':
       'هل ترغب بشراء المنتج بشكل مباشر دون الوصول إلى المزاد ؟ عند تأكيد الطلب سيتواصل فريق يلا مزاد معك مباشرة',
   'menu': 'القائمة',

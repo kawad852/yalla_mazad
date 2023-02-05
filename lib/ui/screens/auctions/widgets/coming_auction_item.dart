@@ -1,44 +1,90 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/auctions/coming_auction_controller.dart';
-import 'package:yalla_mazad/model/firestore_bidding/firestore_bidding_model.dart';
+import 'package:yalla_mazad/ui/screens/auctions/screens/current_auction.dart';
 import 'package:yalla_mazad/ui/screens/auctions/widgets/bidding_item.dart';
 import 'package:yalla_mazad/ui/widgets/custom_network_image.dart';
 import 'package:yalla_mazad/utils/screen_size.dart';
 
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
+import '../../../../binding/auctions/current_auction_binding.dart';
 import '../../../../utils/shared_prefrences.dart';
+import '../../../widgets/custom_countdown_timer.dart';
 
-class ComingAuctionItem extends StatelessWidget {
+class ComingAuctionItem extends StatefulWidget {
   final List<String> images;
   final String name;
   final String description;
   final String id;
+  final String buyNowPrice;
+  final String startDate;
+  final String endDate;
+  final int priceOne;
+  final int priceTwo;
+  final int priceThree;
 
   const ComingAuctionItem({
     required this.name,
     required this.images,
     required this.description,
     required this.id,
+    required this.buyNowPrice,
+    required this.startDate,
+    required this.endDate,
+    required this.priceOne,
+    required this.priceTwo,
+    required this.priceThree,
     Key? key,
   }) : super(key: key);
 
-  static final Query<FireStoreBiddingModel> query = FirebaseFirestore.instance
-      .collection('auctions')
-      .doc('7')
-      .collection('biddings')
-      .withConverter<FireStoreBiddingModel>(
-        fromFirestore: (snapshot, _) {
-          return FireStoreBiddingModel.fromJson(
-            snapshot.data()!,
-          );
-        },
-        toFirestore: (biddings, _) => biddings.toJson(),
-      );
+  @override
+  State<ComingAuctionItem> createState() => _ComingAuctionItemState();
+}
+
+class _ComingAuctionItemState extends State<ComingAuctionItem> {
+  var seconds = 0;
+
+  ///0 means coming, 1 current, 2 done
+  RxInt status = 0.obs;
+  var secondsToStart = 0;
+
+  @override
+  void initState() {
+    secondsToStart =
+        DateTime.parse(widget.startDate).difference(DateTime.now()).inSeconds;
+    seconds =
+        DateTime.parse(widget.endDate).difference(DateTime.now()).inSeconds;
+    if (secondsToStart > 0) {
+      status.value = 0;
+      RxInt remaining = secondsToStart.obs;
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (remaining.value == 0) {
+          timer.cancel();
+          status.value = 1;
+          log('timer for coming is done and status is: ${status.value}');
+        } else {
+          remaining.value--;
+          log('timer for coming is moving and remaining is is: $remaining');
+        }
+        setState(() {});
+      });
+    } else if (seconds == 0) {
+      status.value = 2;
+    } else if (secondsToStart <= 0 && seconds > 0) {
+      status.value = 1;
+    }
+    log('seconds: $seconds');
+    log('secondsToStart: $secondsToStart');
+    log('status: ${status.value}');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,13 +160,13 @@ class ComingAuctionItem extends StatelessWidget {
                                   ?.isFavorite ==
                               true) {
                             await controller.fetchDeleteFromFavoritesData(
-                              adId: id,
+                              adId: widget.id,
                               context: context,
                             );
                             value.update();
                           } else {
                             await controller.fetchAddToFavoritesData(
-                              adId: id,
+                              adId: widget.id,
                               context: context,
                             );
                             value.update();
@@ -153,10 +199,10 @@ class ComingAuctionItem extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                images.isNotEmpty
+                widget.images.isNotEmpty
                     ? CarouselSlider(
                         items: List.generate(
-                          images.length,
+                          widget.images.length,
                           (index) => Container(
                             height: 333,
                             width: ScreenSize.phoneSize(
@@ -180,7 +226,7 @@ class ComingAuctionItem extends StatelessWidget {
                             ),
                             child: CustomNetworkImage(
                               radius: 20,
-                              url: images[index],
+                              url: widget.images[index],
                               defaultUrl: MyImages.logo,
                             ),
                           ),
@@ -196,7 +242,7 @@ class ComingAuctionItem extends StatelessWidget {
                         ),
                       )
                     : const SizedBox(),
-                images.isNotEmpty
+                widget.images.isNotEmpty
                     ? const SizedBox(
                         height: 50,
                       )
@@ -273,7 +319,7 @@ class ComingAuctionItem extends StatelessWidget {
                     start: 50,
                   ),
                   child: Text(
-                    name,
+                    widget.name,
                     style: const TextStyle(
                       color: MyColors.primary,
                       fontSize: 16,
@@ -289,7 +335,7 @@ class ComingAuctionItem extends StatelessWidget {
                       start: 50,
                     ),
                     child: Text(
-                      description,
+                      widget.description,
                       style: const TextStyle(
                         color: Color(
                           0xff333333,
@@ -312,7 +358,7 @@ class ComingAuctionItem extends StatelessWidget {
                       Column(
                         children: [
                           Text(
-                            'highest price'.tr,
+                            'direct sell'.tr,
                             style: const TextStyle(
                               color: MyColors.primary,
                               fontSize: 16,
@@ -334,11 +380,11 @@ class ComingAuctionItem extends StatelessWidget {
                               ),
                               color: MyColors.textFieldColor,
                             ),
-                            child: const Center(
+                            child: Center(
                               child: Text(
-                                '130 JOD',
+                                widget.buyNowPrice,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: MyColors.red,
                                   fontSize: 16,
                                 ),
@@ -372,16 +418,28 @@ class ComingAuctionItem extends StatelessWidget {
                               ),
                               color: MyColors.textFieldColor,
                             ),
-                            child: const Center(
-                              child: Text(
-                                '130 JOD',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: MyColors.red,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
+                            child: Center(
+                                child: CountDownTimer(
+                              secondsRemaining: secondsToStart,
+                              whenTimeExpires: () {
+                                setState(
+                                  () {
+                                    status.value = 1;
+                                  },
+                                );
+                                log('timer for coming is done and status is: ${status.value}');
+                                Get.off(
+                                  const CurrentAuctionScreen(),
+                                  binding: CurrentAuctionBinding(),
+                                  arguments: [
+                                    widget.id,
+                                    widget.priceOne,
+                                    widget.priceTwo,
+                                    widget.priceThree
+                                  ],
+                                );
+                              },
+                            )),
                           ),
                         ],
                       ),
@@ -394,7 +452,7 @@ class ComingAuctionItem extends StatelessWidget {
           StreamBuilder<QuerySnapshot>(
             stream: FirebaseFirestore.instance
                 .collection('auctions')
-                .doc(id)
+                .doc(widget.id)
                 .collection('biddings')
                 .orderBy('amount', descending: true)
                 .snapshots(),
