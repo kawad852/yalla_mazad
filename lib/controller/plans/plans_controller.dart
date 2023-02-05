@@ -48,9 +48,11 @@ class PlansController extends GetxController {
     if (createSubscriptionModel!.code == 200) {
       Fluttertoast.showToast(msg: createSubscriptionModel!.msg!);
     } else if (createSubscriptionModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+      Fluttertoast.showToast(
+          msg: createSubscriptionModel?.msg ?? AppConstants.failedMessage);
     } else {
-      Fluttertoast.showToast(msg: createSubscriptionModel!.msg!);
+      Fluttertoast.showToast(
+          msg: createSubscriptionModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

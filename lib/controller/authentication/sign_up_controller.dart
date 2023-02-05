@@ -52,9 +52,11 @@ class SignUpController extends GetxController {
                 binding: PhoneNumberBinding(),
               );
             } else if (registerModel!.code == 500) {
-              Fluttertoast.showToast(msg: 'incorrect email or password'.tr);
+              Fluttertoast.showToast(
+                  msg: registerModel?.msg ?? AppConstants.failedMessage);
             } else {
-              Fluttertoast.showToast(msg: registerModel!.msg!);
+              Fluttertoast.showToast(
+                  msg: registerModel?.msg ?? AppConstants.failedMessage);
             }
             Loader.hide();
           }

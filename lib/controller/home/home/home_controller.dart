@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:get/get.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
@@ -31,7 +29,6 @@ class HomeController extends GetxController {
     initializeSliderFuture = fetchAllSliders();
     trendingPagingController = PagingController(firstPageKey: 1)
       ..addPageRequestListener((pageKey) {
-        log('inside trend listener');
         fetchTrendingPage(pageKey);
       });
     allAdsPagingController = PagingController(firstPageKey: 1)

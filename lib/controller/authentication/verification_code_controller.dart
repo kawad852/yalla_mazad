@@ -94,9 +94,11 @@ class VerificationCodeController extends GetxController {
     if (resendOtpModel!.code == 200) {
       // Get.to(() => const InterestsScreen(), binding: InterestsBinding());
     } else if (resendOtpModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+      Fluttertoast.showToast(
+          msg: resendOtpModel?.msg ?? AppConstants.failedMessage);
     } else {
-      Fluttertoast.showToast(msg: resendOtpModel!.msg!);
+      Fluttertoast.showToast(
+          msg: resendOtpModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

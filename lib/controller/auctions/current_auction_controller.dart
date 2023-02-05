@@ -179,9 +179,11 @@ class CurrentAuctionController extends GetxController {
       Get.back();
       Fluttertoast.showToast(msg: createBidModel!.msg!);
     } else if (createBidModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+      Fluttertoast.showToast(
+          msg: createBidModel?.msg ?? AppConstants.failedMessage);
     } else {
-      Fluttertoast.showToast(msg: createBidModel!.msg!);
+      Fluttertoast.showToast(
+          msg: createBidModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

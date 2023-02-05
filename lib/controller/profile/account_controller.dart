@@ -43,9 +43,11 @@ class AccountController extends GetxController {
           }
           Fluttertoast.showToast(msg: updateUserModel!.msg!);
         } else if (updateUserModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+          Fluttertoast.showToast(
+              msg: updateUserModel?.msg ?? AppConstants.failedMessage);
         } else {
-          Fluttertoast.showToast(msg: updateUserModel!.msg!);
+          Fluttertoast.showToast(
+              msg: updateUserModel?.msg ?? AppConstants.failedMessage);
         }
         Loader.hide();
       }

@@ -54,7 +54,7 @@ final Map<String, String> ar = {
   'my account': 'حسابي',
   'sent': 'تم الإرسال',
   'congratulations, your ad has been successfully submitted. The Yalla Mazad team will contact you as soon as possible':
-      'تهانينا ، لقد تم ارسال إعلانك بنجاح سيقوم فريق يلا مزاد بالتواصل مع في اسرع وقت',
+      'تهانينا ، لقد تم ارسال إعلانك بنجاح سيقوم فريق يلا مزاد بالتواصل معك في اسرع وقت',
   'confirm': 'تأكيد',
   'auction': 'مزايدة',
   'your auction amount': 'مقدار مزايدتك',

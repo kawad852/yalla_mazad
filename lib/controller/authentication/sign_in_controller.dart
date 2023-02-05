@@ -51,9 +51,11 @@ class SignInController extends GetxController {
             binding: HomeBinding(),
           );
         } else if (signInModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+          Fluttertoast.showToast(
+              msg: signInModel?.msg ?? AppConstants.failedMessage);
         } else {
-          Fluttertoast.showToast(msg: signInModel!.msg!);
+          Fluttertoast.showToast(
+              msg: signInModel?.msg ?? AppConstants.failedMessage);
         }
         Loader.hide();
       }
@@ -89,9 +91,11 @@ class SignInController extends GetxController {
         binding: HomeBinding(),
       );
     } else if (socialLogInModel!.code == 500) {
-      Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+      Fluttertoast.showToast(
+          msg: socialLogInModel?.msg ?? AppConstants.failedMessage);
     } else {
-      Fluttertoast.showToast(msg: socialLogInModel!.msg!);
+      Fluttertoast.showToast(
+          msg: socialLogInModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

@@ -37,9 +37,13 @@ class ResetPasswordPhoneNumberController extends GetxController {
             binding: ResetPasswordCodeBinding(),
           );
         } else if (resetPasswordPhoneNumberModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+          Fluttertoast.showToast(
+              msg: resetPasswordPhoneNumberModel?.msg ??
+                  AppConstants.failedMessage);
         } else {
-          Fluttertoast.showToast(msg: resetPasswordPhoneNumberModel!.msg!);
+          Fluttertoast.showToast(
+              msg: resetPasswordPhoneNumberModel?.msg ??
+                  AppConstants.failedMessage);
         }
         Loader.hide();
       }

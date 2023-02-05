@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -161,23 +160,23 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
                           Flexible(
                             child: FittedBox(
                               child: Obx(
-                                    () => isDone.value
+                                () => isDone.value
                                     ? Text(
-                                  'done auction'.tr,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                  ),
-                                )
+                                        'done auction'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                        ),
+                                      )
                                     : CountDownTimer(
-                                  secondsRemaining: seconds,
-                                  whenTimeExpires: () {
-                                    setState(
-                                          () {
-                                        isDone.value = true;
-                                      },
-                                    );
-                                  },
-                                ),
+                                        secondsRemaining: seconds,
+                                        whenTimeExpires: () {
+                                          setState(
+                                            () {
+                                              isDone.value = true;
+                                            },
+                                          );
+                                        },
+                                      ),
                               ),
                             ),
                           ),

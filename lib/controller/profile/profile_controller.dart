@@ -55,12 +55,10 @@ class ProfileController extends GetxController {
       image = null;
     } else if (updateUserModel!.code == 500) {
       Fluttertoast.showToast(
-        msg: AppConstants.failedMessage,
-      );
+          msg: updateUserModel?.msg ?? AppConstants.failedMessage);
     } else {
       Fluttertoast.showToast(
-        msg: updateUserModel!.msg!,
-      );
+          msg: updateUserModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

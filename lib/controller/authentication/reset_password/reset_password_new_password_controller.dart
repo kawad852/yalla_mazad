@@ -38,9 +38,13 @@ class ResetPasswordNewPasswordController extends GetxController {
               () => const ResetPasswordCongratsScreen(),
             );
           } else if (resetPasswordNewPasswordModel!.code == 500) {
-            Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+            Fluttertoast.showToast(
+                msg: resetPasswordNewPasswordModel?.msg ??
+                    AppConstants.failedMessage);
           } else {
-            Fluttertoast.showToast(msg: resetPasswordNewPasswordModel!.msg!);
+            Fluttertoast.showToast(
+                msg: resetPasswordNewPasswordModel?.msg ??
+                    AppConstants.failedMessage);
           }
           Loader.hide();
         }

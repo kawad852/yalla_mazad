@@ -38,9 +38,11 @@ class EditPasswordController extends GetxController {
         if (changePasswordModel!.code == 200) {
           Fluttertoast.showToast(msg: changePasswordModel!.msg!);
         } else if (changePasswordModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'password not matched'.tr);
+          Fluttertoast.showToast(
+              msg: changePasswordModel?.msg ?? AppConstants.failedMessage);
         } else {
-          Fluttertoast.showToast(msg: changePasswordModel!.msg!);
+          Fluttertoast.showToast(
+              msg: changePasswordModel?.msg ?? AppConstants.failedMessage);
         }
         Loader.hide();
       }

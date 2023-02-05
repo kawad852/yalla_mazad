@@ -51,9 +51,11 @@ class InterestsController extends GetxController {
         binding: PlansBinding(),
       );
     } else if (addCategoriesToUserModel!.code == 500) {
-      Fluttertoast.showToast(msg: AppConstants.failedMessage);
+      Fluttertoast.showToast(
+          msg: addCategoriesToUserModel?.msg ?? AppConstants.failedMessage);
     } else {
-      Fluttertoast.showToast(msg: addCategoriesToUserModel!.msg!);
+      Fluttertoast.showToast(
+          msg: addCategoriesToUserModel?.msg ?? AppConstants.failedMessage);
     }
     Loader.hide();
   }

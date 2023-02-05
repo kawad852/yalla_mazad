@@ -40,9 +40,11 @@ class PhoneNumberController extends GetxController {
             binding: VerificationCodeBinding(),
           );
         } else if (updateUserPhoneModel!.code == 500) {
-          Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
+          Fluttertoast.showToast(
+              msg: updateUserPhoneModel?.msg ?? AppConstants.failedMessage);
         } else {
-          Fluttertoast.showToast(msg: updateUserPhoneModel!.msg!);
+          Fluttertoast.showToast(
+              msg: updateUserPhoneModel?.msg ?? AppConstants.failedMessage);
         }
         Loader.hide();
       }

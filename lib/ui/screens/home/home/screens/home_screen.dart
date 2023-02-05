@@ -653,7 +653,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         user: data.user?.name,
                                         id: data.id,
                                         startDate: data.startDate,
-                                        endDate:  data.endDate,
+                                        endDate: data.endDate,
                                       ),
                                       onTap: () {
                                         Future.delayed(
