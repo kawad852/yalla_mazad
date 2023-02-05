@@ -121,11 +121,13 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
                               name: value.myFavoritesModel?.data?[index].name,
                               details:
                                   value.myFavoritesModel?.data?[index].content,
-                              price: value
-                                  .myFavoritesModel?.data?[index].startPrice
-                                  .toString(),
                               status:
                                   value.myFavoritesModel?.data?[index].status,
+                              startDate: controller
+                                  .myFavoritesModel?.data?[index].startDate,
+                              endDate: controller
+                                  .myFavoritesModel?.data?[index].endDate,
+                              id: controller.myFavoritesModel?.data?[index].id,
                             ),
                           );
                         },

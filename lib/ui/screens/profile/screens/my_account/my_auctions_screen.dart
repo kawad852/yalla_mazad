@@ -126,11 +126,14 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                   .myAdvertisementsModel?.data?[index].name,
                               details: controller
                                   .myAdvertisementsModel?.data?[index].content,
-                              price: controller.myAdvertisementsModel
-                                  ?.data?[index].startPrice
-                                  .toString(),
                               status: controller
                                   .myAdvertisementsModel?.data?[index].status,
+                              startDate: controller
+                                  .myAdvertisementsModel?.data?[index].startDate,
+                              endDate: controller
+                                  .myAdvertisementsModel?.data?[index].endDate,
+                              id: controller
+                                  .myAdvertisementsModel?.data?[index].id,
                             ),
                           );
                         },

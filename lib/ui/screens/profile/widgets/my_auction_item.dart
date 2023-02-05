@@ -1,25 +1,91 @@
+import 'dart:async';
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../widgets/custom_countdown_timer.dart';
 import '../../../widgets/custom_network_image.dart';
 
-class MyAuctionItem extends StatelessWidget {
+class MyAuctionItem extends StatefulWidget {
   final String? image;
   final String? name;
   final String? details;
   final String? status;
-  final String? price;
+  final int? id;
+  final String? startDate;
+  final String? endDate;
 
-  ///TODO: add time left
   const MyAuctionItem(
       {required this.image,
       required this.name,
       required this.details,
-      required this.price,
       required this.status,
+      required this.id,
+      required this.startDate,
+      required this.endDate,
       Key? key})
       : super(key: key);
+
+  @override
+  State<MyAuctionItem> createState() => _MyAuctionItemState();
+}
+
+class _MyAuctionItemState extends State<MyAuctionItem> {
+  RxInt highestPrice = 0.obs;
+  var seconds = 0;
+
+  ///0 means coming, 1 current, 2 done
+  RxInt status = 0.obs;
+  var secondsToStart = 0;
+
+  @override
+  void initState() {
+    var items = FirebaseFirestore.instance
+        .collection('auctions')
+        .doc(widget.id.toString())
+        .collection('biddings')
+        .orderBy('amount', descending: true)
+        .snapshots();
+    items.listen((snapshot) {
+      var currentPrice = snapshot.docs.isNotEmpty
+          ? snapshot.docs.first.get('amount').toString().obs
+          : "0".obs;
+      highestPrice.value = int.parse(currentPrice.value);
+    });
+    secondsToStart = DateTime.parse(widget.startDate ?? '')
+        .difference(DateTime.now())
+        .inSeconds;
+    seconds = DateTime.parse(widget.endDate ?? '')
+        .difference(DateTime.now())
+        .inSeconds;
+    if (secondsToStart > 0) {
+      status.value = 0;
+      int remaining = secondsToStart;
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        if (remaining == 0) {
+          timer.cancel();
+          status.value = 1;
+          log('timer for coming is done and status is: ${status.value}');
+        } else {
+          remaining--;
+          log('timer for coming is moving and remaining is is: $remaining');
+        }
+        setState(() {});
+      });
+    } else if (seconds == 0) {
+      status.value = 2;
+    } else if (secondsToStart <= 0 && seconds > 0) {
+      status.value = 1;
+    }
+    log('seconds: $seconds');
+    log('secondsToStart: $secondsToStart');
+    log('status: ${status.value}');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +113,7 @@ class MyAuctionItem extends StatelessWidget {
               ),
             ),
             child: CustomNetworkImage(
-              url: image!,
+              url: widget.image!,
               defaultUrl: MyImages.logo,
               radius: 18,
             ),
@@ -61,14 +127,14 @@ class MyAuctionItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name!,
+                  widget.name!,
                   style: const TextStyle(
                     color: MyColors.primary,
                     fontSize: 16,
                   ),
                 ),
                 Text(
-                  details!,
+                  widget.details!,
                   maxLines: 3,
                   style: const TextStyle(
                     color: MyColors.primary,
@@ -101,11 +167,37 @@ class MyAuctionItem extends StatelessWidget {
                           const SizedBox(
                             width: 4,
                           ),
-                          const Text(
-                            '1:23:02:00',
-                            style: TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 12,
+                          Flexible(
+                            child: FittedBox(
+                              child: Obx(
+                                () => status.value == 2
+                                    ? Text(
+                                        'done auction'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                        ),
+                                      )
+                                    : status.value == 1
+                                        ? CountDownTimer(
+                                            secondsRemaining: seconds,
+                                            whenTimeExpires: () {
+                                              setState(
+                                                () {
+                                                  status.value = 2;
+                                                },
+                                              );
+                                              log('timer for current is done and status is: ${status.value}');
+                                            },
+                                          )
+
+                                        ///TODO add date and format it
+                                        : Text(
+                                            'coming auction'.tr,
+                                            style: const TextStyle(
+                                              color: MyColors.primary,
+                                            ),
+                                          ),
+                              ),
                             ),
                           ),
                         ],
@@ -135,11 +227,13 @@ class MyAuctionItem extends StatelessWidget {
                           const SizedBox(
                             width: 4,
                           ),
-                          Text(
-                            price!,
-                            style: const TextStyle(
-                              color: MyColors.primary,
-                              fontSize: 12,
+                          Obx(
+                            () => Text(
+                              '${highestPrice.value.toString()} JOD',
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ],
@@ -148,12 +242,12 @@ class MyAuctionItem extends StatelessWidget {
                   ],
                 ),
                 Text(
-                  status!,
+                  widget.status!,
                   style: TextStyle(
                     fontSize: 14,
-                    color: status! == 'pending'
+                    color: widget.status! == 'pending'
                         ? MyColors.primary
-                        : status! == 'rejected'
+                        : widget.status! == 'rejected'
                             ? MyColors.red
                             : Colors.green,
                   ),
