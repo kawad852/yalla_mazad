@@ -63,7 +63,6 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
           ),
           SingleChildScrollView(
             child: SizedBox(
-              height: Get.height * 1.6,
               child: Form(
                 key: controller.formKey,
                 child: Column(
@@ -119,7 +118,8 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                         ],
                       ),
                     ),
-                    Expanded(
+                    SizedBox(
+                      height: 1000,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -236,6 +236,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                           ),
                           Expanded(
                             child: SingleChildScrollView(
+                              physics: NeverScrollableScrollPhysics(),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 30,
@@ -405,7 +406,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                                       },
                                     ),
                                     const SizedBox(
-                                      height: 70,
+                                      height: 150,
                                     ),
                                   ],
                                 ),

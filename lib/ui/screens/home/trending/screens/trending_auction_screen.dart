@@ -38,7 +38,7 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
-          50,
+          150,
         ),
         child: Padding(
           padding: const EdgeInsets.only(
@@ -50,11 +50,13 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             centerTitle: true,
-            title: Text(
-              'trending auctions'.tr,
-              style: const TextStyle(
-                color: MyColors.primary,
-                fontSize: 18,
+            title: FittedBox(
+              child: Text(
+                'trending auctions'.tr,
+                style: const TextStyle(
+                  color: MyColors.primary,
+                  fontSize: 18,
+                ),
               ),
             ),
             leadingWidth: 72,

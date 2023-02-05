@@ -428,10 +428,10 @@ class DoneAuctionItem extends StatelessWidget {
                   );
                 default:
                   return SizedBox(
-                    height: 600,
+                    height: snapshot.data!.docs.length * 70,
                     child: ListView(
                       shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.only(
                         left: 30,
                         right: 30,
@@ -457,6 +457,9 @@ class DoneAuctionItem extends StatelessWidget {
                   );
               }
             },
+          ),
+          const SizedBox(
+            height: 200,
           ),
         ],
       ),

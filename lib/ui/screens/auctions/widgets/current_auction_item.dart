@@ -492,14 +492,14 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                   );
                 default:
                   return SizedBox(
-                    height: 600,
+                    height: snapshot.data!.docs.length * 70,
                     child: ListView(
                       shrinkWrap: true,
-                      physics: const ClampingScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.only(
                         left: 30,
                         right: 30,
-                        bottom: 140,
+                       // bottom: 140,
                       ),
                       children: snapshot.data!.docs
                           .asMap()
@@ -522,6 +522,7 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
               }
             },
           ),
+          const SizedBox(height: 200,),
         ],
       ),
     );

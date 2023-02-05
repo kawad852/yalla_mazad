@@ -37,7 +37,7 @@ class _ViewAuctionScreenState extends State<ViewAuctionScreen> {
       extendBodyBehindAppBar: true,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(
-          50,
+          150,
         ),
         child: Padding(
           padding: const EdgeInsets.only(
