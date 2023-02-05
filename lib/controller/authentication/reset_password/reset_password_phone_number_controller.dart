@@ -8,6 +8,7 @@ import '../../../binding/authentication/reset_password/reset_password_code_bindi
 import '../../../model/auth/reset_password/reset_password_phone_number_model.dart';
 import '../../../ui/screens/authentication/reset_password/reset_password_code_screen.dart';
 import '../../../utils/app_constants.dart';
+import '../../../utils/colors.dart';
 import '../../../utils/shared_prefrences.dart';
 
 class ResetPasswordPhoneNumberController extends GetxController {
@@ -22,7 +23,12 @@ class ResetPasswordPhoneNumberController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         resetPasswordPhoneNumberModel =
             await ResetPasswordPhoneNumberApi().data(phone: phone);
         if (resetPasswordPhoneNumberModel == null) {

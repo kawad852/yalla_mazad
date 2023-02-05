@@ -12,6 +12,7 @@ import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import '../../api/plans/plans_api.dart';
 import '../../model/plans/plans_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 
 class MySubscriptionController extends GetxController {
   static MySubscriptionController get find => Get.find();
@@ -49,7 +50,12 @@ class MySubscriptionController extends GetxController {
     required int time,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     createSubscriptionModel = await CreateSubscriptionApi().data(
         userId: MySharedPreferences.userId.toString(),
         planId: planId,

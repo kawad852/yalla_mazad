@@ -15,7 +15,6 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../binding/auctions/current_auction_binding.dart';
-import '../../../../utils/shared_prefrences.dart';
 import '../../../widgets/custom_countdown_timer.dart';
 
 class ComingAuctionItem extends StatefulWidget {
@@ -297,7 +296,7 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                             widget.userName,
+                              widget.userName,
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 14,

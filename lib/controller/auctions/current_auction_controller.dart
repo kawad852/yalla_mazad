@@ -16,6 +16,7 @@ import '../../api/create_bid/create_bid_api.dart';
 import '../../api/delete_advertisement_from_favorites/delete_advertisement_from_favorites_api.dart';
 import '../../model/delete_advertisement_from_favorites/delete_advertisement_from_favorites_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../profile/my_account/my_favorites_controller.dart';
 
 class CurrentAuctionController extends GetxController {
@@ -75,7 +76,12 @@ class CurrentAuctionController extends GetxController {
     required String adId,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     addAdvertisementToFavoritesModel =
         await AddAdvertisementToFavoritesApi().data(
       userId: MySharedPreferences.userId.toString(),
@@ -120,7 +126,12 @@ class CurrentAuctionController extends GetxController {
     required String adId,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     deleteAdvertisementFromFavoritesModel =
         await DeleteAdvertisementFromFavoritesApi().data(
       advertisementId: adId,
@@ -164,7 +175,12 @@ class CurrentAuctionController extends GetxController {
     required String adId,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     createBidModel = await CreateBidApi().data(
       userId: MySharedPreferences.userId.toString(),
       price: totalPrice,

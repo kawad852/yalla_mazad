@@ -8,6 +8,7 @@ import 'package:yalla_mazad/utils/app_constants.dart';
 import '../../api/auth/update_user_phone_api.dart';
 import '../../binding/authentication/verification_code_binding.dart';
 import '../../ui/screens/authentication/verification_code/screens/verification_code_screen.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class PhoneNumberController extends GetxController {
@@ -25,7 +26,12 @@ class PhoneNumberController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         updateUserPhoneModel =
             await UpdateUserPhoneApi().data(phone: phone, id: id);
         if (updateUserPhoneModel == null) {

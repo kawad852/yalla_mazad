@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -6,6 +6,7 @@ import 'package:yalla_mazad/api/change_password/change_password_api.dart';
 import 'package:yalla_mazad/model/change_password/change_password_model.dart';
 
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 
 class EditPasswordController extends GetxController {
   static EditPasswordController get find => Get.find();
@@ -27,7 +28,12 @@ class EditPasswordController extends GetxController {
     if (passwordController.text == confirmPasswordController.text) {
       if (formKey.currentState != null) {
         //if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         changePasswordModel = await ChangePasswordApi()
             .data(oldPassword: oldPassword, newPassword: newPassword);
         if (changePasswordModel == null) {

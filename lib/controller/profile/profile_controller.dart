@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../api/auth/update_user_image_api.dart';
 import '../../model/auth/update_user_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class ProfileController extends GetxController {
@@ -35,7 +36,12 @@ class ProfileController extends GetxController {
   Future fetchUpdateImageData({
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     updateUserModel = await UpdateUserImageApi().data(
       file: File(image!),
     );

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -9,6 +9,7 @@ import 'package:yalla_mazad/api/add_auction/add_auction_api.dart';
 import 'package:yalla_mazad/api/categories/categories_api.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
 import 'package:yalla_mazad/model/categories/categories_model.dart';
+import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../model/add_auction/add_auction_model.dart';
@@ -115,7 +116,12 @@ class AddAuctionController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         addAuctionModel = await AddAuctionApi().data(
           file: getListOfFiles(),
           name: addressController.text,

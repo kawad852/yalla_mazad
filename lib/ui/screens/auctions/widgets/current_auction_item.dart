@@ -14,7 +14,6 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/current_auction_controller.dart';
-import '../../../../utils/shared_prefrences.dart';
 import '../../../widgets/custom_countdown_timer.dart';
 import 'bidding_item.dart';
 

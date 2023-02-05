@@ -8,6 +8,7 @@ import '../../api/plans/plans_api.dart';
 import '../../model/create_subscription/create_subscription_model.dart';
 import '../../model/plans/plans_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class PlansController extends GetxController {
@@ -34,7 +35,12 @@ class PlansController extends GetxController {
     required int time,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     createSubscriptionModel = await CreateSubscriptionApi().data(
         userId: MySharedPreferences.userId.toString(),
         planId: planId,

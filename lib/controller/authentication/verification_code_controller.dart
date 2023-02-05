@@ -11,6 +11,7 @@ import 'package:yalla_mazad/model/auth/resend_otp_model.dart';
 import '../../binding/interests/interests_binding.dart';
 import '../../ui/screens/interests/screens/interests_screen.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class VerificationCodeController extends GetxController {
@@ -58,7 +59,12 @@ class VerificationCodeController extends GetxController {
     ///TODO:bring back and make sure
     // if (formKey.currentState != null) {
     //   if (formKey.currentState!.validate()) {
-    //     Loader.show(context);
+    // Loader.show(
+    //   context,
+    //   progressIndicator: const CircularProgressIndicator(
+    //     color: MyColors.primary,
+    //   ),
+    // );
     // code =   '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
     // optCheckModel = await OptCheckApi().data(phone: phone, code: code);
     //     if (optCheckModel == null) {
@@ -84,7 +90,12 @@ class VerificationCodeController extends GetxController {
     required int id,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     resendOtpModel = await ResendOtpApi().data(id: id);
     if (resendOtpModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);

@@ -8,6 +8,7 @@ import 'package:yalla_mazad/model/auth/register_model.dart';
 import '../../binding/authentication/phone_number_binding.dart';
 import '../../ui/screens/authentication/phone_number/screens/phone_number_screen.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class SignUpController extends GetxController {
@@ -31,8 +32,12 @@ class SignUpController extends GetxController {
       if (passwordController.text == confirmPasswordController.text) {
         if (formKey.currentState != null) {
           if (formKey.currentState!.validate()) {
-            Loader.show(context);
-            // OverLayLoader.showLoading(context);
+            Loader.show(
+              context,
+              progressIndicator: const CircularProgressIndicator(
+                color: MyColors.primary,
+              ),
+            );
             registerModel = await RegisterApi()
                 .data(name: name, email: email, password: password);
             if (registerModel == null) {

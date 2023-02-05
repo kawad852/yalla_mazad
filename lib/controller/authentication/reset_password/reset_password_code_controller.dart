@@ -28,7 +28,12 @@ class ResetPasswordCodeController extends GetxController {
     //   if (formKey.currentState!.validate()) {
     //     code =
     //         '${codeControllers[0].text}${codeControllers[1].text}${codeControllers[2].text}${codeControllers[3].text}';
-    //     Loader.show(context);
+    // Loader.show(
+    //   context,
+    //   progressIndicator: const CircularProgressIndicator(
+    //     color: MyColors.primary,
+    //   ),
+    // );
     //     optCheckModel = await OptCheckApi().data(phone: phone, code: code);
     //     if (optCheckModel == null) {
     //       Fluttertoast.showToast(msg: AppConstants.failedMessage);

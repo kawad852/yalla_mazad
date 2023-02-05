@@ -11,6 +11,7 @@ import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 
 class InterestsController extends GetxController {
   static InterestsController get find => Get.find();
@@ -35,7 +36,12 @@ class InterestsController extends GetxController {
     required List<String> categories,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     addCategoriesToUserModel = await AddCategoriesToUserApi().data(
       userId: MySharedPreferences.userId.toString(),
       categoriesId: categories,

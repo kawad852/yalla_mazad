@@ -11,6 +11,7 @@ import 'package:yalla_mazad/utils/shared_prefrences.dart';
 import '../../api/delete_advertisement_from_favorites/delete_advertisement_from_favorites_api.dart';
 import '../../model/delete_advertisement_from_favorites/delete_advertisement_from_favorites_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../profile/my_account/my_favorites_controller.dart';
 
 class DoneAuctionController extends GetxController {
@@ -42,7 +43,12 @@ class DoneAuctionController extends GetxController {
     required String adId,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     addAdvertisementToFavoritesModel =
         await AddAdvertisementToFavoritesApi().data(
       userId: MySharedPreferences.userId.toString(),
@@ -85,7 +91,12 @@ class DoneAuctionController extends GetxController {
     required String adId,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     deleteAdvertisementFromFavoritesModel =
         await DeleteAdvertisementFromFavoritesApi().data(
       advertisementId: adId,

@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -7,6 +7,7 @@ import 'package:yalla_mazad/model/auth/reset_password/reset_password_new_passwor
 import 'package:yalla_mazad/ui/screens/authentication/reset_password/reset_password_congrats.dart';
 
 import '../../../utils/app_constants.dart';
+import '../../../utils/colors.dart';
 
 class ResetPasswordNewPasswordController extends GetxController {
   static ResetPasswordNewPasswordController get find => Get.find();
@@ -25,7 +26,12 @@ class ResetPasswordNewPasswordController extends GetxController {
     if (passwordController.text == confirmPasswordController.text) {
       if (formKey.currentState != null) {
         if (formKey.currentState!.validate()) {
-          Loader.show(context);
+          Loader.show(
+            context,
+            progressIndicator: const CircularProgressIndicator(
+              color: MyColors.primary,
+            ),
+          );
           resetPasswordNewPasswordModel = await ResetPasswordNewPasswordApi()
               .data(phone: phone, password: passwordController.text);
           if (resetPasswordNewPasswordModel == null) {

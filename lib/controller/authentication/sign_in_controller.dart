@@ -14,6 +14,7 @@ import 'package:yalla_mazad/ui/widgets/custom_navigation_bar.dart';
 import '../../api/auth/sign_in_api.dart';
 import '../../model/auth/sign_in_model.dart';
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class SignInController extends GetxController {
@@ -30,7 +31,12 @@ class SignInController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         signInModel = await SignInApi().data(phone: phone, password: password);
         if (signInModel == null) {
           Fluttertoast.showToast(msg: AppConstants.failedMessage);
@@ -69,7 +75,12 @@ class SignInController extends GetxController {
     required String username,
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     socialLogInModel = await SocialLoginApi().data(
       username: username,
       email: email,
@@ -104,7 +115,12 @@ class SignInController extends GetxController {
     BuildContext context,
   ) async {
     try {
-      Loader.show(context);
+      Loader.show(
+        context,
+        progressIndicator: const CircularProgressIndicator(
+          color: MyColors.primary,
+        ),
+      );
       if (GoogleSignIn().currentUser == null) {
         await GoogleSignIn().signOut();
       }

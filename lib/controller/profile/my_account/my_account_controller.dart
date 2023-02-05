@@ -12,6 +12,7 @@ import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../../api/auth/update_user_image_api.dart';
 import '../../../utils/app_constants.dart';
+import '../../../utils/colors.dart';
 
 class MyAccountController extends GetxController {
   static MyAccountController get find => Get.find();
@@ -52,7 +53,12 @@ class MyAccountController extends GetxController {
   Future fetchUpdateImageData({
     required BuildContext context,
   }) async {
-    Loader.show(context);
+    Loader.show(
+      context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     updateUserModel = await UpdateUserImageApi().data(
       file: File(image!),
     );

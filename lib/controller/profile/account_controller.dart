@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_overlay_loader/flutter_overlay_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
@@ -6,6 +6,7 @@ import 'package:yalla_mazad/api/auth/update_user_api.dart';
 import 'package:yalla_mazad/model/auth/update_user_model.dart';
 
 import '../../utils/app_constants.dart';
+import '../../utils/colors.dart';
 import '../../utils/shared_prefrences.dart';
 
 class AccountController extends GetxController {
@@ -27,7 +28,12 @@ class AccountController extends GetxController {
   }) async {
     if (formKey.currentState != null) {
       if (formKey.currentState!.validate()) {
-        Loader.show(context);
+        Loader.show(
+          context,
+          progressIndicator: const CircularProgressIndicator(
+            color: MyColors.primary,
+          ),
+        );
         updateUserModel = await UpdateUserApi().data(
           phone: phone,
         );
