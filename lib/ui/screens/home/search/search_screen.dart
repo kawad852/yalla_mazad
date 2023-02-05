@@ -196,6 +196,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 Text(
                                   'unfortunately, no search results are currently available'
                                       .tr,
+                                  textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,

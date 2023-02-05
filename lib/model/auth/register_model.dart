@@ -84,11 +84,6 @@ class User {
     }
   }
 
-  // if (json['badges'] != null) {
-  //   badges = <Badge?>[];
-  //   json['badges'].forEach((v) {
-  //     badges!.add( Badge.fromJson(v));
-  //   });
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

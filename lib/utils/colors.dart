@@ -13,5 +13,4 @@ class MyColors {
   //grey
   static const Color greyED0 = Color(0xFF263238);
 
-//yellow
 }
