@@ -7,8 +7,12 @@ import '../../../widgets/custom_slide_button.dart';
 
 class ConfirmDirectBuyDialog extends StatelessWidget {
   final GlobalKey<SlideActionState> _key = GlobalKey();
+  final String buyNowPrice;
 
-  ConfirmDirectBuyDialog({Key? key}) : super(key: key);
+  ConfirmDirectBuyDialog({
+    Key? key,
+    required this.buyNowPrice,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -90,11 +94,11 @@ class ConfirmDirectBuyDialog extends StatelessWidget {
                       ),
                       color: MyColors.textFieldColor,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        '130 JOD',
+                        buyNowPrice,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: MyColors.red,
                           fontSize: 16,
                         ),

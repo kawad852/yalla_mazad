@@ -6,6 +6,7 @@ import 'package:yalla_mazad/model/advertisement_details/advertisement_details_mo
 import 'package:yalla_mazad/ui/screens/auctions/widgets/done_auction_item.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
+import '../../../../utils/colors.dart';
 import '../../../widgets/failure_widget.dart';
 
 class DoneAuctionScreen extends StatefulWidget {
@@ -45,8 +46,69 @@ class _DoneAuctionScreenState extends State<DoneAuctionScreen> {
                       ),
                     ),
                   ),
-                  const Center(
-                    child: CircularProgressIndicator(),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: 45,
+                          left: 35,
+                          right: 35,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 35,
+                              height: 35,
+                              padding: const EdgeInsetsDirectional.only(
+                                start: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(
+                                  0xffD3CFDC,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  7,
+                                ),
+                              ),
+                              child: Center(
+                                child: IconButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: MyColors.primary,
+                                    size: 15,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text(
+                              'done auction'.tr,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Container(
+                              width: 35,
+                              height: 35,
+                              color: Colors.transparent,
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 100,
+                      ),
+                      const Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -84,6 +146,9 @@ class _DoneAuctionScreenState extends State<DoneAuctionScreen> {
                       name: snapshot.data?.data?.name ?? '',
                       description: snapshot.data?.data?.content ?? '',
                       id: snapshot.data?.data?.id.toString() ?? '0',
+                      userId: snapshot.data?.data?.user?.id.toString() ?? '',
+                      userName: snapshot.data?.data?.user?.name ?? '',
+                      userProfileImage: snapshot.data?.data?.user?.image ?? '',
                     ),
                   ],
                 ),

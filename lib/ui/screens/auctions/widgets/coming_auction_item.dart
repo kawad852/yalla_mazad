@@ -29,6 +29,9 @@ class ComingAuctionItem extends StatefulWidget {
   final int priceOne;
   final int priceTwo;
   final int priceThree;
+  final String userName;
+  final String userId;
+  final String userProfileImage;
 
   const ComingAuctionItem({
     required this.name,
@@ -41,6 +44,9 @@ class ComingAuctionItem extends StatefulWidget {
     required this.priceOne,
     required this.priceTwo,
     required this.priceThree,
+    required this.userId,
+    required this.userName,
+    required this.userProfileImage,
     Key? key,
   }) : super(key: key);
 
@@ -273,7 +279,7 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                           ),
                         ),
                         child: CustomNetworkImage(
-                          url: MySharedPreferences.image,
+                          url: widget.userProfileImage,
                           defaultUrl: MyImages.noProfile,
                           radius: 100,
                         ),
@@ -291,14 +297,14 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              MySharedPreferences.name,
+                             widget.userName,
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 14,
                               ),
                             ),
                             Text(
-                              '@${MySharedPreferences.userId}',
+                              '@${widget.userId}',
                               textDirection: TextDirection.ltr,
                               style: const TextStyle(
                                 color: MyColors.greyPrimary,

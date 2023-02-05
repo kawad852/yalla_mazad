@@ -128,8 +128,8 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                   .myAdvertisementsModel?.data?[index].content,
                               status: controller
                                   .myAdvertisementsModel?.data?[index].status,
-                              startDate: controller
-                                  .myAdvertisementsModel?.data?[index].startDate,
+                              startDate: controller.myAdvertisementsModel
+                                  ?.data?[index].startDate,
                               endDate: controller
                                   .myAdvertisementsModel?.data?[index].endDate,
                               id: controller

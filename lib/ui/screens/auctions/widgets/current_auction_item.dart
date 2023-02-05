@@ -25,6 +25,9 @@ class CurrentAuctionItem extends StatefulWidget {
   final String id;
   final String startDate;
   final String endDate;
+  final String userName;
+  final String userId;
+  final String userProfileImage;
 
   const CurrentAuctionItem({
     required this.name,
@@ -33,6 +36,9 @@ class CurrentAuctionItem extends StatefulWidget {
     required this.id,
     required this.startDate,
     required this.endDate,
+    required this.userId,
+    required this.userName,
+    required this.userProfileImage,
     Key? key,
   }) : super(key: key);
 
@@ -49,12 +55,10 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
 
   @override
   void initState() {
-    secondsToStart = DateTime.parse(widget.startDate)
-        .difference(DateTime.now())
-        .inSeconds;
-    seconds = DateTime.parse(widget.endDate)
-        .difference(DateTime.now())
-        .inSeconds;
+    secondsToStart =
+        DateTime.parse(widget.startDate).difference(DateTime.now()).inSeconds;
+    seconds =
+        DateTime.parse(widget.endDate).difference(DateTime.now()).inSeconds;
     if (secondsToStart > 0) {
       status.value = 0;
       RxInt remaining = secondsToStart.obs;
@@ -268,7 +272,7 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                           ),
                         ),
                         child: CustomNetworkImage(
-                          url: MySharedPreferences.image,
+                          url: widget.userProfileImage,
                           defaultUrl: MyImages.noProfile,
                           radius: 100,
                         ),
@@ -286,14 +290,14 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              MySharedPreferences.name,
+                              widget.userName,
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 14,
                               ),
                             ),
                             Text(
-                              '@${MySharedPreferences.userId}',
+                              '@${widget.userId}',
                               textDirection: TextDirection.ltr,
                               style: const TextStyle(
                                 color: MyColors.greyPrimary,
@@ -439,22 +443,23 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                               color: MyColors.textFieldColor,
                             ),
                             child: Center(
-                                child: CountDownTimer(
-                              secondsRemaining: seconds,
-                              whenTimeExpires: () {
-                                setState(
-                                  () {
-                                    status.value = 2;
-                                  },
-                                );
-                                log('timer for current is done and status is: ${status.value}');
-                                Get.off(
-                                  const DoneAuctionScreen(),
-                                  binding: DoneAuctionBinding(),
-                                  arguments: widget.id,
-                                );
-                              },
-                            ),),
+                              child: CountDownTimer(
+                                secondsRemaining: seconds,
+                                whenTimeExpires: () {
+                                  setState(
+                                    () {
+                                      status.value = 2;
+                                    },
+                                  );
+                                  log('timer for current is done and status is: ${status.value}');
+                                  Get.off(
+                                    const DoneAuctionScreen(),
+                                    binding: DoneAuctionBinding(),
+                                    arguments: widget.id,
+                                  );
+                                },
+                              ),
+                            ),
                           ),
                         ],
                       ),

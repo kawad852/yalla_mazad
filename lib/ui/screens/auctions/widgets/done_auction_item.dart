@@ -9,7 +9,6 @@ import 'package:yalla_mazad/utils/screen_size.dart';
 import '../../../../../utils/colors.dart';
 import '../../../../../utils/images.dart';
 import '../../../../controller/auctions/done_auction_controller.dart';
-import '../../../../utils/shared_prefrences.dart';
 import 'bidding_item.dart';
 
 class DoneAuctionItem extends StatelessWidget {
@@ -17,12 +16,18 @@ class DoneAuctionItem extends StatelessWidget {
   final String name;
   final String description;
   final String id;
+  final String userName;
+  final String userId;
+  final String userProfileImage;
 
   const DoneAuctionItem({
     required this.name,
     required this.images,
     required this.description,
     required this.id,
+    required this.userId,
+    required this.userName,
+    required this.userProfileImage,
     Key? key,
   }) : super(key: key);
 
@@ -213,7 +218,7 @@ class DoneAuctionItem extends StatelessWidget {
                           ),
                         ),
                         child: CustomNetworkImage(
-                          url: MySharedPreferences.image,
+                          url: userProfileImage,
                           defaultUrl: MyImages.noProfile,
                           radius: 100,
                         ),
@@ -231,14 +236,14 @@ class DoneAuctionItem extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              MySharedPreferences.name,
+                              userName,
                               style: const TextStyle(
                                 color: MyColors.primary,
                                 fontSize: 14,
                               ),
                             ),
                             Text(
-                              '@${MySharedPreferences.userId}',
+                              '@$userId',
                               textDirection: TextDirection.ltr,
                               style: const TextStyle(
                                 color: MyColors.greyPrimary,
