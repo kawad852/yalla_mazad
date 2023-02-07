@@ -139,9 +139,15 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
                       );
                     });
                   } else if (snapshot.hasError) {
-                    return const FailureWidget();
+                    return const SizedBox(
+                      height: 50,
+                      child: FailureWidget(),
+                    );
                   } else {
-                    return const FailureWidget();
+                    return const SizedBox(
+                      height: 50,
+                      child: FailureWidget(),
+                    );
                   }
               }
             },

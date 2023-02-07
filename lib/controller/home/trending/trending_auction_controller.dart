@@ -35,6 +35,7 @@ class TrendingAuctionController extends GetxController {
       }
     } catch (e) {
       trendingPagingController.error = e;
+      isLoading.value = false;
     }
   }
 

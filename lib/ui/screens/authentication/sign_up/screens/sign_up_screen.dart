@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/binding/drawer/privacy_policy_binding.dart';
+import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
 import 'package:yalla_mazad/controller/authentication/sign_up_controller.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/privacy_policy_screen.dart';
+import 'package:yalla_mazad/ui/screens/drawer/screens/terms_and_conditions_screen.dart';
 import 'package:yalla_mazad/ui/widgets/custom_text_field.dart';
 import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
@@ -209,15 +213,55 @@ class SignUpScreen extends StatelessWidget {
                         );
                       }),
                       Expanded(
-                        child: Text(
-                          'I agree to the terms and conditions, privacy policy'
-                              .tr,
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: MyColors.primary,
-                          ),
+                        child: Wrap(
+                          children: [
+                            Text(
+                              'I agree to the'.tr,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: MyColors.primary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  const TermsAndConditionsScreen(),
+                                  binding: TermsAndConditionsBinding(),
+                                );
+                              },
+                              child: Text(
+                                'terms and conditions'.tr,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: MyColors.primary5D0,
+                                ),
+                              ),
+                            ),
+                            const Text(
+                              ', ',
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: MyColors.primary,
+                              ),
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Get.to(
+                                  const PrivacyPolicyScreen(),
+                                  binding: PrivacyPolicyBinding(),
+                                );
+                              },
+                              child: Text(
+                                'privacy policy'.tr,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: MyColors.primary5D0,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

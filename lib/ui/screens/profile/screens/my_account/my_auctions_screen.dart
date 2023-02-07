@@ -145,9 +145,15 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                       );
                     });
                   } else if (snapshot.hasError) {
-                    return const FailureWidget();
+                    return const SizedBox(
+                      height: 50,
+                      child: FailureWidget(),
+                    );
                   } else {
-                    return const FailureWidget();
+                    return const SizedBox(
+                      height: 50,
+                      child: FailureWidget(),
+                    );
                   }
               }
             },

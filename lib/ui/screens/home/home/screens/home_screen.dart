@@ -17,6 +17,7 @@ import 'package:yalla_mazad/utils/images.dart';
 
 import '../../../../../binding/notifications/notifications_binding.dart';
 import '../../../../../controller/home/view_auctions/view_auction_controller.dart';
+import '../../../../../utils/app_constants.dart';
 import '../../../../../utils/screen_size.dart';
 import '../../../../widgets/custom_category_item.dart';
 import '../../../../widgets/failure_widget.dart';
@@ -157,7 +158,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       2,
                                       (index) => Container(
                                         margin: const EdgeInsets.symmetric(
-                                            horizontal: 30),
+                                          horizontal: 30,
+                                        ),
                                         height: 190,
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
@@ -460,6 +462,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   controller.trendingPagingController,
                               builderDelegate:
                                   PagedChildBuilderDelegate<PopularAdsList>(
+                                firstPageErrorIndicatorBuilder: (context) =>
+                                    SizedBox(
+                                  height: 50,
+                                  child: Center(
+                                    child: Text(
+                                      AppConstants.failedMessage,
+                                    ),
+                                  ),
+                                ),
                                 newPageProgressIndicatorBuilder: (context) =>
                                     Column(
                                   children: [
@@ -642,6 +653,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                             width: 10,
                                           ),
                                         ],
+                                      ),
+                                    ),
+                                  ),
+                                  firstPageErrorIndicatorBuilder: (context) =>
+                                      SizedBox(
+                                    height: 50,
+                                    child: Center(
+                                      child: Text(
+                                        AppConstants.failedMessage,
                                       ),
                                     ),
                                   ),

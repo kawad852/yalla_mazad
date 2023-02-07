@@ -132,4 +132,5 @@ final Map<String, String> ar = {
   'your message': 'رسالتك',
   'your auction': 'مزايدتك',
   'notifications':'الإشعارات',
+  'I agree to the':'أنا أوافق على ',
 };

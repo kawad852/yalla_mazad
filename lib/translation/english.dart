@@ -135,4 +135,6 @@ final Map<String, String> en = {
   'your message': 'your message',
   'your auction': 'your auction',
   'notifications':'notifications',
+  'I agree to the':'I agree to the ',
+
 };

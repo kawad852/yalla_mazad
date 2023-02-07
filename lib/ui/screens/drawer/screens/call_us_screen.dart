@@ -52,14 +52,46 @@ class _CallUsScreenState extends State<CallUsScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Container(
+                        width: 35,
+                        height: 35,
+                        padding: const EdgeInsetsDirectional.only(
+                          start: 3,
+                        ),
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xffD3CFDC,
+                          ),
+                          borderRadius: BorderRadius.circular(
+                            7,
+                          ),
+                        ),
+                        child: Center(
+                          child: IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: const Icon(
+                              Icons.arrow_back_ios,
+                              color: MyColors.primary,
+                              size: 15,
+                            ),
+                          ),
+                        ),
+                      ),
                       Text(
                         'call us'.tr,
                         style: const TextStyle(
                           fontSize: 20,
                           color: MyColors.primary,
                         ),
+                      ),
+                      Container(
+                        width: 35,
+                        height: 35,
+                        color: Colors.transparent,
                       ),
                     ],
                   ),
