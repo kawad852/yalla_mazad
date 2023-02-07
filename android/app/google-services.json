@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:567364200295:android:b6dcca8842f37aa2fb31c2",
+        "mobilesdk_app_id": "1:567364200295:android:f590bdd825a625f7fb31c2",
         "android_client_info": {
-          "package_name": "com.example.yalla_mazad"
+          "package_name": "com.yalla_mazad.wecan"
         }
       },
       "oauth_client": [
         {
-          "client_id": "567364200295-ul044u3rbbbnmrak0pqfci8pqmmm49il.apps.googleusercontent.com",
+          "client_id": "567364200295-hdtvqjer0fi9o0g3fp1baeqdnucrkvaq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.yalla_mazad",
+            "package_name": "com.yalla_mazad.wecan",
             "certificate_hash": "eb503ed9828e4c2ee15943d84e2c6eb39f3f7533"
           }
         },
@@ -29,7 +29,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB2Hr22qEokMKOJr_0_FmSQmYv8soIuOF0"
+          "current_key": "AIzaSyBWigpQ7SE-4m40Ga_DAe-YLg9oxYjEqWg"
         }
       ],
       "services": {
