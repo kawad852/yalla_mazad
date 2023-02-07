@@ -49,105 +49,108 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 left: 35,
                 right: 35,
               ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        padding: const EdgeInsetsDirectional.only(
-                          start: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(
-                            0xffD3CFDC,
+              child: Container(
+                color: Colors.green.withOpacity(0.5),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 35,
+                          height: 35,
+                          padding: const EdgeInsetsDirectional.only(
+                            start: 3,
                           ),
-                          borderRadius: BorderRadius.circular(
-                            7,
+                          decoration: BoxDecoration(
+                            color: const Color(
+                              0xffD3CFDC,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              7,
+                            ),
                           ),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: MyColors.primary,
-                              size: 15,
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              icon: const Icon(
+                                Icons.arrow_back_ios,
+                                color: MyColors.primary,
+                                size: 15,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Text(
-                        'who we are'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
+                        Text(
+                          'who we are'.tr,
+                          style: const TextStyle(
+                            color: MyColors.primary,
+                            fontSize: 18,
+                          ),
                         ),
-                      ),
-                      Container(
-                        width: 35,
-                        height: 35,
-                        color: Colors.transparent,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: Get.width,
-                    child: FutureBuilder<PageModel?>(
-                      future: controller.initializePageFuture,
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          case ConnectionState.done:
-                          default:
-                            if (snapshot.hasData) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    snapshot.data?.data?.title ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      color: MyColors.primary,
-                                    ),
-                                  ),
-                                  Html(
-                                    data: """${snapshot.data?.data?.content}""",
-                                  ),
-                                ],
-                              );
-                            } else if (snapshot.hasError) {
-                              return Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 300,
-                                    child: FailureWidget(),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 300,
-                                    child: FailureWidget(),
-                                  ),
-                                ],
-                              );
-                            }
-                        }
-                      },
+                        Container(
+                          width: 35,
+                          height: 35,
+                          color: Colors.transparent,
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: Get.width,
+                      child: FutureBuilder<PageModel?>(
+                        future: controller.initializePageFuture,
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            case ConnectionState.done:
+                            default:
+                              if (snapshot.hasData) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      snapshot.data?.data?.title ?? '',
+                                      style: const TextStyle(
+                                        fontSize: 28,
+                                        color: MyColors.primary,
+                                      ),
+                                    ),
+                                    Html(
+                                      data: """${snapshot.data?.data?.content}""",
+                                    ),
+                                  ],
+                                );
+                              } else if (snapshot.hasError) {
+                                return Column(
+                                  children: const [
+                                    SizedBox(
+                                      height: 300,
+                                      child: FailureWidget(),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return Column(
+                                  children: const [
+                                    SizedBox(
+                                      height: 300,
+                                      child: FailureWidget(),
+                                    ),
+                                  ],
+                                );
+                              }
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
