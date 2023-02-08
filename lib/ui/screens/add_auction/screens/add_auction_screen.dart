@@ -236,7 +236,7 @@ class _AddAuctionScreenState extends State<AddAuctionScreen> {
                           ),
                           Expanded(
                             child: SingleChildScrollView(
-                              physics: NeverScrollableScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 30,

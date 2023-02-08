@@ -222,7 +222,7 @@ class SignUpScreen extends StatelessWidget {
                                 color: MyColors.primary,
                               ),
                             ),
-                            GestureDetector(
+                           /* GestureDetector(
                               onTap: () {
                                 Get.to(
                                   const TermsAndConditionsScreen(),
@@ -243,7 +243,7 @@ class SignUpScreen extends StatelessWidget {
                                 fontSize: 14,
                                 color: MyColors.primary,
                               ),
-                            ),
+                            ),*/
                             GestureDetector(
                               onTap: () {
                                 Get.to(

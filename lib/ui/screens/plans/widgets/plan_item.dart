@@ -159,11 +159,12 @@ class PlanItem extends StatelessWidget {
               ? InkWell(
                   onTap: () async {
                     showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
                         context: context,
                         builder: (context) {
                           return Container(
-                            color: Colors.white,
-                            height: 200,
+                            color: Colors.transparent,
+                            height: 100,
                             child: Column(
                               children: [
                                 ApplePayButton(

@@ -42,89 +42,92 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.only(
-                top: 45,
-                left: 35,
-                right: 35,
-              ),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        padding: const EdgeInsetsDirectional.only(
-                          start: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(
-                            0xffD3CFDC,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            7,
-                          ),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: MyColors.primary,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'privacy policy'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Container(
-                        width: 35,
-                        height: 35,
-                        color: Colors.transparent,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    width: Get.width,
-                    child: FutureBuilder<PageModel?>(
-                      future: controller.initializePageFuture,
-                      builder: (context, snapshot) {
-                        switch (snapshot.connectionState) {
-                          case ConnectionState.waiting:
-                            return const SizedBox(
-                              height: 400,
-                              child: Center(
-                                child: CircularProgressIndicator(),
+          Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      top: 45,
+                      left: 35,
+                      right: 35,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 35,
+                              height: 35,
+                              padding: const EdgeInsetsDirectional.only(
+                                start: 3,
                               ),
-                            );
-                          case ConnectionState.done:
-                          default:
-                            if (snapshot.hasData) {
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    snapshot.data?.data?.title ?? '',
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      color: MyColors.primary,
-                                    ),
+                              decoration: BoxDecoration(
+                                color: const Color(
+                                  0xffD3CFDC,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  7,
+                                ),
+                              ),
+                              child: Center(
+                                child: IconButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  icon: const Icon(
+                                    Icons.arrow_back_ios,
+                                    color: MyColors.primary,
+                                    size: 15,
                                   ),
-                                  Html(
-                                      data: snapshot.data?.data?.content == null
-                                          ? """<h1>Privacy Policy for Yalla Mazad</h1>
+                                ),
+                              ),
+                            ),
+                            Text(
+                              'privacy policy'.tr,
+                              style: const TextStyle(
+                                color: MyColors.primary,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Container(
+                              width: 35,
+                              height: 35,
+                              color: Colors.transparent,
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: Get.width,
+                          child: FutureBuilder<PageModel?>(
+                            future: controller.initializePageFuture,
+                            builder: (context, snapshot) {
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return const SizedBox(
+                                    height: 400,
+                                    child: Center(
+                                      child: CircularProgressIndicator(),
+                                    ),
+                                  );
+                                case ConnectionState.done:
+                                default:
+                                  if (snapshot.hasData) {
+                                    return Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          snapshot.data?.data?.title ?? '',
+                                          style: const TextStyle(
+                                            fontSize: 28,
+                                            color: MyColors.primary,
+                                          ),
+                                        ),
+                                        Html(
+                                            data: snapshot.data?.data?.content == null
+                                                ? """<h1>Privacy Policy for Yalla Mazad</h1>
 
 <p>At Yalla Mazad, accessible from https://yallamzad.com/, one of our main priorities is the privacy of our visitors.
 	This Privacy Policy document contains types of information that is collected and recorded by Yalla Mazad and how we
@@ -191,37 +194,40 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
 <h2>Consent</h2>
 
 <p>By using our website, you hereby consent to our Privacy Policy and agree to its Terms and Conditions.</p>"""
-                                          : """${snapshot.data?.data?.content}"""
-                                      // data: """${snapshot.data?.data?.content}""",
-                                      ),
-                                ],
-                              );
-                            } else if (snapshot.hasError) {
-                              return Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 300,
-                                    child: FailureWidget(),
-                                  ),
-                                ],
-                              );
-                            } else {
-                              return Column(
-                                children: const [
-                                  SizedBox(
-                                    height: 300,
-                                    child: FailureWidget(),
-                                  ),
-                                ],
-                              );
-                            }
-                        }
-                      },
+                                                : """${snapshot.data?.data?.content}"""
+                                            // data: """${snapshot.data?.data?.content}""",
+                                            ),
+                                      ],
+                                    );
+                                  } else if (snapshot.hasError) {
+                                    return Column(
+                                      children: const [
+                                        SizedBox(
+                                          height: 300,
+                                          child: FailureWidget(),
+                                        ),
+                                      ],
+                                    );
+                                  } else {
+                                    return Column(
+                                      children: const [
+                                        SizedBox(
+                                          height: 300,
+                                          child: FailureWidget(),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                              }
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ],
       ),

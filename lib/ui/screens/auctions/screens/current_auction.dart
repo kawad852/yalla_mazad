@@ -105,9 +105,9 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                       ),
                       const SizedBox(
                         height: 100,
-                      ),
-                      const Center(
-                        child: CircularProgressIndicator(),
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
                       ),
                     ],
                   ),
@@ -214,7 +214,66 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                         ),
                       ),
                     ),
-                    const FailureWidget(),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 45,
+                            left: 35,
+                            right: 35,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 35,
+                                height: 35,
+                                padding: const EdgeInsetsDirectional.only(
+                                  start: 3,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xffD3CFDC,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    7,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: MyColors.primary,
+                                      size: 15,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'current auction'.tr,
+                                style: const TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                width: 35,
+                                height: 35,
+                                color: Colors.transparent,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 100,
+                          child: FailureWidget(),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               );
@@ -239,7 +298,66 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                         ),
                       ),
                     ),
-                    const FailureWidget(),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 45,
+                            left: 35,
+                            right: 35,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 35,
+                                height: 35,
+                                padding: const EdgeInsetsDirectional.only(
+                                  start: 3,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: const Color(
+                                    0xffD3CFDC,
+                                  ),
+                                  borderRadius: BorderRadius.circular(
+                                    7,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      Get.back();
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: MyColors.primary,
+                                      size: 15,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'current auction'.tr,
+                                style: const TextStyle(
+                                  color: MyColors.primary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Container(
+                                width: 35,
+                                height: 35,
+                                color: Colors.transparent,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 100,
+                          child: FailureWidget(),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               );
