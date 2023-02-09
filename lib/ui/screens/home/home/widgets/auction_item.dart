@@ -55,31 +55,35 @@ class _AuctionItemState extends State<AuctionItem> {
           : "0".obs;
       highestPrice.value = int.parse(currentPrice.value);
     });
-    secondsToStart = DateTime.parse(widget.startDate ?? '')
-        .difference(DateTime.now())
-        .inSeconds;
-    seconds = DateTime.parse(widget.endDate ?? '')
-        .difference(DateTime.now())
-        .inSeconds;
-    if (secondsToStart > 0) {
-      status.value = 0;
-      int remaining = secondsToStart;
-      Timer.periodic(const Duration(seconds: 1), (timer) {
-        if (remaining == 0) {
-          timer.cancel();
-          status.value = 1;
-          log('timer for coming is done and status is: ${status.value}');
-        } else {
-          remaining--;
-          log('timer for coming is moving and remaining is is: $remaining');
-        }
-        setState(() {});
-      });
-    } else if (seconds == 0) {
-      status.value = 2;
-    } else if (secondsToStart <= 0 && seconds > 0) {
-      status.value = 1;
-    }
+    try {
+      secondsToStart = DateTime
+          .parse(widget.startDate ?? '')
+          .difference(DateTime.now())
+          .inSeconds;
+      seconds = DateTime
+          .parse(widget.endDate ?? '')
+          .difference(DateTime.now())
+          .inSeconds;
+      if (secondsToStart > 0) {
+        status.value = 0;
+        int remaining = secondsToStart;
+        Timer.periodic(const Duration(seconds: 1), (timer) {
+          if (remaining == 0) {
+            timer.cancel();
+            status.value = 1;
+            log('timer for coming is done and status is: ${status.value}');
+          } else {
+            remaining--;
+            log('timer for coming is moving and remaining is is: $remaining');
+          }
+          setState(() {});
+        });
+      } else if (seconds == 0) {
+        status.value = 2;
+      } else if (secondsToStart <= 0 && seconds > 0) {
+        status.value = 1;
+      }
+    }catch(e){}
     log('seconds: $seconds');
     log('secondsToStart: $secondsToStart');
     log('status: ${status.value}');
