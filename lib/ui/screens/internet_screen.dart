@@ -1,13 +1,23 @@
+import 'dart:developer';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:yalla_mazad/controller/material_controller.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
 import '../../utils/colors.dart';
 
-class InternetScreen extends StatelessWidget {
+class InternetScreen extends StatefulWidget {
   const InternetScreen({Key? key}) : super(key: key);
 
+  @override
+  State<InternetScreen> createState() => _InternetScreenState();
+}
+
+class _InternetScreenState extends State<InternetScreen> {
+  final controller = MaterialController.find;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +86,20 @@ class InternetScreen extends StatelessWidget {
                     height: 20,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () async {
+                      ///TODO:
+                      var status = await Connectivity().checkConnectivity();
+                      log("internetStatus:: $status");
+                      if (status == ConnectivityResult.none) {
+                        setState(() {
+                          controller.internetConnection = false;
+                        });
+                      } else {
+                        setState(() {
+                          controller.internetConnection = true;
+                        });
+                      }
+                    },
                     child: Container(
                       width: 170,
                       height: 57,

@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:yalla_mazad/binding/authentication/authentication_binding.dart';
 import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/binding/introduction/introduction_binding.dart';
+import 'package:yalla_mazad/controller/material_controller.dart';
 import 'package:yalla_mazad/translation/translation.dart';
 import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
 import 'package:yalla_mazad/ui/screens/internet_screen.dart';
@@ -35,6 +36,7 @@ Future<void> main() async {
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   //FirebaseMessaging.onBackgroundMessage(_onBackgroundMessage);
   await MySharedPreferences.init();
+  Get.put(MaterialController());
   if (MySharedPreferences.language.isEmpty) {
     MySharedPreferences.language = Get.deviceLocale!.languageCode;
   }
@@ -74,7 +76,9 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool internetConnection = true;
+
+ final controller = MaterialController.find;
+
 
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
@@ -112,11 +116,12 @@ class _MyAppState extends State<MyApp> {
       log("internetStatus:: $status");
       if (status == ConnectivityResult.none) {
         setState(() {
-          internetConnection = false;
+          controller.internetConnection = false;
+
         });
       } else {
         setState(() {
-          internetConnection = true;
+          controller.internetConnection = true;
         });
       }
     });
@@ -146,7 +151,7 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: internetConnection ? _toggleScreen() : const InternetScreen(),
+      home: controller.internetConnection ? _toggleScreen() : const InternetScreen(),
     );
   }
 }
