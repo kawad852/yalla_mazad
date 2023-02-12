@@ -194,8 +194,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                               height: 20,
                             ),
                             GestureDetector(
-                              onTap: () async {
-                                await controller.fetchAddCategoriesData(
+                              onTap: () async{
+                                setState(() {});
+                                 await controller.fetchAddCategoriesData(
                                   context: context,
                                   categories: controller.selectedInterests,
                                 );

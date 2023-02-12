@@ -36,15 +36,19 @@ class InterestsController extends GetxController {
   Future fetchAddCategoriesData({
     required List<String> categories,
     required BuildContext context,
-  }) async {
-    OverLayLoader.flickrLoading(context);
+  })  async{
+    Loader.show(context,
+      progressIndicator: const CircularProgressIndicator(
+        color: MyColors.primary,
+      ),
+    );
     addCategoriesToUserModel = await AddCategoriesToUserApi().data(
       userId: MySharedPreferences.userId.toString(),
       categoriesId: categories,
     );
     if (addCategoriesToUserModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
-      // Loader.hide();
+      Loader.hide();
       return;
     }
 
@@ -60,6 +64,6 @@ class InterestsController extends GetxController {
       Fluttertoast.showToast(
           msg: addCategoriesToUserModel?.msg ?? AppConstants.failedMessage);
     }
-    // Loader.hide();
+    Loader.hide();
   }
 }
