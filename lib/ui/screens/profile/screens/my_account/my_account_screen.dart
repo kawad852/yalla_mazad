@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/my_account/my_account_controller.dart';
+import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
+import 'package:yalla_mazad/controller/profile/my_account/my_favorites_controller.dart';
 import 'package:yalla_mazad/controller/profile/profile_controller.dart';
 import 'package:yalla_mazad/model/my_badges/my_badges_model.dart';
 import 'package:yalla_mazad/ui/screens/profile/screens/edit_profile_screen.dart';
@@ -30,13 +32,9 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
   @override
   void initState() {
     Get.put(MyAccountController());
+    Get.put(MyAuctionsController());
+    Get.put(MyFavoritesController());
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    Get.delete<MyAccountController>();
-    super.dispose();
   }
 
   @override
@@ -63,393 +61,450 @@ class _MyAccountScreenState extends State<MyAccountScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 45,
-              left: 35,
-              right: 35,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 35,
-                  height: 35,
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child: Text(
+                    'my account'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                leadingWidth: 70,
+                leading: Padding(
                   padding: const EdgeInsetsDirectional.only(
-                    start: 3,
+                    start: 35,
                   ),
-                  decoration: BoxDecoration(
-                    color: const Color(
-                      0xffD3CFDC,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      7,
-                    ),
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        CustomNavigationBarController.find.tabController
-                            .jumpToTab(0);
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: MyColors.primary,
-                        size: 15,
+                  child: GestureDetector(
+                    onTap: () {
+                      CustomNavigationBarController.find.tabController
+                          .jumpToTab(0);
+                    },
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
                       ),
-                    ),
-                  ),
-                ),
-                Text(
-                  'my account'.tr,
-                  style: const TextStyle(
-                    color: MyColors.primary,
-                    fontSize: 18,
-                  ),
-                ),
-                Container(
-                  width: 35,
-                  height: 35,
-                  padding: const EdgeInsets.only(right: 2),
-                  decoration: BoxDecoration(
-                    color: const Color(
-                      0xffD3CFDC,
-                    ).withOpacity(
-                      0.6,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      7,
-                    ),
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        Get.to(
-                          () => const EditProfileScreen(),
-                          binding: ProfileBinding(),
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.settings,
-                        color: MyColors.primary,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 50,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      GetBuilder<MyAccountController>(
-                        builder: (value) {
-                          return InkWell(
-                            onTap: () {
-                              controller.pickImage(context);
-                              value.update();
-                              Get.put(ProfileController());
-                              ProfileController.find.update();
-                            },
-                            child: Container(
-                              width: 114,
-                              height: 114,
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xffD3CFDC,
-                                ),
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color: const Color(
-                                    0xffD3CFDC,
-                                  ),
-                                  width: 8,
-                                ),
-                              ),
-                              child: CustomNetworkImage(
-                                url: MySharedPreferences.image,
-                                defaultUrl: MyImages.noProfile,
-                                radius: 100,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: ScreenSize.phoneSize(
-                          170,
-                          height: false,
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              MySharedPreferences.name,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              '@${MySharedPreferences.userId}',
-                              textDirection: TextDirection.ltr,
-                              style: const TextStyle(
-                                color: MyColors.greyPrimary,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
+                        borderRadius: BorderRadius.circular(
+                          7,
                         ),
                       ),
-                    ],
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: MyColors.primary,
+                          size: 15,
+                        ),
+                      ),
+                    ),
                   ),
-                  const SizedBox(
-                    height: 10,
+                ),
+                actions: [
+                  Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      end: 35,
+                    ),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsets.only(
+                        right: 2,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
+                        ).withOpacity(
+                          0.6,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                      ),
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () {
+                            Get.to(
+                              () => const EditProfileScreen(),
+                              binding: ProfileBinding(),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.settings,
+                            color: MyColors.primary,
+                            size: 20,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-              FutureBuilder<MyBadgesModel?>(
-                  future: controller.initializeMyBadgesFuture,
-                  builder: (context, snapshot) {
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return SizedBox(
-                          height: 80,
-                          child: Column(
+              body: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 30,
-                                ),
-                                child: Text(
-                                  'the badges'.tr,
-                                  style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 18,
-                                  ),
-                                ),
+                              const SizedBox(
+                                height: 10,
                               ),
-                              SizedBox(
-                                height: 47,
-                                child: Center(
-                                    child: ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
                                   ),
-                                  itemCount: 8,
-                                  itemBuilder: (context, index) {
-                                    return const CustomShimmerLoading(
-                                      radius: 15,
-                                      width: 47,
-                                      height: 47,
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) {
-                                    return const SizedBox(
-                                      width: 10,
-                                    );
-                                  },
-                                )),
-                              ),
-                            ],
-                          ),
-                        );
-                      case ConnectionState.done:
-                      default:
-                        if (snapshot.hasData) {
-                          return snapshot.data!.data!.isNotEmpty
-                              ? SizedBox(
-                                  height: 80,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 30,
+                                  GetBuilder<MyAccountController>(
+                                    builder: (value) {
+                                      return InkWell(
+                                        onTap: () {
+                                          controller.pickImage(context);
+                                          value.update();
+                                          Get.put(
+                                            ProfileController(),
+                                          );
+                                          ProfileController.find.update();
+                                        },
+                                        child: Container(
+                                          width: 114,
+                                          height: 114,
+                                          decoration: BoxDecoration(
+                                            color: const Color(
+                                              0xffD3CFDC,
+                                            ),
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: const Color(
+                                                0xffD3CFDC,
+                                              ),
+                                              width: 8,
+                                            ),
+                                          ),
+                                          child: CustomNetworkImage(
+                                            url: MySharedPreferences.image,
+                                            defaultUrl: MyImages.noProfile,
+                                            radius: 100,
+                                          ),
                                         ),
-                                        child: Text(
-                                          'the badges'.tr,
+                                      );
+                                    },
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                    width: ScreenSize.phoneSize(
+                                      170,
+                                      height: false,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          MySharedPreferences.name,
                                           style: const TextStyle(
                                             color: MyColors.primary,
                                             fontSize: 18,
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 47,
-                                        child: Center(
-                                            child: ListView.separated(
-                                          scrollDirection: Axis.horizontal,
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 10,
+                                        Text(
+                                          '@${MySharedPreferences.userId}',
+                                          textDirection: TextDirection.ltr,
+                                          style: const TextStyle(
+                                            color: MyColors.greyPrimary,
+                                            fontSize: 14,
                                           ),
-                                          itemCount:
-                                              snapshot.data?.data?.length ?? 0,
-                                          itemBuilder: (context, index) {
-                                            return BadgeItem(
-                                              image: snapshot
-                                                  .data?.data?[index].image,
-                                              message: snapshot
-                                                  .data?.data?[index].id
-                                                  .toString(),
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return const SizedBox(
-                                              width: 10,
-                                            );
-                                          },
-                                        )),
-                                      ),
-                                    ],
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                )
-                              : const SizedBox();
-                        } else if (snapshot.hasError) {
-                          return const FailureWidget();
-                        } else {
-                          return const FailureWidget();
-                        }
-                    }
-                  }),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                child: Container(
-                  height: 67,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      25,
-                    ),
-                    color: const Color(
-                      0xffD3CFDC,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.pageController.animateToPage(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                            setState(() {
-                              controller.currentIndex = 0;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: controller.currentIndex == 0
-                                  ? MyColors.primary
-                                  : const Color(
-                                      0xffD3CFDC,
-                                    ),
-                              borderRadius: BorderRadius.circular(
-                                25,
+                                ],
                               ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                            ],
+                          ),
+                          FutureBuilder<MyBadgesModel?>(
+                              future: controller.initializeMyBadgesFuture,
+                              builder: (context, snapshot) {
+                                switch (snapshot.connectionState) {
+                                  case ConnectionState.waiting:
+                                    return SizedBox(
+                                      height: 80,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                              horizontal: 30,
+                                            ),
+                                            child: Text(
+                                              'the badges'.tr,
+                                              style: const TextStyle(
+                                                color: MyColors.primary,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 47,
+                                            child: Center(
+                                                child: ListView.separated(
+                                              scrollDirection: Axis.horizontal,
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                              ),
+                                              itemCount: 8,
+                                              itemBuilder: (context, index) {
+                                                return const CustomShimmerLoading(
+                                                  radius: 15,
+                                                  width: 47,
+                                                  height: 47,
+                                                );
+                                              },
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return const SizedBox(
+                                                  width: 10,
+                                                );
+                                              },
+                                            )),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  case ConnectionState.done:
+                                  default:
+                                    if (snapshot.hasData) {
+                                      return snapshot.data!.data!.isNotEmpty
+                                          ? SizedBox(
+                                              height: 80,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 30,
+                                                    ),
+                                                    child: Text(
+                                                      'the badges'.tr,
+                                                      style: const TextStyle(
+                                                        color: MyColors.primary,
+                                                        fontSize: 18,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 47,
+                                                    child: Center(
+                                                        child:
+                                                            ListView.separated(
+                                                      scrollDirection:
+                                                          Axis.horizontal,
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        horizontal: 10,
+                                                      ),
+                                                      itemCount: snapshot.data
+                                                              ?.data?.length ??
+                                                          0,
+                                                      itemBuilder:
+                                                          (context, index) {
+                                                        return BadgeItem(
+                                                          image: snapshot
+                                                              .data
+                                                              ?.data?[index]
+                                                              .image,
+                                                          message: snapshot.data
+                                                              ?.data?[index].id
+                                                              .toString(),
+                                                        );
+                                                      },
+                                                      separatorBuilder:
+                                                          (context, index) {
+                                                        return const SizedBox(
+                                                          width: 10,
+                                                        );
+                                                      },
+                                                    )),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : const SizedBox();
+                                    } else if (snapshot.hasError) {
+                                      return const FailureWidget();
+                                    } else {
+                                      return const FailureWidget();
+                                    }
+                                }
+                              }),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 30,
                             ),
-                            child: Center(
-                              child: Text(
-                                'my auctions'.tr,
-                                style: TextStyle(
-                                  color: controller.currentIndex == 0
-                                      ? Colors.white
-                                      : MyColors.primary,
-                                  fontSize: 16,
+                            child: Container(
+                              height: 67,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  25,
                                 ),
+                                color: const Color(
+                                  0xffD3CFDC,
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.pageController.animateToPage(
+                                            0,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.linear);
+                                        setState(() {
+                                          controller.currentIndex = 0;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 5),
+                                        height: 56,
+                                        decoration: BoxDecoration(
+                                          color: controller.currentIndex == 0
+                                              ? MyColors.primary
+                                              : const Color(
+                                                  0xffD3CFDC,
+                                                ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'my auctions'.tr,
+                                            style: TextStyle(
+                                              color:
+                                                  controller.currentIndex == 0
+                                                      ? Colors.white
+                                                      : MyColors.primary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.pageController.animateToPage(
+                                            1,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.linear);
+                                        setState(() {
+                                          controller.currentIndex = 1;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 5),
+                                        height: 56,
+                                        decoration: BoxDecoration(
+                                          color: controller.currentIndex == 1
+                                              ? MyColors.primary
+                                              : const Color(
+                                                  0xffD3CFDC,
+                                                ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'favorites'.tr,
+                                            style: TextStyle(
+                                              color:
+                                                  controller.currentIndex == 1
+                                                      ? Colors.white
+                                                      : MyColors.primary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.pageController.animateToPage(1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                            setState(() {
-                              controller.currentIndex = 1;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: controller.currentIndex == 1
-                                  ? MyColors.primary
-                                  : const Color(
-                                      0xffD3CFDC,
-                                    ),
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'favorites'.tr,
-                                style: TextStyle(
-                                  color: controller.currentIndex == 1
-                                      ? Colors.white
-                                      : MyColors.primary,
-                                  fontSize: 16,
-                                ),
+                          Obx(
+                            () => SizedBox(
+                              height: controller.currentIndex == 0
+                                  ? MyAuctionsController
+                                          .find.auctionsLength.value *
+                                      170
+                                  : MyFavoritesController
+                                          .find.favoritesLength.value *
+                                      170,
+                              child: PageView(
+                                physics: const NeverScrollableScrollPhysics(),
+                                controller: controller.pageController,
+                                children: const [
+                                  MyAuctionsScreen(),
+                                  MyFavoritesScreen(),
+                                ],
                               ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-              Expanded(
-                child: PageView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: controller.pageController,
-                  children: const [
-                    MyAuctionsScreen(),
-                    MyFavoritesScreen(),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

@@ -75,7 +75,7 @@ class VerificationCodeController extends GetxController {
     //     if (optCheckModel!.code == 200) {
     //       MySharedPreferences.phone = phone;
     //       MySharedPreferences.isLogIn = true;
-    Get.to(() => const InterestsScreen(), binding: InterestsBinding());
+    Get.offAll(() => const InterestsScreen(), binding: InterestsBinding());
     //     } else if (optCheckModel!.code == 500) {
     //       Fluttertoast.showToast(msg: 'incorrect phone or password'.tr);
     //     } else {

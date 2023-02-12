@@ -42,120 +42,131 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
               ),
             ),
           ),
-          Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 45,
-                      left: 35,
-                      right: 35,
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child:  Text(
+                    'who we are'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 18,
                     ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              width: 35,
-                              height: 35,
-                              padding: const EdgeInsetsDirectional.only(
-                                start: 3,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(
-                                  0xffD3CFDC,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                  7,
-                                ),
-                              ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios,
-                                    color: MyColors.primary,
-                                    size: 15,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text(
-                              'who we are'.tr,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Container(
-                              width: 35,
-                              height: 35,
-                              color: Colors.transparent,
-                            ),
-                          ],
+                  ),
+                ),
+                leadingWidth: 70,
+                leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 35,
+                    ),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
                         ),
-                        SizedBox(
-                          width: Get.width,
-                          child: FutureBuilder<PageModel?>(
-                            future: controller.initializePageFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return Column(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          snapshot.data?.data?.title ?? '',
-                                          style: const TextStyle(
-                                            fontSize: 28,
-                                            color: MyColors.primary,
-                                          ),
-                                        ),
-                                        Html(
-                                          data: """${snapshot.data?.data?.content}""",
-                                        ),
-                                      ],
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return Column(
-                                      children: const [
-                                        SizedBox(
-                                          height: 300,
-                                          child: FailureWidget(),
-                                        ),
-                                      ],
-                                    );
-                                  } else {
-                                    return Column(
-                                      children: const [
-                                        SizedBox(
-                                          height: 300,
-                                          child: FailureWidget(),
-                                        ),
-                                      ],
-                                    );
-                                  }
-                              }
-                            },
-                          ),
+                        borderRadius: BorderRadius.circular(
+                          7,
                         ),
-                      ],
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: MyColors.primary,
+                          size: 15,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ],
+              body: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                          top: 45,
+                          left: 35,
+                          right: 35,
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              width: Get.width,
+                              child: FutureBuilder<PageModel?>(
+                                future: controller.initializePageFuture,
+                                builder: (context, snapshot) {
+                                  switch (snapshot.connectionState) {
+                                    case ConnectionState.waiting:
+                                      return const Center(
+                                        child: CircularProgressIndicator(),
+                                      );
+                                    case ConnectionState.done:
+                                    default:
+                                      if (snapshot.hasData) {
+                                        return Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              snapshot.data?.data?.title ?? '',
+                                              style: const TextStyle(
+                                                fontSize: 28,
+                                                color: MyColors.primary,
+                                              ),
+                                            ),
+                                            Html(
+                                              data: """${snapshot.data?.data?.content}""",
+                                            ),
+                                          ],
+                                        );
+                                      } else if (snapshot.hasError) {
+                                        return Column(
+                                          children: const [
+                                            SizedBox(
+                                              height: 300,
+                                              child: FailureWidget(),
+                                            ),
+                                          ],
+                                        );
+                                      } else {
+                                        return Column(
+                                          children: const [
+                                            SizedBox(
+                                              height: 300,
+                                              child: FailureWidget(),
+                                            ),
+                                          ],
+                                        );
+                                      }
+                                  }
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ],
       ),

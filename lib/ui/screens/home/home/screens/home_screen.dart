@@ -74,429 +74,461 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      top: 45,
-                      left: 35,
-                      right: 35,
+            SafeArea(
+              bottom: false,
+              child: Scaffold(
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  primary: false,
+                  toolbarHeight: 40,
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  centerTitle: true,
+                  leadingWidth: 75,
+                  leading: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 35,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            controller.advancedDrawerController.showDrawer();
-                          },
-                          icon: RotatedBox(
-                            quarterTurns:
-                                Get.locale == const Locale('ar') ? 0 : 2,
-                            child: Image.asset(
-                              MyImages.drawerMenu,
-                              width: 25,
-                              height: 25,
-                            ),
-                          ),
+                    child: IconButton(
+                      onPressed: () {
+                        controller.advancedDrawerController.showDrawer();
+                      },
+                      icon: RotatedBox(
+                        quarterTurns: Get.locale == const Locale('ar') ? 0 : 2,
+                        child: Image.asset(
+                          MyImages.drawerMenu,
+                          width: 25,
+                          height: 25,
                         ),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            width: 35,
-                            height: 35,
-                            decoration: BoxDecoration(
-                              color: const Color.fromRGBO(
-                                202,
-                                195,
-                                212,
-                                0.3,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                7,
-                              ),
-                            ),
-                            child: Center(
-                              child: IconButton(
-                                onPressed: () {
-                                  Get.to(
-                                    () => const NotificationsScreen(),
-                                    binding: NotificationsBinding(),
-                                  );
-                                },
-                                icon: Image.asset(
-                                  MyImages.notification,
-                                  width: 25,
-                                  height: 25,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                    // ),
                   ),
-                  SizedBox(
-                    height: 1200,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          height: 5,
+                  actions: [
+                    Padding(
+                      padding: const EdgeInsetsDirectional.only(
+                        end: 35,
+                      ),
+                      child: InkWell(
+                        onTap: () {},
+                        child: Container(
+                          width: 35,
+                          height: 35,
+                          decoration: BoxDecoration(
+                            color: const Color.fromRGBO(
+                              202,
+                              195,
+                              212,
+                              0.3,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              7,
+                            ),
+                          ),
+                          child: Center(
+                            child: IconButton(
+                              onPressed: () {
+                                Get.to(
+                                  () => const NotificationsScreen(),
+                                  binding: NotificationsBinding(),
+                                );
+                              },
+                              icon: Image.asset(
+                                MyImages.notification,
+                                width: 25,
+                                height: 25,
+                              ),
+                            ),
+                          ),
                         ),
-                        GetBuilder<HomeController>(builder: (value) {
-                          return FutureBuilder(
-                            future: controller.initializeSliderFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
-                                  return CarouselSlider(
-                                    items: List.generate(
-                                      2,
-                                      (index) => Container(
-                                        margin: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                        ),
-                                        height: 190,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            25,
-                                          ),
-                                        ),
-                                        child: const CustomShimmerLoading(
-                                          radius: 25,
-                                          height: 190,
-                                        ),
-                                      ),
-                                    ),
-                                    options: CarouselOptions(
-                                      viewportFraction: 1,
-                                      reverse: true,
-                                      autoPlay: true,
-                                    ),
-                                  );
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return CarouselSlider(
-                                      items: List.generate(
-                                        controller.sliderModel?.data?.length ??
-                                            0,
-                                        (index) => Container(
-                                          margin: const EdgeInsets.symmetric(
-                                            horizontal: 30,
-                                          ),
-                                          height: 190,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              25,
-                                            ),
-                                          ),
-                                          child: CustomNetworkImage(
-                                            url: controller.sliderModel
-                                                    ?.data?[index].image ??
-                                                '',
-                                            defaultUrl: MyImages.logo,
-                                            radius: 25,
-                                          ),
-                                        ),
-                                      ),
-                                      options: CarouselOptions(
-                                        viewportFraction: 1,
-                                        reverse: true,
-                                        autoPlay: true,
-                                      ),
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            },
-                          );
-                        }),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        GetBuilder<HomeController>(builder: (value) {
-                          return FutureBuilder(
-                              future: controller.initializeTipsFuture,
-                              builder: (context, snapshot) {
-                                switch (snapshot.connectionState) {
-                                  case ConnectionState.waiting:
-                                    return CarouselSlider(
-                                      items: List.generate(
-                                        2,
-                                        (index) => Container(
-                                          margin: const EdgeInsets.symmetric(
-                                            horizontal: 30,
-                                          ),
-                                          height: 67,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(
-                                              25,
-                                            ),
-                                            color: MyColors.primary,
-                                          ),
-                                          child: const CustomShimmerLoading(
-                                            radius: 25,
-                                            height: 67,
-                                          ),
-                                        ),
-                                      ),
-                                      options: CarouselOptions(
-                                        viewportFraction: 1,
-                                        height: 67,
-                                        reverse: true,
-                                        autoPlay: true,
-                                      ),
-                                    );
-                                  case ConnectionState.done:
-                                  default:
-                                    if (snapshot.hasData) {
-                                      return CarouselSlider(
-                                        items: List.generate(
-                                          controller
-                                                  .allTipsModel?.data?.length ??
-                                              0,
-                                          (index) => Container(
-                                            margin: const EdgeInsets.symmetric(
-                                              horizontal: 30,
-                                            ),
-                                            height: 67,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(
-                                                25,
-                                              ),
-                                              color: MyColors.primary,
-                                            ),
-                                            child: Center(
-                                              child: Text(
-                                                snapshot.data?.data?[index]
-                                                        .note ??
-                                                    '',
-                                                style: const TextStyle(
-                                                  color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
+                body: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                  height: 5,
+                                ),
+                                GetBuilder<HomeController>(builder: (value) {
+                                  return FutureBuilder(
+                                    future: controller.initializeSliderFuture,
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return CarouselSlider(
+                                            items: List.generate(
+                                              2,
+                                              (index) => Container(
+                                                margin: const EdgeInsets
+                                                    .symmetric(
+                                                  horizontal: 30,
+                                                ),
+                                                height: 190,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    25,
+                                                  ),
+                                                ),
+                                                child:
+                                                    const CustomShimmerLoading(
+                                                  radius: 25,
+                                                  height: 190,
                                                 ),
                                               ),
                                             ),
-                                          ),
+                                            options: CarouselOptions(
+                                              viewportFraction: 1,
+                                              reverse: true,
+                                              autoPlay: true,
+                                            ),
+                                          );
+                                        case ConnectionState.done:
+                                        default:
+                                          if (snapshot.hasData) {
+                                            return CarouselSlider(
+                                              items: List.generate(
+                                                controller.sliderModel?.data
+                                                        ?.length ??
+                                                    0,
+                                                (index) => Container(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 30,
+                                                  ),
+                                                  height: 190,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      25,
+                                                    ),
+                                                  ),
+                                                  child: CustomNetworkImage(
+                                                    url: controller
+                                                            .sliderModel
+                                                            ?.data?[index]
+                                                            .image ??
+                                                        '',
+                                                    defaultUrl: MyImages.logo,
+                                                    radius: 25,
+                                                  ),
+                                                ),
+                                              ),
+                                              options: CarouselOptions(
+                                                viewportFraction: 1,
+                                                reverse: true,
+                                                autoPlay: true,
+                                              ),
+                                            );
+                                          } else if (snapshot.hasError) {
+                                            return const FailureWidget();
+                                          } else {
+                                            return const FailureWidget();
+                                          }
+                                      }
+                                    },
+                                  );
+                                }),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                GetBuilder<HomeController>(builder: (value) {
+                                  return FutureBuilder(
+                                      future: controller.initializeTipsFuture,
+                                      builder: (context, snapshot) {
+                                        switch (snapshot.connectionState) {
+                                          case ConnectionState.waiting:
+                                            return CarouselSlider(
+                                              items: List.generate(
+                                                2,
+                                                (index) => Container(
+                                                  margin: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 30,
+                                                  ),
+                                                  height: 67,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      25,
+                                                    ),
+                                                    color: MyColors.primary,
+                                                  ),
+                                                  child:
+                                                      const CustomShimmerLoading(
+                                                    radius: 25,
+                                                    height: 67,
+                                                  ),
+                                                ),
+                                              ),
+                                              options: CarouselOptions(
+                                                viewportFraction: 1,
+                                                height: 67,
+                                                reverse: true,
+                                                autoPlay: true,
+                                              ),
+                                            );
+                                          case ConnectionState.done:
+                                          default:
+                                            if (snapshot.hasData) {
+                                              return CarouselSlider(
+                                                items: List.generate(
+                                                  controller.allTipsModel
+                                                          ?.data?.length ??
+                                                      0,
+                                                  (index) => Container(
+                                                    margin: const EdgeInsets
+                                                        .symmetric(
+                                                      horizontal: 30,
+                                                    ),
+                                                    height: 67,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                        25,
+                                                      ),
+                                                      color: MyColors.primary,
+                                                    ),
+                                                    child: Center(
+                                                      child: Text(
+                                                        snapshot
+                                                                .data
+                                                                ?.data?[index]
+                                                                .note ??
+                                                            '',
+                                                        style:
+                                                            const TextStyle(
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                options: CarouselOptions(
+                                                  viewportFraction: 1,
+                                                  height: 67,
+                                                  reverse: true,
+                                                  autoPlay: true,
+                                                ),
+                                              );
+                                            } else if (snapshot.hasError) {
+                                              return const FailureWidget();
+                                            } else {
+                                              return const FailureWidget();
+                                            }
+                                        }
+                                      });
+                                }),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        MyImages.justice,
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        'categories'.tr,
+                                        style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                GetBuilder<HomeController>(builder: (value) {
+                                  return FutureBuilder(
+                                    future:
+                                        controller.initializeCategoriesFuture,
+                                    builder: (context, snapshot) {
+                                      switch (snapshot.connectionState) {
+                                        case ConnectionState.waiting:
+                                          return SizedBox(
+                                            height: 60,
+                                            child: ListView.separated(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 30,
+                                              ),
+                                              scrollDirection:
+                                                  Axis.horizontal,
+                                              itemCount: 6,
+                                              itemBuilder: (context, index) {
+                                                return const CustomShimmerLoading(
+                                                  radius: 15,
+                                                  width: 60,
+                                                  height: 60,
+                                                );
+                                              },
+                                              separatorBuilder:
+                                                  (context, index) {
+                                                return const SizedBox(
+                                                  width: 10,
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        case ConnectionState.done:
+                                        default:
+                                          if (snapshot.hasData) {
+                                            return SizedBox(
+                                              height: 100,
+                                              child: ListView.separated(
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                  horizontal: 30,
+                                                ),
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount: controller
+                                                        .categoriesModel
+                                                        ?.data
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder:
+                                                    (context, index) {
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      controller.category = MapEntry(
+                                                          controller
+                                                                  .categoriesModel
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .name ??
+                                                              '',
+                                                          controller
+                                                                  .categoriesModel
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .id ??
+                                                              0);
+                                                      Get.to(
+                                                          () =>
+                                                              const AuctionsByCategoryScreen(),
+                                                          binding:
+                                                              AuctionsByCategoryBinding());
+                                                    },
+                                                    child: CustomCategoryItem(
+                                                      url: controller
+                                                              .categoriesModel
+                                                              ?.data?[index]
+                                                              .image ??
+                                                          '',
+                                                      name: controller
+                                                              .categoriesModel
+                                                              ?.data?[index]
+                                                              .name ??
+                                                          '',
+                                                    ),
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) {
+                                                  return const SizedBox(
+                                                    width: 10,
+                                                  );
+                                                },
+                                              ),
+                                            );
+                                          } else if (snapshot.hasError) {
+                                            return const FailureWidget();
+                                          } else {
+                                            return const FailureWidget();
+                                          }
+                                      }
+                                    },
+                                  );
+                                }),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        MyImages.justice,
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        'trending auctions'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
                                         ),
-                                        options: CarouselOptions(
-                                          viewportFraction: 1,
-                                          height: 67,
-                                          reverse: true,
-                                          autoPlay: true,
-                                        ),
-                                      );
-                                    } else if (snapshot.hasError) {
-                                      return const FailureWidget();
-                                    } else {
-                                      return const FailureWidget();
-                                    }
-                                }
-                              });
-                        }),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 35.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                MyImages.justice,
-                                width: 20,
-                                height: 20,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                'categories'.tr,
-                                style: const TextStyle(
-                                    color: MyColors.primary,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        GetBuilder<HomeController>(builder: (value) {
-                          return FutureBuilder(
-                            future: controller.initializeCategoriesFuture,
-                            builder: (context, snapshot) {
-                              switch (snapshot.connectionState) {
-                                case ConnectionState.waiting:
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                GetBuilder<HomeController>(builder: (value) {
                                   return SizedBox(
-                                    height: 60,
-                                    child: ListView.separated(
+                                    height: 247,
+                                    child: PagedListView<int,
+                                        PopularAdsList>.separated(
                                       padding: const EdgeInsets.symmetric(
                                         horizontal: 30,
                                       ),
                                       scrollDirection: Axis.horizontal,
-                                      itemCount: 6,
-                                      itemBuilder: (context, index) {
-                                        return const CustomShimmerLoading(
-                                          radius: 15,
-                                          width: 60,
-                                          height: 60,
-                                        );
-                                      },
-                                      separatorBuilder: (context, index) {
-                                        return const SizedBox(
-                                          width: 10,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                case ConnectionState.done:
-                                default:
-                                  if (snapshot.hasData) {
-                                    return SizedBox(
-                                      height: 100,
-                                      child: ListView.separated(
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 30,
-                                        ),
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: controller.categoriesModel
-                                                ?.data?.length ??
-                                            0,
-                                        itemBuilder: (context, index) {
-                                          return InkWell(
-                                            onTap: () {
-                                              controller.category = MapEntry(
-                                                  controller.categoriesModel
-                                                          ?.data?[index].name ??
-                                                      '',
-                                                  controller.categoriesModel
-                                                          ?.data?[index].id ??
-                                                      0);
-                                              Get.to(
-                                                  () =>
-                                                      const AuctionsByCategoryScreen(),
-                                                  binding:
-                                                      AuctionsByCategoryBinding());
-                                            },
-                                            child: CustomCategoryItem(
-                                              url: controller.categoriesModel
-                                                      ?.data?[index].image ??
-                                                  '',
-                                              name: controller.categoriesModel
-                                                      ?.data?[index].name ??
-                                                  '',
+                                      pagingController:
+                                          controller.trendingPagingController,
+                                      builderDelegate:
+                                          PagedChildBuilderDelegate<
+                                              PopularAdsList>(
+                                        firstPageErrorIndicatorBuilder:
+                                            (context) => SizedBox(
+                                          height: 50,
+                                          child: Center(
+                                            child: Text(
+                                              AppConstants.failedMessage,
                                             ),
-                                          );
-                                        },
-                                        separatorBuilder: (context, index) {
-                                          return const SizedBox(
-                                            width: 10,
-                                          );
-                                        },
-                                      ),
-                                    );
-                                  } else if (snapshot.hasError) {
-                                    return const FailureWidget();
-                                  } else {
-                                    return const FailureWidget();
-                                  }
-                              }
-                            },
-                          );
-                        }),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 35.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                MyImages.justice,
-                                width: 20,
-                                height: 20,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                'trending auctions'.tr,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        GetBuilder<HomeController>(builder: (value) {
-                          return SizedBox(
-                            height: 247,
-                            child: PagedListView<int, PopularAdsList>.separated(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30,
-                              ),
-                              scrollDirection: Axis.horizontal,
-                              pagingController:
-                                  controller.trendingPagingController,
-                              builderDelegate:
-                                  PagedChildBuilderDelegate<PopularAdsList>(
-                                firstPageErrorIndicatorBuilder: (context) =>
-                                    SizedBox(
-                                  height: 50,
-                                  child: Center(
-                                    child: Text(
-                                      AppConstants.failedMessage,
-                                    ),
-                                  ),
-                                ),
-                                newPageProgressIndicatorBuilder: (context) =>
-                                    Column(
-                                  children: [
-                                    CustomShimmerLoading(
-                                      radius: 25,
-                                      height: ScreenSize.phoneSize(
-                                        180,
-                                        height: false,
-                                      ),
-                                      width: ScreenSize.phoneSize(
-                                        180,
-                                        height: false,
-                                      ),
-                                    ),
-                                    const Expanded(
-                                      child: SizedBox(),
-                                    ),
-                                  ],
-                                ),
-                                firstPageProgressIndicatorBuilder: (context) =>
-                                    Row(
-                                  children: List.generate(
-                                    4,
-                                    (index) => Row(
-                                      children: [
-                                        Column(
+                                          ),
+                                        ),
+                                        newPageProgressIndicatorBuilder:
+                                            (context) => Column(
                                           children: [
                                             CustomShimmerLoading(
                                               radius: 25,
@@ -509,132 +541,140 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 height: false,
                                               ),
                                             ),
+                                            const Expanded(
+                                              child: SizedBox(),
+                                            ),
                                           ],
                                         ),
-                                        const SizedBox(
-                                          width: 10,
+                                        firstPageProgressIndicatorBuilder:
+                                            (context) => Row(
+                                          children: List.generate(
+                                            4,
+                                            (index) => Row(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    CustomShimmerLoading(
+                                                      radius: 25,
+                                                      height: ScreenSize
+                                                          .phoneSize(
+                                                        180,
+                                                        height: false,
+                                                      ),
+                                                      width: ScreenSize
+                                                          .phoneSize(
+                                                        180,
+                                                        height: false,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                itemBuilder: (context, data, index) {
-                                  return InkWell(
-                                    child: AuctionItem(
-                                      image: data.image,
-                                      name: data.name,
-                                      user: data.user?.name,
-                                      id: data.id,
-                                      startDate: data.startDate,
-                                      endDate: data.endDate,
-                                    ),
-                                    onTap: () {
-                                      controller.selectedIndex = index;
-                                      CustomNavigationBarController
-                                          .find.tabController
-                                          .jumpToTab(3);
-                                      Future.delayed(
-                                        const Duration(
-                                          milliseconds: 50,
-                                        ),
-                                        () {
-                                          if (TrendingAuctionController.find
-                                                  .pageController.hasClients &&
-                                              TrendingAuctionController
-                                                      .find
-                                                      .pageController
-                                                      .positions
-                                                      .length <=
-                                                  1) {
-                                            TrendingAuctionController
-                                                .find.pageController
-                                                .jumpToPage(
-                                                    controller.selectedIndex);
-                                          }
+                                        itemBuilder: (context, data, index) {
+                                          return InkWell(
+                                            child: AuctionItem(
+                                              image: data.image,
+                                              name: data.name,
+                                              user: data.user?.name,
+                                              id: data.id,
+                                              startDate: data.startDate,
+                                              endDate: data.endDate,
+                                            ),
+                                            onTap: () {
+                                              controller.selectedIndex =
+                                                  index;
+                                              CustomNavigationBarController
+                                                  .find.tabController
+                                                  .jumpToTab(3);
+                                              Future.delayed(
+                                                const Duration(
+                                                  milliseconds: 50,
+                                                ),
+                                                () {
+                                                  if (TrendingAuctionController
+                                                          .find
+                                                          .pageController
+                                                          .hasClients &&
+                                                      TrendingAuctionController
+                                                              .find
+                                                              .pageController
+                                                              .positions
+                                                              .length <=
+                                                          1) {
+                                                    TrendingAuctionController
+                                                        .find.pageController
+                                                        .jumpToPage(controller
+                                                            .selectedIndex);
+                                                  }
+                                                },
+                                              );
+                                            },
+                                          );
                                         },
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(
-                                  width: 10,
-                                );
-                              },
-                            ),
-                          );
-                        }),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 35.0,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.asset(
-                                MyImages.justice,
-                                width: 20,
-                                height: 20,
-                              ),
-                              const SizedBox(
-                                width: 4,
-                              ),
-                              Text(
-                                'you may also like'.tr,
-                                style: const TextStyle(
-                                  color: MyColors.primary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 15,
-                        ),
-                        GetBuilder<HomeController>(
-                          builder: (value) {
-                            return SizedBox(
-                              height: 247,
-                              child:
-                                  PagedListView<int, PopularAdsList>.separated(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 30,
-                                ),
-                                scrollDirection: Axis.horizontal,
-                                pagingController:
-                                    controller.allAdsPagingController,
-                                builderDelegate:
-                                    PagedChildBuilderDelegate<PopularAdsList>(
-                                  newPageProgressIndicatorBuilder: (context) =>
-                                      Column(
-                                    children: [
-                                      CustomShimmerLoading(
-                                        radius: 25,
-                                        height: ScreenSize.phoneSize(
-                                          180,
-                                          height: false,
-                                        ),
-                                        width: ScreenSize.phoneSize(
-                                          180,
-                                          height: false,
-                                        ),
                                       ),
-                                      const Expanded(
-                                        child: SizedBox(),
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          width: 10,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 35.0,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Image.asset(
+                                        MyImages.justice,
+                                        width: 20,
+                                        height: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 4,
+                                      ),
+                                      Text(
+                                        'you may also like'.tr,
+                                        style: const TextStyle(
+                                          color: MyColors.primary,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  firstPageProgressIndicatorBuilder:
-                                      (context) => Row(
-                                    children: List.generate(
-                                      4,
-                                      (index) => Row(
-                                        children: [
-                                          Column(
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                GetBuilder<HomeController>(
+                                  builder: (value) {
+                                    return SizedBox(
+                                      height: 247,
+                                      child: PagedListView<int,
+                                          PopularAdsList>.separated(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 30,
+                                        ),
+                                        scrollDirection: Axis.horizontal,
+                                        pagingController:
+                                            controller.allAdsPagingController,
+                                        builderDelegate:
+                                            PagedChildBuilderDelegate<
+                                                PopularAdsList>(
+                                          newPageProgressIndicatorBuilder:
+                                              (context) => Column(
                                             children: [
                                               CustomShimmerLoading(
                                                 radius: 25,
@@ -647,67 +687,103 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   height: false,
                                                 ),
                                               ),
+                                              const Expanded(
+                                                child: SizedBox(),
+                                              ),
                                             ],
                                           ),
-                                          const SizedBox(
-                                            width: 10,
+                                          firstPageProgressIndicatorBuilder:
+                                              (context) => Row(
+                                            children: List.generate(
+                                              4,
+                                              (index) => Row(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      CustomShimmerLoading(
+                                                        radius: 25,
+                                                        height: ScreenSize
+                                                            .phoneSize(
+                                                          180,
+                                                          height: false,
+                                                        ),
+                                                        width: ScreenSize
+                                                            .phoneSize(
+                                                          180,
+                                                          height: false,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 10,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  firstPageErrorIndicatorBuilder: (context) =>
-                                      SizedBox(
-                                    height: 50,
-                                    child: Center(
-                                      child: Text(
-                                        AppConstants.failedMessage,
-                                      ),
-                                    ),
-                                  ),
-                                  itemBuilder: (context, data, index) {
-                                    return InkWell(
-                                      child: AuctionItem(
-                                        image: data.image,
-                                        name: data.name,
-                                        user: data.user?.name,
-                                        id: data.id,
-                                        startDate: data.startDate,
-                                        endDate: data.endDate,
-                                      ),
-                                      onTap: () {
-                                        Future.delayed(
-                                          const Duration(
-                                            milliseconds: 100,
+                                          firstPageErrorIndicatorBuilder:
+                                              (context) => SizedBox(
+                                            height: 50,
+                                            child: Center(
+                                              child: Text(
+                                                AppConstants.failedMessage,
+                                              ),
+                                            ),
                                           ),
-                                          () {
-                                            ViewAuctionController
-                                                .find.pageController
-                                                .jumpToPage(index);
+                                          itemBuilder:
+                                              (context, data, index) {
+                                            return InkWell(
+                                              child: AuctionItem(
+                                                image: data.image,
+                                                name: data.name,
+                                                user: data.user?.name,
+                                                id: data.id,
+                                                startDate: data.startDate,
+                                                endDate: data.endDate,
+                                              ),
+                                              onTap: () {
+                                                Future.delayed(
+                                                  const Duration(
+                                                    milliseconds: 100,
+                                                  ),
+                                                  () {
+                                                    ViewAuctionController
+                                                        .find.pageController
+                                                        .jumpToPage(index);
+                                                  },
+                                                );
+                                                Get.to(
+                                                  () =>
+                                                      const ViewAuctionScreen(),
+                                                  arguments: controller
+                                                      .allAdsPagingController
+                                                      .itemList!,
+                                                );
+                                              },
+                                            );
                                           },
-                                        );
-                                        Get.to(
-                                          () => const ViewAuctionScreen(),
-                                          arguments: controller
-                                              .allAdsPagingController.itemList!,
-                                        );
-                                      },
+                                        ),
+                                        separatorBuilder: (context, index) {
+                                          return const SizedBox(
+                                            width: 10,
+                                          );
+                                        },
+                                      ),
                                     );
                                   },
                                 ),
-                                separatorBuilder: (context, index) {
-                                  return const SizedBox(
-                                    width: 10,
-                                  );
-                                },
-                              ),
-                            );
-                          },
+                                const SizedBox(
+                                  height: 100,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],

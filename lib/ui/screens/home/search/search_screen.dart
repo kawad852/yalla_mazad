@@ -66,245 +66,275 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 45,
-                    left: 35,
-                    right: 35,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        padding: const EdgeInsetsDirectional.only(
-                          start: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(
-                            0xffD3CFDC,
-                          ),
-                          borderRadius: BorderRadius.circular(
-                            7,
-                          ),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () {
-                              CustomNavigationBarController.find.tabController
-                                  .jumpToTab(0);
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: MyColors.primary,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Text(
-                        'search'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                      Container(
-                        width: 35,
-                        height: 35,
-                        decoration: BoxDecoration(
-                          color: const Color.fromRGBO(202, 195, 212, 0.3),
-                          borderRadius: BorderRadius.circular(
-                            7,
-                          ),
-                        ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () {
-                              Get.to(
-                                () => const NotificationsScreen(),
-                                binding: NotificationsBinding(),
-                              );
-                            },
-                            icon: Image.asset(
-                              MyImages.notification,
-                              width: 25,
-                              height: 25,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child: Text(
+                    'search'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const SizedBox(
-                      height: 20,
+                leadingWidth: 70,
+                leading: GestureDetector(
+                  onTap: () {
+                    CustomNavigationBarController.find.tabController
+                        .jumpToTab(0);
+                  },
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 35,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0,
-                      ),
-                      child: CustomTextField(
-                        controller: controller.searchController,
-                        color: MyColors.primary5D0,
-                        hint: 'what do you want to search for?'.tr,
-                        suffixIcon: const Icon(
-                          Icons.search_sharp,
-                          color: MyColors.primary,
-                          size: 30,
-                        ),
-                        onChanged: (value) {
-                          if (controller.searchQuery.value != value) {
-                            controller.onSearchChanged(value);
-                          }
-                        },
-                      ),
-                    ),
-                    PagedListView<int, SearchedAdList>.separated(
+                    child: Container(
+                      width: 35,
+                      height: 35,
                       padding: const EdgeInsetsDirectional.only(
-                        start: 30,
-                        top: 20,
+                        start: 3,
                       ),
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      pagingController: controller.searchPagingController,
-                      builderDelegate:
-                          PagedChildBuilderDelegate<SearchedAdList>(
-                              noItemsFoundIndicatorBuilder: (context) {
-                        return SizedBox(
-                          height: 400,
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.only(
-                              end: 30,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  MyImages.noSearchResults,
-                                  height: 320,
-                                ),
-                                Text(
-                                  'unfortunately, no search results are currently available'
-                                      .tr,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(
-                                      0xff333333,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }, firstPageErrorIndicatorBuilder: (context) {
-                        return SizedBox(
-                          height: 400,
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.only(
-                              end: 30,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Image.asset(
-                                  MyImages.noSearchResults,
-                                  height: 320,
-                                ),
-                                Text(
-                                  'unfortunately, no search results are currently available'
-                                      .tr,
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Color(
-                                      0xff333333,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      }, itemBuilder: (context, data, index) {
-                        return InkWell(
-                          onTap: () {
-                            String startDate = data.startDate ?? '';
-                            String endDate = data.endDate ?? '';
-                            log(startDate);
-                            log(endDate);
-                            int startDifference = DateTime.parse(startDate)
-                                .difference(DateTime.now())
-                                .inSeconds;
-                            int endDifference = DateTime.now()
-                                .difference(DateTime.parse(endDate))
-                                .inSeconds;
-                            if (startDifference >= 1) {
-                              log('coming');
-                              Get.to(
-                                () => const ComingAuctionScreen(),
-                                binding: ComingAuctionBinding(),
-                                arguments: data.id,
-                              );
-                            } else if (startDifference <= 0 &&
-                                endDifference <= 0) {
-                              log('current');
-                              Get.to(
-                                () => const CurrentAuctionScreen(),
-                                binding: CurrentAuctionBinding(),
-                                arguments: [
-                                  data.id,
-                                  data.priceOne,
-                                  data.priceTwo,
-                                  data.priceThree
-                                ],
-                              );
-                            } else if (endDifference >= 1) {
-                              log('done');
-                              Get.to(
-                                () => const DoneAuctionScreen(),
-                                binding: DoneAuctionBinding(),
-                                arguments: data.id,
-                              );
-                            }
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: MyColors.primary,
+                          size: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                actions: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      end: 35,
+                    ),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(202, 195, 212, 0.3),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                      ),
+                      child: Center(
+                        child: IconButton(
+                          onPressed: () {
+                            Get.to(
+                              () => const NotificationsScreen(),
+                              binding: NotificationsBinding(),
+                            );
                           },
-                          child: AllAuctionsItem(
-                            image: data.image,
-                            name: data.name,
-                            details: data.content,
-                            id: data.id,
-                            userImage: data.user?.image,
-                            userName: data.user?.name,
-                            startDate: data.startDate,
-                            endDate: data.endDate,
+                          icon: Image.asset(
+                            MyImages.notification,
+                            width: 25,
+                            height: 25,
                           ),
-                        );
-                      }),
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(
-                          height: 10,
-                        );
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              body: Column(
+                children: [
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 30.0,
+                      right: 30,
+                      bottom: 10,
+                    ),
+                    child: CustomTextField(
+                      controller: controller.searchController,
+                      color: MyColors.primary5D0,
+                      hint: 'what do you want to search for?'.tr,
+                      suffixIcon: const Icon(
+                        Icons.search_sharp,
+                        color: MyColors.primary,
+                        size: 30,
+                      ),
+                      onChanged: (value) {
+                        if (controller.searchQuery.value != value) {
+                          controller.onSearchChanged(value);
+                        }
                       },
                     ),
-                    const SizedBox(
-                      height: 90,
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              PagedListView<int, SearchedAdList>.separated(
+                                padding: const EdgeInsetsDirectional.only(
+                                  start: 30,
+                                  top: 20,
+                                ),
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                pagingController:
+                                    controller.searchPagingController,
+                                builderDelegate:
+                                    PagedChildBuilderDelegate<SearchedAdList>(
+                                        noItemsFoundIndicatorBuilder:
+                                            (context) {
+                                  return SizedBox(
+                                    height: 400,
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.only(
+                                        end: 30,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            MyImages.noSearchResults,
+                                            height: 320,
+                                          ),
+                                          Text(
+                                            'unfortunately, no search results are currently available'
+                                                .tr,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(
+                                                0xff333333,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }, firstPageErrorIndicatorBuilder: (context) {
+                                  return SizedBox(
+                                    height: 400,
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.only(
+                                        end: 30,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Image.asset(
+                                            MyImages.noSearchResults,
+                                            height: 320,
+                                          ),
+                                          Text(
+                                            'unfortunately, no search results are currently available'
+                                                .tr,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(
+                                                0xff333333,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                }, itemBuilder: (context, data, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      String startDate = data.startDate ?? '';
+                                      String endDate = data.endDate ?? '';
+                                      log(startDate);
+                                      log(endDate);
+                                      int startDifference =
+                                          DateTime.parse(startDate)
+                                              .difference(DateTime.now())
+                                              .inSeconds;
+                                      int endDifference = DateTime.now()
+                                          .difference(DateTime.parse(endDate))
+                                          .inSeconds;
+                                      if (startDifference >= 1) {
+                                        log('coming');
+                                        Get.to(
+                                          () => const ComingAuctionScreen(),
+                                          binding: ComingAuctionBinding(),
+                                          arguments: data.id,
+                                        );
+                                      } else if (startDifference <= 0 &&
+                                          endDifference <= 0) {
+                                        log('current');
+                                        Get.to(
+                                          () => const CurrentAuctionScreen(),
+                                          binding: CurrentAuctionBinding(),
+                                          arguments: [
+                                            data.id,
+                                            data.priceOne,
+                                            data.priceTwo,
+                                            data.priceThree
+                                          ],
+                                        );
+                                      } else if (endDifference >= 1) {
+                                        log('done');
+                                        Get.to(
+                                          () => const DoneAuctionScreen(),
+                                          binding: DoneAuctionBinding(),
+                                          arguments: data.id,
+                                        );
+                                      }
+                                    },
+                                    child: AllAuctionsItem(
+                                      image: data.image,
+                                      name: data.name,
+                                      details: data.content,
+                                      id: data.id,
+                                      userImage: data.user?.image,
+                                      userName: data.user?.name,
+                                      startDate: data.startDate,
+                                      endDate: data.endDate,
+                                    ),
+                                  );
+                                }),
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(
+                                    height: 10,
+                                  );
+                                },
+                              ),
+                              const SizedBox(
+                                height: 100,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                  ],
-                ),
-              ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],

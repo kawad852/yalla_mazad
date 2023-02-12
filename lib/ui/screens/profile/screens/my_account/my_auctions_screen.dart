@@ -24,12 +24,6 @@ class MyAuctionsScreen extends StatefulWidget {
 
 class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
   @override
-  void initState() {
-    Get.put(MyAuctionsController());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final controller = MyAuctionsController.find;
     return Padding(
@@ -41,6 +35,7 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
       ),
       child: ListView(
         padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           FutureBuilder<MyAdvertisementsModel?>(
             future: controller.initializeMyAdsFuture,

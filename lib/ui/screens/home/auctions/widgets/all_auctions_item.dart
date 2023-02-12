@@ -82,7 +82,7 @@ class _AllAuctionsItemState extends State<AllAuctionsItem> {
           }
           setState(() {});
         });
-      } else if (seconds == 0) {
+      } else if (seconds <= 0) {
         status.value = 2;
       } else if (secondsToStart <= 0 && seconds > 0) {
         status.value = 1;

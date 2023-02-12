@@ -44,303 +44,343 @@ class _PlansScreenState extends State<PlansScreen> {
               ),
             ),
           ),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    top: 45,
-                    left: 35,
-                    right: 35,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        onPressed: () {
-                          Get.to(
-                            () => const CustomNavigationBar(),
-                            binding: HomeBinding(),
-                          );
-                        },
-                        icon: const Icon(
-                          Icons.cancel_outlined,
-                          color: MyColors.primary,
-                          size: 25,
-                        ),
-                      ),
-                      Text(
-                        'subscriptions'.tr,
-                        style: const TextStyle(
-                          color: MyColors.primary,
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 50,
-                      ),
-                    ],
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child: Text(
+                    'subscriptions'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-                SizedBox(
-                  height: Get.height * 1.4,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 30.0,
-                              ),
-                              child: RichText(
-                                text: TextSpan(
-                                  children: [
-                                    TextSpan(
-                                      text: 'congratulations'.tr,
-                                      style: const TextStyle(
-                                        color: MyColors.red,
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                leadingWidth: 70,
+                leading: IconButton(
+                  onPressed: () {
+                    Get.to(
+                      () => const CustomNavigationBar(),
+                      binding: HomeBinding(),
+                    );
+                  },
+                  icon: const Padding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: 35,
+                    ),
+                    child: Icon(
+                      Icons.cancel_outlined,
+                      color: MyColors.primary,
+                      size: 25,
+                    ),
+                  ),
+                ),
+              ),
+              body: Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 30.0,
                                     ),
-                                    TextSpan(
-                                      text:
-                                          'you\'ve got a free subscription, valid for one auction'
-                                              .tr,
-                                      style: const TextStyle(
-                                        color: MyColors.primary,
-                                        fontSize: 32,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height,
-                              child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 30.0,
-                                      ),
-                                      child: Text(
-                                        'you can change your subscription to any other subscription at any time'
-                                            .tr,
-                                        style: const TextStyle(
-                                          color: MyColors.primary,
-                                          fontSize: 18,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 30.0,
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                    child: RichText(
+                                      text: TextSpan(
                                         children: [
-                                          Image.asset(
-                                            MyImages.justice,
-                                            width: 20,
-                                            height: 20,
+                                          TextSpan(
+                                            text: 'congratulations'.tr,
+                                            style: const TextStyle(
+                                              color: MyColors.red,
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                          const SizedBox(
-                                            width: 4,
-                                          ),
-                                          Text(
-                                            'subscriptions'.tr,
+                                          TextSpan(
+                                            text:
+                                                'you\'ve got a free subscription, valid for one auction'
+                                                    .tr,
                                             style: const TextStyle(
                                               color: MyColors.primary,
-                                              fontSize: 20,
+                                              fontSize: 32,
+                                              fontWeight: FontWeight.bold,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
-                                    const SizedBox(
-                                      height: 30,
-                                    ),
-                                    FutureBuilder(
-                                        future:
-                                            controller.initializePlansFuture,
-                                        builder: (context, snapshot) {
-                                          switch (snapshot.connectionState) {
-                                            case ConnectionState.waiting:
-                                              return CarouselSlider(
-                                                items: List.generate(
-                                                  3,
-                                                  (index) => Opacity(
-                                                    opacity:
-                                                        controller.pageIndex ==
-                                                                index
-                                                            ? 1
-                                                            : 0.5,
-                                                    child: CustomShimmerLoading(
-                                                      radius: 25,
-                                                      height: 392,
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width -
-                                                              75,
-                                                    ),
-                                                  ),
-                                                ),
-                                                options: CarouselOptions(
-                                                  enableInfiniteScroll: false,
-                                                  height: 392,
-                                                  viewportFraction: 0.8,
-                                                  enlargeCenterPage: true,
-                                                  initialPage: 0,
-                                                  autoPlay: false,
-                                                  enlargeFactor: 0.2,
-                                                  autoPlayInterval:
-                                                      const Duration(
-                                                    milliseconds: 1000,
-                                                  ),
-                                                ),
-                                              );
-                                            case ConnectionState.done:
-                                            default:
-                                              if (snapshot.hasData) {
-                                                return CarouselSlider(
-                                                  items: List.generate(
-                                                    snapshot.data?.data
-                                                            ?.length ??
-                                                        0,
-                                                    (index) => Opacity(
-                                                      opacity: controller
-                                                                  .pageIndex ==
-                                                              index
-                                                          ? 1
-                                                          : 0.5,
-                                                      child: PlanItem(
-                                                        price: snapshot
-                                                            .data
-                                                            ?.data?[index]
-                                                            .price,
-                                                        pointOne: snapshot
-                                                            .data
-                                                            ?.data?[index]
-                                                            .pointOne,
-                                                        pointTwo: snapshot
-                                                            .data
-                                                            ?.data?[index]
-                                                            .pointTwo,
-                                                        pointThree: snapshot
-                                                            .data
-                                                            ?.data?[index]
-                                                            .pointThree,
-                                                        planId: snapshot.data
-                                                            ?.data?[index].id
-                                                            .toString(),
-                                                        time: snapshot.data
-                                                            ?.data?[index].time,
-                                                        function: controller
-                                                            .fetchCreateSubscriptionData,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  options: CarouselOptions(
-                                                    onPageChanged: (index, x) {
-                                                      setState(
-                                                        () {
-                                                          controller.pageIndex =
-                                                              index;
-                                                        },
-                                                      );
-                                                    },
-                                                    //aspectRatio: 1.1,
-                                                    enableInfiniteScroll: false,
-                                                    height: 392,
-                                                    viewportFraction: 0.8,
-                                                    enlargeCenterPage: true,
-                                                    initialPage: 0,
-                                                    autoPlay: false,
-                                                    enlargeFactor: 0.2,
-                                                    autoPlayInterval:
-                                                        const Duration(
-                                                      milliseconds: 1000,
-                                                    ),
-                                                  ),
-                                                );
-                                              } else if (snapshot.hasError) {
-                                                return const FailureWidget();
-                                              } else {
-                                                return const FailureWidget();
-                                              }
-                                          }
-                                        }),
-                                    const SizedBox(
-                                      height: 60,
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 30.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          Get.to(
-                                            () => const CustomNavigationBar(),
-                                            binding: HomeBinding(),
-                                          );
-                                        },
-                                        child: Container(
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: MyColors.primary,
-                                            borderRadius: BorderRadius.circular(
-                                              25,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        MediaQuery.of(context).size.height,
+                                    child: SingleChildScrollView(
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.symmetric(
+                                              horizontal: 30.0,
                                             ),
-                                          ),
-                                          child: Center(
                                             child: Text(
-                                              'home screen'.tr,
+                                              'you can change your subscription to any other subscription at any time'
+                                                  .tr,
                                               style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w500,
+                                                color: MyColors.primary,
+                                                fontSize: 18,
                                               ),
                                             ),
                                           ),
-                                        ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.symmetric(
+                                              horizontal: 30.0,
+                                            ),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Image.asset(
+                                                  MyImages.justice,
+                                                  width: 20,
+                                                  height: 20,
+                                                ),
+                                                const SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  'subscriptions'.tr,
+                                                  style: const TextStyle(
+                                                    color: MyColors.primary,
+                                                    fontSize: 20,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 30,
+                                          ),
+                                          FutureBuilder(
+                                              future: controller
+                                                  .initializePlansFuture,
+                                              builder: (context, snapshot) {
+                                                switch (snapshot
+                                                    .connectionState) {
+                                                  case ConnectionState
+                                                      .waiting:
+                                                    return CarouselSlider(
+                                                      items: List.generate(
+                                                        3,
+                                                        (index) => Opacity(
+                                                          opacity: controller
+                                                                      .pageIndex ==
+                                                                  index
+                                                              ? 1
+                                                              : 0.5,
+                                                          child:
+                                                              CustomShimmerLoading(
+                                                            radius: 25,
+                                                            height: 392,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width -
+                                                                75,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      options:
+                                                          CarouselOptions(
+                                                        enableInfiniteScroll:
+                                                            false,
+                                                        height: 392,
+                                                        viewportFraction: 0.8,
+                                                        enlargeCenterPage:
+                                                            true,
+                                                        initialPage: 0,
+                                                        autoPlay: false,
+                                                        enlargeFactor: 0.2,
+                                                        autoPlayInterval:
+                                                            const Duration(
+                                                          milliseconds: 1000,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  case ConnectionState.done:
+                                                  default:
+                                                    if (snapshot.hasData) {
+                                                      return CarouselSlider(
+                                                        items: List.generate(
+                                                          snapshot.data?.data
+                                                                  ?.length ??
+                                                              0,
+                                                          (index) => Opacity(
+                                                            opacity: controller
+                                                                        .pageIndex ==
+                                                                    index
+                                                                ? 1
+                                                                : 0.5,
+                                                            child: PlanItem(
+                                                              price: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .price,
+                                                              pointOne: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .pointOne,
+                                                              pointTwo: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .pointTwo,
+                                                              pointThree: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .pointThree,
+                                                              planId: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .id
+                                                                  .toString(),
+                                                              time: snapshot
+                                                                  .data
+                                                                  ?.data?[
+                                                                      index]
+                                                                  .time,
+                                                              function: controller
+                                                                  .fetchCreateSubscriptionData,
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        options:
+                                                            CarouselOptions(
+                                                          onPageChanged:
+                                                              (index, x) {
+                                                            setState(
+                                                              () {
+                                                                controller
+                                                                        .pageIndex =
+                                                                    index;
+                                                              },
+                                                            );
+                                                          },
+                                                          //aspectRatio: 1.1,
+                                                          enableInfiniteScroll:
+                                                              false,
+                                                          height: 392,
+                                                          viewportFraction:
+                                                              0.8,
+                                                          enlargeCenterPage:
+                                                              true,
+                                                          initialPage: 0,
+                                                          autoPlay: false,
+                                                          enlargeFactor: 0.2,
+                                                          autoPlayInterval:
+                                                              const Duration(
+                                                            milliseconds:
+                                                                1000,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                        .hasError) {
+                                                      return const FailureWidget();
+                                                    } else {
+                                                      return const FailureWidget();
+                                                    }
+                                                }
+                                              }),
+                                          const SizedBox(
+                                            height: 60,
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.symmetric(
+                                                    horizontal: 30.0),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                Get.to(
+                                                  () =>
+                                                      const CustomNavigationBar(),
+                                                  binding: HomeBinding(),
+                                                );
+                                              },
+                                              child: Container(
+                                                height: 60,
+                                                decoration: BoxDecoration(
+                                                  color: MyColors.primary,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    25,
+                                                  ),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    'home screen'.tr,
+                                                    style: const TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          // const SizedBox(
+                                          //   height: 20,
+                                          // ),
+                                        ],
                                       ),
                                     ),
-                                    // const SizedBox(
-                                    //   height: 20,
-                                    // ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],

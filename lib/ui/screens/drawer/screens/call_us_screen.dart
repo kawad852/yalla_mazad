@@ -39,230 +39,241 @@ class _CallUsScreenState extends State<CallUsScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 55,
-              left: 35,
-              right: 35,
-            ),
-            child: SizedBox(
-              width: Get.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child: Text(
+                    'call us'.tr,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      color: MyColors.primary,
+                    ),
+                  ),
+                ),
+                leadingWidth: 70,
+                leading: GestureDetector(
+                  onTap: () {
+                    Get.back();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsetsDirectional.only(
+                      start: 35,
+                    ),
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: MyColors.primary,
+                          size: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              body: Padding(
+                padding: const EdgeInsets.only(
+                  left: 35,
+                  right: 35,
+                  top: 10,
+                ),
+                child: SizedBox(
+                  width: Get.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 35,
-                        height: 35,
-                        padding: const EdgeInsetsDirectional.only(
-                          start: 3,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(
-                            0xffD3CFDC,
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              'we are here for you! how can we help?'.tr,
+                              textAlign: TextAlign.center,
+                              maxLines: 3,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                color: MyColors.primary,
+                              ),
+                            ),
                           ),
-                          borderRadius: BorderRadius.circular(
-                            7,
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      CustomTextField(
+                        controller: controller.nameController,
+                        color: MyColors.textFieldColor,
+                        validator: (text) {
+                          if (text == '' || text!.isEmpty) {
+                            return 'cannot be empty'.tr;
+                          }
+                          return null;
+                        },
+                        prefixIcon: SizedBox(
+                          width: 60,
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 18,
+                              ),
+                              Image.asset(
+                                MyImages.userField,
+                                width: 20,
+                                height: 20,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                width: 1,
+                                height: 38,
+                                color: MyColors.primary,
+                              ),
+                            ],
                           ),
                         ),
-                        child: Center(
-                          child: IconButton(
-                            onPressed: () {
-                              Get.back();
-                            },
-                            icon: const Icon(
-                              Icons.arrow_back_ios,
-                              color: MyColors.primary,
-                              size: 15,
+                        hint: 'name'.tr,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        controller: controller.emailController,
+                        color: MyColors.textFieldColor,
+                        validator: (text) {
+                          if (text == '' || text!.isEmpty) {
+                            return 'cannot be empty'.tr;
+                          } else if (!text.contains(RegExp(
+                              r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
+                            return 'not a valid email'.tr;
+                          }
+                          return null;
+                        },
+                        prefixIcon: SizedBox(
+                          width: 60,
+                          child: Row(
+                            children: [
+                              const SizedBox(
+                                width: 18,
+                              ),
+                              const Icon(
+                                Icons.alternate_email,
+                                color: Color(0xffBDB5D0),
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                width: 1,
+                                height: 38,
+                                color: MyColors.primary,
+                              ),
+                            ],
+                          ),
+                        ),
+                        hint: 'email'.tr,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CustomTextField(
+                        controller: controller.messageController,
+                        color: MyColors.textFieldColor,
+                        maxLines: 10,
+                        validator: (text) {
+                          if (text == '' || text!.isEmpty) {
+                            return 'cannot be empty'.tr;
+                          }
+                          return null;
+                        },
+                        // prefixIcon: Container(
+                        //   width: 60,
+                        //   height: 240,
+                        //   padding: const EdgeInsets.only(bottom: 180),
+                        //   child: Row(
+                        //     crossAxisAlignment: CrossAxisAlignment.center,
+                        //     children: [
+                        //       const SizedBox(
+                        //         width: 18,
+                        //       ),
+                        //       const Icon(
+                        //         Icons.message_outlined,
+                        //         color: Color(0xffBDB5D0),
+                        //       ),
+                        //       const SizedBox(
+                        //         width: 10,
+                        //       ),
+                        //       Container(
+                        //         width: 1,
+                        //         height: 38,
+                        //         color: MyColors.primary,
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        hint: 'your message'.tr,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      GestureDetector(
+                        onTap: () async {
+                          await controller.sendEmailJS(
+                            controller.nameController.text,
+                            controller.emailController.text,
+                            controller.messageController.text,
+                            context,
+                          );
+                        },
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: MyColors.primary,
+                            borderRadius: BorderRadius.circular(
+                              25,
+                            ),
+                          ),
+                          child: Center(
+                            child: Text(
+                              'send'.tr,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Text(
-                        'call us'.tr,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          color: MyColors.primary,
-                        ),
-                      ),
-                      Container(
-                        width: 35,
-                        height: 35,
-                        color: Colors.transparent,
-                      ),
                     ],
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'we are here for you! how can we help?'.tr,
-                          textAlign: TextAlign.center,
-                          maxLines: 3,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            color: MyColors.primary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  CustomTextField(
-                    controller: controller.nameController,
-                    color: MyColors.textFieldColor,
-                    validator: (text) {
-                      if (text == '' || text!.isEmpty) {
-                        return 'cannot be empty'.tr;
-                      }
-                      return null;
-                    },
-                    prefixIcon: SizedBox(
-                      width: 60,
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          Image.asset(
-                            MyImages.userField,
-                            width: 20,
-                            height: 20,
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 1,
-                            height: 38,
-                            color: MyColors.primary,
-                          ),
-                        ],
-                      ),
-                    ),
-                    hint: 'name'.tr,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                    controller: controller.emailController,
-                    color: MyColors.textFieldColor,
-                    validator: (text) {
-                      if (text == '' || text!.isEmpty) {
-                        return 'cannot be empty'.tr;
-                      } else if (!text.contains(RegExp(
-                          r"^[a-zA-Z0-9.a-zA-Z0-9!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+"))) {
-                        return 'not a valid email'.tr;
-                      }
-                      return null;
-                    },
-                    prefixIcon: SizedBox(
-                      width: 60,
-                      child: Row(
-                        children: [
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          const Icon(
-                            Icons.alternate_email,
-                            color: Color(0xffBDB5D0),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 1,
-                            height: 38,
-                            color: MyColors.primary,
-                          ),
-                        ],
-                      ),
-                    ),
-                    hint: 'email'.tr,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  CustomTextField(
-                    controller: controller.messageController,
-                    color: MyColors.textFieldColor,
-                    maxLines: 10,
-                    validator: (text) {
-                      if (text == '' || text!.isEmpty) {
-                        return 'cannot be empty'.tr;
-                      }
-                      return null;
-                    },
-                    prefixIcon: Container(
-                      width: 60,
-                      height: 240,
-                      padding: const EdgeInsets.only(bottom: 180),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const SizedBox(
-                            width: 18,
-                          ),
-                          const Icon(
-                            Icons.message_outlined,
-                            color: Color(0xffBDB5D0),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            width: 1,
-                            height: 38,
-                            color: MyColors.primary,
-                          ),
-                        ],
-                      ),
-                    ),
-                    hint: 'your message'.tr,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      await controller.sendEmailJS(
-                        controller.nameController.text,
-                        controller.emailController.text,
-                        controller.messageController.text,
-                        context,
-                      );
-                    },
-                    child: Container(
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: MyColors.primary,
-                        borderRadius: BorderRadius.circular(
-                          25,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'send'.tr,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+                ),
               ),
             ),
           ),

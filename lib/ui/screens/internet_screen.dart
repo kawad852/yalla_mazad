@@ -87,7 +87,6 @@ class _InternetScreenState extends State<InternetScreen> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      ///TODO:
                       var status = await Connectivity().checkConnectivity();
                       log("internetStatus:: $status");
                       if (status == ConnectivityResult.none) {

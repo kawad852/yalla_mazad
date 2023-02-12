@@ -23,11 +23,6 @@ class MyFavoritesScreen extends StatefulWidget {
 }
 
 class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
-  @override
-  initState() {
-    super.initState();
-    Get.put(MyFavoritesController());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,6 +36,7 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
       ),
       child: ListView(
         padding: EdgeInsets.zero,
+        physics: const NeverScrollableScrollPhysics(),
         children: [
           FutureBuilder<MyFavoritesModel?>(
             future: controller.initializeMyFavFuture,

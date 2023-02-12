@@ -34,97 +34,87 @@ class _ViewAuctionScreenState extends State<ViewAuctionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(
-          150,
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-            top: 45,
-          ),
-          child: AppBar(
-            primary: false,
-            toolbarHeight: 35,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            centerTitle: true,
-            title: Text(
-              'trending auctions'.tr,
-              style: const TextStyle(
-                color: MyColors.primary,
-                fontSize: 18,
-              ),
-            ),
-            leadingWidth: 72,
-            leading: GestureDetector(
-              onTap: () {
-                Get.back();
-              },
-              child: Container(
-                width: 35,
-                height: 35,
-                padding: const EdgeInsetsDirectional.only(
-                  start: 3,
-                ),
-                margin: const EdgeInsetsDirectional.only(
-                  start: 37,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(
-                    0xffD3CFDC,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    7,
-                  ),
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.arrow_back_ios,
-                    color: MyColors.primary,
-                    size: 15,
-                  ),
-                ),
-              ),
-            ),
-            actions: [
-              GestureDetector(
-                onTap: () {
-                  Get.to(
-                    () => const NotificationsScreen(),
-                    binding: NotificationsBinding(),
-                  );
-                },
-                child: Container(
-                  width: 35,
-                  height: 35,
-                  margin: const EdgeInsetsDirectional.only(
-                    end: 37,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color.fromRGBO(
-                      202,
-                      195,
-                      212,
-                      0.3,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      7,
-                    ),
-                  ),
-                  child: Center(
-                    child: Image.asset(
-                      MyImages.notification,
-                      width: 20,
-                      height: 20,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      // extendBodyBehindAppBar: true,
+      // appBar: AppBar(
+      //   primary: false,
+      //   toolbarHeight: 35,
+      //   backgroundColor: Colors.transparent,
+      //   elevation: 0,
+      //   centerTitle: true,
+      //   title: Text(
+      //     'trending auctions'.tr,
+      //     style: const TextStyle(
+      //       color: MyColors.primary,
+      //       fontSize: 18,
+      //     ),
+      //   ),
+      //   leadingWidth: 72,
+      //   leading: GestureDetector(
+      //     onTap: () {
+      //       Get.back();
+      //     },
+      //     child: Container(
+      //       width: 35,
+      //       height: 35,
+      //       padding: const EdgeInsetsDirectional.only(
+      //         start: 3,
+      //       ),
+      //       margin: const EdgeInsetsDirectional.only(
+      //         start: 37,
+      //       ),
+      //       decoration: BoxDecoration(
+      //         color: const Color(
+      //           0xffD3CFDC,
+      //         ),
+      //         borderRadius: BorderRadius.circular(
+      //           7,
+      //         ),
+      //       ),
+      //       child: const Center(
+      //         child: Icon(
+      //           Icons.arrow_back_ios,
+      //           color: MyColors.primary,
+      //           size: 15,
+      //         ),
+      //       ),
+      //     ),
+      //   ),
+      //   actions: [
+      //     GestureDetector(
+      //       onTap: () {
+      //         Get.to(
+      //           () => const NotificationsScreen(),
+      //           binding: NotificationsBinding(),
+      //         );
+      //       },
+      //       child: Container(
+      //         width: 35,
+      //         height: 35,
+      //         margin: const EdgeInsetsDirectional.only(
+      //           end: 37,
+      //         ),
+      //         decoration: BoxDecoration(
+      //           color: const Color.fromRGBO(
+      //             202,
+      //             195,
+      //             212,
+      //             0.3,
+      //           ),
+      //           borderRadius: BorderRadius.circular(
+      //             7,
+      //           ),
+      //         ),
+      //         child: Center(
+      //           child: Image.asset(
+      //             MyImages.notification,
+      //             width: 20,
+      //             height: 20,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: Stack(
         children: [
           Positioned(
@@ -165,6 +155,7 @@ class _ViewAuctionScreenState extends State<ViewAuctionScreen> {
                         priceOne: list[index].priceOne ?? 0,
                         priceTwo: list[index].priceTwo ?? 0,
                         priceThree: list[index].priceThree ?? 0,
+                        isBack: true,
                       ),
                     ),
                   ),

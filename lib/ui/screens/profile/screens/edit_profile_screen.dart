@@ -46,288 +46,313 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(
-              top: 45,
-              left: 35,
-              right: 35,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 35,
-                  height: 35,
+          SafeArea(
+            bottom: false,
+            child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: AppBar(
+                primary: false,
+                toolbarHeight: 35,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                centerTitle: true,
+                title: FittedBox(
+                  child: Text(
+                    'edit account'.tr,
+                    style: const TextStyle(
+                      color: MyColors.primary,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                leadingWidth: 70,
+                leading: Padding(
                   padding: const EdgeInsetsDirectional.only(
-                    start: 3,
+                    start: 35,
                   ),
-                  decoration: BoxDecoration(
-                    color: const Color(
-                      0xffD3CFDC,
-                    ),
-                    borderRadius: BorderRadius.circular(
-                      7,
-                    ),
-                  ),
-                  child: Center(
-                    child: IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const Icon(
-                        Icons.arrow_back_ios,
-                        color: MyColors.primary,
-                        size: 15,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.back();
+                    },
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      padding: const EdgeInsetsDirectional.only(
+                        start: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: const Color(
+                          0xffD3CFDC,
+                        ),
+                        borderRadius: BorderRadius.circular(
+                          7,
+                        ),
+                      ),
+                      child: const Center(
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: MyColors.primary,
+                          size: 15,
+                        ),
                       ),
                     ),
                   ),
                 ),
-                Text(
-                  'edit account'.tr,
-                  style: const TextStyle(
-                    color: MyColors.primary,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(
-                  width: 50,
-                ),
-              ],
-            ),
-          ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 50,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              body: Column(
                 children: [
-                  const SizedBox(
-                    height: 40,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      GetBuilder<ProfileController>(builder: (value) {
-                        return InkWell(
-                          onTap: () {
-                            controller.pickImage(context);
-                            value.update();
-                            MyAccountController.find.update();
-                          },
-                          child: Container(
-                            width: 114,
-                            height: 114,
-                            decoration: BoxDecoration(
-                              color: const Color(
-                                0xffD3CFDC,
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
                               ),
-                              shape: BoxShape.circle,
-                              border: Border.all(
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  GetBuilder<ProfileController>(
+                                      builder: (value) {
+                                    return InkWell(
+                                      onTap: () {
+                                        controller.pickImage(context);
+                                        value.update();
+                                        MyAccountController.find.update();
+                                      },
+                                      child: Container(
+                                        width: 114,
+                                        height: 114,
+                                        decoration: BoxDecoration(
+                                          color: const Color(
+                                            0xffD3CFDC,
+                                          ),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: const Color(
+                                              0xffD3CFDC,
+                                            ),
+                                            width: 8,
+                                          ),
+                                        ),
+                                        child: CustomNetworkImage(
+                                          url: MySharedPreferences.image,
+                                          defaultUrl: MyImages.noProfile,
+                                          radius: 100,
+                                        ),
+                                      ),
+                                    );
+                                  }),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  SizedBox(
+                                    width: ScreenSize.phoneSize(
+                                      170,
+                                      height: false,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          MySharedPreferences.name,
+                                          style: const TextStyle(
+                                            color: MyColors.primary,
+                                            fontSize: 18,
+                                          ),
+                                        ),
+                                        Text(
+                                          '@${MySharedPreferences.userId}',
+                                          textDirection: TextDirection.ltr,
+                                          style: const TextStyle(
+                                            color: MyColors.greyPrimary,
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 30,
+                            ),
+                            child: Container(
+                              height: 67,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  25,
+                                ),
                                 color: const Color(
                                   0xffD3CFDC,
                                 ),
-                                width: 8,
                               ),
-                            ),
-                            child: CustomNetworkImage(
-                              url: MySharedPreferences.image,
-                              defaultUrl: MyImages.noProfile,
-                              radius: 100,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.pageController.animateToPage(
+                                            0,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.linear);
+                                        setState(() {
+                                          controller.currentIndex = 0;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 5),
+                                        height: 56,
+                                        decoration: BoxDecoration(
+                                          color: controller.currentIndex == 0
+                                              ? MyColors.primary
+                                              : const Color(
+                                                  0xffD3CFDC,
+                                                ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'subscription'.tr,
+                                            style: TextStyle(
+                                              color:
+                                                  controller.currentIndex == 0
+                                                      ? Colors.white
+                                                      : MyColors.primary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.pageController.animateToPage(
+                                            1,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.linear);
+                                        setState(() {
+                                          controller.currentIndex = 1;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 5),
+                                        height: 56,
+                                        decoration: BoxDecoration(
+                                          color: controller.currentIndex == 1
+                                              ? MyColors.primary
+                                              : const Color(
+                                                  0xffD3CFDC,
+                                                ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'account'.tr,
+                                            style: TextStyle(
+                                              color:
+                                                  controller.currentIndex == 1
+                                                      ? Colors.white
+                                                      : MyColors.primary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        controller.pageController.animateToPage(
+                                            2,
+                                            duration: const Duration(
+                                                milliseconds: 500),
+                                            curve: Curves.linear);
+                                        setState(() {
+                                          controller.currentIndex = 2;
+                                        });
+                                      },
+                                      child: Container(
+                                        margin: const EdgeInsets.symmetric(
+                                            vertical: 1, horizontal: 5),
+                                        height: 56,
+                                        decoration: BoxDecoration(
+                                          color: controller.currentIndex == 2
+                                              ? MyColors.primary
+                                              : const Color(
+                                                  0xffD3CFDC,
+                                                ),
+                                          borderRadius: BorderRadius.circular(
+                                            25,
+                                          ),
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            'password'.tr,
+                                            style: TextStyle(
+                                              color:
+                                                  controller.currentIndex == 2
+                                                      ? Colors.white
+                                                      : MyColors.primary,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        );
-                      }),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      SizedBox(
-                        width: ScreenSize.phoneSize(
-                          170,
-                          height: false,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Text(
-                              MySharedPreferences.name,
-                              style: const TextStyle(
-                                color: MyColors.primary,
-                                fontSize: 18,
-                              ),
+                          SizedBox(
+                            height: controller.currentIndex == 0 ? 1000 : 600,
+                            child: PageView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              controller: controller.pageController,
+                              children: [
+                                const MySubscriptionScreen(),
+                                AccountScreen(),
+                                EditPasswordScreen(),
+                              ],
                             ),
-                            Text(
-                              '@${MySharedPreferences.userId}',
-                              textDirection: TextDirection.ltr,
-                              style: const TextStyle(
-                                color: MyColors.greyPrimary,
-                                fontSize: 14,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 30,
+                    ),
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 30,
-                ),
-                child: Container(
-                  height: 67,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      25,
-                    ),
-                    color: const Color(
-                      0xffD3CFDC,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.pageController.animateToPage(0,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                            setState(() {
-                              controller.currentIndex = 0;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: controller.currentIndex == 0
-                                  ? MyColors.primary
-                                  : const Color(
-                                      0xffD3CFDC,
-                                    ),
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'subscription'.tr,
-                                style: TextStyle(
-                                  color: controller.currentIndex == 0
-                                      ? Colors.white
-                                      : MyColors.primary,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.pageController.animateToPage(1,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                            setState(() {
-                              controller.currentIndex = 1;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: controller.currentIndex == 1
-                                  ? MyColors.primary
-                                  : const Color(
-                                      0xffD3CFDC,
-                                    ),
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'account'.tr,
-                                style: TextStyle(
-                                  color: controller.currentIndex == 1
-                                      ? Colors.white
-                                      : MyColors.primary,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.pageController.animateToPage(2,
-                                duration: const Duration(milliseconds: 500),
-                                curve: Curves.linear);
-                            setState(() {
-                              controller.currentIndex = 2;
-                            });
-                          },
-                          child: Container(
-                            margin: const EdgeInsets.symmetric(
-                                vertical: 1, horizontal: 5),
-                            height: 56,
-                            decoration: BoxDecoration(
-                              color: controller.currentIndex == 2
-                                  ? MyColors.primary
-                                  : const Color(
-                                      0xffD3CFDC,
-                                    ),
-                              borderRadius: BorderRadius.circular(
-                                25,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'password'.tr,
-                                style: TextStyle(
-                                  color: controller.currentIndex == 2
-                                      ? Colors.white
-                                      : MyColors.primary,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Expanded(
-                child: PageView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  controller: controller.pageController,
-                  children: [
-                    const MySubscriptionScreen(),
-                    AccountScreen(),
-                    EditPasswordScreen(),
-                  ],
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),

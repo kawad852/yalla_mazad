@@ -8,6 +8,8 @@ class MyFavoritesController extends GetxController {
   MyFavoritesModel? myFavoritesModel;
   late Future<MyFavoritesModel?> initializeMyFavFuture;
 
+  RxDouble favoritesLength = 0.0.obs;
+
   @override
   void onInit() {
     initializeMyFavFuture = fetchMyFav();
@@ -16,6 +18,7 @@ class MyFavoritesController extends GetxController {
 
   Future<MyFavoritesModel?> fetchMyFav() async {
     myFavoritesModel = await MyFavoritesApi().data();
+    favoritesLength.value = myFavoritesModel?.data?.length.toDouble() ?? 0.0;
     update();
     return myFavoritesModel;
   }
