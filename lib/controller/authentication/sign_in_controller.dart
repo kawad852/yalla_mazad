@@ -49,7 +49,6 @@ class SignInController extends GetxController {
           MySharedPreferences.name = signInModel!.data!.user!.name!;
           MySharedPreferences.userId = signInModel!.data!.user!.id!;
           MySharedPreferences.image = signInModel!.data!.user!.image!;
-
           if (signInModel!.data!.user!.phone!.length > 4) {
             MySharedPreferences.phone =
                 signInModel!.data!.user!.phone!.substring(4);

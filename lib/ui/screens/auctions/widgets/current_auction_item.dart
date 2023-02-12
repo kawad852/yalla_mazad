@@ -27,6 +27,7 @@ class CurrentAuctionItem extends StatefulWidget {
   final String userName;
   final String userId;
   final String userProfileImage;
+  final String startPrice;
 
   const CurrentAuctionItem({
     required this.name,
@@ -38,6 +39,7 @@ class CurrentAuctionItem extends StatefulWidget {
     required this.userId,
     required this.userName,
     required this.userProfileImage,
+    required this.startPrice,
     Key? key,
   }) : super(key: key);
 
@@ -428,8 +430,8 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                                                               .data?.docs.first
                                                               .get('amount')
                                                               .toString() ??
-                                                          ""
-                                                      : " ",
+                                                          widget.startPrice
+                                                      : widget.startPrice,
                                                   textAlign: TextAlign.center,
                                                   style: const TextStyle(
                                                     color: MyColors.red,

@@ -27,6 +27,7 @@ class TrendingAuctionItem extends StatelessWidget {
   final int priceTwo;
   final int priceThree;
   final bool isBack;
+  final String startPrice;
 
   const TrendingAuctionItem({
     required this.name,
@@ -39,6 +40,7 @@ class TrendingAuctionItem extends StatelessWidget {
     required this.priceTwo,
     required this.priceThree,
     required this.isBack,
+    required this.startPrice,
     Key? key,
   }) : super(key: key);
 
@@ -170,6 +172,8 @@ class TrendingAuctionItem extends StatelessWidget {
                                   priceOne,
                                   priceTwo,
                                   priceThree,
+                                  startPrice,
+
                                 ],
                               );
                             } else if (endDifference >= 1) {
@@ -223,6 +227,7 @@ class TrendingAuctionItem extends StatelessWidget {
                                 priceOne,
                                 priceTwo,
                                 priceThree,
+                                startPrice,
                               ],
                             );
                           } else if (endDifference >= 1) {

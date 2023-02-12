@@ -194,6 +194,7 @@ class _ComingAuctionScreenState extends State<ComingAuctionScreen> {
                       userId: snapshot.data?.data?.user?.id.toString() ?? '',
                       userName: snapshot.data?.data?.user?.name ?? '',
                       userProfileImage: snapshot.data?.data?.user?.image ?? '',
+                      startPrice: snapshot.data?.data?.startPrice.toString() ?? '0',
                     ),
                   ],
                 ),

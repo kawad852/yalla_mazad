@@ -156,6 +156,7 @@ class _ViewAuctionScreenState extends State<ViewAuctionScreen> {
                         priceTwo: list[index].priceTwo ?? 0,
                         priceThree: list[index].priceThree ?? 0,
                         isBack: true,
+                        startPrice: list[index].startPrice?.toString() ?? '0',
                       ),
                     ),
                   ),

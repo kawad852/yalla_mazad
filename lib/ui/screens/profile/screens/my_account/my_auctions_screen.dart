@@ -101,7 +101,9 @@ class _MyAuctionsScreenState extends State<MyAuctionsScreen> {
                                     controller.myAdvertisementsModel
                                         ?.data?[index].priceTwo,
                                     controller.myAdvertisementsModel
-                                        ?.data?[index].priceThree
+                                        ?.data?[index].priceThree,
+                                    controller.myAdvertisementsModel
+                                        ?.data?[index].startPrice.toString(),
                                   ],
                                 );
                               } else if (endDifference >= 1) {

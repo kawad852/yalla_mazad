@@ -31,6 +31,7 @@ class ComingAuctionItem extends StatefulWidget {
   final String userName;
   final String userId;
   final String userProfileImage;
+  final String startPrice;
 
   const ComingAuctionItem({
     required this.name,
@@ -46,6 +47,7 @@ class ComingAuctionItem extends StatefulWidget {
     required this.userId,
     required this.userName,
     required this.userProfileImage,
+    required this.startPrice,
     Key? key,
   }) : super(key: key);
 
@@ -460,7 +462,8 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                                               widget.id,
                                               widget.priceOne,
                                               widget.priceTwo,
-                                              widget.priceThree
+                                              widget.priceThree,
+                                              widget.startPrice,
                                             ],
                                           );
                                         },

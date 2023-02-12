@@ -99,7 +99,8 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
                                     controller.myFavoritesModel?.data?[index]
                                         .priceTwo,
                                     controller.myFavoritesModel?.data?[index]
-                                        .priceThree
+                                        .priceThree, controller.myFavoritesModel
+                                        ?.data?[index].startPrice.toString(),
                                   ],
                                 );
                               } else if (endDifference >= 1) {

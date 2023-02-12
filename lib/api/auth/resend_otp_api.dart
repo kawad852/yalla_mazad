@@ -19,7 +19,7 @@ class ResendOtpApi {
         'Authorization': 'Bearer ${MySharedPreferences.accessToken}',
       };
       log("Response:: ResendOtpResponse\nUrl:: $url\nheaders:: $headers\n");
-      http.Response response = await http.get(uri, headers: headers);
+      http.Response response = await http.post(uri, headers: headers);
       log("ResendOtpStatusCode:: ${response.statusCode}  ResendOtpBody:: ${response.body}");
       ResendOtpModel resendOtpModel =
           ResendOtpModel.fromJson(json.decode(response.body));

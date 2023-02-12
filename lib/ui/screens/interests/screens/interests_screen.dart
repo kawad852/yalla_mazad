@@ -22,8 +22,6 @@ class _InterestsScreenState extends State<InterestsScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = InterestsController.find;
-
-    ///TODO: needs to make sure
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Stack(
@@ -120,82 +118,76 @@ class _InterestsScreenState extends State<InterestsScreen> {
                                   height: 30,
                                 ),
                                 FutureBuilder<InterestsModel?>(
-                                    future:
-                                        controller.initializeInterestsFuture,
-                                    builder: (context, snapshot) {
-                                      switch (snapshot.connectionState) {
-                                        case ConnectionState.waiting:
-                                          return const Center(
-                                            child: CircularProgressIndicator(),
-                                          );
-                                        case ConnectionState.done:
-                                        default:
-                                          if (snapshot.hasData) {
-                                            return Wrap(
-                                              spacing: 10,
-                                              crossAxisAlignment:
-                                                  WrapCrossAlignment.center,
-                                              runSpacing: 10,
-                                              children: List.generate(
-                                                controller.interestsModel?.data
-                                                        ?.length ??
-                                                    0,
-                                                (index) => GestureDetector(
-                                                  onTap: () {
-                                                    setState(() {
-                                                      if (!controller
-                                                          .selectedInterests
-                                                          .contains(snapshot
-                                                              .data
-                                                              ?.data?[index]
-                                                              .id
-                                                              .toString())) {
-                                                        controller
-                                                            .selectedInterests
-                                                            .add(snapshot
-                                                                    .data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .id
-                                                                    .toString() ??
-                                                                '0');
-                                                      } else {
-                                                        controller
-                                                            .selectedInterests
-                                                            .remove(snapshot
-                                                                    .data
-                                                                    ?.data?[
-                                                                        index]
-                                                                    .id
-                                                                    .toString() ??
-                                                                '0');
-                                                      }
-                                                    });
-                                                  },
-                                                  child: InterestItem(
-                                                    content: snapshot
-                                                            .data
-                                                            ?.data?[index]
-                                                            .name ??
-                                                        '',
-                                                    isChosen: controller
+                                  future: controller.initializeInterestsFuture,
+                                  builder: (context, snapshot) {
+                                    switch (snapshot.connectionState) {
+                                      case ConnectionState.waiting:
+                                        return const Center(
+                                          child: CircularProgressIndicator(),
+                                        );
+                                      case ConnectionState.done:
+                                      default:
+                                        if (snapshot.hasData) {
+                                          return Wrap(
+                                            spacing: 10,
+                                            crossAxisAlignment:
+                                                WrapCrossAlignment.center,
+                                            runSpacing: 10,
+                                            children: List.generate(
+                                              controller.interestsModel?.data
+                                                      ?.length ??
+                                                  0,
+                                              (index) => GestureDetector(
+                                                onTap: () {
+                                                  setState(() {
+                                                    if (!controller
                                                         .selectedInterests
-                                                        .contains(
-                                                      snapshot
-                                                          .data?.data?[index].id
-                                                          .toString(),
-                                                    ),
+                                                        .contains(snapshot.data
+                                                            ?.data?[index].id
+                                                            .toString())) {
+                                                      controller
+                                                          .selectedInterests
+                                                          .add(snapshot
+                                                                  .data
+                                                                  ?.data?[index]
+                                                                  .id
+                                                                  .toString() ??
+                                                              '0');
+                                                    } else {
+                                                      controller
+                                                          .selectedInterests
+                                                          .remove(snapshot
+                                                                  .data
+                                                                  ?.data?[index]
+                                                                  .id
+                                                                  .toString() ??
+                                                              '0');
+                                                    }
+                                                  });
+                                                },
+                                                child: InterestItem(
+                                                  content: snapshot.data
+                                                          ?.data?[index].name ??
+                                                      '',
+                                                  isChosen: controller
+                                                      .selectedInterests
+                                                      .contains(
+                                                    snapshot
+                                                        .data?.data?[index].id
+                                                        .toString(),
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          } else if (snapshot.hasError) {
-                                            return const FailureWidget();
-                                          } else {
-                                            return const FailureWidget();
-                                          }
-                                      }
-                                    }),
+                                            ),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return const FailureWidget();
+                                        } else {
+                                          return const FailureWidget();
+                                        }
+                                    }
+                                  },
+                                ),
                               ],
                             ),
                             const SizedBox(
@@ -204,8 +196,9 @@ class _InterestsScreenState extends State<InterestsScreen> {
                             GestureDetector(
                               onTap: () async {
                                 await controller.fetchAddCategoriesData(
-                                    categories: controller.selectedInterests,
-                                    context: context);
+                                  context: context,
+                                  categories: controller.selectedInterests,
+                                );
                               },
                               child: Container(
                                 height: 60,

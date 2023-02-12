@@ -29,6 +29,7 @@ class CurrentAuctionController extends GetxController {
   int priceTwo = 0;
   int priceThree = 0;
   RxString currentPrice = "0".obs;
+  String startPrice = "0";
 
   AdvertisementDetailsModel? advertisementDetailsModel;
   late Future<AdvertisementDetailsModel?> initializeAdvertisementFuture;
@@ -42,6 +43,7 @@ class CurrentAuctionController extends GetxController {
     priceOne = Get.arguments[1];
     priceTwo = Get.arguments[2];
     priceThree = Get.arguments[3];
+    startPrice = Get.arguments[4];
     selectedBidAmount = priceOne;
     selectedBidItem = 1;
     var items = FirebaseFirestore.instance
@@ -53,7 +55,7 @@ class CurrentAuctionController extends GetxController {
     items.listen((snapshot) {
       currentPrice = snapshot.docs.isNotEmpty
           ? snapshot.docs.first.get('amount').toString().obs
-          : "0".obs;
+          : startPrice.obs;
       totalPrice = int.parse(currentPrice.value) + selectedBidAmount;
       update();
       log(totalPrice.toString());

@@ -134,6 +134,7 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                         priceOne: data?.priceOne ?? 0,
                         priceTwo: data?.priceTwo ?? 0,
                         priceThree: data?.priceThree ?? 0,
+                        startPrice: data?.startPrice.toString() ?? '',
                       ),
                     );
                   },
@@ -189,6 +190,7 @@ class _CurrentAuctionScreenState extends State<CurrentAuctionScreen> {
                       userId: snapshot.data?.data?.user?.id.toString() ?? '',
                       userName: snapshot.data?.data?.user?.name ?? '',
                       userProfileImage: snapshot.data?.data?.user?.image ?? '',
+                      startPrice: snapshot.data?.data?.startPrice.toString() ?? '',
                     ),
                   ],
                 ),

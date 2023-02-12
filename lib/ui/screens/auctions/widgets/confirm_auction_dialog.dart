@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,7 @@ class ConfirmAuctionDialog extends StatefulWidget {
   final int priceOne;
   final int priceTwo;
   final int priceThree;
+  final String startPrice;
 
   const ConfirmAuctionDialog({
     Key? key,
@@ -21,6 +24,7 @@ class ConfirmAuctionDialog extends StatefulWidget {
     required this.priceOne,
     required this.priceTwo,
     required this.priceThree,
+    required this.startPrice,
   }) : super(key: key);
 
   @override
@@ -131,8 +135,8 @@ class _ConfirmAuctionDialogState extends State<ConfirmAuctionDialog> {
                                                   .get('amount')
                                                   .toString()
                                                   .obs ??
-                                              "0".obs
-                                          : "0".obs;
+                                              widget.startPrice.obs
+                                          :  widget.startPrice.obs;
                                 }
 
                                 return Text(
@@ -140,8 +144,8 @@ class _ConfirmAuctionDialogState extends State<ConfirmAuctionDialog> {
                                       ? snapshot.data?.docs.first
                                               .get('amount')
                                               .toString() ??
-                                          ""
-                                      : " ",
+                                      widget.startPrice
+                                      :  widget.startPrice,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     color: MyColors.red,

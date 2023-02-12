@@ -518,7 +518,8 @@ class _AuctionsByCategoryScreenState extends State<AuctionsByCategoryScreen> {
                                               data.id,
                                               data.priceOne,
                                               data.priceTwo,
-                                              data.priceThree
+                                              data.priceThree,
+                                              data.startPrice.toString(),
                                             ],
                                           );
                                         } else if (endDifference >= 1) {

@@ -8,6 +8,7 @@ import 'package:yalla_mazad/binding/plans/plans_binding.dart';
 import 'package:yalla_mazad/model/add_categories_to_user/add_categories_to_user_model.dart';
 import 'package:yalla_mazad/model/interests/interests_model.dart';
 import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
+import 'package:yalla_mazad/ui/widgets/overlay_loader.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../utils/app_constants.dart';
@@ -36,21 +37,17 @@ class InterestsController extends GetxController {
     required List<String> categories,
     required BuildContext context,
   }) async {
-    Loader.show(
-      context,
-      progressIndicator: const CircularProgressIndicator(
-        color: MyColors.primary,
-      ),
-    );
+    OverLayLoader.flickrLoading(context);
     addCategoriesToUserModel = await AddCategoriesToUserApi().data(
       userId: MySharedPreferences.userId.toString(),
       categoriesId: categories,
     );
     if (addCategoriesToUserModel == null) {
       Fluttertoast.showToast(msg: AppConstants.failedMessage);
-      Loader.hide();
+      // Loader.hide();
       return;
     }
+
     if (addCategoriesToUserModel!.code == 200) {
       Get.to(
         () => const PlansScreen(),
@@ -63,6 +60,6 @@ class InterestsController extends GetxController {
       Fluttertoast.showToast(
           msg: addCategoriesToUserModel?.msg ?? AppConstants.failedMessage);
     }
-    Loader.hide();
+    // Loader.hide();
   }
 }
