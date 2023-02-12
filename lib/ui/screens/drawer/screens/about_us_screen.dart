@@ -53,7 +53,7 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                 elevation: 0,
                 centerTitle: true,
                 title: FittedBox(
-                  child:  Text(
+                  child: Text(
                     'who we are'.tr,
                     style: const TextStyle(
                       color: MyColors.primary,
@@ -121,8 +121,10 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                     default:
                                       if (snapshot.hasData) {
                                         return Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               snapshot.data?.data?.title ?? '',
@@ -132,7 +134,8 @@ class _AboutUsScreenState extends State<AboutUsScreen> {
                                               ),
                                             ),
                                             Html(
-                                              data: """${snapshot.data?.data?.content}""",
+                                              data:
+                                                  """${snapshot.data?.data?.content}""",
                                             ),
                                           ],
                                         );

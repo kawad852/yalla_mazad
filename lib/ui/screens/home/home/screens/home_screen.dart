@@ -171,8 +171,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             items: List.generate(
                                               2,
                                               (index) => Container(
-                                                margin: const EdgeInsets
-                                                    .symmetric(
+                                                margin:
+                                                    const EdgeInsets.symmetric(
                                                   horizontal: 30,
                                                 ),
                                                 height: 190,
@@ -285,8 +285,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             if (snapshot.hasData) {
                                               return CarouselSlider(
                                                 items: List.generate(
-                                                  controller.allTipsModel
-                                                          ?.data?.length ??
+                                                  controller.allTipsModel?.data
+                                                          ?.length ??
                                                       0,
                                                   (index) => Container(
                                                     margin: const EdgeInsets
@@ -296,8 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     height: 67,
                                                     decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(
+                                                          BorderRadius.circular(
                                                         25,
                                                       ),
                                                       color: MyColors.primary,
@@ -309,8 +308,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 ?.data?[index]
                                                                 .note ??
                                                             '',
-                                                        style:
-                                                            const TextStyle(
+                                                        style: const TextStyle(
                                                           color: Colors.white,
                                                         ),
                                                       ),
@@ -340,8 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     horizontal: 35.0,
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -380,8 +377,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   const EdgeInsets.symmetric(
                                                 horizontal: 30,
                                               ),
-                                              scrollDirection:
-                                                  Axis.horizontal,
+                                              scrollDirection: Axis.horizontal,
                                               itemCount: 6,
                                               itemBuilder: (context, index) {
                                                 return const CustomShimmerLoading(
@@ -404,8 +400,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             return SizedBox(
                                               height: 100,
                                               child: ListView.separated(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
                                                   horizontal: 30,
                                                 ),
                                                 scrollDirection:
@@ -415,21 +411,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         ?.data
                                                         ?.length ??
                                                     0,
-                                                itemBuilder:
-                                                    (context, index) {
+                                                itemBuilder: (context, index) {
                                                   return InkWell(
                                                     onTap: () {
                                                       controller.category = MapEntry(
                                                           controller
                                                                   .categoriesModel
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .name ??
                                                               '',
                                                           controller
                                                                   .categoriesModel
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .id ??
                                                               0);
                                                       Get.to(
@@ -477,8 +470,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     horizontal: 35.0,
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -556,13 +548,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   children: [
                                                     CustomShimmerLoading(
                                                       radius: 25,
-                                                      height: ScreenSize
-                                                          .phoneSize(
+                                                      height:
+                                                          ScreenSize.phoneSize(
                                                         180,
                                                         height: false,
                                                       ),
-                                                      width: ScreenSize
-                                                          .phoneSize(
+                                                      width:
+                                                          ScreenSize.phoneSize(
                                                         180,
                                                         height: false,
                                                       ),
@@ -587,8 +579,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               endDate: data.endDate,
                                             ),
                                             onTap: () {
-                                              controller.selectedIndex =
-                                                  index;
+                                              controller.selectedIndex = index;
                                               CustomNavigationBarController
                                                   .find.tabController
                                                   .jumpToTab(3);
@@ -631,8 +622,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     horizontal: 35.0,
                                   ),
                                   child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
@@ -731,8 +721,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                             ),
                                           ),
-                                          itemBuilder:
-                                              (context, data, index) {
+                                          itemBuilder: (context, data, index) {
                                             return InkWell(
                                               child: AuctionItem(
                                                 image: data.image,

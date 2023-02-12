@@ -4,9 +4,9 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import '../../utils/colors.dart';
 
-
 class OverLayLoader {
-  static void showLoading(BuildContext context, {Color color = MyColors.primary}) {
+  static void showLoading(BuildContext context,
+      {Color color = MyColors.primary}) {
     Loader.show(
       context,
       overlayColor: Colors.black26,
@@ -16,7 +16,8 @@ class OverLayLoader {
     );
   }
 
-  static void flickrLoading(BuildContext context, {Color color = MyColors.primary}) {
+  static void flickrLoading(BuildContext context,
+      {Color color = MyColors.primary}) {
     Loader.show(
       isAppbarOverlay: true,
       context,
@@ -29,5 +30,4 @@ class OverLayLoader {
       ),
     );
   }
-
 }

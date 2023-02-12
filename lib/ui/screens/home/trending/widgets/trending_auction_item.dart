@@ -173,7 +173,6 @@ class TrendingAuctionItem extends StatelessWidget {
                                   priceTwo,
                                   priceThree,
                                   startPrice,
-
                                 ],
                               );
                             } else if (endDifference >= 1) {

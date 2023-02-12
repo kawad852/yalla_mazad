@@ -8,7 +8,6 @@ import 'package:yalla_mazad/binding/plans/plans_binding.dart';
 import 'package:yalla_mazad/model/add_categories_to_user/add_categories_to_user_model.dart';
 import 'package:yalla_mazad/model/interests/interests_model.dart';
 import 'package:yalla_mazad/ui/screens/plans/screens/plans_screen.dart';
-import 'package:yalla_mazad/ui/widgets/overlay_loader.dart';
 import 'package:yalla_mazad/utils/shared_prefrences.dart';
 
 import '../../utils/app_constants.dart';
@@ -36,8 +35,9 @@ class InterestsController extends GetxController {
   Future fetchAddCategoriesData({
     required List<String> categories,
     required BuildContext context,
-  })  async{
-    Loader.show(context,
+  }) async {
+    Loader.show(
+      context,
       progressIndicator: const CircularProgressIndicator(
         color: MyColors.primary,
       ),

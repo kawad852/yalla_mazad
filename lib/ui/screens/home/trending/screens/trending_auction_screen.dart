@@ -106,7 +106,9 @@ class _TrendingAuctionScreenState extends State<TrendingAuctionScreen> {
                                     0,
                                 isBack: false,
                                 startPrice: value.trendingPagingController
-                                    .itemList?[index].startPrice.toString() ?? '0',
+                                        .itemList?[index].startPrice
+                                        .toString() ??
+                                    '0',
                               ),
                             ),
                           ),

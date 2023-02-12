@@ -76,9 +76,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
- final controller = MaterialController.find;
-
+  final controller = MaterialController.find;
 
   Widget _toggleScreen() {
     if (MySharedPreferences.isLogIn) {
@@ -117,7 +115,6 @@ class _MyAppState extends State<MyApp> {
       if (status == ConnectivityResult.none) {
         setState(() {
           controller.internetConnection = false;
-
         });
       } else {
         setState(() {
@@ -151,7 +148,9 @@ class _MyAppState extends State<MyApp> {
       locale: Locale(MySharedPreferences.language),
       fallbackLocale: Locale(MySharedPreferences.language),
       theme: AppThemeData().materialTheme,
-      home: controller.internetConnection ? _toggleScreen() : const InternetScreen(),
+      home: controller.internetConnection
+          ? _toggleScreen()
+          : const InternetScreen(),
     );
   }
 }

@@ -87,8 +87,7 @@ class AddAuctionController extends GetxController {
     List<File?> files = [];
     if (image != null) {
       files.add(File(image!));
-    } else {
-    }
+    } else {}
     if (images != null) {
       for (var item in images!) {
         if (item != null) {
@@ -96,8 +95,7 @@ class AddAuctionController extends GetxController {
           files.add(file);
         }
       }
-    } else {
-    }
+    } else {}
     return files;
   }
 

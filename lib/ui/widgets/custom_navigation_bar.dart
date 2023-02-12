@@ -7,6 +7,7 @@ import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:yalla_mazad/binding/drawer/about_us_binding.dart';
 import 'package:yalla_mazad/binding/drawer/privacy_policy_binding.dart';
 import 'package:yalla_mazad/binding/drawer/terms_and_conditions_binding.dart';
+import 'package:yalla_mazad/binding/home/home_binding.dart';
 import 'package:yalla_mazad/controller/home/home/home_controller.dart';
 import 'package:yalla_mazad/ui/screens/add_auction/screens/add_auction_screen.dart';
 import 'package:yalla_mazad/ui/screens/authentication/screens/authentication_screen.dart';
@@ -306,6 +307,10 @@ class _CustomNavigationBarState extends State<CustomNavigationBar> {
                         Get.updateLocale(Locale(MySharedPreferences.language));
                       }
                     });
+                    Get.offAll(
+                      const CustomNavigationBar(),
+                      binding: HomeBinding(),
+                    );
                   },
                   title: Text(
                     Get.locale == const Locale('ar') ? 'English' : 'العربية',

@@ -84,7 +84,6 @@ class User {
     }
   }
 
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['id'] = id;

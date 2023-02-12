@@ -58,12 +58,10 @@ class _MyAuctionItemState extends State<MyAuctionItem> {
     });
     log('start:      ${widget.startDate!}');
     try {
-      secondsToStart = DateTime
-          .parse(widget.startDate ?? '')
+      secondsToStart = DateTime.parse(widget.startDate ?? '')
           .difference(DateTime.now())
           .inSeconds;
-      seconds = DateTime
-          .parse(widget.endDate ?? '')
+      seconds = DateTime.parse(widget.endDate ?? '')
           .difference(DateTime.now())
           .inSeconds;
       if (secondsToStart > 0) {
@@ -85,10 +83,7 @@ class _MyAuctionItemState extends State<MyAuctionItem> {
       } else if (secondsToStart <= 0 && seconds > 0) {
         status.value = 1;
       }
-    }
-    catch(e){
-
-    }
+    } catch (e) {}
     log('seconds: $seconds');
     log('secondsToStart: $secondsToStart');
     log('status: ${status.value}');

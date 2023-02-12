@@ -115,8 +115,10 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                                     default:
                                       if (snapshot.hasData) {
                                         return Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               snapshot.data?.data?.title ?? '',
@@ -126,7 +128,9 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
                                               ),
                                             ),
                                             Html(
-                                                data: snapshot.data?.data?.content == null
+                                                data: snapshot.data?.data
+                                                            ?.content ==
+                                                        null
                                                     ? """<h1>Privacy Policy for Yalla Mazad</h1>
 
 <p>At Yalla Mazad, accessible from https://yallamzad.com/, one of our main priorities is the privacy of our visitors.

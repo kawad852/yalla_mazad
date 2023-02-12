@@ -159,7 +159,7 @@ class PlanItem extends StatelessWidget {
               ? InkWell(
                   onTap: () async {
                     showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
+                        backgroundColor: Colors.transparent,
                         context: context,
                         builder: (context) {
                           return Container(

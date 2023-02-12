@@ -154,7 +154,7 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
               padding: const EdgeInsetsDirectional.only(
                 end: 35,
               ),
-              child:Container(
+              child: Container(
                 width: 35,
                 height: 35,
                 decoration: BoxDecoration(
@@ -172,8 +172,8 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                   return Center(
                     child: InkWell(
                       onTap: () async {
-                        if (controller.advertisementDetailsModel?.data
-                            ?.isFavorite ==
+                        if (controller
+                                .advertisementDetailsModel?.data?.isFavorite ==
                             true) {
                           await controller.fetchDeleteFromFavoritesData(
                             adId: widget.id,
@@ -189,17 +189,17 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                         }
                       },
                       child: controller
-                          .advertisementDetailsModel!.data!.isFavorite!
+                              .advertisementDetailsModel!.data!.isFavorite!
                           ? SvgPicture.asset(
-                        MyImages.heartFilled,
-                        width: 20,
-                        height: 20,
-                      )
+                              MyImages.heartFilled,
+                              width: 20,
+                              height: 20,
+                            )
                           : Image.asset(
-                        MyImages.favorite,
-                        width: 20,
-                        height: 20,
-                      ),
+                              MyImages.favorite,
+                              width: 20,
+                              height: 20,
+                            ),
                     ),
                   );
                 }),
@@ -248,7 +248,8 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                                             1,
                                           ),
                                           width: 4,
-                                          strokeAlign: BorderSide.strokeAlignInside,
+                                          strokeAlign:
+                                              BorderSide.strokeAlignInside,
                                         ),
                                       ),
                                       child: CustomNetworkImage(
@@ -314,8 +315,10 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                                     height: false,
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Text(
                                         widget.userName,
@@ -484,8 +487,8 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                           .collection('biddings')
                           .orderBy('amount', descending: true)
                           .snapshots(),
-                      builder:
-                          (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      builder: (BuildContext context,
+                          AsyncSnapshot<QuerySnapshot> snapshot) {
                         if (snapshot.hasError) {
                           return Text(
                             'an error occured'.tr,
@@ -517,7 +520,8 @@ class _ComingAuctionItemState extends State<ComingAuctionItem> {
                                           image: value['image'] ?? "",
                                           amount: (value['amount']).toString(),
                                           order: (key + 1),
-                                          isLast: key + 1 == snapshot.data!.docs.length,
+                                          isLast: key + 1 ==
+                                              snapshot.data!.docs.length,
                                         ),
                                       ),
                                     )

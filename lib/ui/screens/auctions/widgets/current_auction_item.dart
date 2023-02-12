@@ -160,43 +160,41 @@ class _CurrentAuctionItemState extends State<CurrentAuctionItem> {
                     7,
                   ),
                 ),
-                child: GetBuilder<CurrentAuctionController>(
-                    builder: (value) {
-                      return Center(
-                        child: InkWell(
-                          onTap: () async {
-                            if (controller.advertisementDetailsModel
-                                ?.data?.isFavorite ==
-                                true) {
-                              await controller
-                                  .fetchDeleteFromFavoritesData(
-                                adId: widget.id,
-                                context: context,
-                              );
-                              value.update();
-                            } else {
-                              await controller.fetchAddToFavoritesData(
-                                adId: widget.id,
-                                context: context,
-                              );
-                              value.update();
-                            }
-                          },
-                          child: controller.advertisementDetailsModel!
-                              .data!.isFavorite!
-                              ? SvgPicture.asset(
-                            MyImages.heartFilled,
-                            width: 20,
-                            height: 20,
-                          )
-                              : Image.asset(
-                            MyImages.favorite,
-                            width: 20,
-                            height: 20,
-                          ),
-                        ),
-                      );
-                    }),
+                child: GetBuilder<CurrentAuctionController>(builder: (value) {
+                  return Center(
+                    child: InkWell(
+                      onTap: () async {
+                        if (controller
+                                .advertisementDetailsModel?.data?.isFavorite ==
+                            true) {
+                          await controller.fetchDeleteFromFavoritesData(
+                            adId: widget.id,
+                            context: context,
+                          );
+                          value.update();
+                        } else {
+                          await controller.fetchAddToFavoritesData(
+                            adId: widget.id,
+                            context: context,
+                          );
+                          value.update();
+                        }
+                      },
+                      child: controller
+                              .advertisementDetailsModel!.data!.isFavorite!
+                          ? SvgPicture.asset(
+                              MyImages.heartFilled,
+                              width: 20,
+                              height: 20,
+                            )
+                          : Image.asset(
+                              MyImages.favorite,
+                              width: 20,
+                              height: 20,
+                            ),
+                    ),
+                  );
+                }),
               ),
             ),
           ],

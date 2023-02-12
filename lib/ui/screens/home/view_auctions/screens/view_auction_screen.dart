@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:yalla_mazad/binding/notifications/notifications_binding.dart';
 import 'package:yalla_mazad/controller/home/view_auctions/view_auction_controller.dart';
 import 'package:yalla_mazad/ui/screens/home/trending/widgets/trending_auction_item.dart';
-import 'package:yalla_mazad/ui/screens/notifications/screens/notifications_screen.dart';
-import 'package:yalla_mazad/utils/colors.dart';
 import 'package:yalla_mazad/utils/images.dart';
 
 class ViewAuctionScreen extends StatefulWidget {

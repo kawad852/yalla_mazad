@@ -18,6 +18,7 @@ class InternetScreen extends StatefulWidget {
 
 class _InternetScreenState extends State<InternetScreen> {
   final controller = MaterialController.find;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

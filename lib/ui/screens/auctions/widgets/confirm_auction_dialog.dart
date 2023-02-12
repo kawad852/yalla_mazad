@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -136,7 +134,7 @@ class _ConfirmAuctionDialogState extends State<ConfirmAuctionDialog> {
                                                   .toString()
                                                   .obs ??
                                               widget.startPrice.obs
-                                          :  widget.startPrice.obs;
+                                          : widget.startPrice.obs;
                                 }
 
                                 return Text(
@@ -144,8 +142,8 @@ class _ConfirmAuctionDialogState extends State<ConfirmAuctionDialog> {
                                       ? snapshot.data?.docs.first
                                               .get('amount')
                                               .toString() ??
-                                      widget.startPrice
-                                      :  widget.startPrice,
+                                          widget.startPrice
+                                      : widget.startPrice,
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     color: MyColors.red,

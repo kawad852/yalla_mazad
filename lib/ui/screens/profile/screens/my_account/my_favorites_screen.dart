@@ -23,7 +23,6 @@ class MyFavoritesScreen extends StatefulWidget {
 }
 
 class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
-
   @override
   Widget build(BuildContext context) {
     final controller = MyFavoritesController.find;
@@ -99,8 +98,10 @@ class _MyFavoritesScreenState extends State<MyFavoritesScreen> {
                                     controller.myFavoritesModel?.data?[index]
                                         .priceTwo,
                                     controller.myFavoritesModel?.data?[index]
-                                        .priceThree, controller.myFavoritesModel
-                                        ?.data?[index].startPrice.toString(),
+                                        .priceThree,
+                                    controller.myFavoritesModel?.data?[index]
+                                        .startPrice
+                                        .toString(),
                                   ],
                                 );
                               } else if (endDifference >= 1) {

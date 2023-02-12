@@ -18,7 +18,8 @@ class MyAuctionsController extends GetxController {
 
   Future<MyAdvertisementsModel?> fetchMyAds() async {
     myAdvertisementsModel = await MyAdvertisementsApi().data();
-    auctionsLength.value = myAdvertisementsModel?.data?.length.toDouble() ?? 0.0;
+    auctionsLength.value =
+        myAdvertisementsModel?.data?.length.toDouble() ?? 0.0;
     update();
     return myAdvertisementsModel;
   }

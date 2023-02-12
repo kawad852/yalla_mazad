@@ -1,10 +1,8 @@
 import 'package:get/get.dart';
 import 'package:yalla_mazad/controller/profile/edit_password_controller.dart';
-import 'package:yalla_mazad/controller/profile/my_account/my_auctions_controller.dart';
 import 'package:yalla_mazad/controller/profile/my_subscription_controller.dart';
 
 import '../../controller/profile/account_controller.dart';
-import '../../controller/profile/my_account/my_favorites_controller.dart';
 import '../../controller/profile/profile_controller.dart';
 
 class ProfileBinding extends Bindings {
@@ -14,6 +12,5 @@ class ProfileBinding extends Bindings {
     Get.lazyPut(() => EditPasswordController());
     Get.lazyPut(() => AccountController());
     Get.lazyPut(() => MySubscriptionController());
-
   }
 }

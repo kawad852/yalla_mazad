@@ -133,8 +133,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                     height: 20,
                                   ),
                                   SizedBox(
-                                    height:
-                                        MediaQuery.of(context).size.height,
+                                    height: MediaQuery.of(context).size.height,
                                     child: SingleChildScrollView(
                                       physics:
                                           const NeverScrollableScrollPhysics(),
@@ -143,8 +142,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                               horizontal: 30.0,
                                             ),
                                             child: Text(
@@ -160,8 +158,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                             height: 30,
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.symmetric(
+                                            padding: const EdgeInsets.symmetric(
                                               horizontal: 30.0,
                                             ),
                                             child: Row(
@@ -195,10 +192,9 @@ class _PlansScreenState extends State<PlansScreen> {
                                               future: controller
                                                   .initializePlansFuture,
                                               builder: (context, snapshot) {
-                                                switch (snapshot
-                                                    .connectionState) {
-                                                  case ConnectionState
-                                                      .waiting:
+                                                switch (
+                                                    snapshot.connectionState) {
+                                                  case ConnectionState.waiting:
                                                     return CarouselSlider(
                                                       items: List.generate(
                                                         3,
@@ -220,14 +216,12 @@ class _PlansScreenState extends State<PlansScreen> {
                                                           ),
                                                         ),
                                                       ),
-                                                      options:
-                                                          CarouselOptions(
+                                                      options: CarouselOptions(
                                                         enableInfiniteScroll:
                                                             false,
                                                         height: 392,
                                                         viewportFraction: 0.8,
-                                                        enlargeCenterPage:
-                                                            true,
+                                                        enlargeCenterPage: true,
                                                         initialPage: 0,
                                                         autoPlay: false,
                                                         enlargeFactor: 0.2,
@@ -254,34 +248,28 @@ class _PlansScreenState extends State<PlansScreen> {
                                                             child: PlanItem(
                                                               price: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .price,
                                                               pointOne: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .pointOne,
                                                               pointTwo: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .pointTwo,
                                                               pointThree: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .pointThree,
                                                               planId: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .id
                                                                   .toString(),
                                                               time: snapshot
                                                                   .data
-                                                                  ?.data?[
-                                                                      index]
+                                                                  ?.data?[index]
                                                                   .time,
                                                               function: controller
                                                                   .fetchCreateSubscriptionData,
@@ -304,8 +292,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                                           enableInfiniteScroll:
                                                               false,
                                                           height: 392,
-                                                          viewportFraction:
-                                                              0.8,
+                                                          viewportFraction: 0.8,
                                                           enlargeCenterPage:
                                                               true,
                                                           initialPage: 0,
@@ -313,8 +300,7 @@ class _PlansScreenState extends State<PlansScreen> {
                                                           enlargeFactor: 0.2,
                                                           autoPlayInterval:
                                                               const Duration(
-                                                            milliseconds:
-                                                                1000,
+                                                            milliseconds: 1000,
                                                           ),
                                                         ),
                                                       );
@@ -330,9 +316,8 @@ class _PlansScreenState extends State<PlansScreen> {
                                             height: 60,
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.symmetric(
-                                                    horizontal: 30.0),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 30.0),
                                             child: GestureDetector(
                                               onTap: () {
                                                 Get.to(
