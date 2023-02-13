@@ -23,6 +23,22 @@
           }
         },
         {
+          "client_id": "567364200295-q60n46njve87osrumvapqbu4ro4ore4n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yalla_mazad.wecan",
+            "certificate_hash": "a757efa709d40c0ae6f5aed2b47454cfeafe0e72"
+          }
+        },
+        {
+          "client_id": "567364200295-ub1n4n94elr9hdbhcm9q5qvlp8vd3f0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yalla_mazad.wecan",
+            "certificate_hash": "e155ce60aa53e3188827eadd450d94d0e04721be"
+          }
+        },
+        {
           "client_id": "567364200295-84hijjg4l6lv4j2ec8q6c38582mc9pgq.apps.googleusercontent.com",
           "client_type": 3
         }
